@@ -1228,29 +1228,6 @@ button,
     </div>
 
 
-
-<!-- Welcome Modal -->
-<div id="welcomeModal">
-  <div id="welcomeModalContent">
-    <h2>✨ WELCOME TO WEB VTEC ✨</h2>
-    <p>WHAT ARE YOU LOOKING FOR TODAY?</p>
-    
-    <button class="service-button" onclick="selectAutomatedWebsite()">
-      💻 AUTOMATED WEBSITE
-    </button>
-
-
-    <button class="service-button" onclick="selectOnlineProducts()">
-      🛒 ONLINE PRODUCTS
-    </button>
-
-    <button class="service-button" onclick="selectAdGeneration()">
-      🎯 AD GENERATION
-    </button>
-  </div>
-</div>
-
-
 <script>
 // Firebase Configuration
 const firebaseConfig = {
@@ -1349,43 +1326,6 @@ function setupEventListeners() {
     });
 }
 
-// Welcome Modal Functions
-function showWelcomeModal() {
-    document.getElementById('welcomeModal').style.display = 'flex';
-    // hide all other pages
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-
-    // Only push state if not already at welcome
-    if (history.state?.page !== 'welcome') {
-        history.pushState({ page: 'welcome' }, '', '#welcome');
-    }
-}
-
-function closeWelcomeModal() {
-    document.getElementById('welcomeModal').style.display = 'none';
-    // push a "home" state if needed
-    if (history.state?.page !== 'home') {
-        history.pushState({ page: 'home' }, '', '#home');
-    }
-}
-
-function selectAutomatedWebsite() {
-    selectedService = 'automated-website';
-    closeWelcomeModal();
-    showPage('home');
-}
-
-function selectOnlineProducts() {
-    selectedService = 'online-products';
-    closeWelcomeModal();
-    window.location.href = "https://webvtec.github.io/ALL-IN-ONE/";
-}
-
-function selectAdGeneration() {
-    selectedService = 'ad-generation';
-    closeWelcomeModal();
-    window.location.href = "https://your-ad-generation-site.com";
-}
 
 // Page Navigation
 function showPage(pageId) {
