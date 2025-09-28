@@ -1266,6 +1266,17 @@ async function handleWebsiteRequest(e) {
         
         // Save to Firebase
         await db.collection('website-requests').add(requestData);
+
+        const formatDate = (date) => {
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+};
         
         // Send to Telegram
         const telegramMessage = `
@@ -1279,7 +1290,7 @@ async function handleWebsiteRequest(e) {
 💻 REQUEST DETAILS:
 🌐 Website Type: ${requestData.websiteType}
 🤳🏽 Selected Service: ${requestData.selectedService}
-- Submitted: ${new Date().toLocaleString()}
+- <b>Submitted:</b> ${formatDate(new Date())}
 
 Status: ⏳ PENDING REVIEW
 
