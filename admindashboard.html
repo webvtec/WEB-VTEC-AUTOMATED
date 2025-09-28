@@ -506,20 +506,20 @@
   appId: "1:740743513533:web:71b7c3f702ace18b293ed4"
 };
 
-        // Add this right after firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+const ADMIN_EMAILS = ["carlanviroberts@gmail.com"];
+let currentUser = null;
+let allRequests = [];
+let currentFilter = 'all';
+
+// Add debug logs AFTER variables are defined
 console.log('Firebase initialized for admin dashboard');
 console.log('Admin emails configured:', ADMIN_EMAILS);
 
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-
-        const ADMIN_EMAILS = ["carlanviroberts@gmail.com"];
-        let currentUser = null;
-        let allRequests = [];
-        let currentFilter = 'all';
-
-        auth.onAuthStateChanged((user) => {
+auth.onAuthStateChanged((user) => {
     console.log('Auth state changed. User:', user ? user.email : 'null');
     currentUser = user;
     
