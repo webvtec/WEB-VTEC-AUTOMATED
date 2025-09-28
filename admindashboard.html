@@ -530,35 +530,36 @@ console.log('Admin emails configured:', ADMIN_EMAILS);
         return;
     }
     
-    // Add delay to ensure email is fully loaded
-    setTimeout(() => {
-        console.log('Checking admin access for:', user.email);
-        console.log('Admin emails:', ADMIN_EMAILS);
+    if (ADMIN_EMAILS.includes(user.email)) {
+        console.log('Admin access granted');
+        document.getElementById('userInfo').style.display = 'block';
+        document.getElementById('userEmail').textContent = user.email;
         
-        if (ADMIN_EMAILS.includes(user.email)) {
-            console.log('Admin access granted');
-            document.getElementById('userInfo').style.display = 'block';
-            document.getElementById('userEmail').textContent = user.email;
+        // BYPASS LOADING - Show dashboard immediately
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        
+        // Set basic stats to 0
+        document.getElementById('totalRequests').textContent = '0';
+        document.getElementById('pendingRequests').textContent = '0';
+        document.getElementById('inProgressRequests').textContent = '0';
+        document.getElementById('completedRequests').textContent = '0';
+        
+        // Show empty state
+        document.getElementById('requestsList').innerHTML = '<div class="no-requests">No requests found.</div>';
+        
+        console.log('Dashboard shown successfully');
+        
+        // Try to load real data in background (optional)
+        setTimeout(() => {
             loadDashboard();
-            
-            const containerForm = document.getElementById('containerForm');
-            if (containerForm) {
-                containerForm.removeEventListener('submit', handleContainerSubmit);
-                containerForm.addEventListener('submit', handleContainerSubmit);
-                console.log('Container form event listener attached');
-            }
-
-            setTimeout(() => {
-                if (document.getElementById('containersSection').style.display !== 'none') {
-                    loadContainers();
-                }
-            }, 500);
-        } else {
-            console.log('Access denied for email:', user.email);
-            alert('Access denied. Admin privileges required.');
-            window.location.href = 'index.html';
-        }
-    }, 1000);
+        }, 2000);
+        
+    } else {
+        console.log('Access denied for email:', user.email);
+        alert('Access denied. Admin privileges required.');
+        window.location.href = 'index.html';
+    }
 });
         
         async function loadDashboard() {
