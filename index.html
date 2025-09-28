@@ -919,7 +919,8 @@ button,
             </svg>
             Continue with Google
         </button>
-        
+
+        <button onclick="testEmailVerification()" style="position: fixed; top: 10px; right: 10px; z-index: 9999;">Test Email</button>
         <div id="loginError" style="color: #DC2626; margin-top: 15px; font-size: 14px; display: none;"></div>
     </div>
 </div>
@@ -2009,7 +2010,25 @@ function verifyAdminPassword() {
     }
 }
 
-
+// Add this temporary function for testing
+async function testEmailVerification() {
+    if (currentUser) {
+        console.log('Current user:', currentUser.email);
+        console.log('Email verified:', currentUser.emailVerified);
+        console.log('Firebase config:', firebaseConfig.authDomain);
+        
+        try {
+            await currentUser.sendEmailVerification();
+            console.log('Verification email sent successfully');
+            alert('Debug: Verification email sent. Check console and your email.');
+        } catch (error) {
+            console.error('Email verification error:', error);
+            alert('Debug error: ' + error.message);
+        }
+    } else {
+        alert('No user logged in');
+    }
+}
 
 </script>
 </body>
