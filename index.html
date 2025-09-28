@@ -1271,14 +1271,14 @@ async function handleWebsiteRequest(e) {
         const telegramMessage = `
 🚀 NEW WEBSITE REQUEST SUBMITTED!
 
-👤 Customer Details:
-- Name: ${requestData.firstName} ${requestData.lastName}
-- Email: ${requestData.email}
-- Phone: ${requestData.phone}
+   CUSTOMER DETAILS:
+👤 Name: ${requestData.firstName} ${requestData.lastName}
+📨 Email: ${requestData.email}
+📞 Phone: ${requestData.phone}
 
-💻 Request Details:
-- Website Type: ${requestData.websiteType}
-- Selected Service: ${requestData.selectedService}
+💻 REQUEST DETAILS:
+🌐 Website Type: ${requestData.websiteType}
+🤳🏽 Selected Service: ${requestData.selectedService}
 - Submitted: ${new Date().toLocaleString()}
 
 Status: ⏳ PENDING REVIEW
