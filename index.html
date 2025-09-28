@@ -1262,16 +1262,16 @@ async function handleWebsiteRequest(e) {
     }
 
     const requestData = {
-        firstName: formData.get('firstName'),
-        lastName: formData.get('lastName'),
-        phone: formData.get('phone'),
-        email: currentUser.email, // Use authenticated user's email
-        userId: currentUser.uid, // Add user ID for tracking
-        websiteType: websiteType,
-        selectedService: selectedService || 'direct-request',
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        status: 'pending'
-    };
+    firstName: formData.get('firstName'),
+    lastName: formData.get('lastName'),
+    phone: formData.get('phone'),
+    email: formData.get('email'), // Use the email they typed in the form
+    userId: currentUser.uid, // Keep the authenticated user ID for tracking
+    websiteType: websiteType,
+    selectedService: selectedService || 'direct-request',
+    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    status: 'pending'
+};
     
     try {
         // Show loading state
@@ -1295,13 +1295,14 @@ async function handleWebsiteRequest(e) {
         };
         
         // Send to Telegram
-        const telegramMessage = `
+const telegramMessage = `
 🚀 NEW WEBSITE REQUEST SUBMITTED!
 
 👤 CUSTOMER DETAILS:
 Name: ${requestData.firstName} ${requestData.lastName}
-📧 Email: ${requestData.email} (Verified Account)
+📧 Contact Email: ${requestData.email}
 📞 Phone: ${requestData.phone}
+🔐 Account Email: ${currentUser.email} (Verified)
 🆔 User ID: ${requestData.userId}
 
 💻 REQUEST DETAILS:
@@ -1312,7 +1313,7 @@ Name: ${requestData.firstName} ${requestData.lastName}
 Status: ⏳ PENDING REVIEW
 
 Reply to this message to update the customer!
-        `;
+`;
         
         await sendTelegramMessage(telegramMessage);
         
