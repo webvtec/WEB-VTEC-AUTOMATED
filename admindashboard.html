@@ -562,43 +562,79 @@ console.log('Admin emails configured:', ADMIN_EMAILS);
 });
         
         async function loadDashboard() {
-            try {
-                document.getElementById('loading').style.display = 'block';
-                document.getElementById('dashboard').style.display = 'none';
+    console.log('Starting to load dashboard...');
+    
+    try {
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('dashboard').style.display = 'none';
 
-                const requestsSnapshot = await db.collection('website-requests')
-                    .orderBy('timestamp', 'desc')
-                    .get();
-                
-                allRequests = [];
-                let total = 0, pending = 0, inProgress = 0, completed = 0;
-                
-                requestsSnapshot.forEach(doc => {
-                    const request = { id: doc.id, ...doc.data() };
-                    allRequests.push(request);
-                    total++;
-                    
-                    switch(request.status || 'pending') {
-                        case 'pending': pending++; break;
-                        case 'in-progress': inProgress++; break;
-                        case 'completed': completed++; break;
-                    }
-                });
-                
-                document.getElementById('totalRequests').textContent = total;
-                document.getElementById('pendingRequests').textContent = pending;
-                document.getElementById('inProgressRequests').textContent = inProgress;
-                document.getElementById('completedRequests').textContent = completed;
-                
-                displayRequests(allRequests);
-                
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-                
-            } catch (error) {
-                console.error('Error loading dashboard:', error);
-                document.getElementById('loading').innerHTML = 'Error loading dashboard. Please refresh the page.';
+        console.log('Attempting to fetch website requests...');
+        
+        // Try to get requests without ordering first (in case timestamp field doesn't exist)
+        const requestsSnapshot = await db.collection('website-requests').get();
+        
+        console.log('Requests fetched successfully, count:', requestsSnapshot.size);
+        
+        allRequests = [];
+        let total = 0, pending = 0, inProgress = 0, completed = 0;
+        
+        requestsSnapshot.forEach(doc => {
+            const request = { id: doc.id, ...doc.data() };
+            allRequests.push(request);
+            total++;
+            
+            switch(request.status || 'pending') {
+                case 'pending': pending++; break;
+                case 'in-progress': inProgress++; break;
+                case 'completed': completed++; break;
             }
+        });
+        
+        // Sort requests by timestamp if it exists, newest first
+        allRequests.sort((a, b) => {
+            if (a.timestamp && b.timestamp) {
+                return b.timestamp.seconds - a.timestamp.seconds;
+            }
+            return 0;
+        });
+        
+        console.log('Updating stats...');
+        document.getElementById('totalRequests').textContent = total;
+        document.getElementById('pendingRequests').textContent = pending;
+        document.getElementById('inProgressRequests').textContent = inProgress;
+        document.getElementById('completedRequests').textContent = completed;
+        
+        console.log('Displaying requests...');
+        displayRequests(allRequests);
+        
+        console.log('Dashboard loaded successfully');
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        
+    } catch (error) {
+        console.error('Error loading dashboard:', error);
+        document.getElementById('loading').innerHTML = `
+            <div style="color: #EF4444; text-align: center; padding: 40px;">
+                <h3>Error loading dashboard</h3>
+                <p>Error: ${error.message}</p>
+                <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #8B5CF6; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                    Refresh Page
+                </button>
+            </div>
+        `;
+        
+        // Show dashboard anyway with empty state
+        document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('totalRequests').textContent = '0';
+        document.getElementById('pendingRequests').textContent = '0';
+        document.getElementById('inProgressRequests').textContent = '0';
+        document.getElementById('completedRequests').textContent = '0';
+        
+        const requestsList = document.getElementById('requestsList');
+        if (requestsList) {
+            requestsList.innerHTML = '<div class="no-requests">No requests found or error loading data.</div>';
+        }
+    }
         }
 
 
@@ -628,21 +664,35 @@ function showSection(sectionName) {
 }
 
         function displayRequests(requests) {
-            const requestsList = document.getElementById('requestsList');
-            
-            if (requests.length === 0) {
-                requestsList.innerHTML = '<div class="no-requests">No requests found.</div>';
-                return;
-            }
-            
-            requestsList.innerHTML = '';
-            
-            requests.forEach(request => {
-                const requestCard = createRequestCard(request);
-                requestsList.appendChild(requestCard);
-            });
+    console.log('Displaying requests, count:', requests.length);
+    const requestsList = document.getElementById('requestsList');
+    
+    if (!requestsList) {
+        console.error('Requests list element not found');
+        return;
+    }
+    
+    if (requests.length === 0) {
+        requestsList.innerHTML = '<div class="no-requests">No requests found.</div>';
+        return;
+    }
+    
+    requestsList.innerHTML = '';
+    
+    requests.forEach((request, index) => {
+        try {
+            console.log(`Creating card for request ${index + 1}`);
+            const requestCard = createRequestCard(request);
+            requestsList.appendChild(requestCard);
+        } catch (error) {
+            console.error('Error creating request card:', error, request);
+        }
+    });
+    
+    console.log('All request cards created successfully');
         }
 
+        
         function createRequestCard(request) {
             const card = document.createElement('div');
             card.className = 'request-card';
