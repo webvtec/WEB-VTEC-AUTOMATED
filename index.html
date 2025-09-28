@@ -1571,11 +1571,14 @@ function updateUserStatus() {
         userEmail.textContent = currentUser.email;
 
         // ✅ Show admin button if email matches
-        if (ADMIN_EMAILS.includes(currentUser.email)) {
-            adminButton.style.display = 'inline-block';
-        } else {
-            adminButton.style.display = 'none';
-        }
+        console.log('Checking admin button visibility for:', currentUser.email);
+if (ADMIN_EMAILS.includes(currentUser.email)) {
+    console.log('Showing admin button');
+    adminButton.style.display = 'inline-block';
+} else {
+    console.log('Hiding admin button - not admin user');
+    adminButton.style.display = 'none';
+}
     } else {
         userStatus.style.display = 'none';
         adminButton.style.display = 'none';
@@ -1686,10 +1689,18 @@ window.addEventListener('offline', function() {
 });
 
 function adminLogin() {
+    console.log('Admin login clicked. Current user:', currentUser ? currentUser.email : 'null');
+    
     if (currentUser && ADMIN_EMAILS.includes(currentUser.email)) {
+        console.log('Redirecting admin user to dashboard');
         window.location.href = 'admindashboard.html';
-    } else {
+    } else if (currentUser) {
+        console.log('Non-admin user attempted access:', currentUser.email);
         alert('Access denied. Admin privileges required.');
+    } else {
+        console.log('No user logged in for admin access');
+        alert('Please login first to access admin panel.');
+        showLoginModal();
     }
 }
 
