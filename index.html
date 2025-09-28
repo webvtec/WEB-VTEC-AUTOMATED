@@ -1670,26 +1670,22 @@ async function signupWithEmail() {
     hideLoginError();
     
     try {
-        console.log('Creating user account...');
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        console.log('User created:', userCredential.user.email);
         
-        console.log('Sending verification email...');
+        // Better email verification settings
         await userCredential.user.sendEmailVerification({
-            url: window.location.origin, // This helps with email delivery
-            handleCodeInApp: false
+            url: `${window.location.origin}/#home`,
+            handleCodeInApp: true
         });
-        console.log('Verification email sent successfully');
         
         closeLoginModal();
-        alert(`Account created! Verification email sent to ${email}. Please check your inbox (and spam folder) and click the verification link.`);
+        alert(`Account created! Verification email sent to ${email}. IMPORTANT: Check your SPAM/JUNK folder if you don't see it in your inbox within 2-3 minutes.`);
         
     } catch (error) {
-        console.error('Signup error:', error);
         showLoginError(formatFirebaseError(error));
     }
 }
-
+    
 // Password reset function
 async function resetPassword() {
     const email = document.getElementById('loginEmail').value.trim();
