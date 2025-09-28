@@ -506,6 +506,10 @@
   appId: "1:740743513533:web:71b7c3f702ace18b293ed4"
 };
 
+        // Add this right after firebase.initializeApp(firebaseConfig);
+console.log('Firebase initialized for admin dashboard');
+console.log('Admin emails configured:', ADMIN_EMAILS);
+
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
@@ -516,31 +520,47 @@
         let currentFilter = 'all';
 
         auth.onAuthStateChanged((user) => {
+    console.log('Auth state changed. User:', user ? user.email : 'null');
     currentUser = user;
-    if (user && ADMIN_EMAILS.includes(user.email)) {
-        document.getElementById('userInfo').style.display = 'block';
-        document.getElementById('userEmail').textContent = user.email;
-        loadDashboard();
-        
-        // Load containers after a short delay to ensure DOM is ready
-        // Initialize form event listener
-const containerForm = document.getElementById('containerForm');
-if (containerForm) {
-    containerForm.removeEventListener('submit', handleContainerSubmit); // Remove any existing
-    containerForm.addEventListener('submit', handleContainerSubmit);
-    console.log('Container form event listener attached');
-}
-
-setTimeout(() => {
-    if (document.getElementById('containersSection').style.display !== 'none') {
-        loadContainers();
-    }
-}, 500);
-    } else {
-        alert('Access denied. Admin login required.');
+    
+    if (!user) {
+        console.log('No user logged in - redirecting to main page');
+        alert('Please login first');
         window.location.href = 'index.html';
+        return;
     }
+    
+    // Add delay to ensure email is fully loaded
+    setTimeout(() => {
+        console.log('Checking admin access for:', user.email);
+        console.log('Admin emails:', ADMIN_EMAILS);
+        
+        if (ADMIN_EMAILS.includes(user.email)) {
+            console.log('Admin access granted');
+            document.getElementById('userInfo').style.display = 'block';
+            document.getElementById('userEmail').textContent = user.email;
+            loadDashboard();
+            
+            const containerForm = document.getElementById('containerForm');
+            if (containerForm) {
+                containerForm.removeEventListener('submit', handleContainerSubmit);
+                containerForm.addEventListener('submit', handleContainerSubmit);
+                console.log('Container form event listener attached');
+            }
+
+            setTimeout(() => {
+                if (document.getElementById('containersSection').style.display !== 'none') {
+                    loadContainers();
+                }
+            }, 500);
+        } else {
+            console.log('Access denied for email:', user.email);
+            alert('Access denied. Admin privileges required.');
+            window.location.href = 'index.html';
+        }
+    }, 1000);
 });
+        
         async function loadDashboard() {
             try {
                 document.getElementById('loading').style.display = 'block';
