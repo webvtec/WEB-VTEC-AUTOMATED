@@ -62,124 +62,6 @@
     }
 
 
-    /* Welcome Modal Styles - Luxury Gold/Black Gradient */
-#welcomeModal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d1b69 25%, #8b5cf6 50%, #ffd700 75%, #1a1a1a 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10001;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-#welcomeModalContent {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 215, 0, 0.3);
-  padding: 60px 40px;
-  border-radius: 30px;
-  text-align: center;
-  width: 100%;
-  max-width: 700px;
-  box-shadow: 0 25px 50px rgba(255, 215, 0, 0.2), inset 0 1px 0 rgba(255, 215, 0, 0.1);
-  animation: modalSlideIn 0.8s ease-out;
-}
-
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-50px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-#welcomeModalContent h2 {
-  color: #FFD700;
-  font-size: clamp(28px, 6vw, 42px);
-  margin-bottom: 25px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
-  font-weight: bold;
-  letter-spacing: 2px;
-  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-#welcomeModalContent p {
-  color: #FFFFFF;
-  font-size: clamp(18px, 3.5vw, 24px);
-  margin-bottom: 50px;
-  line-height: 1.6;
-  font-weight: 400;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-}
-
-.service-button {
-  display: block;
-  width: 100%;
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 25px 35px;
-  background: linear-gradient(135deg, #1a1a1a, #2d1b69, #8b5cf6);
-  color: #FFD700;
-  border: 2px solid rgba(255, 215, 0, 0.4);
-  border-radius: 20px;
-  font-size: clamp(18px, 3.5vw, 22px);
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  text-decoration: none;
-  font-family: Arial, sans-serif;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 215, 0, 0.1);
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;  /* ADD THIS LINE */
-}
-
-.service-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
-  transition: left 0.6s;
-}
-
-.service-button:hover::before {
-  left: 100%;
-}
-
-.service-button:hover {
-  background: linear-gradient(135deg, #2d1b69, #8b5cf6, #ffd700);
-  transform: translateY(-5px);
-  box-shadow: 0 25px 50px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255, 215, 0, 0.2);
-  color: #000000;
-  border-color: rgba(255, 215, 0, 0.8);
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
-}
-
-.service-button:active {
-  transform: translateY(-2px);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
     /* Page sections */
     .page {
         display: none;
@@ -927,16 +809,6 @@ button,
         height: 50px;
         font-size: 18px;
     }
-
-    #welcomeModalContent {
-    padding: 30px 20px;
-    min-height: 80vh;
-  }
-  
-  .service-button {
-    padding: 20px 25px;
-    margin: 15px auto;
-  }
 }
 
 /* Updated CSS for the preview button */
@@ -1215,26 +1087,6 @@ button,
 
 
 
-<!-- Welcome Modal -->
-<div id="welcomeModal">
-  <div id="welcomeModalContent">
-    <h2>✨ WELCOME TO WEB VTEC ✨</h2>
-    <p>WHAT ARE YOU LOOKING FOR TODAY?</p>
-    
-    <button class="service-button" onclick="selectAutomatedWebsite()">
-      💻 AUTOMATED WEBSITE
-    </button>
-
-
-    <button class="service-button" onclick="selectMobileApp()">
-      📱 MOBILE APP
-    </button>
-
-   <!-- <button class="service-button" onclick="selectAdGeneration()">
-      🎯 AD GENERATION -->
-    </button>
-  </div>
-</div>
 
 <script>
 // Firebase Configuration
