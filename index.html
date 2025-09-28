@@ -1716,8 +1716,8 @@ function adminLogin() {
     console.log('Admin login clicked. Current user:', currentUser ? currentUser.email : 'null');
     
     if (currentUser && ADMIN_EMAILS.includes(currentUser.email)) {
-        console.log('Redirecting admin user to dashboard');
-        window.location.href = 'admindashboard.html';
+        console.log('Admin user detected, requesting password');
+        showAdminPasswordModal();
     } else if (currentUser) {
         console.log('Non-admin user attempted access:', currentUser.email);
         alert('Access denied. Admin privileges required.');
