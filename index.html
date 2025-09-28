@@ -994,7 +994,6 @@ button,
     <div style="background: rgba(255, 255, 255, 0.9); display: inline-block; padding: 10px 15px; border-radius: 20px; color: #4B5563; font-weight: 600;">
         <span id="userEmail"></span>
         <button class="logout-btn" onclick="logout()" style="margin-left: 10px;">Logout</button>
-        <button id="resendVerification" onclick="resendVerification()" style="margin-left: 5px; display: none; background: #059669;">Verify Email</button>
     </div>
             </div>
 
@@ -1685,16 +1684,9 @@ async function signupWithEmail() {
     hideLoginError();
     
     try {
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        
-        // Better email verification settings
-        await userCredential.user.sendEmailVerification({
-            url: `${window.location.origin}/#home`,
-            handleCodeInApp: true
-        });
-        
+        await auth.createUserWithEmailAndPassword(email, password);
         closeLoginModal();
-        alert(`Account created! Verification email sent to ${email}. IMPORTANT: Check your SPAM/JUNK folder if you don't see it in your inbox within 2-3 minutes.`);
+        alert('Account created and logged in successfully!');
         
     } catch (error) {
         showLoginError(formatFirebaseError(error));
@@ -1768,14 +1760,10 @@ function updateUserStatus() {
 
     if (currentUser) {
         userStatus.style.display = 'block';
+        userEmail.textContent = currentUser.email; // Remove verification status
         
-        if (currentUser.emailVerified) {
-            userEmail.innerHTML = `${currentUser.email}`;
-            if (resendButton) resendButton.style.display = 'none';
-        } else {
-            userEmail.innerHTML = `${currentUser.email} ⚠️ (Unverified)`;
-            if (resendButton) resendButton.style.display = 'inline-block';
-        }
+        // Hide verification button completely
+        if (resendButton) resendButton.style.display = 'none';
 
         if (ADMIN_EMAILS.includes(currentUser.email)) {
             adminButton.style.display = 'inline-block';
@@ -1788,16 +1776,6 @@ function updateUserStatus() {
     }
 }
 
-async function resendVerification() {
-    if (currentUser && !currentUser.emailVerified) {
-        try {
-            await currentUser.sendEmailVerification();
-            alert('📧 Verification email sent! Please check your inbox.');
-        } catch (error) {
-            alert('Error sending verification email: ' + formatFirebaseError(error));
-        }
-    }
-}
     
 // Telegram Integration
 async function sendTelegramMessage(message) {
