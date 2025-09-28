@@ -1771,7 +1771,7 @@ function updateUserStatus() {
         userStatus.style.display = 'block';
         
         if (currentUser.emailVerified) {
-            userEmail.innerHTML = `${currentUser.email} ✅`;
+            userEmail.innerHTML = `${currentUser.email}`;
             if (resendButton) resendButton.style.display = 'none';
         } else {
             userEmail.innerHTML = `${currentUser.email} ⚠️ (Unverified)`;
