@@ -964,6 +964,7 @@ button,
     <div style="background: rgba(255, 255, 255, 0.9); display: inline-block; padding: 10px 15px; border-radius: 20px; color: #4B5563; font-weight: 600;">
         <span id="userEmail"></span>
         <button class="logout-btn" onclick="logout()" style="margin-left: 10px;">Logout</button>
+        <button id="resendVerification" onclick="resendVerification()" style="margin-left: 5px; display: none; background: #059669;">Verify Email</button>
     </div>
             </div>
 
@@ -1254,6 +1255,22 @@ async function handleWebsiteRequest(e) {
         return;
     }
     
+    // Check if email is verified
+    if (!currentUser.emailVerified) {
+        alert('Please verify your email address before submitting requests. Check your inbox for the verification link.');
+        // Optionally resend verification email
+        if (confirm('Would you like us to resend the verification email?')) {
+            try {
+                await currentUser.sendEmailVerification();
+                alert('Verification email sent! Please check your inbox.');
+            } catch (error) {
+                alert('Error sending verification email: ' + error.message);
+            }
+        }
+        return;
+    }
+    
+    // Rest of your existing code remains the same...
     const formData = new FormData(e.target);
     
     // Handle website type - use custom type if "other" is selected
@@ -1271,8 +1288,8 @@ async function handleWebsiteRequest(e) {
         firstName: formData.get('firstName'),
         lastName: formData.get('lastName'),
         phone: formData.get('phone'),
-        email: formData.get('email'), // Use the email they typed in the form
-        userId: currentUser.uid, // Keep the authenticated user ID for tracking
+        email: formData.get('email'),
+        userId: currentUser.uid,
         websiteType: websiteType,
         selectedService: selectedService || 'direct-request',
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -1306,9 +1323,10 @@ async function handleWebsiteRequest(e) {
 
 👤 CUSTOMER DETAILS:
 Name: ${requestData.firstName} ${requestData.lastName}
-🔐 Account Email: ${currentUser.email} (Verified)
 📧 Contact Email: ${requestData.email}
 📞 Phone: ${requestData.phone}
+🔐 Account Email: ${currentUser.email} (Verified)
+📧 Contact ID: ${requestData.email}
 
 💻 REQUEST DETAILS:
 🌐 Website Type: ${requestData.websiteType}
@@ -1708,27 +1726,41 @@ function updateUserStatus() {
     const userStatus = document.getElementById('userStatus');
     const userEmail = document.getElementById('userEmail');
     const adminButton = document.querySelector('.admin-button');
+    const resendButton = document.getElementById('resendVerification');
 
     if (currentUser) {
         userStatus.style.display = 'block';
-        userEmail.textContent = currentUser.email;
+        
+        if (currentUser.emailVerified) {
+            userEmail.innerHTML = `${currentUser.email} ✅`;
+            if (resendButton) resendButton.style.display = 'none';
+        } else {
+            userEmail.innerHTML = `${currentUser.email} ⚠️ (Unverified)`;
+            if (resendButton) resendButton.style.display = 'inline-block';
+        }
 
-        // ✅ Show admin button if email matches
-        console.log('Checking admin button visibility for:', currentUser.email);
-if (ADMIN_EMAILS.includes(currentUser.email)) {
-    console.log('Showing admin button');
-    adminButton.style.display = 'inline-block';
-} else {
-    console.log('Hiding admin button - not admin user');
-    adminButton.style.display = 'none';
-}
+        if (ADMIN_EMAILS.includes(currentUser.email)) {
+            adminButton.style.display = 'inline-block';
+        } else {
+            adminButton.style.display = 'none';
+        }
     } else {
         userStatus.style.display = 'none';
         adminButton.style.display = 'none';
     }
 }
 
-
+async function resendVerification() {
+    if (currentUser && !currentUser.emailVerified) {
+        try {
+            await currentUser.sendEmailVerification();
+            alert('📧 Verification email sent! Please check your inbox.');
+        } catch (error) {
+            alert('Error sending verification email: ' + formatFirebaseError(error));
+        }
+    }
+}
+    
 // Telegram Integration
 async function sendTelegramMessage(message) {
     try {
