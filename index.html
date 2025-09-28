@@ -1337,14 +1337,13 @@ async function handleWebsiteRequest(e) {
         const telegramMessage = `
 🚀 NEW WEBSITE REQUEST SUBMITTED!
 
-👤 CUSTOMER DETAILS:
-Name: ${requestData.firstName} ${requestData.lastName}
-📧 Contact Email: ${requestData.email}
+  CUSTOMER DETAILS:
+👤 Name: ${requestData.firstName} ${requestData.lastName}
 📞 Phone: ${requestData.phone}
-🔐 Account Email: ${currentUser.email} (Verified)
-📧 Contact ID: ${requestData.email}
+📨 Contact Email: ${requestData.email}
+✉️ Verified Email: ${currentUser.email} (Verified)
 
-💻 REQUEST DETAILS:
+  REQUEST DETAILS:
 🌐 Website Type: ${requestData.websiteType}
 🤳🏽 Selected Service: ${requestData.selectedService}
 📅 Submitted: ${formatDate(new Date())}
