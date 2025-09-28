@@ -1285,20 +1285,6 @@ async function handleWebsiteRequest(e) {
         return;
     }
     
-    // Check if email is verified
-    if (!currentUser.emailVerified) {
-        alert('Please verify your email address before submitting requests. Check your inbox for the verification link.');
-        // Optionally resend verification email
-        if (confirm('Would you like us to resend the verification email?')) {
-            try {
-                await currentUser.sendEmailVerification();
-                alert('Verification email sent! Please check your inbox.');
-            } catch (error) {
-                alert('Error sending verification email: ' + error.message);
-            }
-        }
-        return;
-    }
     
     // Rest of your existing code remains the same...
     const formData = new FormData(e.target);
