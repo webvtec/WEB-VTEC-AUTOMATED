@@ -1071,6 +1071,19 @@ button,
     </div>
 
 
+<!-- Admin Password Modal -->
+<div id="adminPasswordModal" class="modal">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeAdminPasswordModal()">&times;</button>
+        <h2 class="modal-title">Admin Access Required</h2>
+        <p style="color: #6B7280; margin-bottom: 25px;">Enter admin password to continue</p>
+        
+        <input type="password" id="adminPassword" class="login-input" placeholder="Admin Password" required>
+        
+        <button class="login-button" onclick="verifyAdminPassword()">Access Admin Panel</button>
+    </div>
+</div>
+
 <script>
 // Firebase Configuration
 const firebaseConfig = {
@@ -1120,6 +1133,8 @@ function initializeApp() {
 
 
     const ADMIN_EMAILS = ["carlanviroberts@gmail.com"]; // add more if needed
+    const ADMIN_PASSWORD = "@lanman"; // Change this to your desired password
+
 
 // Setup all event listeners
 function setupEventListeners() {
@@ -1153,6 +1168,7 @@ function setupEventListeners() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('close-modal')) {
             closeLoginModal();
+            closeAdminPasswordModal(); // Add this line
         }
     });
     
@@ -1161,10 +1177,18 @@ function setupEventListeners() {
         if (e.key === 'Escape') {
             closeLoginModal();
             closeWelcomeModal();
+            closeAdminPasswordModal(); // Add this line
+        }
+        
+        // Handle Enter key for admin password
+        if (e.key === 'Enter') {
+            const adminPasswordModal = document.getElementById('adminPasswordModal');
+            if (adminPasswordModal && adminPasswordModal.classList.contains('active')) {
+                verifyAdminPassword();
+            }
         }
     });
 }
-
 
 // Page Navigation
 function showPage(pageId) {
@@ -1812,7 +1836,34 @@ function handleWebsiteTypeChange(e) {
     src="https://app.thinkstack.ai/bot/thinkstackai-loader.min.js"
 ></script> -->
 
+function showAdminPasswordModal() {
+    document.getElementById('adminPasswordModal').classList.add('active');
+    document.getElementById('adminPassword').focus();
+}
 
+function closeAdminPasswordModal() {
+    document.getElementById('adminPasswordModal').classList.remove('active');
+    document.getElementById('adminPassword').value = '';
+}
+
+function verifyAdminPassword() {
+    const enteredPassword = document.getElementById('adminPassword').value;
+    
+    if (!enteredPassword) {
+        alert('Please enter the admin password.');
+        return;
+    }
+    
+    if (enteredPassword === ADMIN_PASSWORD) {
+        console.log('Admin password verified, redirecting to dashboard');
+        closeAdminPasswordModal();
+        window.location.href = 'admindashboard.html';
+    } else {
+        alert('Incorrect admin password. Access denied.');
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('adminPassword').focus();
+    }
+}
 
 </body>
 </html>
