@@ -1000,9 +1000,9 @@ button,
                         </div>
                         
                         <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required readonly style="background-color: rgba(255,255,255,0.1); cursor: not-allowed;">
-                        </div>
+                     <label for="email">Email</label>
+                     <input type="email" id="email" name="email" required readonly style="background-color: rgba(255,255,255,0.1); cursor: not-allowed;">
+                       </div>
                         
                         <div class="form-group">
     <label for="websiteType">Website Type</label>
@@ -1194,13 +1194,15 @@ function setupEventListeners() {
     });
 }
 
-// Page Navigation
-// Add this function first
 function populateUserEmail() {
-    const emailField = document.getElementById('email');
-    if (emailField && currentUser) {
-        emailField.value = currentUser.email;
-    }
+       const emailField = document.getElementById('email');
+       if (emailField) {
+           if (currentUser) {
+               emailField.value = currentUser.email;
+           } else {
+               emailField.placeholder = "Please log in first";
+           }
+       }
 }
 
 function showPage(pageId) {
@@ -1894,14 +1896,6 @@ function verifyAdminPassword() {
     }
 }
 
-
-// Add this function
-function populateUserEmail() {
-    const emailField = document.getElementById('email');
-    if (emailField && currentUser) {
-        emailField.value = currentUser.email;
-    }
-}
 
 
 </script>
