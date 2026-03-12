@@ -936,11 +936,31 @@ button,
     align-items: center;
     justify-content: center;
     height: 28px;
+}
 
+/* Yellow text */
+.footer-text {
+    color: #FFD700;
+    font-weight: bold;
+}
 
-    @media (max-width: 768px) {
+/* Green website link */
+.footer-link {
+    color: #00FF00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Optional hover effect */
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
     .footer {
         height: 24px;
+        font-size: 12px;
     }
 }
 
@@ -2114,10 +2134,13 @@ User Agent: ${visitInfo.userAgent}`;
     
 </script>
 
-    <!-- Footer Banner -->
     <footer class="footer">
-        <span class="footer-text">NEED CASH? MAKE IT TODAY!! AT <a href="https://webvtec.com" target="_blank" class="footer-link">webvtecinstitute.com</a></span>
-    </footer>
-
+    <span class="footer-text">
+        NEED CASH? MAKE IT TODAY!! AT 
+        <a href="https://webvtecinstitute.com" target="_blank" class="footer-link">
+            webvtecinstitute.com
+        </a>
+    </span>
+</footer>
 </body>
 </html>
