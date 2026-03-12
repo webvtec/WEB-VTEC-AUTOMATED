@@ -683,7 +683,7 @@ button,
   
 /* Screenshot-matching container styles */
 .screenshot-container {
-    background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 35%, #6366f1 65%, #8b5cf6 100%);
+    background: linear-gradient(135deg, #6d5a9e 0%, #7c6aad 35%, #9b8cc4 65%, #b8a9d9 100%);
     border-radius: 18px;
     padding: 0;
     margin: 0;
@@ -901,66 +901,21 @@ button,
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    border: 3px solid transparent;
+    border: 2px solid #FFFFFF;
     border-radius: 0 0 16px 16px;
-    position: relative;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 0;
+    background: #261A4C;
+    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
     transition: all 0.3s ease;
-
-    /* Animated multi-layer gradient */
-    background: linear-gradient(45deg, #261A4C, #261A4C, #261A4C, #bb8fce, #261A4C);
-    background-size: 600% 600%;
-    animation: gradientFlow 8s ease infinite, pulseGlow 2s ease-in-out infinite;
-    box-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
+    margin: 0;
+    padding: 0;
 }
 
-.preview-btn::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(120deg, #261A4C, #261A4C, #261A4C, #bb8fce, #261A4C);
-    background-size: 600% 600%;
-    border-radius: 50%;
-    z-index: -1;
-    animation: swirl 12s linear infinite;
-    opacity: 0.6;
-}
-
-/* Keyframes for gradient movement */
-@keyframes gradientFlow {
-    0% { background-position: 0% 50%; }
-    25% { background-position: 50% 100%; }
-    50% { background-position: 100% 50%; }
-    75% { background-position: 50% 0%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Keyframes for pulsing glow */
-@keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 15px rgba(155, 89, 182, 0.5); }
-    50% { box-shadow: 0 0 25px rgba(155, 89, 182, 0.9); }
-}
-
-/* Keyframes for swirling pseudo-element */
-@keyframes swirl {
-    0% { transform: rotate(0deg) translate(0,0); }
-    25% { transform: rotate(90deg) translate(0,0); }
-    50% { transform: rotate(180deg) translate(0,0); }
-    75% { transform: rotate(270deg) translate(0,0); }
-    100% { transform: rotate(360deg) translate(0,0); }
-}
-
-/* Hover effect: intensify glow and scale */
 .preview-btn:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 0 40px rgba(155, 89, 182, 1), 0 12px 30px rgba(155, 89, 182, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(168, 85, 247, 0.6);
 }
 
 </style>
@@ -1932,7 +1887,6 @@ window.addEventListener('online', function() {
 
 window.addEventListener('offline', function() {
     console.log('Gone offline');
-    alert('⚠️ You are offline. Some features may not work.');
 });
 
 function adminLogin() {
