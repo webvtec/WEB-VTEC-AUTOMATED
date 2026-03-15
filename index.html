@@ -985,6 +985,56 @@ button,
   outline-color:#261A4C;
 }
 
+/* GALLERY HIGHLIGHTS BUTTON */
+.gallery-highlights-btn {
+    background: linear-gradient(135deg, #6b2fa0, #8B5CF6);
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    border-radius: 30px;
+    padding: 11px 28px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 18px rgba(139,92,246,0.45);
+    display: inline-block;
+}
+.gallery-highlights-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255,215,0,0.35);
+    background: linear-gradient(135deg, #8B5CF6, #6b2fa0);
+}
+
+/* GALLERY CARD */
+.gallery-card {
+    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(162,150,231,0.25);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+.gallery-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(139,92,246,0.4);
+}
+.gallery-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+.gallery-card-title {
+    padding: 12px 14px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    background: rgba(0,0,0,0.3);
+}
+
 /* FULL SCREEN FOUNDER SECTION */
 #founder-overlay{
   position:fixed;
@@ -1330,6 +1380,20 @@ button,
       <h2 class="founder-name-heading" style="color:#FFD700 !important;">Carlanvi Roberts</h2>
       <p class="founder-title" style="margin:8px 0 0 0;">FOUNDER &amp; CEO</p>
       <p class="founder-tagline" style="margin:2px 0 0 0;">Entrepreneur · Developer · Tradesman · Jamaica 🇯🇲</p>
+      <button class="gallery-highlights-btn" onclick="openGalleryHighlights()" style="margin-top:14px;">📸 GALLERY HIGHLIGHTS</button>
+    </div>
+
+    <!-- GALLERY HIGHLIGHTS MODAL -->
+    <div id="galleryHighlightsModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;overflow-y:auto;backdrop-filter:blur(6px);">
+      <div style="max-width:900px;margin:0 auto;padding:30px 20px 60px;">
+        <!-- Header -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;">
+          <h2 style="color:#FFD700;font-size:clamp(18px,5vw,28px);font-weight:800;letter-spacing:2px;">📸 GALLERY HIGHLIGHTS</h2>
+          <button onclick="closeGalleryHighlights()" style="background:rgba(255,255,255,0.1);color:#fff;border:2px solid rgba(255,255,255,0.3);border-radius:50%;width:42px;height:42px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;" onmouseover="this.style.background='rgba(255,215,0,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">✕</button>
+        </div>
+        <!-- Grid -->
+        <div id="galleryGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;"></div>
+      </div>
     </div>
 
     <!-- Body -->
@@ -2317,6 +2381,62 @@ function closeFounderSection(){
   document.getElementById("founder-overlay").style.display = "none";
   document.body.style.overflow = "";
 }
+
+// ── GALLERY HIGHLIGHTS ──────────────────────────────────────────────────
+const GALLERY_ITEMS = [
+    {
+        url: "https://res.cloudinary.com/dqqr9udcs/image/upload/v1773436607/LANVI_nl5g0x.png",
+        title: "FOUNDER — CARLANVI ROBERTS"
+    },
+    {
+        url: "https://res.cloudinary.com/dqqr9udcs/image/upload/v1771220928/WEB_VTEC_LOGO_jfihzc_e_background_removal_f_png_ooes1p_c_crop_w_800_h_800_tbbcb3.png",
+        title: "WEBV TEC — OFFICIAL LOGO"
+    },
+    {
+        url: "https://res.cloudinary.com/dqqr9udcs/image/upload/v1771220928/WEB_VTEC_LOGO_jfihzc_e_background_removal_f_png_ooes1p_c_crop_w_800_h_800_tbbcb3.png",
+        title: "BRAND IDENTITY 2025"
+    },
+    {
+        url: "https://res.cloudinary.com/dqqr9udcs/image/upload/v1773436607/LANVI_nl5g0x.png",
+        title: "DIGITAL DEVELOPER & TRADESMAN"
+    },
+    {
+        url: "https://res.cloudinary.com/dqqr9udcs/image/upload/v1771220928/WEB_VTEC_LOGO_jfihzc_e_background_removal_f_png_ooes1p_c_crop_w_800_h_800_tbbcb3.png",
+        title: "MADE IN JAMAICA 🇯🇲"
+    },
+    {
+        url: "https://res.cloudinary.com/dqqr9udcs/image/upload/v1773436607/LANVI_nl5g0x.png",
+        title: "WEBV TEC INSTITUTE LAUNCH 2026"
+    }
+];
+
+function openGalleryHighlights() {
+    const modal = document.getElementById('galleryHighlightsModal');
+    const grid = document.getElementById('galleryGrid');
+
+    // Build cards
+    grid.innerHTML = GALLERY_ITEMS.map(item => `
+        <div class="gallery-card">
+            <img src="${item.url}" alt="${item.title}" loading="lazy">
+            <div class="gallery-card-title">${item.title}</div>
+        </div>
+    `).join('');
+
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGalleryHighlights() {
+    document.getElementById('galleryHighlightsModal').style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+// Close gallery on backdrop click
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('galleryHighlightsModal');
+    if (e.target === modal) closeGalleryHighlights();
+});
+// ────────────────────────────────────────────────────────────────────────
 
 // Error handling
 window.addEventListener('error', function(e) {
