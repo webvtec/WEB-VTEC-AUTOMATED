@@ -985,59 +985,7 @@ button,
   outline-color:#261A4C;
 }
 
-/* GALLERY HIGHLIGHTS BUTTON */
-.gallery-highlights-btn {
-    background: linear-gradient(135deg, #6b2fa0, #8B5CF6);
-    color: #FFD700;
-    border: 2px solid #FFD700;
-    border-radius: 30px;
-    padding: 11px 28px;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 18px rgba(139,92,246,0.45);
-    display: inline-block;
-}
-.gallery-highlights-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(255,215,0,0.35);
-    background: linear-gradient(135deg, #8B5CF6, #6b2fa0);
-}
 
-/* GALLERY CARD */
-.gallery-card {
-    background: #1a1a1a;
-    border: none;
-    border-radius: 16px;
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-.gallery-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.7);
-}
-.gallery-card img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-}
-.gallery-card-title {
-    padding: 14px 16px;
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    text-align: center;
-    background: #1a1a1a;
-    line-height: 1.4;
-    text-transform: uppercase;
-}
 
 /* FULL SCREEN FOUNDER SECTION */
 #founder-overlay{
@@ -1384,20 +1332,7 @@ button,
       <h2 class="founder-name-heading" style="color:#FFD700 !important;">Carlanvi Roberts</h2>
       <p class="founder-title" style="margin:8px 0 0 0;">FOUNDER &amp; CEO</p>
       <p class="founder-tagline" style="margin:2px 0 0 0;">Entrepreneur · Developer · Tradesman · Jamaica 🇯🇲</p>
-      <button class="gallery-highlights-btn" onclick="openGalleryHighlights()" style="margin-top:14px;">📸 GALLERY HIGHLIGHTS</button>
-    </div>
 
-    <!-- GALLERY HIGHLIGHTS MODAL -->
-    <div id="galleryHighlightsModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.82);z-index:9999;overflow-y:auto;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);">
-      <div style="max-width:900px;margin:0 auto;padding:30px 20px 60px;">
-        <!-- Header -->
-        <div style="position:relative;text-align:center;margin-bottom:28px;">
-          <h2 style="color:#FFD700;font-size:clamp(18px,5vw,28px);font-weight:800;letter-spacing:2px;display:inline-block;">📸 GALLERY HIGHLIGHTS</h2>
-          <button onclick="closeGalleryHighlights()" style="position:absolute;right:0;top:50%;transform:translateY(-50%);background:rgba(80,80,80,0.7);color:#fff;border:2px solid rgba(180,180,180,0.5);border-radius:50%;width:42px;height:42px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;" onmouseover="this.style.background='rgba(120,120,120,0.9)'" onmouseout="this.style.background='rgba(80,80,80,0.7)'">✕</button>
-        </div>
-        <!-- Grid -->
-        <div id="galleryGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;"></div>
-      </div>
     </div>
 
     <!-- Body -->
@@ -2389,46 +2324,6 @@ function closeFounderSection(){
   document.getElementById("founder-overlay").style.display = "none";
   document.body.style.overflow = "";
 }
-
-// ── GALLERY HIGHLIGHTS ──────────────────────────────────────────────────
-const GALLERY_ITEMS = [
-    {
-        url: "https://res.cloudinary.com/dqqr9udcs/image/upload/v1773609132/Carlanvi_nd_Glendon_mzwzmn.jpg",
-        title: "FOUNDER OF WEBV TEC & OWNER OF WILLOWS VILLA"
-    },
-    {
-        url: "https://res.cloudinary.com/dqqr9udcs/image/upload/v1773608388/Carlanvi_n_Glendon_ohuy1g.png",
-        title: "FOUNDER OF WEBV TEC & OWNER OF WELLAND UNIQUE RENTALS"
-    }
-];
-
-function openGalleryHighlights() {
-    const modal = document.getElementById('galleryHighlightsModal');
-    const grid = document.getElementById('galleryGrid');
-
-    // Build cards
-    grid.innerHTML = GALLERY_ITEMS.map(item => `
-        <div class="gallery-card">
-            <img src="${item.url}" alt="${item.title}" loading="lazy">
-            <div class="gallery-card-title">${item.title}</div>
-        </div>
-    `).join('');
-
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-function closeGalleryHighlights() {
-    document.getElementById('galleryHighlightsModal').style.display = 'none';
-    document.body.style.overflow = '';
-}
-
-// Close gallery on backdrop click
-document.addEventListener('click', function(e) {
-    const modal = document.getElementById('galleryHighlightsModal');
-    if (e.target === modal) closeGalleryHighlights();
-});
-// ────────────────────────────────────────────────────────────────────────
 
 // Error handling
 window.addEventListener('error', function(e) {
