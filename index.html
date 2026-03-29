@@ -2849,16 +2849,14 @@ async function loadPromoGallery() {
             .orderBy('order', 'asc')
             .get();
 
-        document.getElementById('promoLoading').style.display = 'none';
+        grid.innerHTML = '';
 
         if (snapshot.empty) {
-            grid.innerHTML = '';
-            empty.style.display = 'block';
+            if (empty) empty.style.display = 'block';
             return;
         }
 
-        grid.innerHTML = '';
-        empty.style.display = 'none';
+        if (empty) empty.style.display = 'none';
 
         snapshot.forEach(doc => {
             const data = doc.data();
@@ -2878,8 +2876,8 @@ async function loadPromoGallery() {
 
     } catch (error) {
         console.error('Error loading promo gallery:', error);
-        document.getElementById('promoLoading').style.display = 'none';
-        empty.style.display = 'block';
+        if (grid) grid.innerHTML = '';
+        if (empty) empty.style.display = 'block';
     }
 }
 
