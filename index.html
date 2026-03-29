@@ -1273,6 +1273,223 @@ button,
 }
 
 
+/* ===== PROMOTIONAL PRINTS PAGE ===== */
+.promo-page-wrapper {
+    min-height: 100vh;
+    background: #0a0a0f;
+    padding-bottom: 60px;
+}
+
+.promo-page-header {
+    text-align: center;
+    padding: 50px 20px 40px;
+    background: linear-gradient(180deg, #0d0820 0%, #0a0a0f 100%);
+    border-bottom: 1px solid rgba(255,215,0,0.15);
+}
+
+.promo-page-title {
+    font-size: clamp(28px, 6vw, 52px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #FFD700;
+    text-shadow: 0 0 30px rgba(255,215,0,0.4);
+    margin-bottom: 10px;
+    font-family: 'Georgia', serif;
+}
+
+.promo-page-subtitle {
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.promo-request-btn {
+    background: linear-gradient(135deg, #261A4C, #3d2a7a);
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    padding: 14px 36px;
+    border-radius: 35px;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 0 20px rgba(255,215,0,0.2);
+}
+
+.promo-request-btn:hover {
+    background: #FFD700;
+    color: #261A4C;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,215,0,0.4);
+}
+
+.promo-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding: 40px 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.promo-card {
+    background: #12111a;
+    border: 1.5px solid rgba(255,215,0,0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.promo-card:hover {
+    transform: translateY(-6px);
+    border-color: #FFD700;
+    box-shadow: 0 12px 40px rgba(255,215,0,0.2);
+}
+
+.promo-card-img-wrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: #1a1828;
+    cursor: pointer;
+}
+
+.promo-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.promo-card:hover .promo-card-img-wrap img {
+    transform: scale(1.04);
+}
+
+.promo-card-caption {
+    padding: 16px 18px;
+}
+
+.promo-card-caption h3 {
+    color: #FFD700;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.promo-card-caption p {
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.promo-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 20px;
+    color: rgba(255,255,255,0.4);
+}
+
+.promo-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255,215,0,0.2);
+    border-top-color: #FFD700;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.promo-empty {
+    text-align: center;
+    padding: 100px 20px;
+    color: rgba(255,255,255,0.4);
+}
+
+.promo-empty h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 10px;
+}
+
+/* Lightbox */
+.promo-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+}
+
+.promo-lightbox.open {
+    display: flex;
+}
+
+.promo-lightbox-inner {
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+}
+
+.promo-lightbox-inner img {
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 2px solid rgba(255,215,0,0.3);
+}
+
+.promo-lightbox-close {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 36px;
+    height: 36px;
+    background: #FFD700;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.promo-lightbox-caption {
+    color: #FFD700;
+    text-align: center;
+    margin-top: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+    .promo-gallery-grid {
+        grid-template-columns: 1fr;
+        padding: 24px 16px;
+    }
+}
+
 </style>
 <!-- Replace the existing Firebase CDN links with these updated ones -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -1411,7 +1628,7 @@ Some of his main goals are to help more businesses get online and build a strong
     <header class="header">
     <nav class="nav-menu">
         <a href="#home" class="nav-item active" onclick="showPage('home'); return false;" data-page="home">WEBSITES</a>
-        <a href="#request" class="nav-item" onclick="showPage('request'); return false;" data-page="request">PROMOTIONAL PRINTS</a>
+        <a href="#promo" class="nav-item" onclick="showPage('promo'); return false;" data-page="promo">PROMOTIONAL PRINTS</a>
         <a href="#reviews" class="nav-item" onclick="showPage('reviews'); return false;" data-page="reviews">REVIEWS</a>
     </nav>
     </header>
@@ -1468,7 +1685,7 @@ Some of his main goals are to help more businesses get online and build a strong
 
 
 
-    <!-- REQUEST WEBSITE PAGE -->
+    <!-- REQUEST WEBSITE PAGE (hidden, accessed from home) -->
     <div id="request" class="page">
         <div class="navy-gradient-container">
             <div class="content-area">
@@ -1519,6 +1736,83 @@ Some of his main goals are to help more businesses get online and build a strong
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- PROMOTIONAL PRINTS PAGE -->
+    <div id="promo" class="page">
+        <div class="promo-page-wrapper">
+            <!-- Page Title -->
+            <div class="promo-page-header">
+                <h1 class="promo-page-title">PROMOTIONAL PRINTS</h1>
+                <p class="promo-page-subtitle">Professional promotional material crafted for your brand</p>
+                <button class="promo-request-btn" onclick="openPromoRequestModal()">📋 REQUEST PROMOTIONAL IMAGE</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="promo-gallery-grid" id="promoGalleryGrid">
+                <div class="promo-loading" id="promoLoading">
+                    <div class="promo-spinner"></div>
+                    <p>Loading gallery...</p>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="promo-empty" id="promoEmpty" style="display:none;">
+                <div style="font-size: 64px; margin-bottom: 20px;">🖼️</div>
+                <h3>No promotional prints yet</h3>
+                <p>Check back soon — new designs coming shortly.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROMO REQUEST MODAL -->
+    <div id="promoRequestModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <button class="close-modal" onclick="closePromoRequestModal()">&times;</button>
+            <h2 class="modal-title" style="font-size: 20px;">REQUEST PROMOTIONAL IMAGE</h2>
+            <p style="color:#6B7280; margin-bottom: 20px; font-size: 14px;">Fill in the details below and we'll create a custom promotional image for you.</p>
+
+            <form id="promoRequestForm">
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">First Name</label>
+                    <input type="text" id="promoFirstName" class="login-input" placeholder="First Name" required style="margin-bottom:0;">
+                </div>
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Last Name</label>
+                    <input type="text" id="promoLastName" class="login-input" placeholder="Last Name" required style="margin-bottom:0;">
+                </div>
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Phone Number</label>
+                    <input type="tel" id="promoPhone" class="login-input" placeholder="Phone Number" required style="margin-bottom:0;">
+                </div>
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Email</label>
+                    <input type="email" id="promoEmail" class="login-input" placeholder="Email Address" required style="margin-bottom:0;">
+                </div>
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Type of Promotional Image</label>
+                    <select id="promoType" class="login-input" required style="margin-bottom:0; appearance:auto; color:#374151;">
+                        <option value="">Select Type</option>
+                        <option value="flyer">Flyer / Event Poster</option>
+                        <option value="business-card">Business Card</option>
+                        <option value="social-media">Social Media Banner</option>
+                        <option value="logo">Logo Design</option>
+                        <option value="brochure">Brochure</option>
+                        <option value="menu">Menu / Price List</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom:15px;" id="promoTypeOtherGroup" style="display:none;">
+                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Please specify:</label>
+                    <input type="text" id="promoTypeOther" class="login-input" placeholder="Describe the type..." style="margin-bottom:0;">
+                </div>
+                <div class="form-group" style="margin-bottom:20px;">
+                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Description / Details</label>
+                    <textarea id="promoDescription" class="login-input" rows="3" placeholder="Tell us what you need — colors, text, business name, etc..." required style="margin-bottom:0; resize:vertical; font-family:inherit;"></textarea>
+                </div>
+                <button type="submit" class="login-button" style="background:#261A4C; letter-spacing:1px;">SUBMIT REQUEST</button>
+            </form>
         </div>
     </div>
 
@@ -1712,6 +2006,11 @@ function showPage(pageId) {
         item.classList.remove('active');
         if (item.getAttribute('data-page') === pageId) item.classList.add('active');
     });
+
+    // Load promo gallery when navigating to the promo page
+    if (pageId === 'promo' && typeof loadPromoGallery === 'function') {
+        loadPromoGallery();
+    }
 
     // Use replaceState instead of pushState to avoid creating new URLs Google crawls
     history.replaceState({ page: pageId }, '', window.location.pathname);
@@ -2548,6 +2847,182 @@ User Agent: ${visitInfo.userAgent}`;
     }
 }
     
+</script>
+
+<!-- Promo Lightbox -->
+<div class="promo-lightbox" id="promoLightbox" onclick="closePromoLightbox(event)">
+    <div class="promo-lightbox-inner">
+        <button class="promo-lightbox-close" onclick="closePromoLightboxBtn()">✕</button>
+        <img id="promoLightboxImg" src="" alt="">
+        <div class="promo-lightbox-caption" id="promoLightboxCaption"></div>
+    </div>
+</div>
+
+<script>
+// ===== PROMOTIONAL PRINTS FUNCTIONS =====
+
+async function loadPromoGallery() {
+    const grid = document.getElementById('promoGalleryGrid');
+    const empty = document.getElementById('promoEmpty');
+    if (!grid) return;
+
+    try {
+        const snapshot = await db.collection('promo-gallery')
+            .orderBy('order', 'asc')
+            .get();
+
+        document.getElementById('promoLoading').style.display = 'none';
+
+        if (snapshot.empty) {
+            grid.innerHTML = '';
+            empty.style.display = 'block';
+            return;
+        }
+
+        grid.innerHTML = '';
+        empty.style.display = 'none';
+
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            const card = document.createElement('div');
+            card.className = 'promo-card';
+            card.innerHTML = `
+                <div class="promo-card-img-wrap" onclick="openPromoLightbox('${data.imageUrl}', '${(data.title||'').replace(/'/g,"\\'")}')">
+                    <img src="${data.imageUrl}" alt="${data.title || 'Promotional Print'}" loading="lazy">
+                </div>
+                <div class="promo-card-caption">
+                    <h3>${data.title || 'Untitled'}</h3>
+                    ${data.caption ? `<p>${data.caption}</p>` : ''}
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error('Error loading promo gallery:', error);
+        document.getElementById('promoLoading').style.display = 'none';
+        empty.style.display = 'block';
+    }
+}
+
+function openPromoLightbox(url, title) {
+    document.getElementById('promoLightboxImg').src = url;
+    document.getElementById('promoLightboxCaption').textContent = title;
+    document.getElementById('promoLightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePromoLightbox(e) {
+    if (e.target === document.getElementById('promoLightbox')) {
+        closePromoLightboxBtn();
+    }
+}
+
+function closePromoLightboxBtn() {
+    document.getElementById('promoLightbox').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function openPromoRequestModal() {
+    if (!currentUser) {
+        showLoginModal();
+        return;
+    }
+    // Pre-fill email
+    document.getElementById('promoEmail').value = currentUser.email || '';
+    document.getElementById('promoRequestModal').classList.add('active');
+}
+
+function closePromoRequestModal() {
+    document.getElementById('promoRequestModal').classList.remove('active');
+    document.getElementById('promoRequestForm').reset();
+    document.getElementById('promoTypeOtherGroup').style.display = 'none';
+}
+
+// Show/hide "other" field
+document.addEventListener('DOMContentLoaded', function() {
+    const promoTypeSelect = document.getElementById('promoType');
+    if (promoTypeSelect) {
+        promoTypeSelect.addEventListener('change', function() {
+            const otherGroup = document.getElementById('promoTypeOtherGroup');
+            otherGroup.style.display = this.value === 'other' ? 'block' : 'none';
+        });
+    }
+
+    // Promo request form submit
+    const promoForm = document.getElementById('promoRequestForm');
+    if (promoForm) {
+        promoForm.addEventListener('submit', handlePromoRequest);
+    }
+});
+
+async function handlePromoRequest(e) {
+    e.preventDefault();
+
+    if (!currentUser) {
+        showLoginModal();
+        return;
+    }
+
+    let promoType = document.getElementById('promoType').value;
+    if (promoType === 'other') {
+        const other = document.getElementById('promoTypeOther').value.trim();
+        if (!other) { alert('Please specify the type.'); return; }
+        promoType = other;
+    }
+
+    const requestData = {
+        firstName: document.getElementById('promoFirstName').value.trim(),
+        lastName: document.getElementById('promoLastName').value.trim(),
+        phone: document.getElementById('promoPhone').value.trim(),
+        email: document.getElementById('promoEmail').value.trim(),
+        promoType: promoType,
+        description: document.getElementById('promoDescription').value.trim(),
+        userId: currentUser.uid,
+        userEmail: currentUser.email,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        status: 'pending'
+    };
+
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+
+    try {
+        submitBtn.textContent = 'SUBMITTING...';
+        submitBtn.disabled = true;
+
+        await db.collection('promo-requests').add(requestData);
+
+        const telegramMsg = `
+🎨 NEW PROMOTIONAL IMAGE REQUEST!
+
+👤 Name: ${requestData.firstName} ${requestData.lastName}
+📞 Phone: ${requestData.phone}
+📨 Email: ${requestData.email}
+
+🖼️ Type: ${requestData.promoType}
+📝 Details: ${requestData.description}
+
+📅 Submitted: ${new Date().toLocaleString()}
+
+CONTACT THE CUSTOMER!`;
+
+        await sendTelegramMessage(telegramMsg);
+
+        alert('🎉 Request submitted! We will contact you soon.');
+        closePromoRequestModal();
+
+    } catch (err) {
+        console.error('Promo request error:', err);
+        alert('❌ Error submitting. Please try again.');
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+}
+
+// Promo gallery is triggered from inside the original showPage function below
+
 </script>
 
     <footer class="footer">
