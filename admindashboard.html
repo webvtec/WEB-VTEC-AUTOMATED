@@ -752,19 +752,9 @@ body {
             <input type="url" id="editPromoUrl" oninput="previewEditImg(this.value)">
             <img id="editImgPreview" class="img-preview" alt="Preview">
         </div>
-        <div class="form-row">
-            <div class="field">
-                <label>Title</label>
-                <input type="text" id="editPromoTitle">
-            </div>
-            <div class="field">
-                <label>Order</label>
-                <input type="number" id="editPromoOrder" min="1">
-            </div>
-        </div>
         <div class="field">
-            <label>Caption</label>
-            <input type="text" id="editPromoCaption">
+            <label>Order</label>
+            <input type="number" id="editPromoOrder" min="1">
         </div>
         <button class="btn btn-gold" onclick="saveEditPromo()">SAVE CHANGES</button>
     </div>
@@ -969,7 +959,7 @@ async function loadAdminGallery() {
                     ${d.category ? `<div style="display:inline-block;background:rgba(255,215,0,0.15);color:#FFD700;font-size:10px;font-weight:800;letter-spacing:1px;padding:2px 8px;border-radius:10px;margin-bottom:5px;text-transform:uppercase;">${d.category}</div>` : ''}
                     <div class="admin-gallery-card-caption">${d.caption || ''}</div>
                     <div class="admin-gallery-card-actions">
-                        <button class="btn btn-outline btn-sm" onclick="openEditPromo('${doc.id}','${escQ(d.imageUrl)}','${escQ(d.title||'')}','${escQ(d.caption||'')}',${d.order})">EDIT</button>
+                        <button class="btn btn-outline btn-sm" onclick="openEditPromo('${doc.id}','${escQ(d.imageUrl)}',${d.order})">EDIT</button>
                         <button class="btn btn-danger btn-sm" onclick="deletePromoImage('${doc.id}')">DELETE</button>
                     </div>
                 </div>
@@ -1009,11 +999,9 @@ function previewAdminImg(url) {
     }
 }
 
-function openEditPromo(id, url, title, caption, order) {
+function openEditPromo(id, url, order) {
     document.getElementById('editPromoId').value = id;
     document.getElementById('editPromoUrl').value = unescQ(url);
-    document.getElementById('editPromoTitle').value = unescQ(title);
-    document.getElementById('editPromoCaption').value = unescQ(caption);
     document.getElementById('editPromoOrder').value = order;
     previewEditImg(unescQ(url));
     document.getElementById('editPromoModal').classList.add('open');
@@ -1036,14 +1024,12 @@ function closeEditPromo() {
 async function saveEditPromo() {
     const id = document.getElementById('editPromoId').value;
     const imageUrl = document.getElementById('editPromoUrl').value.trim();
-    const title = document.getElementById('editPromoTitle').value.trim();
-    const caption = document.getElementById('editPromoCaption').value.trim();
     const order = parseInt(document.getElementById('editPromoOrder').value) || 1;
 
-    if (!imageUrl || !title) { toast('URL and title required.', true); return; }
+    if (!imageUrl) { toast('Image URL is required.', true); return; }
 
     try {
-        await db.collection('promo-gallery').doc(id).update({ imageUrl, title, caption, order });
+        await db.collection('promo-gallery').doc(id).update({ imageUrl, order });
         toast('✅ Image updated!');
         closeEditPromo();
         loadAdminGallery();
