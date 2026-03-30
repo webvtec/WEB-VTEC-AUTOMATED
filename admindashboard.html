@@ -604,15 +604,6 @@ body {
                 <div class="stat-value" id="stat-reviews">—</div>
             </div>
         </div>
-
-        <div class="card">
-            <div class="card-title">QUICK ACTIONS</div>
-            <div style="display:flex; flex-wrap:wrap; gap:12px;">
-                <button class="btn btn-gold" onclick="switchTab('promo')">+ ADD PROMO IMAGE</button>
-                <button class="btn btn-outline" onclick="switchTab('websites')">EDIT WEBSITE CONTENT</button>
-                <button class="btn btn-outline" onclick="switchTab('site-requests')">VIEW REQUESTS</button>
-            </div>
-        </div>
     </div>
 
     <!-- ===== WEBSITE CONTENT PANEL ===== -->
@@ -678,9 +669,19 @@ body {
                     <input type="number" id="promoImgOrder" placeholder="1" min="1">
                 </div>
             </div>
-            <div class="field">
-                <label>Caption (optional)</label>
-                <input type="text" id="promoImgCaption" placeholder="Short description of this image...">
+            <div class="form-row">
+                <div class="field">
+                    <label>Category</label>
+                    <select id="promoImgCategory">
+                        <option value="posters">POSTERS</option>
+                        <option value="tickets">TICKETS</option>
+                        <option value="business-cards">BUSINESS CARDS</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Caption (optional)</label>
+                    <input type="text" id="promoImgCaption" placeholder="Short description of this image...">
+                </div>
             </div>
             <button class="btn btn-gold" onclick="addPromoImage()">+ ADD IMAGE</button>
         </div>
@@ -1000,6 +1001,7 @@ async function loadAdminGallery() {
                 <img src="${d.imageUrl}" alt="${d.title||''}" loading="lazy">
                 <div class="admin-gallery-card-info">
                     <div class="admin-gallery-card-title">${d.title || '(Untitled)'}</div>
+                    ${d.category ? `<div style="display:inline-block;background:rgba(255,215,0,0.15);color:#FFD700;font-size:10px;font-weight:800;letter-spacing:1px;padding:2px 8px;border-radius:10px;margin-bottom:5px;text-transform:uppercase;">${d.category}</div>` : ''}
                     <div class="admin-gallery-card-caption">${d.caption || ''}</div>
                     <div class="admin-gallery-card-actions">
                         <button class="btn btn-outline btn-sm" onclick="openEditPromo('${doc.id}','${escQ(d.imageUrl)}','${escQ(d.title||'')}','${escQ(d.caption||'')}',${d.order})">EDIT</button>
@@ -1017,12 +1019,13 @@ async function addPromoImage() {
     const title = document.getElementById('promoImgTitle').value.trim();
     const caption = document.getElementById('promoImgCaption').value.trim();
     const order = parseInt(document.getElementById('promoImgOrder').value) || 99;
+    const category = document.getElementById('promoImgCategory').value;
 
     if (!imageUrl || !title) { toast('Image URL and Title are required.', true); return; }
 
     try {
         await db.collection('promo-gallery').add({
-            imageUrl, title, caption, order,
+            imageUrl, title, caption, order, category,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
         toast('✅ Image added!');
