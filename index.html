@@ -1336,13 +1336,16 @@ button,
     overflow: hidden;
     background: rgba(255,255,255,0.05);
     cursor: pointer;
+    /* let height grow with the image — no fixed or min-height */
+    display: block;
+    line-height: 0;
 }
 
 .promo-card-img-wrap img {
     width: 100%;
-    height: auto;
+    height: auto;       /* natural image height */
     display: block;
-    object-fit: contain;
+    object-fit: unset;  /* don't crop / letterbox */
     transition: transform 0.4s ease;
 }
 
@@ -1497,6 +1500,14 @@ button,
 .promo-cat-btn.active svg,
 .promo-cat-btn:hover svg {
     stroke: #261A4C;
+}
+
+/* PROMO REQUEST FULL PAGE */
+#promoRequestPage {
+    display: none;
+}
+#promoRequestPage.active {
+    display: block;
 }
 
 /* REQUEST NOW button on each card */
@@ -1860,6 +1871,58 @@ Some of his main goals are to help more businesses get online and build a strong
                 </div>
                 <button type="submit" class="login-button" style="background:#261A4C; letter-spacing:1px;">SUBMIT REQUEST</button>
             </form>
+        </div>
+    </div>
+
+    <!-- PROMO REQUEST FULL PAGE -->
+    <div id="promoRequestPage" class="page">
+        <div class="navy-gradient-container">
+            <div class="content-area">
+                <div class="form-container">
+                    <h2 style="color: #D1D5DB; font-size: clamp(16px, 4vw, 28px); margin-bottom: 30px; white-space: nowrap; text-align: center;">REQUEST PROMOTIONAL IMAGE</h2>
+                    <form id="promoRequestPageForm">
+                        <div class="form-group">
+                            <label for="promoPageFirstName">First Name</label>
+                            <input type="text" id="promoPageFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promoPageLastName">Last Name</label>
+                            <input type="text" id="promoPageLastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promoPagePhone">Phone</label>
+                            <input type="tel" id="promoPagePhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promoPageEmail">Email</label>
+                            <input type="email" id="promoPageEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="promoPageType">Type of Promotional Image</label>
+                            <select id="promoPageType" required>
+                                <option value="">Select Type</option>
+                                <option value="flyer">Flyer / Event Poster</option>
+                                <option value="business-card">Business Card</option>
+                                <option value="social-media">Social Media Banner</option>
+                                <option value="logo">Logo Design</option>
+                                <option value="brochure">Brochure</option>
+                                <option value="menu">Menu / Price List</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="promoPageTypeOtherGroup" style="display:none;">
+                            <label for="promoPageTypeOther">Please specify:</label>
+                            <input type="text" id="promoPageTypeOther" placeholder="Describe the type...">
+                        </div>
+                        <div class="form-group">
+                            <label for="promoPageDescription">Description / Details</label>
+                            <textarea id="promoPageDescription" rows="4" placeholder="Tell us what you need — colors, text, business name, etc..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">SUBMIT REQUEST</button>
+                        <button type="button" class="submit-button" onclick="showPage('promo')" style="margin-top:12px; background: rgba(255,255,255,0.08);">← BACK TO GALLERY</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -2986,9 +3049,9 @@ function openPromoRequestModal() {
         showLoginModal();
         return;
     }
-    // Pre-fill email
-    document.getElementById('promoEmail').value = currentUser.email || '';
-    document.getElementById('promoRequestModal').classList.add('active');
+    // Navigate to the full promo request page
+    document.getElementById('promoPageEmail').value = currentUser.email || '';
+    showPage('promoRequestPage');
 }
 
 function closePromoRequestModal() {
@@ -3011,6 +3074,80 @@ document.addEventListener('DOMContentLoaded', function() {
     const promoForm = document.getElementById('promoRequestForm');
     if (promoForm) {
         promoForm.addEventListener('submit', handlePromoRequest);
+    }
+
+    // Promo request PAGE form
+    const promoPageTypeSelect = document.getElementById('promoPageType');
+    if (promoPageTypeSelect) {
+        promoPageTypeSelect.addEventListener('change', function() {
+            const otherGroup = document.getElementById('promoPageTypeOtherGroup');
+            otherGroup.style.display = this.value === 'other' ? 'block' : 'none';
+        });
+    }
+
+    const promoPageForm = document.getElementById('promoRequestPageForm');
+    if (promoPageForm) {
+        promoPageForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!currentUser) { showLoginModal(); return; }
+
+            let promoType = document.getElementById('promoPageType').value;
+            if (promoType === 'other') {
+                const other = document.getElementById('promoPageTypeOther').value.trim();
+                if (!other) { alert('Please specify the type.'); return; }
+                promoType = other;
+            }
+
+            const requestData = {
+                firstName: document.getElementById('promoPageFirstName').value.trim(),
+                lastName: document.getElementById('promoPageLastName').value.trim(),
+                phone: document.getElementById('promoPagePhone').value.trim(),
+                email: document.getElementById('promoPageEmail').value.trim(),
+                promoType: promoType,
+                description: document.getElementById('promoPageDescription').value.trim(),
+                userId: currentUser.uid,
+                userEmail: currentUser.email,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                status: 'pending'
+            };
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            try {
+                submitBtn.textContent = 'SUBMITTING...';
+                submitBtn.disabled = true;
+
+                await db.collection('promo-requests').add(requestData);
+
+                const telegramMsg = `
+🎨 NEW PROMOTIONAL IMAGE REQUEST!
+
+👤 Name: ${requestData.firstName} ${requestData.lastName}
+📞 Phone: ${requestData.phone}
+📨 Email: ${requestData.email}
+
+🖼️ Type: ${requestData.promoType}
+📝 Details: ${requestData.description}
+
+📅 Submitted: ${new Date().toLocaleString()}
+
+CONTACT THE CUSTOMER!`;
+
+                await sendTelegramMessage(telegramMsg);
+
+                alert('🎉 Request submitted! We will contact you soon.');
+                promoPageForm.reset();
+                showPage('promo');
+
+            } catch (err) {
+                console.error('Promo page request error:', err);
+                alert('❌ Error submitting. Please try again.');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
     }
 });
 
