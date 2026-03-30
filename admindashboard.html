@@ -571,8 +571,7 @@ body {
 
 <!-- TABS -->
 <div class="tabs">
-    <div class="tab active" onclick="switchTab('overview')">📊 OVERVIEW</div>
-    <div class="tab" onclick="switchTab('websites')">🌐 WEBSITE CONTENT</div>
+    <div class="tab active" onclick="switchTab('websites')">🌐 WEBSITE CONTENT</div>
     <div class="tab" onclick="switchTab('promo')">🖼️ PROMOTIONAL PRINTS</div>
     <div class="tab" onclick="switchTab('site-requests')">📬 WEBSITE REQUESTS</div>
     <div class="tab" onclick="switchTab('promo-requests')">🎨 PROMO REQUESTS</div>
@@ -581,33 +580,8 @@ body {
 <!-- MAIN -->
 <div class="main">
 
-    <!-- ===== OVERVIEW PANEL ===== -->
-    <div id="panel-overview" class="panel active">
-        <div class="section-title">DASHBOARD OVERVIEW</div>
-        <div class="section-sub">Welcome back. Here's a snapshot of your platform.</div>
-
-        <div class="stats-row">
-            <div class="stat-card">
-                <div class="stat-label">Website Requests</div>
-                <div class="stat-value" id="stat-site-requests">—</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Promo Requests</div>
-                <div class="stat-value" id="stat-promo-requests">—</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Gallery Images</div>
-                <div class="stat-value" id="stat-gallery">—</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Reviews</div>
-                <div class="stat-value" id="stat-reviews">—</div>
-            </div>
-        </div>
-    </div>
-
     <!-- ===== WEBSITE CONTENT PANEL ===== -->
-    <div id="panel-websites" class="panel">
+    <div id="panel-websites" class="panel active">
         <div class="section-title">WEBSITE CONTENT</div>
         <div class="section-sub">Manage the containers shown on the main Websites page.</div>
 
@@ -661,16 +635,6 @@ body {
             </div>
             <div class="form-row">
                 <div class="field">
-                    <label>Title</label>
-                    <input type="text" id="promoImgTitle" placeholder="e.g. PARTY FLYER — JUNE 2025">
-                </div>
-                <div class="field">
-                    <label>Order (1 = first)</label>
-                    <input type="number" id="promoImgOrder" placeholder="1" min="1">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="field">
                     <label>Category</label>
                     <select id="promoImgCategory">
                         <option value="posters">POSTERS</option>
@@ -679,8 +643,8 @@ body {
                     </select>
                 </div>
                 <div class="field">
-                    <label>Caption (optional)</label>
-                    <input type="text" id="promoImgCaption" placeholder="Short description of this image...">
+                    <label>Order (1 = first)</label>
+                    <input type="number" id="promoImgOrder" placeholder="1" min="1">
                 </div>
             </div>
             <button class="btn btn-gold" onclick="addPromoImage()">+ ADD IMAGE</button>
@@ -845,11 +809,11 @@ function goBack() {
 }
 
 // ===== TABS =====
-let activeTab = 'overview';
+let activeTab = 'websites';
 
 function switchTab(id) {
     document.querySelectorAll('.tab').forEach((t, i) => {
-        const ids = ['overview','websites','promo','site-requests','promo-requests'];
+        const ids = ['websites','promo','site-requests','promo-requests'];
         t.classList.toggle('active', ids[i] === id);
     });
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -863,7 +827,7 @@ function switchTab(id) {
 
 // ===== INIT =====
 function initDashboard() {
-    loadStats();
+    loadContainers();
 }
 
 async function loadStats() {
@@ -1016,26 +980,21 @@ async function loadAdminGallery() {
 
 async function addPromoImage() {
     const imageUrl = document.getElementById('promoImgUrl').value.trim();
-    const title = document.getElementById('promoImgTitle').value.trim();
-    const caption = document.getElementById('promoImgCaption').value.trim();
     const order = parseInt(document.getElementById('promoImgOrder').value) || 99;
     const category = document.getElementById('promoImgCategory').value;
 
-    if (!imageUrl || !title) { toast('Image URL and Title are required.', true); return; }
+    if (!imageUrl) { toast('Image URL is required.', true); return; }
 
     try {
         await db.collection('promo-gallery').add({
-            imageUrl, title, caption, order, category,
+            imageUrl, order, category,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
         toast('✅ Image added!');
         document.getElementById('promoImgUrl').value = '';
-        document.getElementById('promoImgTitle').value = '';
-        document.getElementById('promoImgCaption').value = '';
         document.getElementById('promoImgOrder').value = '';
         document.getElementById('adminImgPreview').style.display = 'none';
         loadAdminGallery();
-        loadStats();
     } catch(e) { toast('Error adding image.', true); }
 }
 
