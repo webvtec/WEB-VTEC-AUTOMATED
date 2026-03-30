@@ -404,6 +404,12 @@
         transition: all 0.3s ease;
     }
 
+    /* Black background for the native dropdown popup */
+    .form-group select option {
+        background: #000000;
+        color: #FFFFFF;
+    }
+
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
@@ -1323,6 +1329,9 @@ button,
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    /* NO fixed height — card grows to fit image naturally */
 }
 
 .promo-card:hover {
@@ -1775,6 +1784,7 @@ Some of his main goals are to help more businesses get online and build a strong
 </div>
                         
                         <button type="submit" class="submit-button">SUBMIT REQUEST</button>
+                        <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background: rgba(255,255,255,0.08);">← BACK</button>
                     </form>
                 </div>
             </div>
