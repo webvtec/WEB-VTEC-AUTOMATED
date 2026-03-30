@@ -1333,7 +1333,6 @@ button,
 
 .promo-card-img-wrap {
     width: 100%;
-    aspect-ratio: 4/3;
     overflow: hidden;
     background: rgba(255,255,255,0.05);
     cursor: pointer;
@@ -1341,8 +1340,9 @@ button,
 
 .promo-card-img-wrap img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
+    object-fit: contain;
     transition: transform 0.4s ease;
 }
 
@@ -1468,6 +1468,28 @@ button,
         grid-template-columns: 1fr;
         padding: 24px 16px;
     }
+}
+
+/* Category filter buttons */
+.promo-cat-btn {
+    background: transparent;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+}
+
+.promo-cat-btn:hover,
+.promo-cat-btn.active {
+    background: #FFD700;
+    color: #261A4C;
+    box-shadow: 0 4px 18px rgba(255,215,0,0.3);
 }
 
 </style>
@@ -1725,6 +1747,14 @@ Some of his main goals are to help more businesses get online and build a strong
             <!-- Page Header -->
             <div class="promo-page-header">
                 <button class="promo-request-btn" onclick="openPromoRequestModal()">📋 REQUEST PROMOTIONAL IMAGE</button>
+
+                <!-- Category Filter Buttons -->
+                <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-top:18px;">
+                    <button class="promo-cat-btn active" onclick="filterPromoCategory('all', this)">ALL</button>
+                    <button class="promo-cat-btn" onclick="filterPromoCategory('posters', this)">POSTERS</button>
+                    <button class="promo-cat-btn" onclick="filterPromoCategory('tickets', this)">TICKETS</button>
+                    <button class="promo-cat-btn" onclick="filterPromoCategory('business-cards', this)">BUSINESS CARDS</button>
+                </div>
             </div>
 
             <!-- Gallery Grid -->
@@ -2839,10 +2869,22 @@ User Agent: ${visitInfo.userAgent}`;
 <script>
 // ===== PROMOTIONAL PRINTS FUNCTIONS =====
 
+let currentPromoCategory = 'all';
+
+function filterPromoCategory(category, btn) {
+    currentPromoCategory = category;
+    // Update active button
+    document.querySelectorAll('.promo-cat-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    loadPromoGallery();
+}
+
 async function loadPromoGallery() {
     const grid = document.getElementById('promoGalleryGrid');
     const empty = document.getElementById('promoEmpty');
     if (!grid) return;
+
+    grid.innerHTML = `<div class="promo-loading" id="promoLoading"><div class="promo-spinner"></div><p>Loading gallery...</p></div>`;
 
     try {
         const snapshot = await db.collection('promo-gallery')
@@ -2851,15 +2893,22 @@ async function loadPromoGallery() {
 
         grid.innerHTML = '';
 
-        if (snapshot.empty) {
+        let items = [];
+        snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
+
+        // Filter by category if not 'all'
+        if (currentPromoCategory !== 'all') {
+            items = items.filter(d => (d.category || '').toLowerCase() === currentPromoCategory);
+        }
+
+        if (items.length === 0) {
             if (empty) empty.style.display = 'block';
             return;
         }
 
         if (empty) empty.style.display = 'none';
 
-        snapshot.forEach(doc => {
-            const data = doc.data();
+        items.forEach(data => {
             const card = document.createElement('div');
             card.className = 'promo-card';
             card.innerHTML = `
