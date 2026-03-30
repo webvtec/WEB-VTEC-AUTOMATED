@@ -1475,7 +1475,7 @@ button,
     background: transparent;
     color: #FFD700;
     border: 2px solid #FFD700;
-    padding: 10px 22px;
+    padding: 11px 22px;
     border-radius: 25px;
     font-size: 13px;
     font-weight: 800;
@@ -1483,6 +1483,8 @@ button,
     cursor: pointer;
     transition: all 0.25s ease;
     text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
 }
 
 .promo-cat-btn:hover,
@@ -1490,6 +1492,33 @@ button,
     background: #FFD700;
     color: #261A4C;
     box-shadow: 0 4px 18px rgba(255,215,0,0.3);
+}
+
+.promo-cat-btn.active svg,
+.promo-cat-btn:hover svg {
+    stroke: #261A4C;
+}
+
+/* REQUEST NOW button on each card */
+.promo-card-request-btn {
+    display: block;
+    width: 100%;
+    background: #261A4C;
+    color: #FFD700;
+    border: none;
+    border-top: 1.5px solid rgba(255,215,0,0.25);
+    padding: 13px 10px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.promo-card-request-btn:hover {
+    background: #FFD700;
+    color: #261A4C;
 }
 
 </style>
@@ -1746,14 +1775,20 @@ Some of his main goals are to help more businesses get online and build a strong
         <div class="promo-page-wrapper">
             <!-- Page Header -->
             <div class="promo-page-header">
-                <button class="promo-request-btn" onclick="openPromoRequestModal()">📋 REQUEST PROMOTIONAL IMAGE</button>
-
                 <!-- Category Filter Buttons -->
-                <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-top:18px;">
-                    <button class="promo-cat-btn active" onclick="filterPromoCategory('all', this)">ALL</button>
-                    <button class="promo-cat-btn" onclick="filterPromoCategory('posters', this)">POSTERS</button>
-                    <button class="promo-cat-btn" onclick="filterPromoCategory('tickets', this)">TICKETS</button>
-                    <button class="promo-cat-btn" onclick="filterPromoCategory('business-cards', this)">BUSINESS CARDS</button>
+                <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-top:10px;">
+                    <button class="promo-cat-btn active" onclick="filterPromoCategory('posters', this)">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                        POSTERS
+                    </button>
+                    <button class="promo-cat-btn" onclick="filterPromoCategory('tickets', this)">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><path d="M2 9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="2 2"/></svg>
+                        TICKETS
+                    </button>
+                    <button class="promo-cat-btn" onclick="filterPromoCategory('business-cards', this)">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M14 12h4"/><path d="M6 15h2"/></svg>
+                        BUSINESS CARDS
+                    </button>
                 </div>
             </div>
 
@@ -2869,11 +2904,10 @@ User Agent: ${visitInfo.userAgent}`;
 <script>
 // ===== PROMOTIONAL PRINTS FUNCTIONS =====
 
-let currentPromoCategory = 'all';
+let currentPromoCategory = 'posters';
 
 function filterPromoCategory(category, btn) {
     currentPromoCategory = category;
-    // Update active button
     document.querySelectorAll('.promo-cat-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
     loadPromoGallery();
@@ -2896,10 +2930,8 @@ async function loadPromoGallery() {
         let items = [];
         snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
 
-        // Filter by category if not 'all'
-        if (currentPromoCategory !== 'all') {
-            items = items.filter(d => (d.category || '').toLowerCase() === currentPromoCategory);
-        }
+        // Filter by selected category
+        items = items.filter(d => (d.category || '').toLowerCase() === currentPromoCategory);
 
         if (items.length === 0) {
             if (empty) empty.style.display = 'block';
@@ -2912,13 +2944,10 @@ async function loadPromoGallery() {
             const card = document.createElement('div');
             card.className = 'promo-card';
             card.innerHTML = `
-                <div class="promo-card-img-wrap" onclick="openPromoLightbox('${data.imageUrl}', '${(data.title||'').replace(/'/g,"\\'")}')">
-                    <img src="${data.imageUrl}" alt="${data.title || 'Promotional Print'}" loading="lazy">
+                <div class="promo-card-img-wrap" onclick="openPromoLightbox('${data.imageUrl}', '')">
+                    <img src="${data.imageUrl}" alt="Promotional Print" loading="lazy">
                 </div>
-                <div class="promo-card-caption">
-                    <h3>${data.title || 'Untitled'}</h3>
-                    ${data.caption ? `<p>${data.caption}</p>` : ''}
-                </div>
+                <button class="promo-card-request-btn" onclick="openPromoRequestModal()">REQUEST NOW</button>
             `;
             grid.appendChild(card);
         });
