@@ -877,11 +877,20 @@ async function loadContainers() {
     } catch(e) { list.innerHTML = '<div class="loading-row" style="color:#ef4444;">Error loading.</div>'; }
 }
 
+function normalizeUrl(raw) {
+    if (!raw) return '';
+    raw = raw.trim();
+    if (!raw) return '';
+    if (/^https?:\/\//i.test(raw)) return raw;
+    if (raw.startsWith('//')) return 'https:' + raw;
+    return 'https://' + raw;
+}
+
 async function addContainer() {
     const title = document.getElementById('ctTitle').value.trim();
     const text = document.getElementById('ctText').value.trim();
     const order = parseInt(document.getElementById('ctOrder').value) || 99;
-    const url = document.getElementById('ctUrl').value.trim();
+    const url = normalizeUrl(document.getElementById('ctUrl').value);
 
     if (!title || !text) { toast('Title and text are required.', true); return; }
 
@@ -915,7 +924,7 @@ async function saveEditContainer() {
     const title = document.getElementById('editCtTitle').value.trim();
     const text = document.getElementById('editCtText').value.trim();
     const order = parseInt(document.getElementById('editCtOrder').value) || 1;
-    const url = document.getElementById('editCtUrl').value.trim();
+    const url = normalizeUrl(document.getElementById('editCtUrl').value);
 
     if (!title || !text) { toast('Title and text required.', true); return; }
 

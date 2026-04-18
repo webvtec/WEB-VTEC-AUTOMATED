@@ -2838,6 +2838,15 @@ function adminLogin() {
 
 
 
+function normalizeUrl(raw) {
+    if (!raw) return '#';
+    raw = raw.trim();
+    if (!raw) return '#';
+    if (/^https?:\/\//i.test(raw)) return raw;
+    if (raw.startsWith('//')) return 'https:' + raw;
+    return 'https://' + raw;
+}
+
 // Load containers from Firebase and display them
 async function loadSiteContainers() {
     const containerSection = document.getElementById("containerSection");
@@ -2890,7 +2899,7 @@ async function loadSiteContainers() {
                 `;
             } else {
                 // Use URL stored in Firestore by the admin — no hardcoding
-                const previewUrl = (data.url && data.url.trim()) ? data.url.trim() : '#';
+                const previewUrl = (data.url && data.url.trim()) ? normalizeUrl(data.url.trim()) : '#';
                 const btnClick = previewUrl !== '#'
                     ? `window.open('${previewUrl}', '_blank')`
                     : `alert('No preview URL set for this container yet.')`;
