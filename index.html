@@ -2847,15 +2847,6 @@ async function loadSiteContainers() {
         return;
     }
     
-    // Define URL mappings based on container titles
-    const urlMappings = {
-    "HAIR & NAIL TECH WEBSITES": "https://nailsbynavia.com",
-    "MAKEUP & SPA WEBSITES": "https://your-rental-demo.com", 
-    "RESTURANT DELIVERY WEBSITE": "https://kravinfood.com",
-    "PAINTING WEBSITES": "https://webvtec.github.io/GARFIELD/",
-    "PARTY RENTAL WEBSITES": "https://webvtec.github.io/Pellz-Party-Rental/index.html",
-};
-    
     try {
         console.log("Loading site containers...");
         
@@ -2886,7 +2877,7 @@ async function loadSiteContainers() {
             const containerDiv = document.createElement('div');
             containerDiv.className = 'screenshot-container';
             
-            // First container gets "JOIN US NOW", others get "PREVIEW A WEBSITE"
+            // First container gets "JOIN US NOW", others get "VIEW A WEBSITE"
             if (containerIndex === 0) {
                 containerDiv.innerHTML = `
                     <div class="container-header">
@@ -2898,8 +2889,11 @@ async function loadSiteContainers() {
                     <button class="join-btn" onclick="showPage('request')">JOIN US NOW</button>
                 `;
             } else {
-                // Get URL based on container title
-                const previewUrl = urlMappings[data.title] || '#';
+                // Use URL stored in Firestore by the admin — no hardcoding
+                const previewUrl = (data.url && data.url.trim()) ? data.url.trim() : '#';
+                const btnClick = previewUrl !== '#'
+                    ? `window.open('${previewUrl}', '_blank')`
+                    : `alert('No preview URL set for this container yet.')`;
                 containerDiv.innerHTML = `
                     <div class="container-header">
                         <h1>${data.title}</h1>
@@ -2907,7 +2901,7 @@ async function loadSiteContainers() {
                     <div class="container-content">
                         <p>${processedText}</p>
                     </div>
-                    <button class="preview-btn" onclick="window.open('${previewUrl}', '_blank')">VIEW A WEBSITE</button>
+                    <button class="preview-btn" onclick="${btnClick}">VIEW A WEBSITE</button>
                 `;
             }
             
