@@ -429,6 +429,7 @@ button{box-shadow:none}
 .price-badge-chip-label{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3)}
 .price-badge-chip-amount{font-family:"Playfair Display",serif;font-size:22px;font-weight:800;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .price-badge-chip-period{font-size:10.5px;color:var(--tx3);font-weight:600}
+.price-badge-chip-sub{font-size:9.5px;color:var(--tx3);font-weight:600;margin-top:2px}
 
 .package-section{margin-bottom:6px;}
 .package-section-header{
@@ -1835,44 +1836,40 @@ Some of his main goals are to help more businesses get online and build a strong
                             <label>Would you like any of these built into your site? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                             <div class="checkbox-group" id="websiteAddonsGroup">
                                 <label class="checkbox-option">
-                                    <input type="checkbox" name="addons" value="ai-chatbot" data-price="75">
+                                    <input type="checkbox" name="addons" value="ai-chatbot" data-price="35">
                                     <span class="checkbox-text">AI Chatbot (text-based) on my website</span>
-                                    <span class="addon-price">+$75</span>
+                                    <span class="addon-price">+$35/mo</span>
                                 </label>
                                 <label class="checkbox-option">
-                                    <input type="checkbox" name="addons" value="ai-voice-chat" data-price="120">
-                                    <span class="checkbox-text">AI Voice Chat on my website</span>
-                                    <span class="addon-price">+$120</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="addons" value="online-booking" data-price="40">
-                                    <span class="checkbox-text">Online Booking Form</span>
-                                    <span class="addon-price">+$40</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="addons" value="email-confirmations" data-price="25">
+                                    <input type="checkbox" name="addons" value="email-confirmations" data-price="40">
                                     <span class="checkbox-text">Automated Email Confirmations</span>
-                                    <span class="addon-price">+$25</span>
+                                    <span class="addon-price">+$40/mo</span>
                                 </label>
                                 <label class="checkbox-option">
-                                    <input type="checkbox" name="addons" value="revive-dead-leads" data-price="90">
+                                    <input type="checkbox" name="addons" value="revive-dead-leads" data-price="40">
                                     <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
-                                    <span class="addon-price">+$90</span>
+                                    <span class="addon-price">+$40/mo</span>
                                 </label>
                                 <label class="checkbox-option">
-                                    <input type="checkbox" name="addons" value="broadcast-campaigns" data-price="70">
+                                    <input type="checkbox" name="addons" value="broadcast-campaigns" data-price="40">
                                     <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
-                                    <span class="addon-price">+$70</span>
+                                    <span class="addon-price">+$40/mo</span>
                                 </label>
                                 <label class="checkbox-option">
-                                    <input type="checkbox" name="addons" value="clockwork-auto-reviews" data-price="55">
+                                    <input type="checkbox" name="addons" value="clockwork-auto-reviews" data-price="40">
                                     <span class="checkbox-text">Clockwork – Auto Reviews</span>
-                                    <span class="addon-price">+$55</span>
+                                    <span class="addon-price">+$40/mo</span>
                                 </label>
                             </div>
-                            <div class="total-estimate">
-                                <span class="total-estimate-label">Estimated Total</span>
-                                <span class="total-estimate-amount" id="websiteTotalEstimate">$160</span>
+                            <div class="package-grand-total">
+                                <div class="package-grand-total-row">
+                                    <span class="package-grand-total-label">One-Time Setup</span>
+                                    <span class="package-grand-total-amount">$160</span>
+                                </div>
+                                <div class="package-grand-total-row">
+                                    <span class="package-grand-total-label">Monthly Subscription</span>
+                                    <span class="package-grand-total-amount" id="websiteMonthlyTotal">$0/mo</span>
+                                </div>
                             </div>
                         </div>
 
@@ -1902,9 +1899,11 @@ Some of his main goals are to help more businesses get online and build a strong
                         <div class="price-badge-chip">
                             <span class="price-badge-chip-label">AI Receptionist</span>
                             <span class="price-badge-chip-amount">$200</span>
-                            <span class="price-badge-chip-period">/mo</span>
+                            <span class="price-badge-chip-period">setup</span>
+                            <span class="price-badge-chip-sub">+ $150/mo after</span>
                         </div>
                     </div>
+                    <p style="color:var(--tx3);font-size:11px;text-align:center;margin:-18px auto 26px;">AI Receptionist usage fee varies based on call volume and is billed separately.</p>
 
                     <form id="customPackageForm" onsubmit="handleCustomPackageRequest(event)">
                         <div class="form-group">
@@ -1974,44 +1973,40 @@ Some of his main goals are to help more businesses get online and build a strong
                                 <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                                 <div class="checkbox-group" id="pkgWebsiteAddonsGroup">
                                     <label class="checkbox-option">
-                                        <input type="checkbox" name="pkgWebsiteAddons" value="ai-chatbot" data-price="75">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="ai-chatbot" data-price="35">
                                         <span class="checkbox-text">AI Chatbot (text-based) on my website</span>
-                                        <span class="addon-price">+$75</span>
+                                        <span class="addon-price">+$35/mo</span>
                                     </label>
                                     <label class="checkbox-option">
-                                        <input type="checkbox" name="pkgWebsiteAddons" value="ai-voice-chat" data-price="120">
-                                        <span class="checkbox-text">AI Voice Chat on my website</span>
-                                        <span class="addon-price">+$120</span>
-                                    </label>
-                                    <label class="checkbox-option">
-                                        <input type="checkbox" name="pkgWebsiteAddons" value="online-booking" data-price="40">
-                                        <span class="checkbox-text">Online Booking Form</span>
-                                        <span class="addon-price">+$40</span>
-                                    </label>
-                                    <label class="checkbox-option">
-                                        <input type="checkbox" name="pkgWebsiteAddons" value="email-confirmations" data-price="25">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="email-confirmations" data-price="40">
                                         <span class="checkbox-text">Automated Email Confirmations</span>
-                                        <span class="addon-price">+$25</span>
+                                        <span class="addon-price">+$40/mo</span>
                                     </label>
                                     <label class="checkbox-option">
-                                        <input type="checkbox" name="pkgWebsiteAddons" value="revive-dead-leads" data-price="90">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="revive-dead-leads" data-price="40">
                                         <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
-                                        <span class="addon-price">+$90</span>
+                                        <span class="addon-price">+$40/mo</span>
                                     </label>
                                     <label class="checkbox-option">
-                                        <input type="checkbox" name="pkgWebsiteAddons" value="broadcast-campaigns" data-price="70">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="broadcast-campaigns" data-price="40">
                                         <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
-                                        <span class="addon-price">+$70</span>
+                                        <span class="addon-price">+$40/mo</span>
                                     </label>
                                     <label class="checkbox-option">
-                                        <input type="checkbox" name="pkgWebsiteAddons" value="clockwork-auto-reviews" data-price="55">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="clockwork-auto-reviews" data-price="40">
                                         <span class="checkbox-text">Clockwork – Auto Reviews</span>
-                                        <span class="addon-price">+$55</span>
+                                        <span class="addon-price">+$40/mo</span>
                                     </label>
                                 </div>
-                                <div class="total-estimate">
-                                    <span class="total-estimate-label">Website Subtotal</span>
-                                    <span class="total-estimate-amount" id="pkgWebsiteSubtotal">$160</span>
+                                <div class="package-grand-total">
+                                    <div class="package-grand-total-row">
+                                        <span class="package-grand-total-label">One-Time Setup</span>
+                                        <span class="package-grand-total-amount" id="pkgWebsiteOneTime">$160</span>
+                                    </div>
+                                    <div class="package-grand-total-row">
+                                        <span class="package-grand-total-label">Monthly Subscription</span>
+                                        <span class="package-grand-total-amount" id="pkgWebsiteMonthly">$0/mo</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2038,30 +2033,7 @@ Some of his main goals are to help more businesses get online and build a strong
                                     <div class="included-item"><span class="included-check">✓</span>Instant Email Confirmations</div>
                                 </div>
                             </div>
-                            <div class="form-group" style="margin-top:18px;margin-bottom:0;">
-                                <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
-                                <div class="checkbox-group" id="pkgAiAddonsGroup">
-                                    <label class="checkbox-option">
-                                        <input type="checkbox" name="pkgAiAddons" value="revive-dead-leads" data-price="45">
-                                        <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
-                                        <span class="addon-price">+$45/mo</span>
-                                    </label>
-                                    <label class="checkbox-option">
-                                        <input type="checkbox" name="pkgAiAddons" value="broadcast-campaigns" data-price="35">
-                                        <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
-                                        <span class="addon-price">+$35/mo</span>
-                                    </label>
-                                    <label class="checkbox-option">
-                                        <input type="checkbox" name="pkgAiAddons" value="clockwork-auto-reviews" data-price="25">
-                                        <span class="checkbox-text">Clockwork – Auto Reviews</span>
-                                        <span class="addon-price">+$25/mo</span>
-                                    </label>
-                                </div>
-                                <div class="total-estimate">
-                                    <span class="total-estimate-label">AI Receptionist Subtotal</span>
-                                    <span class="total-estimate-amount" id="pkgAiSubtotal">$200/mo</span>
-                                </div>
-                            </div>
+                            <p style="color:var(--tx3);font-size:11.5px;text-align:center;margin-top:14px;">$200 one-time setup, then $150/mo continuation — plus a usage fee that varies based on call volume.</p>
                         </div>
 
                         <div class="form-group">
@@ -2072,13 +2044,14 @@ Some of his main goals are to help more businesses get online and build a strong
                         <div class="package-grand-total">
                             <div class="package-grand-total-row">
                                 <span class="package-grand-total-label">One-Time Setup</span>
-                                <span class="package-grand-total-amount" id="pkgGrandWebsite">$160</span>
+                                <span class="package-grand-total-amount" id="pkgGrandWebsite">$360</span>
                             </div>
                             <div class="package-grand-total-row">
                                 <span class="package-grand-total-label">Monthly Subscription</span>
-                                <span class="package-grand-total-amount" id="pkgGrandAi">$200/mo</span>
+                                <span class="package-grand-total-amount" id="pkgGrandAi">$150/mo</span>
                             </div>
                         </div>
+                        <p style="color:var(--tx3);font-size:11px;text-align:center;margin-top:-12px;margin-bottom:24px;">One-Time Setup = $160 website + $200 AI receptionist. Monthly Subscription = $150 AI continuation + any website add-ons. AI usage fee varies and is billed separately.</p>
 
                         <button type="submit" class="submit-button">SUBMIT PACKAGE REQUEST</button>
                         <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
@@ -2324,7 +2297,8 @@ async function handleWebsiteRequest(e) {
         userId: currentUser.uid,
         websiteType: websiteType,
         addons: formData.getAll('addons'),
-        estimatedTotal: document.getElementById('websiteTotalEstimate')?.textContent || '$160',
+        oneTimeTotal: '$160',
+        monthlyTotal: document.getElementById('websiteMonthlyTotal')?.textContent || '$0/mo',
         selectedService: selectedService || 'direct-request',
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         status: 'pending'
@@ -2368,7 +2342,8 @@ async function handleWebsiteRequest(e) {
   REQUEST DETAILS:
 🌐 Website Type: ${requestData.websiteType}
 ➕ Add-Ons: ${addonsText}
-💰 Estimated Total: ${requestData.estimatedTotal}
+💰 One-Time Setup: ${requestData.oneTimeTotal}
+💰 Monthly Subscription: ${requestData.monthlyTotal}
 📅 Submitted: ${formatDate(new Date())}
 
 CONTACT THE CUSTOMER!
@@ -3226,13 +3201,57 @@ function initPriceCalculator(groupId, totalElId, basePrice, suffix) {
   recalc();
 }
 
+// Sums only the checked checkboxes in a group (no base price) — used for
+// add-on groups that are purely monthly extras on top of a fixed one-time fee.
+function sumCheckedPrices(groupEl) {
+  if (!groupEl) return 0;
+  let total = 0;
+  groupEl.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+    total += parseFloat(cb.dataset.price || '0');
+  });
+  return total;
+}
+
+// Standalone Website page: $160 one-time base (fixed), add-ons are monthly extras.
+function setupWebsiteCalculator() {
+  const group = document.getElementById('websiteAddonsGroup');
+  const monthlyEl = document.getElementById('websiteMonthlyTotal');
+  if (!group || !monthlyEl) return;
+
+  function recalc() {
+    monthlyEl.textContent = '$' + sumCheckedPrices(group).toLocaleString() + '/mo';
+  }
+
+  group.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', recalc));
+  recalc();
+}
+
+// Custom Package page: website's one-time fee never changes ($160 fixed).
+// Website add-ons + AI base + AI add-ons all combine into one monthly subscription figure.
+function setupPackagePageCalculator() {
+  const webGroup = document.getElementById('pkgWebsiteAddonsGroup');
+  if (!webGroup) return;
+
+  const webMonthlyEl   = document.getElementById('pkgWebsiteMonthly');
+  const grandMonthlyEl = document.getElementById('pkgGrandAi');
+
+  function recalc() {
+    const webMonthly      = sumCheckedPrices(webGroup);
+    const combinedMonthly = webMonthly + 150; // AI continuation fee (no AI add-ons in the package)
+
+    if (webMonthlyEl)   webMonthlyEl.textContent   = '$' + webMonthly.toLocaleString() + '/mo';
+    if (grandMonthlyEl) grandMonthlyEl.textContent  = '$' + combinedMonthly.toLocaleString() + '/mo';
+  }
+
+  webGroup.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', recalc));
+
+  recalc();
+}
+
 function setupPriceCalculators() {
-  initPriceCalculator('websiteAddonsGroup', 'websiteTotalEstimate', 160, '');
-  initPriceCalculator('aiAddonsGroup', 'aiTotalEstimate', 200, '/mo');
-  initPriceCalculator('pkgWebsiteAddonsGroup', 'pkgWebsiteSubtotal', 160, '');
-  initPriceCalculator('pkgWebsiteAddonsGroup', 'pkgGrandWebsite', 160, '');
-  initPriceCalculator('pkgAiAddonsGroup', 'pkgAiSubtotal', 200, '/mo');
-  initPriceCalculator('pkgAiAddonsGroup', 'pkgGrandAi', 200, '/mo');
+  setupWebsiteCalculator();
+  initPriceCalculator('aiAddonsGroup', 'aiTotalEstimate', 150, '/mo');
+  setupPackagePageCalculator();
 }
 
 async function handlePromoImageRequest(e) {
@@ -3301,7 +3320,8 @@ async function handleAIReceptionistRequest(e) {
     description:  document.getElementById('aiDescription').value.trim(),
     includedFeatures: AI_INCLUDED_FEATURES,
     addons:       checkedAddons,
-    estimatedTotal: document.getElementById('aiTotalEstimate')?.textContent || '$200/mo',
+    setupFee:        '$200',
+    monthlyEstimate: document.getElementById('aiTotalEstimate')?.textContent || '$150/mo',
     userId:       currentUser.uid,
     userEmail:    currentUser.email,
     timestamp:    firebase.firestore.FieldValue.serverTimestamp(),
@@ -3317,7 +3337,7 @@ async function handleAIReceptionistRequest(e) {
 
     const addonsText = checkedAddons.length ? checkedAddons.join(', ') : 'None selected';
 
-    const msg = `\n🤖 NEW AI RECEPTIONIST REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n✅ Included: ${AI_INCLUDED_FEATURES.join(', ')}\n➕ Extra Add-Ons: ${addonsText}\n💰 Estimated Total: ${data.estimatedTotal}\n📝 Details: ${data.description}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
+    const msg = `\n🤖 NEW AI RECEPTIONIST REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n✅ Included: ${AI_INCLUDED_FEATURES.join(', ')}\n➕ Extra Add-Ons: ${addonsText}\n💰 Setup Fee: ${data.setupFee}\n💰 Monthly (Continuation + Add-Ons): ${data.monthlyEstimate}\n💡 Plus a usage fee that varies by call volume\n📝 Details: ${data.description}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
     await sendTelegramMessage(msg);
     alert('🎉 Request submitted! We will be in touch soon.');
     e.target.reset();
@@ -3333,10 +3353,10 @@ async function handleAIReceptionistRequest(e) {
 
 function resetPackageDisplays() {
   const defaults = {
-    pkgWebsiteSubtotal: '$160',
-    pkgGrandWebsite:    '$160',
-    pkgAiSubtotal:       '$200/mo',
-    pkgGrandAi:          '$200/mo'
+    pkgWebsiteMonthly: '$0/mo',
+    pkgWebsiteOneTime: '$160',
+    pkgGrandWebsite:   '$360',
+    pkgGrandAi:        '$150/mo'
   };
   Object.entries(defaults).forEach(([id, val]) => {
     const el = document.getElementById(id);
@@ -3377,8 +3397,6 @@ async function handleCustomPackageRequest(e) {
 
   const websiteAddons = Array.from(document.querySelectorAll('input[name="pkgWebsiteAddons"]:checked'))
     .map(cb => cb.value);
-  const aiAddons = Array.from(document.querySelectorAll('input[name="pkgAiAddons"]:checked'))
-    .map(cb => cb.value);
 
   const data = {
     firstName:    document.getElementById('pkgFirstName').value.trim(),
@@ -3391,9 +3409,12 @@ async function handleCustomPackageRequest(e) {
     includedWebsiteFeatures: PKG_INCLUDED_WEBSITE,
     includedAiFeatures:      PKG_INCLUDED_AI,
     websiteAddons: websiteAddons,
-    aiAddons:      aiAddons,
-    websiteSubtotal: document.getElementById('pkgWebsiteSubtotal')?.textContent || '$160',
-    aiSubtotal:      document.getElementById('pkgAiSubtotal')?.textContent || '$200/mo',
+    websiteOneTime:      document.getElementById('pkgWebsiteOneTime')?.textContent || '$160',
+    websiteMonthly:      document.getElementById('pkgWebsiteMonthly')?.textContent || '$0/mo',
+    aiSetupFee:          '$200',
+    aiContinuationFee:   '$150/mo',
+    oneTimeSetupTotal:   document.getElementById('pkgGrandWebsite')?.textContent || '$360',
+    monthlySubscription: document.getElementById('pkgGrandAi')?.textContent || '$150/mo',
     userId:    currentUser.uid,
     userEmail: currentUser.email,
     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -3408,9 +3429,8 @@ async function handleCustomPackageRequest(e) {
     await db.collection('custom-package-requests').add(data);
 
     const websiteAddonsText = websiteAddons.length ? websiteAddons.join(', ') : 'None selected';
-    const aiAddonsText      = aiAddons.length ? aiAddons.join(', ') : 'None selected';
 
-    const msg = `\n📦 NEW CUSTOM PACKAGE REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n\n🌐 WEBSITE (included)\n✅ Standard: ${PKG_INCLUDED_WEBSITE.join(', ')}\n➕ Extra Add-Ons: ${websiteAddonsText}\n💰 Subtotal: ${data.websiteSubtotal}\n\n🤖 AI RECEPTIONIST (included)\n✅ Standard: ${PKG_INCLUDED_AI.join(', ')}\n➕ Extra Add-Ons: ${aiAddonsText}\n💰 Subtotal: ${data.aiSubtotal}\n\n📝 Details: ${data.details || 'None provided'}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
+    const msg = `\n📦 NEW CUSTOM PACKAGE REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n\n🌐 WEBSITE (included)\n✅ Standard: ${PKG_INCLUDED_WEBSITE.join(', ')}\n➕ Extra Add-Ons: ${websiteAddonsText}\n💰 One-Time Setup: ${data.websiteOneTime}\n💰 Website Monthly Add-Ons: ${data.websiteMonthly}\n\n🤖 AI RECEPTIONIST (included)\n✅ Standard: ${PKG_INCLUDED_AI.join(', ')}\n💰 Setup Fee: ${data.aiSetupFee}\n💰 Continuation: ${data.aiContinuationFee}\n💡 Plus a usage fee that varies by call volume\n\n💵 TOTAL ONE-TIME SETUP: ${data.oneTimeSetupTotal}\n💵 TOTAL MONTHLY SUBSCRIPTION: ${data.monthlySubscription}\n📝 Details: ${data.details || 'None provided'}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
 
     await sendTelegramMessage(msg);
     alert('🎉 Package request submitted! We will be in touch soon.');
@@ -3439,11 +3459,19 @@ async function handleCustomPackageRequest(e) {
             <div class="content-area">
                 <div class="form-container">
                     <h2 class="form-page-title">Request AI Receptionist</h2>
-                    <div class="price-badge">
-                        <span class="price-badge-label">Starting At</span>
-                        <span class="price-badge-amount">$200</span>
-                        <span class="price-badge-period">/mo</span>
+                    <div class="price-badge-row">
+                        <div class="price-badge-chip">
+                            <span class="price-badge-chip-label">Setup Fee</span>
+                            <span class="price-badge-chip-amount">$200</span>
+                            <span class="price-badge-chip-period">one-time</span>
+                        </div>
+                        <div class="price-badge-chip">
+                            <span class="price-badge-chip-label">Continuation</span>
+                            <span class="price-badge-chip-amount">$150</span>
+                            <span class="price-badge-chip-period">/mo</span>
+                        </div>
                     </div>
+                    <p style="color:var(--tx3);font-size:11.5px;text-align:center;margin:-18px auto 26px;">Plus a usage fee that varies based on call volume.</p>
                     <div class="included-section" style="margin-bottom:28px;">
                         <div class="included-header">
                             <span class="included-badge">✓ Included</span>
@@ -3514,10 +3542,17 @@ async function handleCustomPackageRequest(e) {
                                     <span class="addon-price">+$25/mo</span>
                                 </label>
                             </div>
-                            <div class="total-estimate">
-                                <span class="total-estimate-label">Estimated Total</span>
-                                <span class="total-estimate-amount" id="aiTotalEstimate">$200/mo</span>
+                            <div class="package-grand-total">
+                                <div class="package-grand-total-row">
+                                    <span class="package-grand-total-label">Setup Fee</span>
+                                    <span class="package-grand-total-amount">$200</span>
+                                </div>
+                                <div class="package-grand-total-row">
+                                    <span class="package-grand-total-label">Monthly (Continuation + Add-Ons)</span>
+                                    <span class="package-grand-total-amount" id="aiTotalEstimate">$150/mo</span>
+                                </div>
                             </div>
+                            <p style="color:var(--tx3);font-size:11px;text-align:center;margin-top:10px;">Plus a usage fee that varies based on call volume — billed separately.</p>
                         </div>
                         <div class="form-group">
                             <label for="aiDescription">What should your AI receptionist handle?</label>
