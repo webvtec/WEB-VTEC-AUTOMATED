@@ -210,8 +210,8 @@ body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--t
 /* ── SECTION HEADERS ─────────────────────────────────────── */
 .services-section{padding:90px 0 0;background:var(--bg)}
 .services-header{text-align:center;padding:0 24px 48px}
-.services-headline{font-family:"Playfair Display",serif;font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.12;letter-spacing:-.5px;color:var(--tx1);margin-bottom:12px}
-.services-subline{font-size:clamp(13px,1.5vw,16px);color:var(--tx3);letter-spacing:.3px}
+.services-headline{font-family:"Playfair Display",serif;font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.12;letter-spacing:-.5px;color:var(--tx1);margin-bottom:0}
+.section-eyebrow-lg{font-size:clamp(18px,2.4vw,28px);font-weight:800;letter-spacing:1.5px;margin-bottom:10px;color:var(--g1);}
 
 /* ── HORIZONTAL SCROLL TRACK ─────────────────────────────── */
 .hscroll-wrap{position:relative;padding:0 0 48px}
@@ -1153,9 +1153,8 @@ Some of his main goals are to help more businesses get online and build a strong
       <!-- ══════════════════ AI CALLING SYSTEM ══════════════════ -->
       <section class="ai-section">
         <div class="services-header">
-          <span class="section-eyebrow">AI Calling Systems</span>
-          <h2 class="services-headline">Meet Our <span class="hl-gold">AI Agents</span></h2>
-          <p class="services-subline">Each one built for a different job — press play to hear them in action.</p>
+          <span class="section-eyebrow section-eyebrow-lg">What We Build</span>
+          <h2 class="services-headline">AI Agents</h2>
         </div>
 
         <div class="hscroll-wrap">
@@ -1444,9 +1443,7 @@ Some of his main goals are to help more businesses get online and build a strong
       <!-- ══════════════════ SERVICE CARDS (horizontal scroll) ══════════════════ -->
       <section class="services-section">
         <div class="services-header">
-          <span class="section-eyebrow">What We Build</span>
-          <h2 class="services-headline">Our <span class="hl-gold">Website Packages</span></h2>
-          <p class="services-subline">Swipe to explore — every template is fully custom-built to your brand.</p>
+          <h2 class="services-headline">Website Packages</h2>
         </div>
         <div class="hscroll-wrap">
           <div class="hscroll-track" id="servicesTrack">
@@ -2602,8 +2599,6 @@ User Agent: ${visitInfo.userAgent}`;
     }
 }
     
-</script>
-
 // ── Horizontal scroll helpers ────────────────────────────
 function scrollTrack(dir) {
   const t = document.getElementById('servicesTrack');
