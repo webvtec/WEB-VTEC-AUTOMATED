@@ -1150,17 +1150,14 @@ Some of his main goals are to help more businesses get online and build a strong
 
             <!-- Promotional Prints -->
             <div class="pillar-card">
-              <div class="pillar-img" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=85&auto=format&fit=crop')">
+              <div class="pillar-img" style="background-image:url('https://images.unsplash.com/photo-1626785774573-4b799315345d?w=700&q=85&auto=format&fit=crop')">
                 <div class="pillar-img-overlay"></div>
                 <div class="pillar-tag">Design</div>
               </div>
               <div class="pillar-body">
                 <h3 class="pillar-title">Promotional Prints</h3>
                 <p class="pillar-desc">Eye-catching posters, event tickets, business cards, social media banners, and logo designs — crafted to make your brand impossible to ignore.</p>
-                <button class="pillar-btn" onclick="showPage('promo')">
-                  Browse Designs
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </button>
+
               </div>
             </div>
 
@@ -1316,9 +1313,9 @@ Some of his main goals are to help more businesses get online and build a strong
         <!-- Scroll-driven category indicator (read-only labels at top) -->
         <div class="promo-scroll-labels" id="promoScrollLabels">
           <span class="promo-scroll-label active" data-cat="posters">Posters</span>
-          <span class="promo-scroll-label" data-cat="tickets">Tickets</span>
+          <span class="promo-scroll-label" data-cat="logo-design">Logos</span>
           <span class="promo-scroll-label" data-cat="business-cards">Business Cards</span>
-          <span class="promo-scroll-label" data-cat="logo-design">Logo Design</span>
+          <span class="promo-scroll-label" data-cat="tickets">Tickets</span>
         </div>
 
         <!-- Horizontal gallery — ALL categories merged, each card tagged with data-cat -->
@@ -1400,48 +1397,6 @@ Some of his main goals are to help more businesses get online and build a strong
         </div>
     </div>
 
-    <!-- PROMOTIONAL PRINTS PAGE -->
-    <div id="promo" class="page">
-        <div class="promo-page-wrapper">
-            <!-- Page Header -->
-            <div class="promo-page-header">
-                <!-- Category Filter Buttons -->
-                <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-top:10px;">
-                    <button class="promo-cat-btn active" onclick="filterPromoCategory('posters', this)">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-                        POSTERS
-                    </button>
-                    <button class="promo-cat-btn" onclick="filterPromoCategory('tickets', this)">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><path d="M2 9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z"/><line x1="12" y1="7" x2="12" y2="17" stroke-dasharray="2 2"/></svg>
-                        TICKETS
-                    </button>
-                    <button class="promo-cat-btn" onclick="filterPromoCategory('business-cards', this)">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4"/><path d="M14 12h4"/><path d="M6 15h2"/></svg>
-                        BUSINESS CARDS
-                    </button>
-                    <button class="promo-cat-btn" onclick="filterPromoCategory('logo-design', this)">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
-                        LOGO DESIGN
-                    </button>
-                </div>
-            </div>
-
-            <!-- Gallery Grid -->
-            <div class="promo-gallery-grid" id="promoGalleryGrid">
-                <div class="promo-loading" id="promoLoading">
-                    <div class="promo-spinner"></div>
-                    <p>Loading gallery...</p>
-                </div>
-            </div>
-
-            <!-- Empty State -->
-            <div class="promo-empty" id="promoEmpty" style="display:none;">
-                <div style="font-size: 64px; margin-bottom: 20px;">🖼️</div>
-                <h3>No promotional prints yet</h3>
-                <p>Check back soon — new designs coming shortly.</p>
-            </div>
-        </div>
-    </div>
 
     <!-- PROMO REQUEST MODAL -->
     <div id="promoRequestModal" class="modal">
@@ -2852,7 +2807,7 @@ function scrollPromoTrack(dir) {
 }
 
 // ── Home promo strip — all categories merged, scroll-driven labels ──
-const PROMO_CATS = ['posters','tickets','business-cards','logo-design'];
+const PROMO_CATS = ['posters','logo-design','business-cards','tickets'];
 
 async function loadHomePromoAll() {
   const track = document.getElementById('promoHomeTrack');
