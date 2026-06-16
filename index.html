@@ -320,23 +320,24 @@ button{box-shadow:none}
 
 /* Optional add-on checkboxes */
 .checkbox-group{
-  display:flex;flex-direction:column;gap:10px;
+  display:flex;flex-direction:column;gap:11px;
 }
 .checkbox-option{
-  display:flex;align-items:center;gap:10px;
-  padding:11px 14px;
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+  padding:13px 16px;
   background:rgba(255,255,255,.025);
-  border:1px solid rgba(212,160,23,.15);
-  border-radius:var(--r);
+  border:1px solid rgba(212,160,23,.16);
+  border-radius:10px;
   cursor:pointer;
-  transition:border-color .2s,background .2s;
+  transition:border-color .2s,background .2s,box-shadow .2s,transform .15s;
 }
 .checkbox-option:hover{
-  border-color:rgba(212,160,23,.4);
-  background:rgba(212,160,23,.04);
+  border-color:rgba(212,160,23,.45);
+  background:rgba(212,160,23,.05);
+  transform:translateY(-1px);
 }
 .checkbox-option input[type="checkbox"]{
-  width:17px;height:17px;flex-shrink:0;
+  width:18px;height:18px;flex-shrink:0;
   accent-color:var(--g2);
   cursor:pointer;
 }
@@ -346,11 +347,11 @@ button{box-shadow:none}
   letter-spacing:0;
 }
 .checkbox-option:has(input:checked){
-  border-color:rgba(212,160,23,.5);
-  background:rgba(212,160,23,.07);
+  border-color:rgba(212,160,23,.55);
+  background:rgba(212,160,23,.08);
+  box-shadow:0 0 0 1px rgba(212,160,23,.12),0 4px 14px rgba(212,160,23,.1);
 }
 .checkbox-option:has(input:checked) span{color:var(--tx1);}
-.checkbox-option{justify-content:space-between}
 .checkbox-text{flex:1}
 
 /* Pricing display */
@@ -364,21 +365,102 @@ button{box-shadow:none}
 
 .addon-price{
   flex-shrink:0;font-size:11.5px;font-weight:700;color:var(--g1);
-  background:rgba(212,160,23,.1);padding:3px 10px;border-radius:20px;
+  background:rgba(212,160,23,.1);padding:4px 11px;border-radius:20px;
   border:1px solid rgba(212,160,23,.25);letter-spacing:.2px;white-space:nowrap;
 }
 
 .total-estimate{
   display:flex;align-items:center;justify-content:space-between;gap:12px;
-  margin-top:8px;padding:16px 18px;
+  margin-top:10px;padding:16px 18px;
   background:rgba(212,160,23,.06);border:1px solid rgba(212,160,23,.3);
-  border-radius:var(--r);
+  border-radius:10px;
 }
 .total-estimate-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2)}
 .total-estimate-amount{font-family:"Playfair Display",serif;font-size:22px;font-weight:800;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
 
+/* Included-by-default feature list (not optional, no extra charge) */
+.included-section{
+  background:rgba(52,211,153,.05);
+  border:1px solid rgba(52,211,153,.22);
+  border-radius:10px;
+  padding:18px 18px 16px;
+}
+.included-header{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.included-badge{
+  font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:#34d399;background:rgba(52,211,153,.13);
+  border:1px solid rgba(52,211,153,.4);
+  padding:4px 11px;border-radius:20px;
+}
+.included-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--tx2)}
+.included-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;
+}
+.included-item{
+  display:flex;align-items:center;gap:9px;
+  font-size:13.5px;color:var(--tx1);font-weight:400;
+  padding:10px 12px;background:rgba(255,255,255,.02);
+  border:1px solid rgba(52,211,153,.14);border-radius:8px;
+}
+.included-check{
+  flex-shrink:0;width:18px;height:18px;border-radius:50%;
+  background:rgba(52,211,153,.16);color:#34d399;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:900;line-height:1;
+}
+
 .form-page-title{font-family:"Playfair Display",serif;font-size:clamp(20px,4vw,32px);font-weight:700;letter-spacing:.5px;text-align:center;margin-bottom:32px;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
 .form-page-subtitle{font-size:13.5px;line-height:1.65;color:var(--tx3);text-align:center;margin-bottom:32px;margin-top:-20px}
+
+/* Custom Package page */
+.price-badge-row{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  margin:0 auto 30px;
+}
+.price-badge-chip{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:13px 24px;border:1px solid rgba(212,160,23,.3);
+  border-radius:10px;background:rgba(212,160,23,.05);
+  min-width:140px;
+}
+.price-badge-chip-label{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3)}
+.price-badge-chip-amount{font-family:"Playfair Display",serif;font-size:22px;font-weight:800;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.price-badge-chip-period{font-size:10.5px;color:var(--tx3);font-weight:600}
+
+.package-section{margin-bottom:6px;}
+.package-section-header{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.package-section-title{
+  font-family:"Playfair Display",serif;font-size:18px;font-weight:700;color:var(--tx1);
+  display:flex;align-items:center;gap:8px;margin:0;
+}
+.mandatory-badge{
+  font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--g1);background:rgba(212,160,23,.12);
+  border:1px solid rgba(212,160,23,.4);
+  padding:4px 11px;border-radius:20px;white-space:nowrap;
+}
+.package-divider{
+  height:1px;background:rgba(212,160,23,.16);
+  margin:32px 0 28px;
+}
+.package-grand-total{
+  margin-top:6px;margin-bottom:24px;
+  background:rgba(212,160,23,.07);
+  border:1px solid rgba(212,160,23,.32);
+  border-radius:10px;padding:18px 20px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.package-grand-total-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.package-grand-total-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2)}
+.package-grand-total-amount{font-family:"Playfair Display",serif;font-size:21px;font-weight:800;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
 
 /* ── DYNAMIC CONTAINERS (firebase) ──────────────────────── */
 #containerSection{padding:0 20px 60px}
@@ -987,6 +1069,11 @@ button{box-shadow:none}
         <h2 class="modal-title">GET STARTED</h2>
         <p style="color:rgba(255,255,255,.5);font-size:13px;margin-bottom:28px;margin-top:-16px;">What would you like to request?</p>
 
+        <button class="login-button" onclick="closeGetStartedModal(); showPage('custom-package');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            Custom Package (Website + AI)
+        </button>
+
         <button class="login-button" onclick="closeGetStartedModal(); showPage('ai-receptionist');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><line x1="19" y1="14" x2="22" y2="14"/><line x1="2" y1="14" x2="5" y2="14"/></svg>
             AI Call Receptionist
@@ -1232,13 +1319,9 @@ Some of his main goals are to help more businesses get online and build a strong
             </div>
 
             <div class="hero-left-ctas">
-              <button class="btn-primary" onclick="showPage('request')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                Request a Website
-              </button>
-              <button class="btn-secondary" onclick="showPage('ai-receptionist')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><line x1="19" y1="14" x2="22" y2="14"/><line x1="2" y1="14" x2="5" y2="14"/></svg>
-                Request AI Agent
+              <button class="btn-primary" onclick="showPage('custom-package')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                Request A Custom Package
               </button>
               <button class="about-btn" onclick="openFounderSection()">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
@@ -1781,6 +1864,11 @@ Some of his main goals are to help more businesses get online and build a strong
                                     <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
                                     <span class="addon-price">+$70</span>
                                 </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="addons" value="clockwork-auto-reviews" data-price="55">
+                                    <span class="checkbox-text">Clockwork – Auto Reviews</span>
+                                    <span class="addon-price">+$55</span>
+                                </label>
                             </div>
                             <div class="total-estimate">
                                 <span class="total-estimate-label">Estimated Total</span>
@@ -1789,6 +1877,210 @@ Some of his main goals are to help more businesses get online and build a strong
                         </div>
 
                         <button type="submit" class="submit-button">SUBMIT REQUEST</button>
+                        <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CUSTOM PACKAGE REQUEST PAGE -->
+    <div id="custom-package" class="page">
+        <div class="navy-gradient-container">
+            <div class="content-area">
+                <div class="form-container">
+                    <h2 class="form-page-title">Request A Custom Package</h2>
+                    <p class="form-page-subtitle">A website and an AI receptionist, bundled together as one package — then customize either side with extra capabilities.</p>
+
+                    <div class="price-badge-row">
+                        <div class="price-badge-chip">
+                            <span class="price-badge-chip-label">Website</span>
+                            <span class="price-badge-chip-amount">$160</span>
+                            <span class="price-badge-chip-period">one-time</span>
+                        </div>
+                        <div class="price-badge-chip">
+                            <span class="price-badge-chip-label">AI Receptionist</span>
+                            <span class="price-badge-chip-amount">$200</span>
+                            <span class="price-badge-chip-period">/mo</span>
+                        </div>
+                    </div>
+
+                    <form id="customPackageForm" onsubmit="handleCustomPackageRequest(event)">
+                        <div class="form-group">
+                            <label for="pkgFirstName">First Name</label>
+                            <input type="text" id="pkgFirstName" required placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <label for="pkgLastName">Last Name</label>
+                            <input type="text" id="pkgLastName" required placeholder="Last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="pkgPhone">Phone Number</label>
+                            <input type="tel" id="pkgPhone" required placeholder="Your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="pkgEmail">Email Address</label>
+                            <input type="email" id="pkgEmail" required placeholder="Your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="pkgBusinessName">Business Name</label>
+                            <input type="text" id="pkgBusinessName" required placeholder="Your business name">
+                        </div>
+                        <div class="form-group">
+                            <label for="pkgBusinessType">Business / Website Type</label>
+                            <select id="pkgBusinessType" required onchange="handlePkgTypeChange(event)">
+                                <option value="">Select your business type</option>
+                                <option value="nail-tech">Nail Tech</option>
+                                <option value="hair-barbershop">Hair Tech / Barbershop</option>
+                                <option value="makeup">Makeup Artist</option>
+                                <option value="spa">Spa / Wellness</option>
+                                <option value="painting">Painting</option>
+                                <option value="restaurant">Restaurant / Food Delivery</option>
+                                <option value="party-rental">Party Rental</option>
+                                <option value="home-services">Home Services</option>
+                                <option value="retail">Retail Store</option>
+                                <option value="medical">Medical / Healthcare</option>
+                                <option value="real-estate">Real Estate</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="pkgCustomTypeGroup" style="display:none;">
+                            <label for="pkgCustomType">Please specify your business type:</label>
+                            <input type="text" id="pkgCustomType" placeholder="Enter your business type...">
+                        </div>
+
+                        <!-- WEBSITE SECTION -->
+                        <div class="package-section">
+                            <div class="package-section-header">
+                                <h3 class="package-section-title">🌐 Your Website</h3>
+                                <span class="mandatory-badge">Included In Every Package</span>
+                            </div>
+                            <div class="included-section">
+                                <div class="included-header">
+                                    <span class="included-badge">✓ Included</span>
+                                    <span class="included-title">Standard With Every Website</span>
+                                </div>
+                                <div class="included-grid">
+                                    <div class="included-item"><span class="included-check">✓</span>Custom Responsive Design</div>
+                                    <div class="included-item"><span class="included-check">✓</span>Mobile &amp; Desktop Friendly</div>
+                                    <div class="included-item"><span class="included-check">✓</span>Social Media Integration</div>
+                                    <div class="included-item"><span class="included-check">✓</span>Contact / Inquiry Form</div>
+                                    <div class="included-item"><span class="included-check">✓</span>SEO-Friendly Setup</div>
+                                    <div class="included-item"><span class="included-check">✓</span>Admin Content Management</div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:18px;margin-bottom:0;">
+                                <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                                <div class="checkbox-group" id="pkgWebsiteAddonsGroup">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="ai-chatbot" data-price="75">
+                                        <span class="checkbox-text">AI Chatbot (text-based) on my website</span>
+                                        <span class="addon-price">+$75</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="ai-voice-chat" data-price="120">
+                                        <span class="checkbox-text">AI Voice Chat on my website</span>
+                                        <span class="addon-price">+$120</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="online-booking" data-price="40">
+                                        <span class="checkbox-text">Online Booking Form</span>
+                                        <span class="addon-price">+$40</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="email-confirmations" data-price="25">
+                                        <span class="checkbox-text">Automated Email Confirmations</span>
+                                        <span class="addon-price">+$25</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="revive-dead-leads" data-price="90">
+                                        <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
+                                        <span class="addon-price">+$90</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="broadcast-campaigns" data-price="70">
+                                        <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
+                                        <span class="addon-price">+$70</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="clockwork-auto-reviews" data-price="55">
+                                        <span class="checkbox-text">Clockwork – Auto Reviews</span>
+                                        <span class="addon-price">+$55</span>
+                                    </label>
+                                </div>
+                                <div class="total-estimate">
+                                    <span class="total-estimate-label">Website Subtotal</span>
+                                    <span class="total-estimate-amount" id="pkgWebsiteSubtotal">$160</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="package-divider"></div>
+
+                        <!-- AI RECEPTIONIST SECTION -->
+                        <div class="package-section">
+                            <div class="package-section-header">
+                                <h3 class="package-section-title">🤖 Your AI Receptionist</h3>
+                                <span class="mandatory-badge">Included In Every Package</span>
+                            </div>
+                            <div class="included-section">
+                                <div class="included-header">
+                                    <span class="included-badge">✓ Included</span>
+                                    <span class="included-title">Standard With Every AI Receptionist</span>
+                                </div>
+                                <div class="included-grid">
+                                    <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
+                                    <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
+                                    <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
+                                    <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
+                                    <div class="included-item"><span class="included-check">✓</span>Sends Reminder Emails</div>
+                                    <div class="included-item"><span class="included-check">✓</span>Instant Email Confirmations</div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top:18px;margin-bottom:0;">
+                                <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                                <div class="checkbox-group" id="pkgAiAddonsGroup">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgAiAddons" value="revive-dead-leads" data-price="45">
+                                        <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
+                                        <span class="addon-price">+$45/mo</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgAiAddons" value="broadcast-campaigns" data-price="35">
+                                        <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
+                                        <span class="addon-price">+$35/mo</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgAiAddons" value="clockwork-auto-reviews" data-price="25">
+                                        <span class="checkbox-text">Clockwork – Auto Reviews</span>
+                                        <span class="addon-price">+$25/mo</span>
+                                    </label>
+                                </div>
+                                <div class="total-estimate">
+                                    <span class="total-estimate-label">AI Receptionist Subtotal</span>
+                                    <span class="total-estimate-amount" id="pkgAiSubtotal">$200/mo</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                            <textarea id="pkgDetails" rows="4" placeholder="Tell us anything specific you need for your website or AI receptionist..."></textarea>
+                        </div>
+
+                        <div class="package-grand-total">
+                            <div class="package-grand-total-row">
+                                <span class="package-grand-total-label">One-Time Setup</span>
+                                <span class="package-grand-total-amount" id="pkgGrandWebsite">$160</span>
+                            </div>
+                            <div class="package-grand-total-row">
+                                <span class="package-grand-total-label">Monthly Subscription</span>
+                                <span class="package-grand-total-amount" id="pkgGrandAi">$200/mo</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-button">SUBMIT PACKAGE REQUEST</button>
                         <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
                     </form>
                 </div>
@@ -2685,6 +2977,21 @@ function handleWebsiteTypeChange(e) {
     }
 }
 
+function handlePkgTypeChange(e) {
+    const customGroup = document.getElementById('pkgCustomTypeGroup');
+    const customInput = document.getElementById('pkgCustomType');
+    if (!customGroup || !customInput) return;
+
+    if (e.target.value === 'other') {
+        customGroup.style.display = 'block';
+        customInput.required = true;
+    } else {
+        customGroup.style.display = 'none';
+        customInput.required = false;
+        customInput.value = '';
+    }
+}
+
 
 function showAdminPasswordModal() {
     document.getElementById('adminPasswordModal').classList.add('active');
@@ -2922,6 +3229,10 @@ function initPriceCalculator(groupId, totalElId, basePrice, suffix) {
 function setupPriceCalculators() {
   initPriceCalculator('websiteAddonsGroup', 'websiteTotalEstimate', 160, '');
   initPriceCalculator('aiAddonsGroup', 'aiTotalEstimate', 200, '/mo');
+  initPriceCalculator('pkgWebsiteAddonsGroup', 'pkgWebsiteSubtotal', 160, '');
+  initPriceCalculator('pkgWebsiteAddonsGroup', 'pkgGrandWebsite', 160, '');
+  initPriceCalculator('pkgAiAddonsGroup', 'pkgAiSubtotal', 200, '/mo');
+  initPriceCalculator('pkgAiAddonsGroup', 'pkgGrandAi', 200, '/mo');
 }
 
 async function handlePromoImageRequest(e) {
@@ -2968,6 +3279,15 @@ async function handleAIReceptionistRequest(e) {
   e.preventDefault();
   if (!currentUser) { showLoginModal(); return; }
 
+  const AI_INCLUDED_FEATURES = [
+    'Answers Every Call 24/7',
+    'Takes Bookings',
+    'Cancels & Reschedules',
+    'Answers General Questions',
+    'Sends Reminder Emails',
+    'Instant Email Confirmations'
+  ];
+
   const checkedAddons = Array.from(document.querySelectorAll('input[name="aiAddons"]:checked'))
     .map(cb => cb.value);
 
@@ -2979,6 +3299,7 @@ async function handleAIReceptionistRequest(e) {
     businessName: document.getElementById('aiBusinessName').value.trim(),
     businessType: document.getElementById('aiBusinessType').value,
     description:  document.getElementById('aiDescription').value.trim(),
+    includedFeatures: AI_INCLUDED_FEATURES,
     addons:       checkedAddons,
     estimatedTotal: document.getElementById('aiTotalEstimate')?.textContent || '$200/mo',
     userId:       currentUser.uid,
@@ -2996,10 +3317,107 @@ async function handleAIReceptionistRequest(e) {
 
     const addonsText = checkedAddons.length ? checkedAddons.join(', ') : 'None selected';
 
-    const msg = `\n🤖 NEW AI RECEPTIONIST REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n➕ Add-Ons: ${addonsText}\n💰 Estimated Total: ${data.estimatedTotal}\n📝 Details: ${data.description}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
+    const msg = `\n🤖 NEW AI RECEPTIONIST REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n✅ Included: ${AI_INCLUDED_FEATURES.join(', ')}\n➕ Extra Add-Ons: ${addonsText}\n💰 Estimated Total: ${data.estimatedTotal}\n📝 Details: ${data.description}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
     await sendTelegramMessage(msg);
     alert('🎉 Request submitted! We will be in touch soon.');
     e.target.reset();
+    showPage('home');
+  } catch(err) {
+    console.error(err);
+    alert('❌ Error submitting. Please try again.');
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+}
+
+function resetPackageDisplays() {
+  const defaults = {
+    pkgWebsiteSubtotal: '$160',
+    pkgGrandWebsite:    '$160',
+    pkgAiSubtotal:       '$200/mo',
+    pkgGrandAi:          '$200/mo'
+  };
+  Object.entries(defaults).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  });
+}
+
+async function handleCustomPackageRequest(e) {
+  e.preventDefault();
+  if (!currentUser) { showLoginModal(); return; }
+
+  const PKG_INCLUDED_WEBSITE = [
+    'Custom Responsive Design',
+    'Mobile & Desktop Friendly',
+    'Social Media Integration',
+    'Contact / Inquiry Form',
+    'SEO-Friendly Setup',
+    'Admin Content Management'
+  ];
+  const PKG_INCLUDED_AI = [
+    'Answers Every Call 24/7',
+    'Takes Bookings',
+    'Cancels & Reschedules',
+    'Answers General Questions',
+    'Sends Reminder Emails',
+    'Instant Email Confirmations'
+  ];
+
+  let businessType = document.getElementById('pkgBusinessType').value;
+  if (businessType === 'other') {
+    const customType = document.getElementById('pkgCustomType').value.trim();
+    if (!customType) {
+      alert('Please specify your business type.');
+      return;
+    }
+    businessType = customType;
+  }
+
+  const websiteAddons = Array.from(document.querySelectorAll('input[name="pkgWebsiteAddons"]:checked'))
+    .map(cb => cb.value);
+  const aiAddons = Array.from(document.querySelectorAll('input[name="pkgAiAddons"]:checked'))
+    .map(cb => cb.value);
+
+  const data = {
+    firstName:    document.getElementById('pkgFirstName').value.trim(),
+    lastName:     document.getElementById('pkgLastName').value.trim(),
+    phone:        document.getElementById('pkgPhone').value.trim(),
+    email:        document.getElementById('pkgEmail').value.trim(),
+    businessName: document.getElementById('pkgBusinessName').value.trim(),
+    businessType: businessType,
+    details:      document.getElementById('pkgDetails').value.trim(),
+    includedWebsiteFeatures: PKG_INCLUDED_WEBSITE,
+    includedAiFeatures:      PKG_INCLUDED_AI,
+    websiteAddons: websiteAddons,
+    aiAddons:      aiAddons,
+    websiteSubtotal: document.getElementById('pkgWebsiteSubtotal')?.textContent || '$160',
+    aiSubtotal:      document.getElementById('pkgAiSubtotal')?.textContent || '$200/mo',
+    userId:    currentUser.uid,
+    userEmail: currentUser.email,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    status:    'pending'
+  };
+
+  const btn = e.target.querySelector('button[type="submit"]');
+  const orig = btn.textContent;
+  try {
+    btn.textContent = 'SUBMITTING...';
+    btn.disabled = true;
+    await db.collection('custom-package-requests').add(data);
+
+    const websiteAddonsText = websiteAddons.length ? websiteAddons.join(', ') : 'None selected';
+    const aiAddonsText      = aiAddons.length ? aiAddons.join(', ') : 'None selected';
+
+    const msg = `\n📦 NEW CUSTOM PACKAGE REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n\n🌐 WEBSITE (included)\n✅ Standard: ${PKG_INCLUDED_WEBSITE.join(', ')}\n➕ Extra Add-Ons: ${websiteAddonsText}\n💰 Subtotal: ${data.websiteSubtotal}\n\n🤖 AI RECEPTIONIST (included)\n✅ Standard: ${PKG_INCLUDED_AI.join(', ')}\n➕ Extra Add-Ons: ${aiAddonsText}\n💰 Subtotal: ${data.aiSubtotal}\n\n📝 Details: ${data.details || 'None provided'}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
+
+    await sendTelegramMessage(msg);
+    alert('🎉 Package request submitted! We will be in touch soon.');
+    e.target.reset();
+    const pkgCustomGroup = document.getElementById('pkgCustomTypeGroup');
+    if (pkgCustomGroup) pkgCustomGroup.style.display = 'none';
+    resetPackageDisplays();
     showPage('home');
   } catch(err) {
     console.error(err);
@@ -3025,6 +3443,20 @@ async function handleAIReceptionistRequest(e) {
                         <span class="price-badge-label">Starting At</span>
                         <span class="price-badge-amount">$200</span>
                         <span class="price-badge-period">/mo</span>
+                    </div>
+                    <div class="included-section" style="margin-bottom:28px;">
+                        <div class="included-header">
+                            <span class="included-badge">✓ Included</span>
+                            <span class="included-title">Standard With Every AI Receptionist</span>
+                        </div>
+                        <div class="included-grid">
+                            <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
+                            <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
+                            <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
+                            <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
+                            <div class="included-item"><span class="included-check">✓</span>Sends Reminder Emails</div>
+                            <div class="included-item"><span class="included-check">✓</span>Instant Email Confirmations</div>
+                        </div>
                     </div>
                     <p style="color:rgba(255,255,255,.45);font-size:13px;text-align:center;margin-bottom:32px;line-height:1.6;">Let an AI handle your calls, bookings, and customer inquiries 24/7 — fully branded to your business.</p>
                     <form id="aiReceptionistForm" onsubmit="handleAIReceptionistRequest(event)">
@@ -3064,33 +3496,8 @@ async function handleAIReceptionistRequest(e) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>What should your AI handle? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                            <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                             <div class="checkbox-group" id="aiAddonsGroup">
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="aiAddons" value="take-bookings" data-price="50">
-                                    <span class="checkbox-text">Take Bookings 24/7</span>
-                                    <span class="addon-price">+$50/mo</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="aiAddons" value="cancel-reschedule" data-price="30">
-                                    <span class="checkbox-text">Cancel/Reschedule Bookings</span>
-                                    <span class="addon-price">+$30/mo</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="aiAddons" value="general-questions" data-price="25">
-                                    <span class="checkbox-text">Answer General Questions</span>
-                                    <span class="addon-price">+$25/mo</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="aiAddons" value="reminder-calls" data-price="20">
-                                    <span class="checkbox-text">Send Reminder Calls</span>
-                                    <span class="addon-price">+$20/mo</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="aiAddons" value="email-confirmations" data-price="15">
-                                    <span class="checkbox-text">Instant Email Confirmations</span>
-                                    <span class="addon-price">+$15/mo</span>
-                                </label>
                                 <label class="checkbox-option">
                                     <input type="checkbox" name="aiAddons" value="revive-dead-leads" data-price="45">
                                     <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
@@ -3100,6 +3507,11 @@ async function handleAIReceptionistRequest(e) {
                                     <input type="checkbox" name="aiAddons" value="broadcast-campaigns" data-price="35">
                                     <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
                                     <span class="addon-price">+$35/mo</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="aiAddons" value="clockwork-auto-reviews" data-price="25">
+                                    <span class="checkbox-text">Clockwork – Auto Reviews</span>
+                                    <span class="addon-price">+$25/mo</span>
                                 </label>
                             </div>
                             <div class="total-estimate">
