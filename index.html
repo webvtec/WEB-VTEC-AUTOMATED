@@ -287,32 +287,6 @@ body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--t
 .hscroll-next{right:8px}
 
 /* ── PROMO HOME SECTION ──────────────────────────────────── */
-.promo-home-section{padding:80px 0 100px;background:var(--deep);border-top:1px solid rgba(212,160,23,.1)}
-.promo-home-header{text-align:center;padding:0 24px 48px}
-.promo-hscroll-wrap{position:relative;padding:0 0 8px}
-.promo-hscroll-track{
-  display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;
-  padding:8px 48px 16px;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth;
-}
-.promo-hscroll-track::-webkit-scrollbar{display:none}
-.promo-home-card{
-  flex:0 0 260px;scroll-snap-align:start;
-  background:var(--card);border:1px solid rgba(212,160,23,.15);border-radius:var(--rl);
-  overflow:hidden;cursor:pointer;transition:all .28s;
-}
-.promo-home-card:hover{border-color:rgba(212,160,23,.55);box-shadow:0 0 26px rgba(212,160,23,.13),0 12px 36px rgba(0,0,0,.5);transform:translateY(-4px)}
-.promo-home-card img{width:100%;height:auto;display:block;transition:transform .4s}
-.promo-home-card:hover img{transform:scale(1.04)}
-.promo-home-card-btn{
-  display:block;width:100%;padding:12px;
-  background:transparent;color:var(--g1);
-  border:none;border-top:1px solid rgba(212,160,23,.15);
-  font-family:"Inter",sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-  cursor:pointer;transition:all .22s;text-align:center;
-}
-.promo-home-card-btn:hover{background:var(--gold);color:#08070d}
-.promo-home-cats{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:24px 24px 0}
-.promo-home-loading{display:flex;flex-direction:column;align-items:center;padding:60px 80px;color:var(--tx3)}
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
 .btn-primary{
@@ -491,9 +465,8 @@ button{box-shadow:none}
   .services-header{padding:0 20px 36px}
   .hscroll-track{padding:8px 20px 16px}
   .scard{flex:0 0 300px}
-  .promo-hscroll-track{padding:8px 20px 16px}
-  .promo-home-section{padding:60px 0 72px}
-  #containerSection{padding:0 12px 40px}
+  
+    #containerSection{padding:0 12px 40px}
   .container-content{padding:24px 18px 16px}
   .content-area{padding:28px 18px 64px}
 }
@@ -833,30 +806,6 @@ button{box-shadow:none}
 
 
 /* ── Scroll-driven promo labels ─────────────────────────── */
-.promo-scroll-labels{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  padding:0 24px 28px;
-}
-.promo-scroll-label{
-  font-family:"Inter",sans-serif;
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--tx3);
-  padding:8px 20px;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--r);
-  pointer-events:none; /* not clickable */
-  user-select:none;
-  transition:color .3s,border-color .3s,background .3s,box-shadow .3s;
-}
-.promo-scroll-label.active{
-  color:var(--g1);
-  border-color:rgba(212,160,23,.5);
-  background:rgba(212,160,23,.08);
-  box-shadow:0 0 14px rgba(212,160,23,.18);
-}
 
 
 /* ── AI CALLING SECTION ──────────────────────────────────── */
@@ -1628,33 +1577,6 @@ Some of his main goals are to help more businesses get online and build a strong
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
           <button class="hscroll-arrow hscroll-next" onclick="scrollTrack(1)" aria-label="Next">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </div>
-      </section>
-
-      <!-- ══════════════════ PROMO PRINTS STRIP ══════════════════ -->
-      <section class="promo-home-section">
-        <!-- Scroll-driven category indicator (read-only labels at top) -->
-        <div class="promo-scroll-labels" id="promoScrollLabels">
-          <span class="promo-scroll-label active" data-cat="posters">Posters</span>
-          <span class="promo-scroll-label" data-cat="logo-design">Logos</span>
-          <span class="promo-scroll-label" data-cat="business-cards">Business Cards</span>
-          <span class="promo-scroll-label" data-cat="tickets">Tickets</span>
-        </div>
-
-        <!-- Horizontal gallery — ALL categories merged, each card tagged with data-cat -->
-        <div class="promo-hscroll-wrap">
-          <div class="promo-hscroll-track" id="promoHomeTrack">
-            <div class="promo-home-loading">
-              <div class="promo-spinner"></div>
-              <p>Loading designs...</p>
-            </div>
-          </div>
-          <button class="hscroll-arrow hscroll-prev" onclick="scrollPromoTrack(-1)" aria-label="Previous">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button class="hscroll-arrow hscroll-next" onclick="scrollPromoTrack(1)" aria-label="Next">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
         </div>
@@ -3126,86 +3048,9 @@ function scrollTrack(dir) {
   const t = document.getElementById('servicesTrack');
   if (t) t.scrollBy({ left: dir * 380, behavior: 'smooth' });
 }
-function scrollPromoTrack(dir) {
-  const t = document.getElementById('promoHomeTrack');
-  if (t) t.scrollBy({ left: dir * 280, behavior: 'smooth' });
+);
 }
 
-// ── Home promo strip — all categories merged, scroll-driven labels ──
-const PROMO_CATS = ['posters','logo-design','business-cards','tickets'];
-
-async function loadHomePromoAll() {
-  const track = document.getElementById('promoHomeTrack');
-  if (!track) return;
-  track.innerHTML = '<div class="promo-home-loading"><div class="promo-spinner"></div><p>Loading designs...</p></div>';
-
-  try {
-    // Fetch all categories in parallel
-    const snaps = await Promise.all(
-      PROMO_CATS.map(cat => db.collection('promo-gallery').where('category','==',cat).get())
-    );
-
-    track.innerHTML = '';
-    let hasAny = false;
-
-    snaps.forEach((snap, idx) => {
-      const cat = PROMO_CATS[idx];
-      if (snap.empty) return;
-      hasAny = true;
-      snap.forEach(doc => {
-        const d = doc.data();
-        const card = document.createElement('div');
-        card.className = 'promo-home-card';
-        card.setAttribute('data-cat', cat);
-        card.innerHTML = `
-          <img src="${d.imageUrl}" alt="${cat} design" loading="lazy"
-               onclick="openPromoLightbox('${d.imageUrl}','')">
-          <button class="promo-home-card-btn" onclick="openPromoRequestModal()">Request This Design</button>
-        `;
-        track.appendChild(card);
-      });
-    });
-
-    if (!hasAny) {
-      track.innerHTML = '<div class="promo-home-loading"><p style="color:rgba(212,160,23,.35)">No designs yet — check back soon.</p></div>';
-      return;
-    }
-
-    // Set up IntersectionObserver to highlight the label of the most-visible card
-    setupPromoScrollObserver();
-
-  } catch(e) {
-    console.error(e);
-    track.innerHTML = '<div class="promo-home-loading"><p style="color:rgba(212,160,23,.35)">Unable to load designs.</p></div>';
-  }
-}
-
-function setupPromoScrollObserver() {
-  const track = document.getElementById('promoHomeTrack');
-  if (!track) return;
-  const labels = document.querySelectorAll('.promo-scroll-label');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-        const cat = entry.target.getAttribute('data-cat');
-        labels.forEach(l => {
-          l.classList.toggle('active', l.getAttribute('data-cat') === cat);
-        });
-      }
-    });
-  }, {
-    root: track,
-    threshold: 0.5
-  });
-
-  track.querySelectorAll('.promo-home-card').forEach(card => observer.observe(card));
-}
-
-// Auto-load all promo after Firebase ready
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(loadHomePromoAll, 1800);
-});
 
 
 // ── AI scroll helper ─────────────────────────────────────
