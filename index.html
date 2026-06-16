@@ -858,6 +858,133 @@ button{box-shadow:none}
   box-shadow:0 0 14px rgba(212,160,23,.18);
 }
 
+
+/* ── AI CALLING SECTION ──────────────────────────────────── */
+.ai-section{padding:90px 0 0;background:var(--bg);}
+
+.ai-track{align-items:stretch;}
+
+.ai-card{
+  flex:0 0 360px;scroll-snap-align:start;
+  background:var(--card);
+  border:1px solid rgba(212,160,23,.18);
+  border-radius:var(--rl);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .28s,box-shadow .28s,transform .28s;
+}
+.ai-card:hover{
+  border-color:rgba(212,160,23,.55);
+  box-shadow:0 0 30px rgba(212,160,23,.12),0 16px 44px rgba(0,0,0,.55);
+  transform:translateY(-4px);
+}
+
+/* Card header */
+.ai-card-header{
+  display:flex;align-items:center;gap:14px;
+  padding:22px 24px 18px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.ai-avatar{
+  width:52px;height:52px;flex-shrink:0;
+  background:rgba(212,160,23,.1);
+  border:1px solid rgba(212,160,23,.35);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--g1);
+}
+.ai-agent-info{display:flex;flex-direction:column;gap:3px;flex:1;}
+.ai-agent-name{font-size:16px;font-weight:800;color:var(--tx1);letter-spacing:.3px;}
+.ai-agent-role{font-size:11px;font-weight:600;color:var(--tx3);letter-spacing:1px;text-transform:uppercase;}
+.ai-live-badge{
+  display:flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--g1);
+  border:1px solid rgba(212,160,23,.35);
+  border-radius:20px;padding:5px 12px;
+  white-space:nowrap;
+}
+.ai-live-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--g1);
+  box-shadow:0 0 7px rgba(212,160,23,.8);
+  animation:livePulse 1.8s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* Card body */
+.ai-card-body{padding:20px 24px;flex:1;display:flex;flex-direction:column;gap:16px;}
+.ai-card-desc{font-size:13.5px;line-height:1.72;color:var(--tx2);}
+
+
+
+/* Play button */
+.ai-play-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:11px 18px;
+  background:transparent;
+  border:1px solid rgba(212,160,23,.3);
+  border-radius:var(--r);
+  color:var(--g1);
+  font-family:"Inter",sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;
+  cursor:pointer;transition:all .22s;
+  width:fit-content;
+}
+.ai-play-btn:hover{background:rgba(212,160,23,.08);border-color:var(--g1);}
+.ai-play-btn.playing{border-color:var(--g1);background:rgba(212,160,23,.1);}
+.ai-play-icon{
+  width:30px;height:30px;flex-shrink:0;
+  background:rgba(212,160,23,.12);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--g1);
+  transition:background .22s;
+}
+.ai-play-btn.playing .ai-play-icon{background:rgba(212,160,23,.25);}
+
+/* Sound wave animation when playing */
+.ai-wave{
+  display:inline-flex;align-items:center;gap:2px;height:16px;
+}
+.ai-wave span{
+  display:block;width:3px;background:currentColor;border-radius:2px;
+  animation:wave 0.9s ease-in-out infinite;
+}
+.ai-wave span:nth-child(2){animation-delay:.15s;}
+.ai-wave span:nth-child(3){animation-delay:.3s;}
+.ai-wave span:nth-child(4){animation-delay:.15s;}
+@keyframes wave{0%,100%{height:4px}50%{height:14px}}
+
+/* Card footer */
+.ai-card-footer{
+  padding:16px 24px 22px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+
+@media(max-width:768px){
+  .ai-card{flex:0 0 300px;}
+  .ai-section{padding:60px 0 0;}
+}
+@media(max-width:480px){
+  .ai-card{flex:0 0 280px;}
+}
+
+
+/* AI profile photo avatars */
+.ai-avatar-photo{
+  width:52px;height:52px;flex-shrink:0;
+  border-radius:50%;
+  border:2px solid rgba(212,160,23,.45);
+  overflow:hidden;
+  box-shadow:0 0 12px rgba(212,160,23,.2);
+}
+.ai-avatar-photo img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  display:block;
+}
+
 </style>
 <!-- Replace the existing Firebase CDN links with these updated ones -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -1149,7 +1276,7 @@ Some of his main goals are to help more businesses get online and build a strong
 
             <!-- Promotional Images -->
             <div class="pillar-card">
-              <div class="pillar-img" style="background-image:url('https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=700&q=85&auto=format&fit=crop')">
+              <div class="pillar-img" style="background-image:url('https://images.unsplash.com/photo-1586325194227-7625ed4d7a0f?w=700&q=90&auto=format&fit=crop')">
                 <div class="pillar-img-overlay"></div>
                 <div class="pillar-tag">Design</div>
               </div>
@@ -1161,6 +1288,151 @@ Some of his main goals are to help more businesses get online and build a strong
             </div>
 
           </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════ AI CALLING SYSTEM ══════════════════ -->
+      <section class="ai-section">
+        <div class="services-header">
+          <span class="section-eyebrow">AI Calling Systems</span>
+          <h2 class="services-headline">Hear Our <span class="hl-gold">AI Receptionists</span></h2>
+          <p class="services-subline">Real voices, real conversations — available 24/7 for your business. Press play to listen.</p>
+        </div>
+
+        <div class="hscroll-wrap">
+          <div class="hscroll-track ai-track" id="aiTrack">
+
+            <!-- CARD 1: Business Receptionist -->
+            <div class="ai-card">
+              <div class="ai-card-header">
+                <div class="ai-avatar ai-avatar-photo">
+                  <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&q=80&auto=format&fit=crop&face" alt="Maya">
+                </div>
+                <div class="ai-agent-info">
+                  <span class="ai-agent-name">Maya</span>
+                  <span class="ai-agent-role">Business Receptionist</span>
+                </div>
+                <div class="ai-live-badge">
+                  <span class="ai-live-dot"></span>24/7
+                </div>
+              </div>
+              <div class="ai-card-body">
+                <p class="ai-card-desc">Answers calls, books appointments, and greets every caller professionally — day or night.</p>
+                <button class="ai-play-btn" onclick="speakAI(this, 'Good day! Thank you for calling Kingston Smile Dental, this is Maya speaking — how can I assist you today?')">
+                  <span class="ai-play-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </span>
+                  <span class="ai-play-label">Hear Maya Speak</span>
+                </button>
+              </div>
+              <div class="ai-card-footer">
+                <button class="pillar-btn" onclick="showPage('ai-receptionist')">
+                  Request This System
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- CARD 2: FAQ AI -->
+            <div class="ai-card">
+              <div class="ai-card-header">
+                <div class="ai-avatar ai-avatar-photo" style="border-color:rgba(100,60,220,.5);">
+                  <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&q=80&auto=format&fit=crop&face" alt="Aria">
+                </div>
+                <div class="ai-agent-info">
+                  <span class="ai-agent-name">Aria</span>
+                  <span class="ai-agent-role">Appointment Scheduler</span>
+                </div>
+                <div class="ai-live-badge" style="border-color:rgba(100,60,220,.4);color:#b088ff;">
+                  <span class="ai-live-dot" style="background:#b088ff;box-shadow:0 0 6px #b088ff;"></span>Bookings
+                </div>
+              </div>
+              <div class="ai-card-body">
+                <p class="ai-card-desc">Manages your entire booking calendar automatically — schedules appointments, sends confirmations, and prevents double-bookings without any manual input.</p>
+                <button class="ai-play-btn" onclick="speakAI(this, 'Hi! I have you booked in for Wednesday at two thirty PM — you will receive a confirmation shortly. We look forward to seeing you!')" style="border-color:rgba(100,60,220,.35);color:#b088ff;">
+                  <span class="ai-play-icon" style="background:rgba(100,60,220,.2);color:#b088ff;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </span>
+                  <span class="ai-play-label">Hear Aria Speak</span>
+                </button>
+              </div>
+              <div class="ai-card-footer">
+                <button class="pillar-btn" onclick="showPage('ai-receptionist')">
+                  Request This System
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- CARD 3: After Hours AI -->
+            <div class="ai-card">
+              <div class="ai-card-header">
+                <div class="ai-avatar ai-avatar-photo" style="border-color:rgba(212,160,23,.5);">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80&auto=format&fit=crop&face" alt="Nova">
+                </div>
+                <div class="ai-agent-info">
+                  <span class="ai-agent-name">Nova</span>
+                  <span class="ai-agent-role">Lead Follow-Up Agent</span>
+                </div>
+                <div class="ai-live-badge" style="border-color:rgba(212,160,23,.4);color:#f5d97a;">
+                  <span class="ai-live-dot" style="background:#f5d97a;box-shadow:0 0 6px rgba(212,160,23,.7);"></span>Outbound
+                </div>
+              </div>
+              <div class="ai-card-body">
+                <p class="ai-card-desc">Proactively calls back leads who showed interest but never booked — re-engages cold enquiries and turns them into paying clients automatically.</p>
+                <button class="ai-play-btn" onclick="speakAI(this, "Hey, this is Nova calling from WEBV TEC — you recently enquired about one of our services and I just wanted to reach out personally to answer any questions you might have.")" style="border-color:rgba(212,160,23,.35);color:#f5d97a;">
+                  <span class="ai-play-icon" style="background:rgba(212,160,23,.12);color:#f5d97a;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </span>
+                  <span class="ai-play-label">Hear Nova Speak</span>
+                </button>
+              </div>
+              <div class="ai-card-footer">
+                <button class="pillar-btn" onclick="showPage('ai-receptionist')">
+                  Request This System
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- CARD 4: Sales Closer -->
+            <div class="ai-card">
+              <div class="ai-card-header">
+                <div class="ai-avatar ai-avatar-photo" style="border-color:rgba(16,185,129,.5);">
+                  <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=120&q=80&auto=format&fit=crop&face" alt="Zara">
+                </div>
+                <div class="ai-agent-info">
+                  <span class="ai-agent-name">Zara</span>
+                  <span class="ai-agent-role">Review Collector</span>
+                </div>
+                <div class="ai-live-badge" style="border-color:rgba(16,185,129,.4);color:#34d399;">
+                  <span class="ai-live-dot" style="background:#34d399;box-shadow:0 0 6px rgba(16,185,129,.6);"></span>Feedback
+                </div>
+              </div>
+              <div class="ai-card-body">
+                <p class="ai-card-desc">Automatically contacts clients after their visit to collect reviews, ratings, and feedback — building your reputation on autopilot.</p>
+                <button class="ai-play-btn" onclick="speakAI(this, "Hi! This is Zara — I'm just calling to check in after your recent visit. We'd love to hear how everything went. Would you be happy to share a quick rating for us today?")" style="border-color:rgba(16,185,129,.3);color:#34d399;">
+                  <span class="ai-play-icon" style="background:rgba(16,185,129,.1);color:#34d399;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </span>
+                  <span class="ai-play-label">Hear Zara Speak</span>
+                </button>
+              </div>
+              <div class="ai-card-footer">
+                <button class="pillar-btn" onclick="showPage('ai-receptionist')">
+                  Request This System
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+          </div>
+          <button class="hscroll-arrow hscroll-prev" onclick="scrollAITrack(-1)" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="hscroll-arrow hscroll-next" onclick="scrollAITrack(1)" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
         </div>
       </section>
 
@@ -2880,6 +3152,128 @@ function setupPromoScrollObserver() {
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(loadHomePromoAll, 1800);
 });
+
+
+// ── AI scroll helper ─────────────────────────────────────
+function scrollAITrack(dir) {
+  const t = document.getElementById('aiTrack');
+  if (t) t.scrollBy({ left: dir * 380, behavior: 'smooth' });
+}
+
+// ── Text-to-speech AI demo ────────────────────────────────
+let currentUtterance = null;
+let currentPlayBtn   = null;
+let voicesReady      = false;
+let voicesList       = [];
+
+function loadVoices() {
+  voicesList = window.speechSynthesis.getVoices();
+  if (voicesList.length) voicesReady = true;
+}
+window.speechSynthesis.onvoiceschanged = loadVoices;
+loadVoices();
+
+/*  Voice profiles — ordered priority lists so we fall through
+    to whatever the browser actually has available.
+    Maya  = warm female (Samantha / Google US Eng female feel)
+    Aria  = bright female UK accent
+    Nova  = deep smooth male (Daniel / Google UK Male)
+    Zara  = confident female American
+*/
+const AI_VOICE_PROFILES = {
+  Maya: {
+    gender: 'female',
+    pitch: 1.08, rate: 0.92,
+    names: ['Samantha','Google US English','Joanna','Victoria','Siri Female','Ava','Susan','en-US-Standard-C','en-US-Wavenet-C']
+  },
+  Aria: {
+    gender: 'female',
+    pitch: 1.12, rate: 0.90,
+    names: ['Karen','Moira','Tessa','Google UK English Female','en-GB-Standard-A','Serena','Alice','Fiona']
+  },
+  Nova: {
+    gender: 'male',
+    pitch: 0.85, rate: 0.88,
+    names: ['Daniel','Google UK English Male','en-GB-Standard-B','Rishi','Oliver','Gordon','Fred','Alex','Thomas']
+  },
+  Zara: {
+    gender: 'female',
+    pitch: 1.04, rate: 0.94,
+    names: ['Zira','Cortana','Aria','Kathy','Nicky','Monica','Paulina','en-US-Standard-F','en-US-Wavenet-F']
+  }
+};
+
+function pickVoice(agentName) {
+  const voices = window.speechSynthesis.getVoices();
+  const profile = AI_VOICE_PROFILES[agentName];
+  if (!profile) return voices.find(v => v.lang.startsWith('en')) || voices[0];
+
+  // 1. Try exact name matches
+  for (const name of profile.names) {
+    const match = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()) && v.lang.startsWith('en'));
+    if (match) return match;
+  }
+
+  // 2. Fall back to gender heuristic
+  const genderHint = profile.gender === 'male'
+    ? voices.filter(v => v.lang.startsWith('en') && /male|david|daniel|fred|alex|oliver|rishi|gordon|thomas/i.test(v.name))
+    : voices.filter(v => v.lang.startsWith('en') && !/male|david|fred|gordon|thomas/i.test(v.name) && /female|samantha|karen|victoria|zira|aria|ava|susan|fiona|moira|tessa|alice|kathy|nicky|monica/i.test(v.name));
+
+  if (genderHint.length) return genderHint[0];
+
+  // 3. Just return any English voice
+  return voices.find(v => v.lang.startsWith('en')) || voices[0];
+}
+
+function speakAI(btn, text) {
+  // Ensure voices are loaded (Chrome lazy-loads them)
+  if (!voicesList.length) voicesList = window.speechSynthesis.getVoices();
+
+  // Stop current if playing
+  if (currentUtterance) {
+    window.speechSynthesis.cancel();
+    if (currentPlayBtn) resetPlayBtn(currentPlayBtn);
+    if (currentPlayBtn === btn) { currentPlayBtn = null; currentUtterance = null; return; }
+  }
+
+  const agentName = btn.closest('.ai-card')?.querySelector('.ai-agent-name')?.textContent?.trim() || '';
+  const profile   = AI_VOICE_PROFILES[agentName] || { pitch: 1, rate: 0.92 };
+  const voice     = pickVoice(agentName);
+
+  const utter = new SpeechSynthesisUtterance(text);
+  if (voice)      utter.voice  = voice;
+  utter.pitch   = profile.pitch;
+  utter.rate    = profile.rate;
+  utter.volume  = 1;
+  utter.lang    = voice?.lang || 'en-US';
+
+  // Set playing UI
+  currentPlayBtn   = btn;
+  currentUtterance = utter;
+  btn.classList.add('playing');
+  const label = btn.querySelector('.ai-play-label');
+  const icon  = btn.querySelector('.ai-play-icon');
+  if (label) label.innerHTML = '<span class="ai-wave"><span></span><span></span><span></span><span></span></span>';
+  if (icon)  icon.innerHTML  = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+
+  utter.onend   = () => resetPlayBtn(btn);
+  utter.onerror = (e) => { console.warn('TTS error', e); resetPlayBtn(btn); };
+
+  // Small delay fixes Chrome voice not applying bug
+  setTimeout(() => window.speechSynthesis.speak(utter), 80);
+}
+
+function resetPlayBtn(btn) {
+  if (!btn) return;
+  btn.classList.remove('playing');
+  const agentName = btn.closest('.ai-card')?.querySelector('.ai-agent-name')?.textContent?.trim() || 'Agent';
+  const label = btn.querySelector('.ai-play-label');
+  const icon  = btn.querySelector('.ai-play-icon');
+  if (label) label.textContent = 'Hear ' + agentName + ' Speak';
+  if (icon)  icon.innerHTML    = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+  currentUtterance = null;
+  currentPlayBtn   = null;
+}
 
 </script>
 
