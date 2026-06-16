@@ -944,6 +944,29 @@ button{box-shadow:none}
 <body>
 
     <!-- Login Modal -->
+<div id="getStartedModal" class="modal">
+    <div class="modal-content" style="max-width:420px;">
+        <button class="close-modal" onclick="closeGetStartedModal()">&times;</button>
+        <h2 class="modal-title">GET STARTED</h2>
+        <p style="color:rgba(255,255,255,.5);font-size:13px;margin-bottom:28px;margin-top:-16px;">What would you like to request?</p>
+
+        <button class="login-button" onclick="closeGetStartedModal(); showPage('ai-receptionist');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><line x1="19" y1="14" x2="22" y2="14"/><line x1="2" y1="14" x2="5" y2="14"/></svg>
+            AI Call Receptionist
+        </button>
+
+        <button class="login-button" onclick="closeGetStartedModal(); showPage('request');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Request Website
+        </button>
+
+        <button class="login-button" onclick="closeGetStartedModal(); showPage('promo-request');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            Request Promotional Image
+        </button>
+    </div>
+</div>
+
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <button class="close-modal" onclick="closeLoginModal()">&times;</button>
@@ -1173,16 +1196,15 @@ Some of his main goals are to help more businesses get online and build a strong
 
           <!-- Top: headline block -->
           <div class="why-top">
-            <span class="section-eyebrow">Why Choose Us</span>
-            <h2 class="why-headline">We don't do<br><span class="hl-gold">anything ordinary.</span></h2>
+            <span class="section-eyebrow">Why Choose Us?</span>
+            <h2 class="why-headline">Excellence is<br><span class="hl-gold">our baseline.</span></h2>
             <p class="why-body">
-              From custom websites and AI call receptionists to posters, tickets, business cards
-              and logo design — every single thing we produce is built to a standard that makes
-              your business look and run better than the competition.
-              <br><br>
-              At WEBV TEC, ordinary is simply not an option.
+              From custom websites and AI call receptionists to high impact print assets, we build
+              to a higher standard. We don't just create assets — we build competitive advantages.
+              Every pixel, line of code, and print run is engineered to make your business look
+              sharper, run faster, and outright dominate your competition.
             </p>
-            <button class="btn-primary" onclick="showPage('request')" style="margin-top:32px;">
+            <button class="btn-primary" onclick="showGetStartedModal()" style="margin-top:32px;">
               Get Started
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
@@ -2329,6 +2351,14 @@ function showLoginModal() {
 
 function closeLoginModal() {
     document.getElementById('loginModal').classList.remove('active');
+}
+
+function showGetStartedModal() {
+    document.getElementById('getStartedModal').classList.add('active');
+}
+
+function closeGetStartedModal() {
+    document.getElementById('getStartedModal').classList.remove('active');
 }
 
 async function loginWithEmail() {
