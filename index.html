@@ -463,6 +463,19 @@ button{box-shadow:none}
 .package-grand-total-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2)}
 .package-grand-total-amount{font-family:"Playfair Display",serif;font-size:21px;font-weight:800;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
 
+.package-grand-total-highlight{
+  background:rgba(52,211,153,.08);
+  border:1px solid rgba(52,211,153,.45);
+}
+.package-grand-total-highlight .package-grand-total-label{color:#34d399}
+.package-grand-total-highlight .package-grand-total-amount{
+  background:linear-gradient(118deg,#7eeec0 0%,#34d399 50%,#0fa56d 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.package-grand-total-tag{
+  display:flex;justify-content:center;margin-bottom:2px;
+}
+
 /* ── DYNAMIC CONTAINERS (firebase) ──────────────────────── */
 #containerSection{padding:0 20px 60px}
 .screenshot-container{background:var(--card);border:1px solid rgba(212,160,23,.17);border-radius:var(--rl);overflow:hidden;display:flex;flex-direction:column;width:100%;margin-top:28px;transition:border-color .3s,box-shadow .3s,transform .3s}
@@ -1791,6 +1804,20 @@ Some of his main goals are to help more businesses get online and build a strong
                         <span class="price-badge-amount">$160</span>
                         <span class="price-badge-period">one-time</span>
                     </div>
+                    <div class="included-section" style="margin-bottom:28px;">
+                        <div class="included-header">
+                            <span class="included-badge">✓ Included</span>
+                            <span class="included-title">Standard With Every Website</span>
+                        </div>
+                        <div class="included-grid">
+                            <div class="included-item"><span class="included-check">✓</span>Custom Responsive Design</div>
+                            <div class="included-item"><span class="included-check">✓</span>Mobile &amp; Desktop Friendly</div>
+                            <div class="included-item"><span class="included-check">✓</span>Social Media Integration</div>
+                            <div class="included-item"><span class="included-check">✓</span>Contact / Inquiry Form</div>
+                            <div class="included-item"><span class="included-check">✓</span>SEO-Friendly Setup</div>
+                            <div class="included-item"><span class="included-check">✓</span>Admin Content Management</div>
+                        </div>
+                    </div>
                     <form id="websiteRequestForm">
                         <div class="form-group">
                             <label for="firstName">First Name</label>
@@ -2017,6 +2044,20 @@ Some of his main goals are to help more businesses get online and build a strong
                         </div>
 
                         <div class="package-grand-total">
+                            <div class="package-grand-total-row">
+                                <span class="package-grand-total-label">AI Receptionist — One-Time Setup</span>
+                                <span class="package-grand-total-amount">$200</span>
+                            </div>
+                            <div class="package-grand-total-row">
+                                <span class="package-grand-total-label">AI Receptionist — Monthly</span>
+                                <span class="package-grand-total-amount">$150/mo</span>
+                            </div>
+                        </div>
+
+                        <div class="package-grand-total package-grand-total-highlight">
+                            <div class="package-grand-total-tag">
+                                <span class="included-badge" style="color:#34d399;background:rgba(52,211,153,.16);border-color:rgba(52,211,153,.5);">Package Total</span>
+                            </div>
                             <div class="package-grand-total-row">
                                 <span class="package-grand-total-label">One-Time Setup</span>
                                 <span class="package-grand-total-amount" id="pkgGrandWebsite">$360</span>
