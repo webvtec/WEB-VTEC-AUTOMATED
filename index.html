@@ -124,1485 +124,792 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Playfair+Display:wght@600;700;900&display=swap');
 
+/* ── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --bg:      #08070d;
+  --deep:    #110820;
+  --card:    #0f0b1a;
+  --glass:   rgba(15,11,26,.75);
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+  --g1: #f5d97a;
+  --g2: #c9960e;
+  --g3: #7a5800;
+  --gold-grad: linear-gradient(118deg,#f5e27a 0%,#d4a017 40%,#f0c84a 70%,#c9960e 100%);
+  --gold-glow: 0 0 24px rgba(212,160,23,.45), 0 0 60px rgba(212,160,23,.13);
+  --gold-rim:  0 0 0 1px rgba(212,160,23,.35);
 
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0A1E3F 50%, #A296E7 100%);
-      color: #A296E7;
-    }
+  --tx1: #f2eefc;
+  --tx2: rgba(242,238,252,.65);
+  --tx3: rgba(242,238,252,.35);
 
-    .header {
-    background: #261A4C;
-    padding: 15px 20px;
-    border-radius: 0 0 30px 30px;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-    border: 2.5px solid #FFD700; /* Add this line */
-    }
+  --r: 6px;
+  --r-lg: 14px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
-    .nav-menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(64, 64, 64, 0.85);
-    padding: 12px 25px;
-    border-radius: 25px;
-    backdrop-filter: none;
-    border: 2.5px solid #FFD700; /* Add this line */
-    }
-    
-    .nav-item {
-        color: #FFD700;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-        padding: 8px 16px;
-        border-radius: 15px;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
+html{scroll-behavior:smooth}
 
-    .nav-item:hover {
-        background: rgba(139, 92, 246, 0.1);
-        color: #261A4C;
-    }
-
-    .nav-item.active {
-        background: #261A4C;
-        color: white;
-    }
-
-
-    /* Page sections */
-    .page {
-        display: none;
-    }
-
-    .page.active {
-        display: block;
-    }
-
-    /* Centered main section */
-    .main-content {
-        padding: 40px 20px;
-        display: flex;
-        flex-direction: column;   /* stack logo + button */
-        align-items: center;      /* center horizontally */
-        justify-content: center;  /* center vertically */
-        text-align: center;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    /* Circle with gradient background */
-    .logo-container {
-        width: 250px;
-        height: 250px;
-        background: radial-gradient(circle at center, #C715FF 0%, #000000 100%);
-        border-radius: 50%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 30px;
-        box-shadow: 0 0 25px rgba(160, 32, 240, 0.6);
-        text-align: center;
-        margin-bottom: 10px;
-        overflow: hidden;
-    }
-
-    /* Laptop inside */
-    .logo-svg {
-        width: 85px;
-        height: 85px;
-        margin-bottom: 8px;
-        flex-shrink: 0;
-    }
-
-    /* Gradient text: WEB VTEC */
-    .brand-name {
-        font-size: 20px;
-        font-weight: bold;
-        background: linear-gradient(135deg, #C715FF, #8B5CF6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        letter-spacing: 2px;
-        white-space: nowrap;
-    }
-
-    /* Gradient text: AUTOMATE NOW! */
-    .brand-tagline {
-        font-size: 10px;
-        font-weight: bold;
-        background: linear-gradient(90deg, #FF4500, #FF6347);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        letter-spacing: 2px;
-        margin-top: 3px;
-        white-space: nowrap;
-    }
-
-    /* Larger CTA button BELOW logo */
-    .cta-button {
-        background: #261A4C;
-        color: white;
-        margin-bottom: 1px; 
-        padding: 16px 40px;   /* bigger button */
-        border: none;
-        border-radius: 35px;
-        font-size: 18px;
-        font-weight: 700;
-        cursor: pointer;
-        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-        letter-spacing: 1px;
-    }
-
-    .cta-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 35px rgba(139, 92, 246, 0.6);
-    }
-
-    @media (min-width: 769px) {
-    .cta-button {
-        margin-top: 15px; /* more breathing room under CTA */
-    }
-    }
-
-    .divider-line {
-        width: 100%;
-        height: 2.5px;
-        background: linear-gradient(90deg, transparent, #D1D5DB, transparent);
-        margin: 1px 0 5px 0;
-    }
-
-    .content-area {
-  min-height: 400px;
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  padding: 30px 30px 70px; /* extra space at bottom for button */
-  margin: 20px auto;
-  max-width: 1200px;
-  color: #A296E7;
-  position: relative; /* allow absolute children */
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--tx1);
+  overflow-x:hidden;
 }
 
-#containerSection {
-    padding: 0 15px; /* 30px padding on left and right */
+/* ── PAGE SYSTEM ─────────────────────────────────────────── */
+.page{display:none}
+.page.active{display:block}
+
+/* ── HEADER ──────────────────────────────────────────────── */
+.header{
+  position:sticky;top:0;z-index:900;
+  background:rgba(8,7,13,.93);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  border-bottom:1px solid rgba(212,160,23,.18);
 }
 
-
-.apple-login-button {
-    width: 100%;
-    background: #000;
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-}
-
-.apple-login-button:hover {
-    background: #333;
-}
-
-    @media (max-width: 768px) {
-    .main-content {
-        flex-direction: column;
-        gap: 30px;
-        text-align: center;
-    }
-
-    .nav-menu {
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        gap: 8px;
-        overflow: visible;
-    }
-
-    .nav-item {
-        flex-shrink: 1;
-        white-space: nowrap;
-        overflow: visible;
-        text-overflow: clip;
-        font-size: 11px;
-        padding: 5px 8px;
-        min-width: 0;
-    }
-
-    /* Smaller logo on mobile */
-    .logo-container {
-        width: 150px;
-        height: 150px;
-        padding: 15px;
-    }
-
-    .logo-svg {
-        width: 60px;
-        height: 60px;
-    }
-
-    .brand-name {
-        font-size: 20px;
-    }
-
-    .brand-tagline {
-        font-size: 8.5px;
-    }
-}
-
-    .navy-gradient-container {
-      background: linear-gradient(to bottom, #0A1E3F 50%, #A296E7 100%);
-      padding: 40px 20px;
-    }
-
-    .client-button {
-        background: #261A4C;
-        color: white;
-        padding: 14px 36px;
-        border: none;
-        border-radius: 35px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        box-shadow: 0 6px 20px rgba(75, 85, 99, 0.3);
-        transition: all 0.3s ease;
-        display: inline-block;
-        margin-bottom: 1px;
-        margin-top: 1px; /* mobile spacing */
-        text-decoration: none;
-        letter-spacing: 1px;
-    }
-
-    .client-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(75, 85, 99, 0.5);
-    }
-
-    /* Add more space only on desktop */
-    @media (min-width: 769px) {
-        .client-button {
-            margin-top: 15px; /* more breathing room under CTA */
-        }
-    }
-
-    .admin-button {
-        background: #261A4C;
-        color: white;
-        padding: 14px 36px;
-        border: none;
-        border-radius: 35px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        box-shadow: 0 6px 20px rgba(75, 85, 99, 0.3);
-        transition: all 0.3s ease;
-        display: none; /* Hidden by default */
-        margin-bottom: 1px;
-        margin-top: 1px; /* mobile spacing */
-        text-decoration: none;
-        letter-spacing: 1px;
-    }
-
-    .admin-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(75, 85, 99, 0.5);
-    }
-
-    /* Add more space only on desktop */
-    @media (min-width: 769px) {
-        .admin-button {
-            margin-top: 15px; /* more breathing room under CTA */
-        }
-    }
-
-    /* Form Styles */
-    .form-container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 40px 20px;
-    }
-
-    .form-group {
-        margin-bottom: 25px;
-    }
-
-    .form-group label {
-        display: block;
-        color: #FFFFFF;
-        font-weight: 600;
-        margin-bottom: 8px;
-        font-size: 16px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        padding: 15px;
-        border: 2px solid rgba(162, 150, 231, 0.3);
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.1);
-        color: #FFFFFF;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-
-    /* Black background for the native dropdown popup */
-    .form-group select option {
-        background: #000000;
-        color: #FFFFFF;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-        outline: none;
-        border-color: #8B5CF6;
-        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
-    }
-
-    .submit-button {
-        background: #261A4C;
-        color: white;
-        white-space: nowrap;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 35px;
-        font-size: 18px;
-        font-weight: 700;
-        cursor: pointer;
-        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-        transition: all 0.3s ease;
-        width: 100%;
-        letter-spacing: 1px;
-    }
-
-    .submit-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 35px rgba(139, 92, 246, 0.6);
-    }
-
-    /* Review Card Styles - Matching the design */
-    .review-form-container {
-        background: linear-gradient(145deg, rgba(35,65,130,0.85), rgba(20,40,80,0.85));
-        border: 2px solid rgba(162, 150, 231, 0.2);
-        border-radius: 20px;
-        padding: 30px;
-        margin-bottom: 30px;
-        backdrop-filter: blur(10px);
-    }
-
-    .review-form-title {
-        color: #D1D5DB;
-        font-size: clamp(16px, 4vw, 28px);
-        font-weight: 600;
-        white-space: nowrap;
-        text-align: center;
-        margin-bottom: 30px;
-    }
-
-    .star-rating {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin: 20px 0;
-    }
-
-    .star {
-        font-size: 40px;
-        color: #6B7280;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        user-select: none;
-    }
-
-    .star:hover,
-    .star.active {
-        color: #FFD700;
-        transform: scale(1.1);
-    }
-
-    /* Review Item Styles - Matching the image */
-    .reviews-container {
-        margin-top: 40px;
-    }
-
-    .review-item {
-        background: rgba(255, 255, 255, 0.08);
-        border: 2px solid rgba(162, 150, 231, 0.2);
-        border-radius: 20px;
-        padding: 25px;
-        margin-bottom: 20px;
-        backdrop-filter: blur(10px);
-    }
-
-    .review-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-        gap: 15px;
-    }
-
-    .reviewer-avatar {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #8B5CF6, #A855F7);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-    }
-
-    .reviewer-info {
-        flex: 1;
-    }
-
-    .reviewer-name {
-        color: #FFFFFF;
-        font-weight: 600;
-        font-size: 20px;
-        margin-bottom: 5px;
-    }
-
-    .review-stars {
-        color: #FFD700;
-        font-size: 18px;
-    }
-
-    .review-text {
-        color: #FFFFFF;
-        line-height: 1.6;
-        font-style: italic;
-        font-size: 16px;
-    }
-
-    /* Login Modal Styles */
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        z-index: 1000;
-        backdrop-filter: blur(5px);
-    }
-
-    .modal.active {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .modal-content {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 40px;
-        border-radius: 20px;
-        max-width: 400px;
-        width: 90%;
-        text-align: center;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(20px);
-        position: relative;
-    }
-
-    .modal-title {
-        color: #4B5563;
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 30px;
-    }
-
-    .login-input {
-        width: 100%;
-        padding: 15px;
-        margin-bottom: 15px;
-        border: 2px solid #E5E7EB;
-        border-radius: 12px;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-
-    .login-input:focus {
-        outline: none;
-        border-color: #8B5CF6;
-        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-    }
-
-    .login-button {
-        width: 100%;
-        background: linear-gradient(135deg, #8B5CF6, #A855F7);
-        color: white;
-        padding: 15px;
-        border: none;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        margin-bottom: 15px;
-        transition: all 0.3s ease;
-    }
-
-    .login-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-    }
-
-    .google-login-button {
-    width: 100%;
-    background: white;
-    color: #4B5563;
-    padding: 15px;
-    border: 2px solid #E5E7EB;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.google-login-button:hover {
-    background: #F9FAFB;
-    border-color: #D1D5DB;
-}
-
-    .close-modal {
-        position: absolute;
-        top: 15px;
-        right: 20px;
-        background: none;
-        border: none;
-        font-size: 24px;
-        color: #6B7280;
-        cursor: pointer;
-    }
-
-
-    
-    .logout-btn {
-        background: #EF4444;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 8px;
-        cursor: pointer;
-        margin-left: 10px;
-        font-size: 12px;
-    }
-
-    .join-button {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background: linear-gradient(135deg, #8B5CF6, #A855F7);
-  color: white;
-  border: none;
-  border-radius: 0 0 15px 15px; 
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-}
-
-
-
-.join-button:hover {
-    background: linear-gradient(135deg, #7C3AED, #9333EA);
-    transform: translateY(-2px);
-}
-
-button,
-.admin-button,
-.client-button,
-.submit-button,
-.join-button,
-.cta-button {
-  border: 1.5px solid #FFD700; /* nice green */
-  box-shadow: 0 0 5px rgba(34, 197, 94, 0.6); /* glowing effect */
-}
-
-  
-/* Screenshot-matching container styles */
-.screenshot-container {
-    background: linear-gradient(135deg, #2d1f52 0%, #3d2d6e 35%, #533d8a 65%, #6b52a0 100%);
-    border-radius: 18px;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 2px solid #FFD700;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    animation: containerGlow 6s ease-in-out infinite;
-    transform: translateY(0);
-    transition: all 0.3s ease;
-}
-
-.screenshot-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
-    border-color: rgba(255, 215, 0, 0.8);
-}
-
-@keyframes containerGlow {
-    0%, 100% { 
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(139, 92, 246, 0.2);
-    }
-    50% { 
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 30px rgba(139, 92, 246, 0.4);
-    }
-}
-
-/* Add spacing between containers */
-.screenshot-container:first-child {
-    margin-top: 60px; /* space from divider line */
-}
-
-.screenshot-container:not(:first-child) {
-    margin-top: 40px; /* space between containers */
-}
-    
-.screenshot-container h1 {
-    color: #ffffff;
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    line-height: 1.2;
-    text-align: center; /* Make sure this is here */
-}
-.screenshot-container p {
-    color: #e5e7eb;
-    font-size: clamp(18px, 3vw, 22px);
-    line-height: 1.6;
-    margin-bottom: 60px;
-    font-weight: 400;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    font-family: 'Times New Roman', 'Georgia', serif;
-}
-
-
-    .container-header {
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(12px);
-    margin: 0;
-    padding: 5px 0;
-    border-radius: 18px 18px 0 0; /* keep top rounded only */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-    width: 100%;
-    }
-
-.container-header h1 {
-    margin: 0;
-    padding: 10px;
-    font-size: clamp(18px, 5vw, 36px);
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    line-height: 1.2;
-    font-family: 'Georgia', 'Times New Roman', serif;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    letter-spacing: 1px;
-    white-space: nowrap;
-    overflow: hidden;
-    animation: textGlow 4s ease-in-out infinite;
-}
-
-@keyframes textGlow {
-    0%, 100% { 
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.1);
-    }
-    50% { 
-        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
-    }
-}
-
-.container-content {
-    padding: 40px 40px 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-    flex: 1;
-}
-
-
-.container-content p {
-    color: #e5e7eb;
-    font-size: clamp(18px, 3vw, 22px);
-    line-height: 1.3;
-    margin: 0;
-    font-weight: 400;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    text-align: left;
-    white-space: normal;
-    word-spacing: normal;
-    letter-spacing: 0.3px;
-    font-family: 'Times New Roman', 'Georgia', serif;
-}
-
-.container-content .line-break {
-    display: block;
-    height: 0.2em; /* Control blank line spacing here */
-}
-    
-.join-btn {
-    width: 100%;
-    height: 60px;
-    background: #261A4C;
-    color: white;
-    border: 2px solid #FFFFFF;
-    border-radius: 0 0 16px 16px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: auto;
-    animation: buttonPulse 3s ease-in-out infinite;
-}
-
-.join-btn:hover {
-    background: #261A4C;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(168, 85, 247, 0.6);
-    border-color: #FFFFFF;
-}
-
-@keyframes buttonPulse {
-    0%, 100% { 
-        box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
-        border-color: #FFFFFF;
-    }
-    50% { 
-        box-shadow: 0 12px 30px rgba(168, 85, 247, 0.6);
-        border-color: rgba(255, 215, 0, 0.8);
-    }
-}
-
-@media (max-width: 768px) {
-    .screenshot-container {
-        margin: 0;
-        width: 100%;
-        border-radius: 18px;
-        box-sizing: border-box;
-    }
-
-    #containerSection {
-        padding: 0 10px; /* smaller padding on mobile */
-    }
-
-    .container-header {
-        width: 100%;
-        margin: 0;
-        padding: 2px 0px;
-        border-radius: 18px 18px 0 0;
-        box-sizing: border-box;
-    }
-
-    .container-header h1 {
-    margin: 0;
-    padding: 10px;
-    font-size: clamp(18px, 5vw, 36px);
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    line-height: 1.2;
-    font-family: 'Georgia', 'Times New Roman', serif;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    letter-spacing: 1px;
-    white-space: nowrap;
-    overflow: hidden;
-    }
-    
-    .container-content {
-        padding: 30px 20px 20px;
-    }
-
-    .join-btn {
-        height: 50px;
-        font-size: 18px;
-    }
-}
-
-/* Updated CSS for the preview button */
-.preview-btn {
-    width: 100%;
-    height: 60px;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    border: 2px solid #FFFFFF;
-    border-radius: 0 0 16px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #261A4C;
-    box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
-    transition: all 0.3s ease;
-    margin: 0;
-    padding: 0;
-}
-
-.preview-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(168, 85, 247, 0.6);
-}
-
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #261A4C;
-    border-top: 2.5px solid #FFD700;
-    padding: 0;
-    text-align: center;
-    z-index: 998;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 28px;
-}
-
-/* Yellow text */
-.footer-text {
-    color: #FFD700;
-    font-weight: bold;
-}
-
-/* Green website link */
-.footer-link {
-    color: #00FF00;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Optional hover effect */
-.footer-link:hover {
-    text-decoration: underline;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .footer {
-        height: 24px;
-        font-size: 12px;
-    }
-}
-
-/* BUTTON */
-.about-btn{
-  padding:11px 26px;
-  background:#261A4C;
-  color:#FFD700;
-  border:2px solid #FFD700;
-  border-radius:8px;
-  font-weight:800;
-  font-size:13px;
-  letter-spacing:1.5px;
-  cursor:pointer;
-  transition:all 0.2s ease;
-
-}
-.about-btn:hover{
-  background:#FFD700;
-  color:#261A4C;
-  outline-color:#261A4C;
-}
-
-
-
-/* FULL SCREEN FOUNDER SECTION */
-#founder-overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:#ffffff;
-  display:none;
-  overflow-y:auto;
-  z-index:9999;
-  padding:0;
-}
-
-.founder-content{
-  max-width:680px;
-  margin:0 auto;
-  background:#ffffff;
-  min-height:100vh;
-  position:relative;
-  color:#1a1a2e;
-}
-
-.founder-hero-banner{
-  background:linear-gradient(135deg,#261A4C 0%,#3d2a7a 100%);
-  padding:36px 32px 28px;
-  text-align:center;
-  position:relative;
-}
-
-.close-founder{
-  position:absolute;
-  top:14px;
-  right:18px;
-  font-size:22px;
-  cursor:pointer;
-  color:rgba(255,255,255,0.7);
-  line-height:1;
-  transition:color 0.2s;
-}
-.close-founder:hover{ color:#FFD700; }
-
-.founder-photo{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  border:4px solid #FFD700;
-  object-fit:cover;
-  margin-bottom:14px;
-  display:block;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-.founder-title{
-  color:#FFD700;
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:0;
-  margin-top:10px;
-}
-
-.founder-name-heading{
-  color:#FFD700;
-  font-size:24px;
-  font-weight:700;
-  margin:0;
-  font-family:'Georgia','Times New Roman',serif;
-}
-
-.founder-tagline{
-  color:#ffffff;
-  font-size:13px;
-  margin-top:6px;
-}
-
-.founder-body{
-  padding:28px 32px 32px;
-}
-
-.founder-details{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0;
-  background:#f7f7fc;
-  border-radius:12px;
-  overflow:hidden;
-  border:1px solid #e8e8f0;
-  margin-bottom:24px;
-}
-
-.founder-detail-item{
-  padding:12px 16px;
-  border-bottom:1px solid #e8e8f0;
-}
-.founder-detail-item:nth-child(odd){ border-right:1px solid #e8e8f0; }
-.founder-detail-item:nth-last-child(-n+2){ border-bottom:none; }
-
-.founder-detail-label{
-  font-size:10px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:1.2px;
-  color:#9999bb;
-  margin-bottom:3px;
-  text-align:center;
-}
-.founder-detail-value{
-  font-size:14.5px;
-  font-weight:700;
-  color:#111111;
-  line-height:1.3;
-  text-align:center;
-}
-
-.founder-section-title{
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:2.5px;
-  text-transform:uppercase;
-  color:#261A4C;
-  margin-bottom:12px;
+.nav-menu{
   display:flex;
   align-items:center;
-  justify-content:center;
-  gap:10px;
-  text-align:center;
-}
-.founder-section-title::before{
-  content:'';
-  flex:1;
-  height:1px;
-  background:#e8e8f0;
-}
-.founder-section-title::after{
-  content:'';
-  flex:1;
-  height:1px;
-  background:#e8e8f0;
-}
-
-.founder-body{
-  padding:32px 36px 40px;
-}
-
-.founder-details{
-  display:grid;
-  grid-template-columns:1fr 1fr;
+  justify-content:space-between;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 32px;
+  height:64px;
   gap:0;
-  background:#f9f9fd;
-  border-radius:14px;
-  overflow:hidden;
-  border:1px solid #ebebf5;
-  margin-bottom:28px;
-  box-shadow:0 2px 12px rgba(38,26,76,0.06);
+  background:transparent;
+  border:none;
+  border-radius:0;
 }
 
-.founder-detail-item{
-  padding:14px 18px;
-  border-bottom:1px solid #ebebf5;
-}
-.founder-detail-item:nth-child(odd){ border-right:1px solid #ebebf5; }
-.founder-detail-item:nth-last-child(-n+2){ border-bottom:none; }
-
-.founder-skills{
+/* Logo lockup inside nav */
+.nav-logo{
   display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:28px;
-  justify-content:center;
-}
-.founder-skill-tag{
-  background:#f0ecff;
-  color:#4a2fa0;
-  font-size:12px;
-  font-weight:600;
-  padding:6px 14px;
-  border-radius:20px;
-  border:1px solid #d8ceff;
-  letter-spacing:0.3px;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  flex-shrink:0;
 }
 
-.founder-mission-box{
-  background:linear-gradient(135deg,#261A4C,#3d2a7a);
-  border-radius:14px;
-  padding:24px 26px;
-  color:white;
-  box-shadow:0 4px 20px rgba(38,26,76,0.2);
-}
-.founder-mission-box p{
-  font-size:14.5px;
-  line-height:1.8;
-  color:rgba(255,255,255,0.88);
-  margin:0;
-  text-align:center;
-}
-
-.founder-hero-banner{
-  background:linear-gradient(160deg,#1a1035 0%,#261A4C 50%,#3d2a7a 100%);
-  padding:20px 32px 16px;
-  text-align:center;
-  position:relative;
-}
-
-.founder-photo{
-  width:160px;
-  height:160px;
+.nav-logo-img{
+  width:36px;height:36px;
   border-radius:50%;
-  border:4px solid #FFD700;
+  border:1.5px solid rgba(212,160,23,.5);
+  box-shadow:0 0 10px rgba(212,160,23,.25);
   object-fit:cover;
-  margin-bottom:10px;
-  display:block;
-  margin-left:auto;
-  margin-right:auto;
-  box-shadow:0 0 0 8px rgba(255,215,0,0.18);
+  background:#110820;
 }
 
-.founder-name-heading{
-  color:#FFD700;
-  font-size:22px;
-  font-weight:700;
-  margin:0;
-  font-family:'Georgia','Times New Roman',serif;
-  letter-spacing:0.5px;
+.nav-logo-text{
+  display:flex;flex-direction:column;line-height:1;
 }
-
-.founder-tagline{
-  color:#ffffff;
-  font-size:12.5px;
+.nav-logo-name{
+  font-size:15px;font-weight:900;letter-spacing:2.5px;
+  background:var(--gold-grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-logo-tagline{
+  font-size:8px;font-weight:600;letter-spacing:2px;
+  color:rgba(212,160,23,.5);
+  text-transform:uppercase;
   margin-top:3px;
-  letter-spacing:0.3px;
 }
 
-.founder-about{
-  font-size:14.5px;
-  line-height:1.85;
-  color:#3a3a5c;
-  margin-bottom:28px;
-  font-weight:400;
+/* Nav links */
+.nav-links{
+  display:flex;align-items:center;gap:4px;
+}
+
+.nav-item{
+  color:var(--tx2);
+  text-decoration:none;
+  font-size:11px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:8px 16px;
+  border:1px solid transparent;
+  border-radius:var(--r);
+  transition:all .2s;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.nav-item:hover{color:var(--g1);border-color:rgba(212,160,23,.3);background:rgba(212,160,23,.06)}
+.nav-item.active{color:var(--g1);border-color:rgba(212,160,23,.45);background:rgba(212,160,23,.09);box-shadow:var(--gold-rim)}
+
+/* Nav right (login) */
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+
+/* ── DIVIDER ─────────────────────────────────────────────── */
+.divider-line{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(212,160,23,.4),transparent);
+  margin:4px 0;
+}
+
+/* ── HERO SECTION ────────────────────────────────────────── */
+.hero{
+  position:relative;
+  min-height:88vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
   text-align:center;
+  overflow:hidden;
+  padding:80px 24px 100px;
 }
 
-.founder-platforms{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+/* Full-bleed background image */
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(8,7,13,.55) 0%,rgba(8,7,13,.78) 60%,rgba(8,7,13,1) 100%),
+    linear-gradient(135deg,rgba(17,8,32,.7) 0%,transparent 60%),
+    url('https://images.unsplash.com/photo-1547658719-da2b51169166?w=1600&q=85&auto=format&fit=crop') center/cover no-repeat;
+  z-index:0;
+}
+
+/* Subtle animated gold shimmer over hero */
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(212,160,23,.07) 0%,transparent 70%);
+  animation:heroGlow 8s ease-in-out infinite alternate;
+}
+@keyframes heroGlow{
+  0%{opacity:.6;transform:scale(1)}
+  100%{opacity:1;transform:scale(1.08)}
+}
+
+.hero-content{position:relative;z-index:1;max-width:860px}
+
+/* Eyebrow label */
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--g1);
+  border:1px solid rgba(212,160,23,.3);
+  border-radius:2px;
+  padding:6px 18px;
+  background:rgba(212,160,23,.06);
   margin-bottom:28px;
+  backdrop-filter:blur(8px);
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:'';width:20px;height:1px;background:var(--g2);
 }
 
-.founder-platform-card{
-  background:#f9f9fd;
-  border:1px solid #ebebf5;
-  border-radius:12px;
-  padding:16px 18px;
-  transition:box-shadow 0.2s;
+/* Main headline */
+.hero-headline{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(42px,7vw,88px);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-1px;
+  color:var(--tx1);
+  margin-bottom:10px;
 }
-.founder-platform-card:hover{
-  box-shadow:0 4px 16px rgba(38,26,76,0.1);
+.hero-headline .hl-gold{
+  background:var(--gold-grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:block;
 }
 
-.founder-platform-name{
+/* Sub-headline */
+.hero-sub{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,3.5vw,34px);
+  font-weight:600;
+  font-style:italic;
+  color:var(--tx2);
+  margin-bottom:22px;
+  letter-spacing:.3px;
+}
+
+/* Body copy */
+.hero-body{
+  font-size:clamp(14px,1.8vw,17px);
+  font-weight:400;
+  line-height:1.85;
+  color:var(--tx2);
+  max-width:580px;
+  margin:0 auto 44px;
+  letter-spacing:.2px;
+}
+
+/* CTA row */
+.hero-ctas{
+  display:flex;flex-wrap:wrap;gap:14px;
+  justify-content:center;
+  margin-bottom:20px;
+}
+
+/* Stat strip */
+.hero-stats{
+  display:flex;gap:48px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:52px;
+}
+.stat{display:flex;flex-direction:column;align-items:center;gap:4px}
+.stat-number{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,4vw,42px);font-weight:900;
+  background:var(--gold-grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;
+}
+.stat-label{
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  color:var(--tx3);text-transform:uppercase;
+}
+
+/* Scroll cue */
+.hero-scroll{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--tx3);font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  animation:scrollBob 2.4s ease-in-out infinite;
+  z-index:1;
+}
+@keyframes scrollBob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.hero-scroll svg{opacity:.5}
+
+/* ── SERVICE STRIP (below hero) ─────────────────────────── */
+.service-strip{
+  background:var(--card);
+  border-top:1px solid rgba(212,160,23,.12);
+  border-bottom:1px solid rgba(212,160,23,.12);
+  padding:32px 24px;
+}
+.service-strip-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.service-item{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:24px 28px;
+  border-right:1px solid rgba(212,160,23,.1);
+  transition:background .2s;
+}
+.service-item:last-child{border-right:none}
+.service-item:hover{background:rgba(212,160,23,.04)}
+
+.service-icon{
+  width:40px;height:40px;flex-shrink:0;
+  background:rgba(212,160,23,.1);
+  border:1px solid rgba(212,160,23,.25);
+  border-radius:var(--r);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--g1);
+}
+.service-info{}
+.service-title{
+  font-size:13px;font-weight:800;letter-spacing:1px;
+  color:var(--tx1);margin-bottom:6px;text-transform:uppercase;
+}
+.service-desc{
+  font-size:12.5px;line-height:1.65;color:var(--tx3);
+}
+
+/* ── MAIN CONTENT / HOME SECTIONS ────────────────────────── */
+.main-content{
+  display:flex;flex-direction:column;align-items:center;
+  padding:0;max-width:100%;margin:0;
+}
+
+/* Hide old logo container — replaced by hero */
+.logo-section,.logo-container,.brand-text,.brand-name,.brand-tagline,
+#userStatus,.divider-line.hero-divider{
+  /* we selectively show/hide via the HTML itself */
+}
+
+#userStatus{
+  display:none;
+  border:1px solid rgba(212,160,23,.3)!important;
+  border-radius:var(--r)!important;
+  background:rgba(15,11,26,.8);
+  padding:8px 16px;
   font-size:13px;
-  font-weight:800;
-  color:#261A4C;
-  margin-bottom:6px;
-  letter-spacing:0.3px;
+  color:var(--tx2)!important;
+}
+#userStatus>div{background:transparent!important;color:var(--tx2)!important}
+
+/* ── SERVICE CONTAINERS (dynamic from Firebase) ─────────── */
+#containerSection{padding:0 20px 60px}
+
+.screenshot-container{
+  background:var(--card);
+  border:1px solid rgba(212,160,23,.18);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  width:100%;margin-top:28px;
+  transition:border-color .3s,box-shadow .3s,transform .3s;
+}
+.screenshot-container:first-child{margin-top:40px}
+.screenshot-container:hover{
+  border-color:rgba(212,160,23,.55);
+  box-shadow:0 0 30px rgba(212,160,23,.1),0 12px 40px rgba(0,0,0,.5);
+  transform:translateY(-3px);
 }
 
-.founder-platform-desc{
-  font-size:13px;
-  line-height:1.65;
-  color:#666688;
+.container-header{
+  background:rgba(212,160,23,.06);
+  border-bottom:1px solid rgba(212,160,23,.18);
+  padding:0;
+  border-radius:var(--r-lg) var(--r-lg) 0 0;
 }
+.container-header h1{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(14px,3.5vw,22px);
+  font-weight:900;letter-spacing:2.5px;
+  text-align:center;line-height:1.2;
+  padding:14px 20px;
+  white-space:nowrap;overflow:hidden;
+  background:var(--gold-grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.screenshot-container h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(24px,4.5vw,38px);
+  font-weight:900;text-align:center;
+  color:var(--tx1);margin-bottom:12px;
+}
+.screenshot-container p{
+  font-size:clamp(14px,2vw,17px);
+  line-height:1.75;color:var(--tx2);margin-bottom:56px;
+}
+
+.container-content{
+  padding:36px 44px 24px;
+  max-width:960px;margin:0 auto;flex:1;
+}
+.container-content p{
+  font-size:clamp(14px,2vw,16.5px);
+  line-height:1.8;color:var(--tx2);
+  letter-spacing:.2px;
+}
+.container-content .line-break{display:block;height:.45em}
+
+/* ── BUTTON SYSTEM ───────────────────────────────────────── */
+
+/* Primary: solid metallic gold */
+.btn-primary,.cta-button{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:15px 34px;
+  background:var(--gold-grad);
+  color:#08070d;
+  font-family:'Inter',sans-serif;
+  font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  text-decoration:none;
+  border:none;border-radius:var(--r);
+  cursor:pointer;
+  box-shadow:0 4px 22px rgba(212,160,23,.4),inset 0 1px 0 rgba(255,255,255,.18);
+  transition:all .22s;
+  position:relative;overflow:hidden;
+  flex-shrink:0;
+}
+.btn-primary::before,.cta-button::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.14) 0%,transparent 55%);
+  pointer-events:none;
+}
+.btn-primary:hover,.cta-button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 34px rgba(212,160,23,.6),inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+/* Secondary: dark + gold border */
+.btn-secondary,.about-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 30px;
+  background:rgba(15,11,26,.9);
+  color:var(--g1);
+  font-family:'Inter',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  border:1px solid rgba(212,160,23,.5);
+  border-radius:var(--r);
+  cursor:pointer;
+  box-shadow:0 0 16px rgba(212,160,23,.1);
+  transition:all .22s;
+  backdrop-filter:blur(8px);
+  text-decoration:none;
+  flex-shrink:0;
+}
+.btn-secondary:hover,.about-btn:hover{
+  background:rgba(212,160,23,.1);
+  border-color:var(--g1);
+  box-shadow:var(--gold-glow);
+  color:#fff;
+}
+
+/* Ghost */
+.client-button,.admin-button{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:12px 28px;
+  background:transparent;color:var(--tx3);
+  font-family:'Inter',sans-serif;font-size:11px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;
+  border:1px solid rgba(255,255,255,.1);border-radius:var(--r);
+  cursor:pointer;transition:all .22s;
+}
+.admin-button{display:none}
+.client-button:hover,.admin-button:hover{
+  border-color:rgba(212,160,23,.4);color:var(--g1);background:rgba(212,160,23,.05)
+}
+
+/* Submit */
+.submit-button{
+  display:inline-flex;align-items:center;justify-content:center;width:100%;
+  padding:16px 24px;
+  background:var(--gold-grad);color:#08070d;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;
+  border:none;border-radius:var(--r);cursor:pointer;
+  box-shadow:0 4px 20px rgba(212,160,23,.35);transition:all .22s;
+}
+.submit-button:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,160,23,.55)}
+.submit-button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* Join / Preview bottom bar */
+.join-btn,.join-button,.preview-btn{
+  width:100%;height:52px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(212,160,23,.08);
+  color:var(--g1);
+  font-family:'Inter',sans-serif;font-size:11px;font-weight:800;letter-spacing:2.5px;
+  text-transform:uppercase;
+  border:none;border-top:1px solid rgba(212,160,23,.22);
+  border-radius:0 0 var(--r-lg) var(--r-lg);
+  cursor:pointer;transition:all .22s;
+  margin:0;margin-top:auto;
+}
+.join-btn:hover,.join-button:hover,.preview-btn:hover{
+  background:var(--gold-grad);color:#08070d;
+  box-shadow:0 -4px 20px rgba(212,160,23,.25);
+}
+.join-button{position:absolute;bottom:0;left:0;border-radius:0 0 var(--r-lg) var(--r-lg);height:40px}
+
+/* Login */
+.login-button{
+  width:100%;padding:14px;
+  background:var(--gold-grad);color:#08070d;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:800;
+  letter-spacing:1.5px;text-transform:uppercase;
+  border:none;border-radius:var(--r);cursor:pointer;margin-bottom:10px;
+  box-shadow:0 4px 18px rgba(212,160,23,.35);transition:all .22s;
+}
+.login-button:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(212,160,23,.55)}
+
+.google-login-button{
+  width:100%;background:rgba(255,255,255,.05);color:var(--tx1);
+  padding:14px;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  gap:10px;transition:all .22s;white-space:nowrap;letter-spacing:.5px;
+}
+.google-login-button:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
+
+.apple-login-button{
+  width:100%;background:rgba(255,255,255,.05);color:var(--tx1);
+  padding:14px;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:10px;transition:all .22s;margin-top:10px;
+}
+.apple-login-button:hover{background:rgba(255,255,255,.1)}
+
+.logout-btn{
+  background:rgba(239,68,68,.1);color:#ff8080;
+  border:1px solid rgba(239,68,68,.28);
+  padding:5px 12px;border-radius:var(--r);cursor:pointer;
+  margin-left:10px;font-size:11px;font-weight:600;transition:all .2s;
+}
+.logout-btn:hover{background:rgba(239,68,68,.22)}
+
+/* Promo card btn */
+.promo-card-request-btn{
+  display:block;width:100%;background:transparent;color:var(--g1);
+  border:none;border-top:1px solid rgba(212,160,23,.18);
+  padding:14px;font-family:'Inter',sans-serif;font-size:11px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .22s;
+}
+.promo-card-request-btn:hover{background:var(--gold-grad);color:#08070d}
+
+/* Promo filter */
+.promo-cat-btn{
+  background:transparent;color:var(--tx2);
+  border:1px solid rgba(255,255,255,.15);
+  padding:9px 18px;border-radius:var(--r);
+  font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;
+  cursor:pointer;transition:all .2s;text-transform:uppercase;
+  display:inline-flex;align-items:center;
+}
+.promo-cat-btn:hover,.promo-cat-btn.active{
+  background:var(--gold-grad);color:#08070d;border-color:transparent;
+  box-shadow:0 4px 16px rgba(212,160,23,.3);
+}
+.promo-cat-btn.active svg,.promo-cat-btn:hover svg{stroke:#08070d}
+
+.promo-request-btn{
+  display:inline-flex;align-items:center;
+  padding:14px 32px;background:var(--gold-grad);color:#08070d;
+  font-family:'Inter',sans-serif;font-size:12px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;
+  border:none;border-radius:var(--r);cursor:pointer;
+  box-shadow:0 4px 20px rgba(212,160,23,.4);transition:all .22s;
+}
+.promo-request-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,160,23,.6)}
+
+button{box-shadow:none}  /* reset browser default */
+
+/* ── CONTENT AREA / FORMS ────────────────────────────────── */
+.navy-gradient-container{
+  background:var(--bg);
+  padding:56px 20px 80px;
+  min-height:calc(100vh - 64px);
+}
+.content-area{
+  background:var(--card);
+  border:1px solid rgba(212,160,23,.18);
+  border-radius:var(--r-lg);
+  box-shadow:0 8px 44px rgba(0,0,0,.6);
+  padding:44px 44px 80px;
+  margin:0 auto;max-width:1100px;
+  position:relative;color:var(--tx1);min-height:400px;
+}
+.form-container{max-width:560px;margin:0 auto}
+.form-group{margin-bottom:22px}
+.form-group label{
+  display:block;color:var(--g2);
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:9px;
+}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:14px 16px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(212,160,23,.2);
+  border-radius:var(--r);color:var(--tx1);
+  font-family:'Inter',sans-serif;font-size:15px;outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--tx3)}
+.form-group select option{background:var(--deep);color:var(--tx1)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  border-color:var(--g2);box-shadow:0 0 0 3px rgba(212,160,23,.16)
+}
+
+/* ── REVIEWS ─────────────────────────────────────────────── */
+.review-form-container{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(212,160,23,.18);
+  border-radius:var(--r-lg);padding:36px;margin-bottom:32px;
+}
+.review-form-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(18px,3.5vw,26px);font-weight:700;
+  letter-spacing:1px;text-align:center;margin-bottom:28px;white-space:nowrap;
+  background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.star-rating{display:flex;justify-content:center;gap:8px;margin:20px 0}
+.star{font-size:36px;color:rgba(212,160,23,.18);cursor:pointer;transition:all .18s;user-select:none}
+.star:hover,.star.active{color:var(--g1);transform:scale(1.12);filter:drop-shadow(0 0 8px rgba(212,160,23,.7))}
+.reviews-container{margin-top:44px}
+.review-item{
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(212,160,23,.12);
+  border-radius:var(--r-lg);padding:26px;margin-bottom:16px;
+  transition:border-color .2s;
+}
+.review-item:hover{border-color:rgba(212,160,23,.35)}
+.review-header{display:flex;align-items:center;margin-bottom:14px;gap:14px}
+.reviewer-avatar{
+  width:46px;height:46px;
+  background:var(--gold-grad);
+  border-radius:var(--r);
+  display:flex;align-items:center;justify-content:center;
+  color:#08070d;font-weight:800;font-size:16px;flex-shrink:0;
+}
+.reviewer-info{flex:1}
+.reviewer-name{color:var(--tx1);font-weight:700;font-size:15px;margin-bottom:4px}
+.review-stars{color:var(--g1);font-size:13px;letter-spacing:1px}
+.review-text{color:var(--tx2);line-height:1.75;font-style:italic;font-size:14px}
+
+/* ── MODAL ───────────────────────────────────────────────── */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:1000;backdrop-filter:blur(14px)}
+.modal.active{display:flex;align-items:center;justify-content:center}
+.modal-content{
+  background:var(--card);border:1px solid rgba(212,160,23,.32);
+  padding:48px 38px 38px;border-radius:var(--r-lg);
+  max-width:400px;width:93%;text-align:center;position:relative;
+  box-shadow:0 0 70px rgba(212,160,23,.13),0 24px 60px rgba(0,0,0,.8);
+}
+.modal-title{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;letter-spacing:1.5px;margin-bottom:28px;
+  background:var(--gold-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.login-input{
+  width:100%;padding:14px 16px;margin-bottom:12px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(212,160,23,.18);border-radius:var(--r);
+  color:var(--tx1);font-family:'Inter',sans-serif;font-size:14px;outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.login-input::placeholder{color:var(--tx3)}
+.login-input:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(212,160,23,.16)}
+.close-modal{
+  position:absolute;top:14px;right:16px;background:none;border:none;
+  font-size:22px;color:var(--tx3);cursor:pointer;transition:color .2s;line-height:1;
+}
+.close-modal:hover{color:var(--g1)}
+
+/* ── FOUNDER OVERLAY ─────────────────────────────────────── */
+#founder-overlay{position:fixed;inset:0;background:var(--bg);display:none;overflow-y:auto;z-index:9999}
+.founder-content{max-width:680px;margin:0 auto;background:var(--bg);min-height:100vh}
+.founder-hero-banner{
+  background:linear-gradient(160deg,#08070d 0%,#110820 55%,#1e0f3a 100%);
+  padding:52px 36px 36px;text-align:center;position:relative;
+  border-bottom:1px solid rgba(212,160,23,.2);
+}
+.close-founder{position:absolute;top:18px;right:20px;font-size:20px;cursor:pointer;color:var(--tx3);line-height:1;transition:color .2s;background:none;border:none}
+.close-founder:hover{color:var(--g1)}
+.founder-photo{
+  width:148px;height:148px;border-radius:50%;
+  border:2px solid var(--g2);object-fit:cover;
+  margin:0 auto 16px;display:block;
+  box-shadow:0 0 0 7px rgba(212,160,23,.1),0 0 35px rgba(212,160,23,.18);
+}
+.founder-title{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--g2);margin:10px 0 0}
+.founder-name-heading{
+  background:var(--gold-grad)!important;-webkit-background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;background-clip:text!important;
+  font-family:'Playfair Display',serif;font-size:26px;font-weight:700;margin:4px 0 0;letter-spacing:.5px;
+}
+.founder-tagline{color:var(--tx3);font-size:12.5px;margin-top:5px}
+.founder-body{padding:36px 40px 52px}
+.founder-details{
+  display:grid;grid-template-columns:1fr 1fr;
+  background:var(--card);border-radius:var(--r);overflow:hidden;
+  border:1px solid rgba(212,160,23,.15);margin-bottom:32px;
+}
+.founder-detail-item{padding:14px 18px;border-bottom:1px solid rgba(212,160,23,.08)}
+.founder-detail-item:nth-child(odd){border-right:1px solid rgba(212,160,23,.08)}
+.founder-detail-item:nth-last-child(-n+2){border-bottom:none}
+.founder-detail-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--g2);margin-bottom:4px;text-align:center}
+.founder-detail-value{font-size:13.5px;font-weight:700;color:var(--tx1);text-align:center}
+.founder-section-title{
+  font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--g2);margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;justify-content:center;
+}
+.founder-section-title::before,.founder-section-title::after{content:'';flex:1;height:1px;background:rgba(212,160,23,.18)}
+.founder-skills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;justify-content:center}
+.founder-skill-tag{
+  background:rgba(212,160,23,.07);color:var(--g1);
+  font-size:11px;font-weight:600;padding:7px 16px;border-radius:3px;
+  border:1px solid rgba(212,160,23,.22);letter-spacing:.3px;
+}
+.founder-about{font-size:14px;line-height:1.88;color:var(--tx2);margin-bottom:28px;text-align:center}
+.founder-mission-box{background:var(--card);border:1px solid rgba(212,160,23,.18);border-radius:var(--r);padding:26px}
+.founder-mission-box p{font-size:14px;line-height:1.82;color:var(--tx2);margin:0;text-align:center}
+.founder-platforms{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.founder-platform-card{background:var(--card);border:1px solid rgba(212,160,23,.13);border-radius:var(--r);padding:18px;transition:border-color .2s,box-shadow .2s}
+.founder-platform-card:hover{border-color:rgba(212,160,23,.45);box-shadow:0 0 18px rgba(212,160,23,.1)}
+.founder-platform-name{font-size:11px;font-weight:800;color:var(--g1);margin-bottom:7px;letter-spacing:.8px;text-transform:uppercase}
+.founder-platform-desc{font-size:12.5px;line-height:1.65;color:var(--tx3)}
 
 @media(max-width:500px){
-  .founder-details{ grid-template-columns:1fr; }
-  .founder-detail-item:nth-child(odd){ border-right:none; }
-  .founder-detail-item:nth-last-child(-n+2){ border-bottom:1px solid #e8e8f0; }
-  .founder-detail-item:last-child{ border-bottom:none; }
-  .founder-body{ padding:20px 18px 24px; }
-  .founder-hero-banner{ padding:28px 18px 22px; }
-  .founder-platforms{ grid-template-columns:1fr; }
+  .founder-details{grid-template-columns:1fr}
+  .founder-detail-item:nth-child(odd){border-right:none}
+  .founder-detail-item:nth-last-child(-n+2){border-bottom:1px solid rgba(212,160,23,.08)}
+  .founder-detail-item:last-child{border-bottom:none}
+  .founder-body{padding:22px 18px 32px}
+  .founder-hero-banner{padding:36px 20px 28px}
+  .founder-platforms{grid-template-columns:1fr}
 }
 
+/* ── PROMO PAGE ──────────────────────────────────────────── */
+.promo-page-wrapper{min-height:calc(100vh - 64px);background:var(--bg);padding-bottom:60px}
+.promo-page-header{text-align:center;padding:36px 20px 20px}
+.promo-gallery-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+  gap:20px;padding:32px 24px;max-width:1300px;margin:0 auto;align-items:start;
+}
+.promo-card{
+  background:var(--card);border:1px solid rgba(212,160,23,.15);
+  border-radius:var(--r-lg);overflow:hidden;
+  transition:all .3s;display:flex;flex-direction:column;
+}
+.promo-card:hover{transform:translateY(-5px);border-color:rgba(212,160,23,.55);box-shadow:0 0 28px rgba(212,160,23,.12),0 14px 40px rgba(0,0,0,.5)}
+.promo-card-img-wrap{width:100%;overflow:hidden;cursor:pointer;display:block;line-height:0}
+.promo-card-img-wrap img{width:100%;height:auto;display:block;transition:transform .4s}
+.promo-card:hover .promo-card-img-wrap img{transform:scale(1.04)}
+.promo-card-caption{padding:14px 16px}
+.promo-card-caption h3{color:var(--g1);font-size:13px;font-weight:700;letter-spacing:.5px;margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.promo-card-caption p{color:var(--tx3);font-size:12px;line-height:1.5;margin:0}
+.promo-loading{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--tx3)}
+.promo-spinner{width:36px;height:36px;border:2px solid rgba(212,160,23,.12);border-top-color:var(--g1);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 18px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.promo-empty{text-align:center;padding:100px 20px;color:var(--tx3)}
+.promo-empty h3{font-size:20px;font-weight:700;color:rgba(212,160,23,.35);margin-bottom:10px}
+.promo-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:9999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(14px)}
+.promo-lightbox.open{display:flex}
+.promo-lightbox-inner{max-width:900px;width:100%;position:relative}
+.promo-lightbox-inner img{width:100%;max-height:80vh;object-fit:contain;border-radius:var(--r);border:1px solid rgba(212,160,23,.28)}
+.promo-lightbox-close{position:absolute;top:-16px;right:-16px;width:34px;height:34px;background:var(--gold-grad);color:#08070d;border:none;border-radius:50%;font-size:18px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.promo-lightbox-caption{color:var(--g1);text-align:center;margin-top:12px;font-size:14px;font-weight:600;letter-spacing:.5px}
+#promoRequestPage{display:none}
+#promoRequestPage.active{display:block}
 
-/* ===== PROMOTIONAL PRINTS PAGE ===== */
-.promo-page-wrapper {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0A1E3F 50%, #A296E7 100%);
-    padding-bottom: 60px;
+/* ── FOOTER HIDDEN ───────────────────────────────────────── */
+.footer{display:none!important}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media(max-width:900px){
+  .service-strip-inner{grid-template-columns:1fr}
+  .service-item{border-right:none;border-bottom:1px solid rgba(212,160,23,.08);padding:20px 22px}
+  .service-item:last-child{border-bottom:none}
 }
 
-.promo-page-header {
-    text-align: center;
-    padding: 30px 20px 20px;
+@media(max-width:768px){
+  .nav-menu{padding:0 16px;height:58px}
+  .nav-logo-name{font-size:13px;letter-spacing:2px}
+  .nav-logo-tagline{display:none}
+  .nav-item{font-size:10px;padding:7px 10px;letter-spacing:.8px}
+  .nav-right{gap:6px}
+  .hero{min-height:auto;padding:60px 20px 80px}
+  .hero-stats{gap:28px;margin-top:40px}
+  .hero-ctas{flex-direction:column;align-items:center}
+  .hero-ctas .btn-primary,.hero-ctas .btn-secondary{width:100%;max-width:320px}
+  #containerSection{padding:0 12px 40px}
+  .container-content{padding:26px 20px 18px}
+  .content-area{padding:28px 20px 64px}
+  .join-btn,.preview-btn{height:48px;font-size:11px}
+  .promo-gallery-grid{grid-template-columns:1fr 1fr;padding:20px 12px;gap:12px}
 }
 
-.promo-request-btn {
-    background: linear-gradient(135deg, #261A4C, #3d2a7a);
-    color: #ffffff;
-    border: 2px solid #FFD700;
-    padding: 14px 36px;
-    border-radius: 35px;
-    font-size: 15px;
-    font-weight: 800;
-    cursor: pointer;
-    letter-spacing: 1.5px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    box-shadow: 0 0 20px rgba(255,215,0,0.2);
+@media(max-width:480px){
+  .nav-links{gap:0}
+  .nav-item{font-size:9.5px;padding:6px 7px}
+  .hero-headline{letter-spacing:-.5px}
+  .promo-gallery-grid{grid-template-columns:1fr}
 }
 
-.promo-request-btn:hover {
-    background: #FFD700;
-    color: #261A4C;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(255,215,0,0.4);
+/* ── FORM PAGE TITLE ─────────────────────────────────────── */
+.form-page-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,4vw,32px);
+  font-weight:700;letter-spacing:.5px;
+  text-align:center;margin-bottom:32px;
+  background:var(--gold-grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1.2;
 }
-
-.promo-gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-    padding: 40px 30px;
-    max-width: 1300px;
-    margin: 0 auto;
-    align-items: start; /* each card shrinks to its own content height */
+.form-page-subtitle{
+  font-size:13.5px;line-height:1.65;color:var(--tx3);
+  text-align:center;margin-bottom:32px;margin-top:-20px;
 }
-
-.promo-card {
-    background: rgba(255, 255, 255, 0.07);
-    border: 1.5px solid rgba(255,215,0,0.2);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    display: flex;
-    flex-direction: column;
-    /* NO fixed height — card grows to fit image naturally */
-}
-
-.promo-card:hover {
-    transform: translateY(-6px);
-    border-color: #FFD700;
-    box-shadow: 0 12px 40px rgba(255,215,0,0.2);
-}
-
-.promo-card-img-wrap {
-    width: 100%;
-    overflow: hidden;
-    background: rgba(255,255,255,0.05);
-    cursor: pointer;
-    /* let height grow with the image — no fixed or min-height */
-    display: block;
-    line-height: 0;
-}
-
-.promo-card-img-wrap img {
-    width: 100%;
-    height: auto;       /* natural image height */
-    display: block;
-    object-fit: unset;  /* don't crop / letterbox */
-    transition: transform 0.4s ease;
-}
-
-.promo-card:hover .promo-card-img-wrap img {
-    transform: scale(1.04);
-}
-
-.promo-card-caption {
-    padding: 16px 18px;
-}
-
-.promo-card-caption h3 {
-    color: #FFD700;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.promo-card-caption p {
-    color: rgba(255,255,255,0.6);
-    font-size: 13px;
-    line-height: 1.5;
-    margin: 0;
-}
-
-.promo-loading {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 80px 20px;
-    color: rgba(255,255,255,0.6);
-}
-
-.promo-spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(255,215,0,0.2);
-    border-top-color: #FFD700;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 20px;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.promo-empty {
-    text-align: center;
-    padding: 100px 20px;
-    color: rgba(255,255,255,0.6);
-}
-
-.promo-empty h3 {
-    font-size: 22px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 10px;
-}
-
-/* Lightbox */
-.promo-lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    backdrop-filter: blur(8px);
-}
-
-.promo-lightbox.open {
-    display: flex;
-}
-
-.promo-lightbox-inner {
-    max-width: 900px;
-    width: 100%;
-    position: relative;
-}
-
-.promo-lightbox-inner img {
-    width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 12px;
-    border: 2px solid rgba(255,215,0,0.3);
-}
-
-.promo-lightbox-close {
-    position: absolute;
-    top: -16px;
-    right: -16px;
-    width: 36px;
-    height: 36px;
-    background: #FFD700;
-    color: #000;
-    border: none;
-    border-radius: 50%;
-    font-size: 20px;
-    font-weight: 900;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-}
-
-.promo-lightbox-caption {
-    color: #FFD700;
-    text-align: center;
-    margin-top: 14px;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-@media (max-width: 600px) {
-    .promo-gallery-grid {
-        grid-template-columns: 1fr;
-        padding: 24px 16px;
-    }
-}
-
-/* Category filter buttons */
-.promo-cat-btn {
-    background: transparent;
-    color: #FFD700;
-    border: 2px solid #FFD700;
-    padding: 11px 22px;
-    border-radius: 25px;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    text-transform: uppercase;
-    display: inline-flex;
-    align-items: center;
-}
-
-.promo-cat-btn:hover,
-.promo-cat-btn.active {
-    background: #FFD700;
-    color: #261A4C;
-    box-shadow: 0 4px 18px rgba(255,215,0,0.3);
-}
-
-.promo-cat-btn.active svg,
-.promo-cat-btn:hover svg {
-    stroke: #261A4C;
-}
-
-/* PROMO REQUEST FULL PAGE */
-#promoRequestPage {
-    display: none;
-}
-#promoRequestPage.active {
-    display: block;
-}
-
-/* REQUEST NOW button on each card */
-.promo-card-request-btn {
-    display: block;
-    width: 100%;
-    background: #261A4C;
-    color: #FFD700;
-    border: none;
-    border-top: 1.5px solid rgba(255,215,0,0.25);
-    padding: 13px 10px;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-
-.promo-card-request-btn:hover {
-    background: #FFD700;
-    color: #261A4C;
-}
-
 </style>
 <!-- Replace the existing Firebase CDN links with these updated ones -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -1740,60 +1047,135 @@ Some of his main goals are to help more businesses get online and build a strong
 
     <header class="header">
     <nav class="nav-menu">
-        <a href="#home" class="nav-item active" onclick="showPage('home'); return false;" data-page="home">WEBSITES</a>
-        <a href="#promo" class="nav-item" onclick="showPage('promo'); return false;" data-page="promo">PROMOTIONAL IMAGES</a>
-        <a href="#reviews" class="nav-item" onclick="showPage('reviews'); return false;" data-page="reviews">REVIEWS</a>
+      <!-- Logo lockup -->
+      <a href="#home" class="nav-logo" onclick="showPage('home'); return false;">
+        <img class="nav-logo-img"
+             src="https://res.cloudinary.com/dqqr9udcs/image/upload/v1771220928/WEB_VTEC_LOGO_jfihzc_e_background_removal_f_png_ooes1p_c_crop_w_800_h_800_tbbcb3.png"
+             alt="WEBV TEC Logo">
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">WEBV TEC</span>
+          <span class="nav-logo-tagline">Automate Your Presence</span>
+        </div>
+      </a>
+
+      <!-- Nav links -->
+      <div class="nav-links">
+        <a href="#home"    class="nav-item active" onclick="showPage('home');    return false;" data-page="home">Websites</a>
+        <a href="#promo"   class="nav-item"        onclick="showPage('promo');   return false;" data-page="promo">Promo Prints</a>
+        <a href="#reviews" class="nav-item"        onclick="showPage('reviews'); return false;" data-page="reviews">Reviews</a>
+      </div>
+
+      <!-- Right actions -->
+      <div class="nav-right">
+        <a href="#" class="admin-button" onclick="adminLogin(); return false;" style="display:none;padding:9px 18px;font-size:10px;">Admin</a>
+      </div>
     </nav>
     </header>
 
     <!-- HOME PAGE -->
     <div id="home" class="page active">
-        <main class="main-content">
-            <!-- Centered Logo -->
-            <div class="logo-section">
-                <div class="logo-container">
-                    <!-- Laptop -->
-                    <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="20" y="20" width="60" height="40" rx="3" ry="3"
-                              fill="none" stroke="#000" stroke-width="3" />
-                        <rect x="25" y="25" width="50" height="30" rx="2" ry="2"
-                              fill="#000" />
-                        <rect x="48" y="60" width="4" height="3"
-                              fill="#000" rx="1" ry="1" />
-                        <rect x="20" y="63" width="60" height="20" rx="3" ry="3"
-                              fill="transparent" stroke="#000" stroke-width="3" />
-                        <rect x="42" y="72" width="16" height="8" rx="1" ry="1"
-                              fill="#000" />
-                    </svg>
 
-                    <!-- Text INSIDE the circle -->
-                    <div class="brand-text">
-                        <div class="brand-name">WEB VTEC</div>
-                        <div class="brand-tagline">AUTOMATE NOW!</div>
-                    </div>
-                </div>
+      <!-- ── HERO ─────────────────────────────────────────── -->
+      <section class="hero">
+        <div class="hero-bg"></div>
+
+        <div class="hero-content">
+          <div class="hero-eyebrow">Jamaica's Premier Web Agency</div>
+
+          <h1 class="hero-headline">
+            Your Business,<br>
+            <span class="hl-gold">Elevated Online.</span>
+          </h1>
+
+          <p class="hero-sub">Professional websites built to convert visitors into clients.</p>
+
+          <p class="hero-body">
+            At <strong style="color:#f5d97a;font-weight:700;">WEBV TEC</strong> we craft high-performance,
+            beautifully designed websites for businesses of every size — from beauty professionals and
+            home-service brands to restaurants and retail. We also deploy AI receptionists that handle
+            bookings and enquiries around the clock, so you never miss a client.
+          </p>
+
+          <div id="userStatus" style="display:none;margin-bottom:18px;">
+            <div>
+              <span id="userEmail"></span>
+              <button class="logout-btn" onclick="logout()">Logout</button>
             </div>
+          </div>
 
-            <div id="userStatus" style="display: none; border: 2.5px solid #FFD700; border-radius: 25px; text-align: center;margin-bottom: 1px; margin-top: 5px;">
-    <div style="background: rgba(255, 255, 255, 0.9); display: inline-block; padding: 10px 15px; border-radius: 20px; color: #4B5563; font-weight: 600;">
-        <span id="userEmail"></span>
-        <button class="logout-btn" onclick="logout()" style="margin-left: 10px;">Logout</button>
-    </div>
+          <div class="hero-ctas">
+            <button class="btn-primary" onclick="showPage('request')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              Request Website Now
+            </button>
+            <button class="btn-secondary" onclick="showPage('ai-receptionist')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><line x1="19" y1="14" x2="22" y2="14"/><line x1="2" y1="14" x2="5" y2="14"/></svg>
+              Request AI Receptionist
+            </button>
+            <button class="btn-secondary" onclick="openFounderSection()" style="border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.6);">
+              About WEBV TEC
+            </button>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-number">5★</span>
+              <span class="stat-label">Avg. Rating</span>
             </div>
+            <div class="stat">
+              <span class="stat-number">24h</span>
+              <span class="stat-label">Avg. Turnaround</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">AI</span>
+              <span class="stat-label">Powered Tools</span>
+            </div>
+          </div>
+        </div>
 
-            <div class="divider-line"></div>
+        <div class="hero-scroll">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          Explore
+        </div>
+      </section>
 
-            <!-- CTA button BELOW the logo -->
-            <button class="cta-button" onclick="showPage('request')">REQUEST WEBSITE NOW</button>
-            <button class="about-btn" onclick="openFounderSection()" style="margin-top:8px;">ABOUT WEBV TEC</button>
-           <!-- <a href="#" class="client-button">CLIENT DASHBOARD</a>   -->
-            <a href="#" class="admin-button" onclick="adminLogin()">ADMIN</a>
-        </main>
+      <!-- ── SERVICE STRIP ─────────────────────────────────── -->
+      <div class="service-strip">
+        <div class="service-strip-inner">
+          <div class="service-item">
+            <div class="service-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="service-info">
+              <div class="service-title">Custom Websites</div>
+              <div class="service-desc">Fully bespoke, mobile-first websites tailored to your niche and brand — designed to convert.</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><line x1="19" y1="14" x2="22" y2="14"/><line x1="2" y1="14" x2="5" y2="14"/></svg>
+            </div>
+            <div class="service-info">
+              <div class="service-title">AI Receptionist</div>
+              <div class="service-desc">An intelligent virtual receptionist that handles calls, bookings and FAQs 24 / 7 — never miss a client.</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            </div>
+            <div class="service-info">
+              <div class="service-title">Promotional Prints</div>
+              <div class="service-desc">Eye-catching posters, flyers, business cards and social banners designed to grow your brand offline and on.</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- ── DYNAMIC SERVICE CARDS ─────────────────────────── -->
+      <div class="divider-line" style="margin:0"></div>
+      <section id="containerSection"></section>
 
-        <div class="divider-line"></div>
-
-        <section id="containerSection"></section>
     </div>
 
 
@@ -1803,7 +1185,7 @@ Some of his main goals are to help more businesses get online and build a strong
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
-                    <h2 style="color: #D1D5DB; font-size: clamp(16px, 4vw, 28px); margin-bottom: 30px; white-space: nowrap; text-align: center;">REQUEST YOUR WEBSITE NOW</h2>
+                    <h2 class="form-page-title">Request Your Website</h2>
                     <form id="websiteRequestForm">
                         <div class="form-group">
                             <label for="firstName">First Name</label>
@@ -1846,7 +1228,7 @@ Some of his main goals are to help more businesses get online and build a strong
 </div>
                         
                         <button type="submit" class="submit-button">SUBMIT REQUEST</button>
-                        <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background: rgba(255,255,255,0.08);">← BACK</button>
+                        <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
                     </form>
                 </div>
             </div>
@@ -1901,27 +1283,27 @@ Some of his main goals are to help more businesses get online and build a strong
         <div class="modal-content" style="max-width: 500px;">
             <button class="close-modal" onclick="closePromoRequestModal()">&times;</button>
             <h2 class="modal-title" style="font-size: 20px;">REQUEST PROMOTIONAL IMAGE</h2>
-            <p style="color:#6B7280; margin-bottom: 20px; font-size: 14px;">Fill in the details below and we'll create a custom promotional image for you.</p>
+            <p style="color:rgba(255,255,255,.4);margin-bottom:20px;font-size:13px;line-height:1.6;">Fill in the details below and we'll create a custom promotional image for you.</p>
 
             <form id="promoRequestForm">
                 <div class="form-group" style="margin-bottom:15px;">
-                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">First Name</label>
+                    <label style="display:block;color:#d4a017;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">First Name</label>
                     <input type="text" id="promoFirstName" class="login-input" placeholder="First Name" required style="margin-bottom:0;">
                 </div>
                 <div class="form-group" style="margin-bottom:15px;">
-                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Last Name</label>
+                    <label style="display:block;color:#d4a017;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Last Name</label>
                     <input type="text" id="promoLastName" class="login-input" placeholder="Last Name" required style="margin-bottom:0;">
                 </div>
                 <div class="form-group" style="margin-bottom:15px;">
-                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Phone Number</label>
+                    <label style="display:block;color:#d4a017;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Phone Number</label>
                     <input type="tel" id="promoPhone" class="login-input" placeholder="Phone Number" required style="margin-bottom:0;">
                 </div>
                 <div class="form-group" style="margin-bottom:15px;">
-                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Email</label>
+                    <label style="display:block;color:#d4a017;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Email</label>
                     <input type="email" id="promoEmail" class="login-input" placeholder="Email Address" required style="margin-bottom:0;">
                 </div>
                 <div class="form-group" style="margin-bottom:15px;">
-                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Type of Promotional Image</label>
+                    <label style="display:block;color:#d4a017;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Type of Promotional Image</label>
                     <select id="promoType" class="login-input" required style="margin-bottom:0; appearance:auto; color:#374151;">
                         <option value="">Select Type</option>
                         <option value="flyer">Flyer / Event Poster</option>
@@ -1934,14 +1316,14 @@ Some of his main goals are to help more businesses get online and build a strong
                     </select>
                 </div>
                 <div class="form-group" style="margin-bottom:15px;" id="promoTypeOtherGroup" style="display:none;">
-                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Please specify:</label>
+                    <label style="display:block;color:#d4a017;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Please specify:</label>
                     <input type="text" id="promoTypeOther" class="login-input" placeholder="Describe the type..." style="margin-bottom:0;">
                 </div>
                 <div class="form-group" style="margin-bottom:20px;">
-                    <label style="display:block;color:#374151;font-weight:600;margin-bottom:6px;font-size:14px;">Description / Details</label>
+                    <label style="display:block;color:#d4a017;font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Description / Details</label>
                     <textarea id="promoDescription" class="login-input" rows="3" placeholder="Tell us what you need — colors, text, business name, etc..." required style="margin-bottom:0; resize:vertical; font-family:inherit;"></textarea>
                 </div>
-                <button type="submit" class="login-button" style="background:#261A4C; letter-spacing:1px;">SUBMIT REQUEST</button>
+                <button type="submit" class="login-button" style="">SUBMIT REQUEST</button>
             </form>
         </div>
     </div>
@@ -1951,7 +1333,7 @@ Some of his main goals are to help more businesses get online and build a strong
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
-                    <h2 style="color: #D1D5DB; font-size: clamp(16px, 4vw, 28px); margin-bottom: 30px; white-space: nowrap; text-align: center;">REQUEST PROMOTIONAL IMAGE</h2>
+                    <h2 class="form-page-title">Request Promotional Image</h2>
                     <form id="promoRequestPageForm">
                         <div class="form-group">
                             <label for="promoPageFirstName">First Name</label>
@@ -1991,7 +1373,7 @@ Some of his main goals are to help more businesses get online and build a strong
                             <textarea id="promoPageDescription" rows="4" placeholder="Tell us what you need — colors, text, business name, etc..." required></textarea>
                         </div>
                         <button type="submit" class="submit-button">SUBMIT REQUEST</button>
-                        <button type="button" class="submit-button" onclick="showPage('promo')" style="margin-top:12px; background: rgba(255,255,255,0.08);">← BACK TO GALLERY</button>
+                        <button type="button" class="submit-button" onclick="showPage('promo')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK TO GALLERY</button>
                     </form>
                 </div>
             </div>
@@ -2029,7 +1411,7 @@ Some of his main goals are to help more businesses get online and build a strong
                 
                 <!-- Reviews Display -->
                 <div class="reviews-container" id="reviewsContainer">
-                    <h3 style="color: #D1D5DB; text-align: center; margin-bottom: 25px; font-size: 24px;">CUSTOMER REVIEWS</h3>
+                    <h3 class="form-page-title" style="font-size:clamp(18px,3vw,24px);margin-bottom:28px;">Customer Reviews</h3>
                     <div id="reviewsList">
                         <!-- Reviews will be loaded here -->
                     </div>
@@ -2044,7 +1426,7 @@ Some of his main goals are to help more businesses get online and build a strong
     <div class="modal-content">
         <button class="close-modal" onclick="closeAdminPasswordModal()">&times;</button>
         <h2 class="modal-title">Admin Access Required</h2>
-        <p style="color: #6B7280; margin-bottom: 25px;">Enter admin password to continue</p>
+        <p style="color:rgba(255,255,255,.42);margin-bottom:24px;font-size:14px;line-height:1.5;">Enter admin password to continue</p>
         
         <input type="password" id="adminPassword" class="login-input" placeholder="Admin Password" required>
         
@@ -3295,13 +2677,62 @@ CONTACT THE CUSTOMER!`;
 
 </script>
 
-    <footer class="footer">
-    <span class="footer-text">
-        NEED CASH? MAKE IT TODAY!! AT 
-        <a href="https://webvtecinstitute.com" target="_blank" class="footer-link">
-            webvtecinstitute.com
-        </a>
-    </span>
-</footer>
+
+
+    <!-- AI RECEPTIONIST PAGE -->
+    <div id="ai-receptionist" class="page">
+        <div class="navy-gradient-container">
+            <div class="content-area">
+                <div class="form-container">
+                    <h2 class="form-page-title">Request AI Receptionist</h2>
+                    <p style="color:rgba(255,255,255,.45);font-size:13px;text-align:center;margin-bottom:32px;line-height:1.6;">Let an AI handle your calls, bookings, and customer inquiries 24/7 — fully branded to your business.</p>
+                    <form id="aiReceptionistForm" onsubmit="handleAIReceptionistRequest(event)">
+                        <div class="form-group">
+                            <label for="aiFirstName">First Name</label>
+                            <input type="text" id="aiFirstName" required placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <label for="aiLastName">Last Name</label>
+                            <input type="text" id="aiLastName" required placeholder="Last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="aiPhone">Phone Number</label>
+                            <input type="tel" id="aiPhone" required placeholder="Your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="aiEmail">Email Address</label>
+                            <input type="email" id="aiEmail" required placeholder="Your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="aiBusinessName">Business Name</label>
+                            <input type="text" id="aiBusinessName" required placeholder="Your business name">
+                        </div>
+                        <div class="form-group">
+                            <label for="aiBusinessType">Business Type</label>
+                            <select id="aiBusinessType" required>
+                                <option value="">Select your business type</option>
+                                <option value="beauty-salon">Beauty Salon / Nail Tech</option>
+                                <option value="barbershop">Barbershop</option>
+                                <option value="restaurant">Restaurant / Food Delivery</option>
+                                <option value="spa">Spa / Wellness</option>
+                                <option value="home-services">Home Services</option>
+                                <option value="retail">Retail Store</option>
+                                <option value="medical">Medical / Healthcare</option>
+                                <option value="real-estate">Real Estate</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="aiDescription">What should your AI receptionist handle?</label>
+                            <textarea id="aiDescription" rows="4" required placeholder="e.g. Answer calls, book appointments, answer FAQs about services and pricing, take messages..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">SUBMIT REQUEST</button>
+                        <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
