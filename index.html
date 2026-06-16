@@ -317,6 +317,39 @@ button{box-shadow:none}
 .form-group input::placeholder,.form-group textarea::placeholder{color:var(--tx3)}
 .form-group select option{background:var(--deep);color:var(--tx1)}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--g2);box-shadow:0 0 0 3px rgba(212,160,23,.15)}
+
+/* Optional add-on checkboxes */
+.checkbox-group{
+  display:flex;flex-direction:column;gap:10px;
+}
+.checkbox-option{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(212,160,23,.15);
+  border-radius:var(--r);
+  cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.checkbox-option:hover{
+  border-color:rgba(212,160,23,.4);
+  background:rgba(212,160,23,.04);
+}
+.checkbox-option input[type="checkbox"]{
+  width:17px;height:17px;flex-shrink:0;
+  accent-color:var(--g2);
+  cursor:pointer;
+}
+.checkbox-option span{
+  font-size:13.5px;color:var(--tx2);
+  font-weight:400;text-transform:none;
+  letter-spacing:0;
+}
+.checkbox-option:has(input:checked){
+  border-color:rgba(212,160,23,.5);
+  background:rgba(212,160,23,.07);
+}
+.checkbox-option:has(input:checked) span{color:var(--tx1);}
 .form-page-title{font-family:"Playfair Display",serif;font-size:clamp(20px,4vw,32px);font-weight:700;letter-spacing:.5px;text-align:center;margin-bottom:32px;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
 .form-page-subtitle{font-size:13.5px;line-height:1.65;color:var(--tx3);text-align:center;margin-bottom:32px;margin-top:-20px}
 
@@ -589,7 +622,7 @@ button{box-shadow:none}
   .hero-left-ctas .btn-secondary,
   .hero-left-ctas .about-btn{min-width:0;flex:1}
 }
-@media(max-width:500px){
+@media(max-width:768px){
   .hero-left-ctas{flex-direction:column}
   .hero-left-ctas .btn-primary,
   .hero-left-ctas .btn-secondary,
@@ -735,6 +768,20 @@ button{box-shadow:none}
 /* Card body */
 .ai-card-body{padding:20px 24px;flex:1;display:flex;flex-direction:column;gap:16px;}
 .ai-card-desc{font-size:13.5px;line-height:1.72;color:var(--tx2);}
+
+/* Capability tags shown under each agent's description */
+.ai-capabilities{
+  display:flex;flex-wrap:wrap;gap:6px;
+}
+.ai-cap-tag{
+  font-size:10.5px;font-weight:600;letter-spacing:.3px;
+  color:var(--g1);
+  border:1px solid rgba(212,160,23,.3);
+  border-radius:20px;
+  padding:5px 11px;
+  white-space:nowrap;
+  background:rgba(212,160,23,.05);
+}
 
 
 
@@ -1055,7 +1102,7 @@ Some of his main goals are to help more businesses get online and build a strong
               </button>
               <button class="btn-secondary" onclick="showPage('ai-receptionist')">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><line x1="19" y1="14" x2="22" y2="14"/><line x1="2" y1="14" x2="5" y2="14"/></svg>
-                AI Receptionist
+                Request AI Agent
               </button>
               <button class="about-btn" onclick="openFounderSection()">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
@@ -1234,6 +1281,13 @@ Some of his main goals are to help more businesses get online and build a strong
               </div>
               <div class="ai-card-body">
                 <p class="ai-card-desc">Answers every call, books appointments, and switches fluently between English and Spanish mid-conversation — day or night.</p>
+                <div class="ai-capabilities">
+                  <span class="ai-cap-tag">✓ Takes Bookings 24/7</span>
+                  <span class="ai-cap-tag">✓ Cancels/Reschedules</span>
+                  <span class="ai-cap-tag">✓ Answers General Questions</span>
+                  <span class="ai-cap-tag">✓ Sends Reminder Calls</span>
+                  <span class="ai-cap-tag">✓ Instant Email Confirmations</span>
+                </div>
                 <button class="ai-play-btn" onclick="speakAI(this, 'Good day! Thank you for calling Kingston Smile Dental, this is Maya speaking — how can I assist you today?')">
                   <span class="ai-play-icon">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1318,6 +1372,11 @@ Some of his main goals are to help more businesses get online and build a strong
               </div>
               <div class="ai-card-body">
                 <p class="ai-card-desc">Calls every job applicant, asks your pre-screening questions, and ranks candidates — so you only interview the ones worth your time.</p>
+                <div class="ai-capabilities">
+                  <span class="ai-cap-tag" style="border-color:rgba(100,60,220,.3);color:#b088ff;">✓ Pre-Screens Applicants</span>
+                  <span class="ai-cap-tag" style="border-color:rgba(100,60,220,.3);color:#b088ff;">✓ Ranks Candidates</span>
+                  <span class="ai-cap-tag" style="border-color:rgba(100,60,220,.3);color:#b088ff;">✓ Instant Email Summary</span>
+                </div>
                 <button class="ai-play-btn" onclick="speakAI(this, 'Hi, this is Sage calling on behalf of WEBV TEC regarding your application. Do you have a few minutes to answer some quick questions about your availability and experience?')" style="border-color:rgba(100,60,220,.35);color:#b088ff;">
                   <span class="ai-play-icon" style="background:rgba(100,60,220,.2);color:#b088ff;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1405,6 +1464,12 @@ Some of his main goals are to help more businesses get online and build a strong
               </div>
               <div class="ai-card-body">
                 <p class="ai-card-desc">Calls clients ahead of their appointment to confirm — and if they can't make it, instantly reschedules or fills the slot from your waitlist.</p>
+                <div class="ai-capabilities">
+                  <span class="ai-cap-tag" style="border-color:rgba(16,185,129,.3);color:#34d399;">✓ Confirmation Calls</span>
+                  <span class="ai-cap-tag" style="border-color:rgba(16,185,129,.3);color:#34d399;">✓ Auto-Reschedules</span>
+                  <span class="ai-cap-tag" style="border-color:rgba(16,185,129,.3);color:#34d399;">✓ Waitlist Fill-In</span>
+                  <span class="ai-cap-tag" style="border-color:rgba(16,185,129,.3);color:#34d399;">✓ Instant Email Reminders</span>
+                </div>
                 <button class="ai-play-btn" onclick="speakAI(this, 'Hi! This is Vera calling to confirm your appointment tomorrow at two PM. Will you still be able to make it, or would you like to reschedule?')" style="border-color:rgba(16,185,129,.3);color:#34d399;">
                   <span class="ai-play-icon" style="background:rgba(16,185,129,.1);color:#34d399;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1634,7 +1699,29 @@ Some of his main goals are to help more businesses get online and build a strong
     <label for="customWebsiteType">Please specify your website type:</label>
     <input type="text" id="customWebsiteType" name="customWebsiteType" placeholder="Enter your website type...">
 </div>
-                        
+
+                        <div class="form-group">
+                            <label>Would you like any of these built into your site? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="addons" value="ai-chatbot">
+                                    <span>AI Chatbot (text-based) on my website</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="addons" value="ai-voice-chat">
+                                    <span>AI Voice Chat on my website</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="addons" value="online-booking">
+                                    <span>Online Booking Form</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="addons" value="email-confirmations">
+                                    <span>Automated Email Confirmations</span>
+                                </label>
+                            </div>
+                        </div>
+
                         <button type="submit" class="submit-button">SUBMIT REQUEST</button>
                         <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
                     </form>
@@ -1875,6 +1962,7 @@ async function handleWebsiteRequest(e) {
         email: formData.get('email'),
         userId: currentUser.uid,
         websiteType: websiteType,
+        addons: formData.getAll('addons'),
         selectedService: selectedService || 'direct-request',
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         status: 'pending'
@@ -1902,6 +1990,10 @@ async function handleWebsiteRequest(e) {
         };
         
         // Send to Telegram
+        const addonsText = requestData.addons && requestData.addons.length
+            ? requestData.addons.join(', ')
+            : 'None selected';
+
         const telegramMessage = `
 🚀 NEW WEBSITE REQUEST SUBMITTED!
 
@@ -1913,6 +2005,7 @@ async function handleWebsiteRequest(e) {
 
   REQUEST DETAILS:
 🌐 Website Type: ${requestData.websiteType}
+➕ Add-Ons: ${addonsText}
 📅 Submitted: ${formatDate(new Date())}
 
 CONTACT THE CUSTOMER!
@@ -2762,7 +2855,54 @@ async function handlePromoImageRequest(e) {
   }
 }
 
+// AI Receptionist Request Form Handler
+async function handleAIReceptionistRequest(e) {
+  e.preventDefault();
+  if (!currentUser) { showLoginModal(); return; }
+
+  const checkedAddons = Array.from(document.querySelectorAll('input[name="aiAddons"]:checked'))
+    .map(cb => cb.value);
+
+  const data = {
+    firstName:    document.getElementById('aiFirstName').value.trim(),
+    lastName:     document.getElementById('aiLastName').value.trim(),
+    phone:        document.getElementById('aiPhone').value.trim(),
+    email:        document.getElementById('aiEmail').value.trim(),
+    businessName: document.getElementById('aiBusinessName').value.trim(),
+    businessType: document.getElementById('aiBusinessType').value,
+    description:  document.getElementById('aiDescription').value.trim(),
+    addons:       checkedAddons,
+    userId:       currentUser.uid,
+    userEmail:    currentUser.email,
+    timestamp:    firebase.firestore.FieldValue.serverTimestamp(),
+    status:       'pending'
+  };
+
+  const btn = e.target.querySelector('button[type="submit"]');
+  const orig = btn.textContent;
+  try {
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+    await db.collection('ai-receptionist-requests').add(data);
+
+    const addonsText = checkedAddons.length ? checkedAddons.join(', ') : 'None selected';
+
+    const msg = `\n🤖 NEW AI RECEPTIONIST REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n➕ Add-Ons: ${addonsText}\n📝 Details: ${data.description}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
+    await sendTelegramMessage(msg);
+    alert('🎉 Request submitted! We will be in touch soon.');
+    e.target.reset();
+    showPage('home');
+  } catch(err) {
+    console.error(err);
+    alert('❌ Error submitting. Please try again.');
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+}
+
 </script>
+
 
 
 
@@ -2808,6 +2948,31 @@ async function handlePromoImageRequest(e) {
                                 <option value="real-estate">Real Estate</option>
                                 <option value="other">Other</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label>What should your AI handle? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="aiAddons" value="take-bookings">
+                                    <span>Take Bookings 24/7</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="aiAddons" value="cancel-reschedule">
+                                    <span>Cancel/Reschedule Bookings</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="aiAddons" value="general-questions">
+                                    <span>Answer General Questions</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="aiAddons" value="reminder-calls">
+                                    <span>Send Reminder Calls</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="aiAddons" value="email-confirmations">
+                                    <span>Instant Email Confirmations</span>
+                                </label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="aiDescription">What should your AI receptionist handle?</label>
