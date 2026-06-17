@@ -477,6 +477,29 @@ button{box-shadow:none}
   font-size:12px;color:var(--tx3);text-align:center;
   margin:-6px 0 22px;line-height:1.6;
 }
+
+/* Promotional Image request page — per design-type toggle list */
+.promo-type-list{display:flex;flex-direction:column;gap:11px;}
+.promo-type-item{
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(212,160,23,.16);
+  border-radius:10px;
+  padding:14px 16px;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+}
+.promo-type-item:has(.prTypeToggle:checked){
+  border-color:rgba(212,160,23,.55);
+  background:rgba(212,160,23,.08);
+  box-shadow:0 0 0 1px rgba(212,160,23,.12),0 4px 14px rgba(212,160,23,.1);
+}
+.promo-type-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.promo-type-name{font-size:13.5px;color:var(--tx2);font-weight:500;}
+.promo-type-item:has(.prTypeToggle:checked) .promo-type-name{color:var(--tx1);}
+.promo-type-extra{margin-top:13px;display:flex;flex-direction:column;gap:10px;}
+.promo-type-extra textarea{resize:vertical;min-height:64px;font-size:13.5px;padding:11px 13px;}
+.promo-type-extra input{font-size:13.5px;padding:11px 13px;}
+.promo-type-extra-hint{font-size:11px;color:var(--tx3);margin:-2px 0 0;}
+.promo-type-extra-label{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--g2);margin:0;}
 .package-divider{
   height:1px;background:rgba(212,160,23,.16);
   margin:32px 0 28px;
@@ -1119,12 +1142,12 @@ button{box-shadow:none}
             (Website + AI Receptionist)
         </button>
 
-        <button class="login-button" onclick="closeGetStartedModal(); showPage('ai-receptionist');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+        <button class="login-button" onclick="closeGetStartedModal(); requestAiSystem(null);" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><line x1="19" y1="14" x2="22" y2="14"/><line x1="2" y1="14" x2="5" y2="14"/></svg>
             AI Receptionist
         </button>
 
-        <button class="login-button" onclick="closeGetStartedModal(); showPage('request');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+        <button class="login-button" onclick="closeGetStartedModal(); requestWebsiteType(null);" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             Website
         </button>
@@ -1467,7 +1490,7 @@ Some of his main goals are to help more businesses get online and build a strong
               <div class="pillar-body">
                 <h3 class="pillar-title">Custom Websites</h3>
                 <p class="pillar-desc">High-performance, mobile-first websites built specifically for your business — with booking systems, galleries, admin dashboards, and social integrations baked in.</p>
-                <button class="pillar-btn" onclick="showPage('request')">
+                <button class="pillar-btn" onclick="requestWebsiteType(null)">
                   Request a Website
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
@@ -1483,7 +1506,7 @@ Some of his main goals are to help more businesses get online and build a strong
               <div class="pillar-body">
                 <h3 class="pillar-title">AI Calling System</h3>
                 <p class="pillar-desc">An intelligent AI receptionist that answers your calls, handles bookings, responds to FAQs, and follows up with clients — 24 hours a day, 7 days a week.</p>
-                <button class="pillar-btn" onclick="showPage('ai-receptionist')">
+                <button class="pillar-btn" onclick="requestAiSystem(null)">
                   Request AI Receptionist
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
@@ -1535,6 +1558,78 @@ Some of his main goals are to help more businesses get online and build a strong
                   <li>Admin content management</li>
                 </ul>
                 <button class="scard-btn" onclick="requestPackage('dental')">Request This Package</button>
+              </div>
+            </div>
+
+            <!-- BARBERING PACKAGE -->
+            <div class="scard">
+              <div class="scard-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1621605815971-fbc98d665033.avif?alt=media&token=d4c928dd-f06a-4a64-91de-a474e929138b')"></div>
+              <div class="scard-body">
+                <h3 class="scard-title">Barbering Package</h3>
+                <ul class="scard-list">
+                  <li>Custom barbering website with photo gallery</li>
+                  <li>Real-time online booking — no overlaps</li>
+                  <li>AI receptionist answers every call 24/7</li>
+                  <li>AI takes bookings, cancellations &amp; reschedules</li>
+                  <li>AI answers general client questions</li>
+                  <li>Mobile &amp; desktop responsive design</li>
+                  <li>Admin dashboard for photos &amp; schedules</li>
+                </ul>
+                <button class="scard-btn" onclick="requestPackage('barbering')">Request This Package</button>
+              </div>
+            </div>
+
+            <!-- NAIL TECH PACKAGE -->
+            <div class="scard">
+              <div class="scard-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1604654894610-df63bc536371.avif?alt=media&token=275e9fff-997a-4984-8318-bff212639bf9')"></div>
+              <div class="scard-body">
+                <h3 class="scard-title">Nail Tech Package</h3>
+                <ul class="scard-list">
+                  <li>Custom nail tech website with portfolio gallery</li>
+                  <li>Online appointment booking system</li>
+                  <li>AI receptionist answers every call 24/7</li>
+                  <li>AI takes bookings, cancellations &amp; reschedules</li>
+                  <li>AI answers general client questions</li>
+                  <li>Mobile &amp; desktop responsive design</li>
+                  <li>Admin control panel</li>
+                </ul>
+                <button class="scard-btn" onclick="requestPackage('nail-tech')">Request This Package</button>
+              </div>
+            </div>
+
+            <!-- RESTAURANT PACKAGE -->
+            <div class="scard">
+              <div class="scard-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1517248135467-4c7edcad34c4.avif?alt=media&token=262cbdfd-bd51-4696-8e89-061a9722f1c2')"></div>
+              <div class="scard-body">
+                <h3 class="scard-title">Restaurant Package</h3>
+                <ul class="scard-list">
+                  <li>Custom restaurant website with digital menu</li>
+                  <li>Online ordering &amp; table reservation system</li>
+                  <li>AI receptionist answers every call 24/7</li>
+                  <li>AI takes reservations, cancellations &amp; reschedules</li>
+                  <li>AI answers general questions (hours, menu, location)</li>
+                  <li>Mobile &amp; desktop responsive design</li>
+                  <li>Admin content management</li>
+                </ul>
+                <button class="scard-btn" onclick="requestPackage('restaurant')">Request This Package</button>
+              </div>
+            </div>
+
+            <!-- SPA PACKAGE -->
+            <div class="scard">
+              <div class="scard-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1540555700478-4be289fbecef.avif?alt=media&token=b8fe18bf-7ffa-4c3e-abf6-8d21eadc74e4')"></div>
+              <div class="scard-body">
+                <h3 class="scard-title">Spa Package</h3>
+                <ul class="scard-list">
+                  <li>Custom spa / wellness website with treatment menu</li>
+                  <li>Online booking with confirmations</li>
+                  <li>AI receptionist answers every call 24/7</li>
+                  <li>AI takes bookings, cancellations &amp; reschedules</li>
+                  <li>AI answers general client questions</li>
+                  <li>Mobile &amp; desktop responsive design</li>
+                  <li>Admin content management</li>
+                </ul>
+                <button class="scard-btn" onclick="requestPackage('spa')">Request This Package</button>
               </div>
             </div>
 
@@ -1602,7 +1697,7 @@ Some of his main goals are to help more businesses get online and build a strong
                 </div>
               </div>
               <div class="ai-card-footer">
-                <button class="pillar-btn" onclick="showPage('ai-receptionist')">
+                <button class="pillar-btn" onclick="requestAiSystem('dental')">
                   Request This System
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
@@ -1615,7 +1710,7 @@ Some of his main goals are to help more businesses get online and build a strong
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(212,160,23,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
                 <h3>Your Industry</h3>
                 <p>Don't see your niche? We build custom AIs for <em>any</em> business. Tell us what you need.</p>
-                <button class="btn-primary" onclick="showPage('ai-receptionist')" style="margin-top:24px;">Request a Custom AI</button>
+                <button class="btn-primary" onclick="requestAiSystem(null)" style="margin-top:24px;">Request a Custom AI</button>
               </div>
             </div>
 
@@ -1646,7 +1741,7 @@ Some of his main goals are to help more businesses get online and build a strong
                   <li>Mobile &amp; desktop responsive</li>
                   <li>Customisable colour scheme</li>
                 </ul>
-                <button class="scard-btn" onclick="showPage('request')">Request This Website</button>
+                <button class="scard-btn" onclick="requestWebsiteType('barbering')">Request This Website</button>
               </div>
             </div>
             <!-- NAIL TECH -->
@@ -1665,7 +1760,7 @@ Some of his main goals are to help more businesses get online and build a strong
                   <li>Mobile &amp; desktop responsive</li>
                   <li>Custom brand colours &amp; fonts</li>
                 </ul>
-                <button class="scard-btn" onclick="showPage('request')">Request This Website</button>
+                <button class="scard-btn" onclick="requestWebsiteType('nail-tech')">Request This Website</button>
               </div>
             </div>
             <!-- RESTAURANT -->
@@ -1684,7 +1779,7 @@ Some of his main goals are to help more businesses get online and build a strong
                   <li>Mobile &amp; desktop responsive</li>
                   <li>Brand-matched design</li>
                 </ul>
-                <button class="scard-btn" onclick="showPage('request')">Request This Website</button>
+                <button class="scard-btn" onclick="requestWebsiteType('restaurant')">Request This Website</button>
               </div>
             </div>
             <!-- SPA -->
@@ -1703,7 +1798,7 @@ Some of his main goals are to help more businesses get online and build a strong
                   <li>Mobile &amp; desktop responsive</li>
                   <li>Luxury custom design</li>
                 </ul>
-                <button class="scard-btn" onclick="showPage('request')">Request This Website</button>
+                <button class="scard-btn" onclick="requestWebsiteType('spa')">Request This Website</button>
               </div>
             </div>
             <!-- MAKEUP -->
@@ -1722,7 +1817,7 @@ Some of his main goals are to help more businesses get online and build a strong
                   <li>Mobile &amp; desktop responsive</li>
                   <li>Elegant custom brand design</li>
                 </ul>
-                <button class="scard-btn" onclick="showPage('request')">Request This Website</button>
+                <button class="scard-btn" onclick="requestWebsiteType('makeup')">Request This Website</button>
               </div>
             </div>
             <!-- PARTY RENTAL -->
@@ -1741,7 +1836,7 @@ Some of his main goals are to help more businesses get online and build a strong
                   <li>Mobile &amp; desktop responsive</li>
                   <li>Custom brand colours</li>
                 </ul>
-                <button class="scard-btn" onclick="showPage('request')">Request This Website</button>
+                <button class="scard-btn" onclick="requestWebsiteType('party-rental')">Request This Website</button>
               </div>
             </div>
             <!-- OTHER / CTA CARD -->
@@ -1750,7 +1845,7 @@ Some of his main goals are to help more businesses get online and build a strong
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(212,160,23,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
                 <h3>Your Industry</h3>
                 <p>Don't see your niche? We build custom websites for <em>any</em> business. Tell us what you need.</p>
-                <button class="btn-primary" onclick="showPage('request')" style="margin-top:24px;">Request a Custom Site</button>
+                <button class="btn-primary" onclick="requestWebsiteType(null)" style="margin-top:24px;">Request a Custom Site</button>
               </div>
             </div>
           </div>
@@ -1769,7 +1864,7 @@ Some of his main goals are to help more businesses get online and build a strong
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
-                    <h2 class="form-page-title">Request Your Website</h2>
+                    <h2 class="form-page-title" id="requestPageTitle">Request Your Website</h2>
                     <div class="price-badge">
                         <span class="price-badge-label">Starting At</span>
                         <span class="price-badge-amount">$160</span>
@@ -2996,7 +3091,7 @@ async function loadSiteContainers() {
                     <div class="container-content">
                         <p>${processedText}</p>
                     </div>
-                    <button class="join-btn" onclick="showPage('request')">JOIN US NOW</button>
+                    <button class="join-btn" onclick="requestWebsiteType(null)">JOIN US NOW</button>
                 `;
             } else {
                 // Use URL stored in Firestore by the admin — no hardcoding
@@ -3040,6 +3135,52 @@ function handleWebsiteTypeChange(e) {
     }
 }
 
+// Pre-built industry presets for the standalone "Request Your Website" page
+// (e.g. clicking "Request This Website" on the Restaurant Website card).
+// Tells the visitor this is specifically a Restaurant Website request
+// instead of a blank generic form, and pre-selects the website type for them.
+const WEBSITE_PRESETS = {
+  barbering:      { type: 'hair-tech',           title: 'Barbering Website' },
+  'nail-tech':    { type: 'nail-tech',           title: 'Nail Tech Website' },
+  restaurant:     { type: 'restaurant-delivery', title: 'Restaurant Website' },
+  spa:            { type: 'spa',                 title: 'Spa / Wellness Website' },
+  makeup:         { type: 'makeup',              title: 'Makeup Artist Website' },
+  'party-rental': { type: 'party-rental',        title: 'Party Rental Website' }
+};
+const DEFAULT_REQUEST_TITLE = 'Request Your Website';
+
+function requestWebsiteType(key) {
+  const preset = WEBSITE_PRESETS[key];
+  const titleEl = document.getElementById('requestPageTitle');
+  const typeSelect = document.getElementById('websiteType');
+
+  selectedService = preset ? key : null;
+  if (titleEl) titleEl.textContent = preset ? preset.title : DEFAULT_REQUEST_TITLE;
+  if (typeSelect) {
+    typeSelect.value = preset ? preset.type : '';
+    typeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  showPage('request');
+}
+
+// Same idea for the standalone "Request AI Receptionist" page — clicking
+// "Request This System" on an industry AI card (e.g. Dental) should land on
+// a page that says so, instead of a generic, unbranded form.
+const AI_PRESETS = {
+  dental: { type: 'dental', title: 'Dental AI Receptionist' }
+};
+const DEFAULT_AI_TITLE = 'Request AI Receptionist';
+
+function requestAiSystem(key) {
+  const preset = AI_PRESETS[key];
+  const titleEl = document.getElementById('aiPageTitle');
+  const typeSelect = document.getElementById('aiBusinessType');
+
+  if (titleEl) titleEl.textContent = preset ? preset.title : DEFAULT_AI_TITLE;
+  if (typeSelect) typeSelect.value = preset ? preset.type : '';
+  showPage('ai-receptionist');
+}
+
 function handlePkgTypeChange(e) {
     const customGroup = document.getElementById('pkgCustomTypeGroup');
     const customInput = document.getElementById('pkgCustomType');
@@ -3068,6 +3209,38 @@ const PACKAGE_PRESETS = {
     promo: false,
     title: 'Dental Package',
     subtitle: 'Your dental practice gets a custom website with online appointment booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general patient questions.'
+  },
+  barbering: {
+    businessType: 'hair-barbershop',
+    website: true,
+    ai: true,
+    promo: false,
+    title: 'Barbering Package',
+    subtitle: 'Your barbershop gets a custom website with a photo gallery and real-time booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general client questions.'
+  },
+  'nail-tech': {
+    businessType: 'nail-tech',
+    website: true,
+    ai: true,
+    promo: false,
+    title: 'Nail Tech Package',
+    subtitle: 'Your nail studio gets a custom website with a portfolio gallery and online booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general client questions.'
+  },
+  restaurant: {
+    businessType: 'restaurant',
+    website: true,
+    ai: true,
+    promo: false,
+    title: 'Restaurant Package',
+    subtitle: 'Your restaurant gets a custom website with a digital menu and online ordering, plus an AI receptionist that answers every call 24/7, takes reservations, handles cancellations & reschedules, and answers general questions.'
+  },
+  spa: {
+    businessType: 'spa',
+    website: true,
+    ai: true,
+    promo: false,
+    title: 'Spa Package',
+    subtitle: 'Your spa gets a custom website with a treatment menu and online booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general client questions.'
   }
 };
 
@@ -3627,9 +3800,35 @@ function setupPriceCalculators() {
 }
 
 
+function handlePromoTypeToggle(el) {
+  const item = el.closest('.promo-type-item');
+  const extra = item ? item.querySelector('.promo-type-extra') : null;
+  if (extra) extra.style.display = el.checked ? 'flex' : 'none';
+  if (el.checked) {
+    const warning = document.getElementById('prDesignTypeWarning');
+    if (warning) warning.style.display = 'none';
+  }
+}
+
 async function handlePromoImageRequest(e) {
   e.preventDefault();
   if (!currentUser) { showLoginModal(); return; }
+
+  const checkedToggles = Array.from(document.querySelectorAll('#prDesignTypesGroup .prTypeToggle:checked'));
+  const warning = document.getElementById('prDesignTypeWarning');
+  if (checkedToggles.length === 0) {
+    if (warning) warning.style.display = 'block';
+    return;
+  }
+  if (warning) warning.style.display = 'none';
+
+  const designTypes = checkedToggles.map(cb => {
+    const type = cb.dataset.type;
+    const label = cb.dataset.label;
+    const extraField = cb.closest('.promo-type-item')?.querySelector('.prTypeExtra');
+    const extra = extraField ? extraField.value.trim() : '';
+    return { type, label, extra };
+  });
 
   const data = {
     firstName:    document.getElementById('prFirstName').value.trim(),
@@ -3637,7 +3836,8 @@ async function handlePromoImageRequest(e) {
     phone:        document.getElementById('prPhone').value.trim(),
     email:        document.getElementById('prEmail').value.trim(),
     businessName: document.getElementById('prBusinessName').value.trim(),
-    designType:   document.getElementById('prDesignType').value,
+    designTypes:  designTypes,
+    designType:   designTypes.map(d => d.label).join(', '),
     colors:       document.getElementById('prColors').value.trim(),
     details:      document.getElementById('prDetails').value.trim(),
     userId:       currentUser.uid,
@@ -3652,10 +3852,12 @@ async function handlePromoImageRequest(e) {
     btn.textContent = 'Submitting...';
     btn.disabled = true;
     await db.collection('promo-image-requests').add(data);
-    const msg = `\n🎨 NEW PROMOTIONAL IMAGE REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n🖼️ Design Type: ${data.designType}\n🎨 Colours: ${data.colors || 'Not specified'}\n📝 Details: ${data.details}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
+    const typesSummary = designTypes.map(d => d.extra ? `${d.label} (${d.extra})` : d.label).join('; ');
+    const msg = `\n🎨 NEW PROMOTIONAL IMAGE REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n🖼️ Design Types: ${typesSummary}\n🎨 Colours: ${data.colors || 'Not specified'}\n📝 General Notes: ${data.details || 'None'}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
     await sendTelegramMessage(msg);
     alert('🎉 Request submitted! We will be in touch soon.');
     e.target.reset();
+    document.querySelectorAll('#prDesignTypesGroup .promo-type-extra').forEach(el => el.style.display = 'none');
     showPage('home');
   } catch(err) {
     console.error(err);
@@ -3885,7 +4087,7 @@ async function handleCustomPackageRequest(e) {
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
-                    <h2 class="form-page-title">Request AI Receptionist</h2>
+                    <h2 class="form-page-title" id="aiPageTitle">Request AI Receptionist</h2>
                     <div class="price-badge-row">
                         <div class="price-badge-chip">
                             <span class="price-badge-chip-label">Setup Fee</span>
@@ -3939,6 +4141,7 @@ async function handleCustomPackageRequest(e) {
                             <label for="aiBusinessType">Business Type</label>
                             <select id="aiBusinessType" required>
                                 <option value="">Select your business type</option>
+                                <option value="dental">Dental Practice</option>
                                 <option value="beauty-salon">Beauty Salon / Nail Tech</option>
                                 <option value="barbershop">Barbershop</option>
                                 <option value="restaurant">Restaurant / Food Delivery</option>
@@ -4024,25 +4227,103 @@ async function handleCustomPackageRequest(e) {
                 <input type="text" id="prBusinessName" required placeholder="Your business name">
               </div>
               <div class="form-group">
-                <label for="prDesignType">Design Type</label>
-                <select id="prDesignType" required>
-                  <option value="">Select design type</option>
-                  <option value="poster">Poster</option>
-                  <option value="ticket">Event Ticket</option>
-                  <option value="business-card">Business Card</option>
-                  <option value="social-banner">Social Media Banner</option>
-                  <option value="logo">Logo Design</option>
-                  <option value="flyer">Flyer</option>
-                  <option value="other">Other</option>
-                </select>
+                <label>Design Type(s) <span style="text-transform:none;font-weight:400;color:var(--tx3);">— toggle on everything you need</span></label>
+                <div class="promo-type-list" id="prDesignTypesGroup">
+
+                  <div class="promo-type-item">
+                    <div class="promo-type-row">
+                      <span class="promo-type-name">Poster</span>
+                      <label class="pkg-toggle">
+                        <input type="checkbox" class="prTypeToggle" data-type="poster" data-label="Poster" onchange="handlePromoTypeToggle(this)">
+                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
+                      </label>
+                    </div>
+                    <div class="promo-type-extra" style="display:none;">
+                      <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                      <textarea class="prTypeExtra" data-type="poster" rows="2" placeholder="Event/promo details, size, key text to include..."></textarea>
+                    </div>
+                  </div>
+
+                  <div class="promo-type-item">
+                    <div class="promo-type-row">
+                      <span class="promo-type-name">Event Ticket</span>
+                      <label class="pkg-toggle">
+                        <input type="checkbox" class="prTypeToggle" data-type="ticket" data-label="Event Ticket" onchange="handlePromoTypeToggle(this)">
+                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
+                      </label>
+                    </div>
+                    <div class="promo-type-extra" style="display:none;">
+                      <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                      <textarea class="prTypeExtra" data-type="ticket" rows="2" placeholder="Event name, date, venue, ticket tiers..."></textarea>
+                    </div>
+                  </div>
+
+                  <div class="promo-type-item">
+                    <div class="promo-type-row">
+                      <span class="promo-type-name">Business Card</span>
+                      <label class="pkg-toggle">
+                        <input type="checkbox" class="prTypeToggle" data-type="business-card" data-label="Business Card" onchange="handlePromoTypeToggle(this)">
+                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
+                      </label>
+                    </div>
+                    <div class="promo-type-extra" style="display:none;">
+                      <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                      <textarea class="prTypeExtra" data-type="business-card" rows="2" placeholder="Job title, contact info, layout style..."></textarea>
+                    </div>
+                  </div>
+
+                  <div class="promo-type-item">
+                    <div class="promo-type-row">
+                      <span class="promo-type-name">Social Media Banner</span>
+                      <label class="pkg-toggle">
+                        <input type="checkbox" class="prTypeToggle" data-type="social-banner" data-label="Social Media Banner" onchange="handlePromoTypeToggle(this)">
+                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
+                      </label>
+                    </div>
+                    <div class="promo-type-extra" style="display:none;">
+                      <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                      <textarea class="prTypeExtra" data-type="social-banner" rows="2" placeholder="Platform (Instagram, Facebook, etc), dimensions, campaign message..."></textarea>
+                    </div>
+                  </div>
+
+                  <div class="promo-type-item">
+                    <div class="promo-type-row">
+                      <span class="promo-type-name">Logo Design</span>
+                      <label class="pkg-toggle">
+                        <input type="checkbox" class="prTypeToggle" data-type="logo" data-label="Logo Design" onchange="handlePromoTypeToggle(this)">
+                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
+                      </label>
+                    </div>
+                    <div class="promo-type-extra" style="display:none;">
+                      <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                      <textarea class="prTypeExtra" data-type="logo" rows="2" placeholder="Style preferences, symbols/icons, fonts you like..."></textarea>
+                    </div>
+                  </div>
+
+                  <div class="promo-type-item">
+                    <div class="promo-type-row">
+                      <span class="promo-type-name">Flyer</span>
+                      <label class="pkg-toggle">
+                        <input type="checkbox" class="prTypeToggle" data-type="flyer" data-label="Flyer" onchange="handlePromoTypeToggle(this)">
+                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
+                      </label>
+                    </div>
+                    <div class="promo-type-extra" style="display:none;">
+                      <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                      <textarea class="prTypeExtra" data-type="flyer" rows="2" placeholder="Event/offer details, distribution size, key info to include..."></textarea>
+                    </div>
+                  </div>
+
+                </div>
+                <p id="prDesignTypeWarning" style="display:none;color:#f87171;font-size:12px;font-weight:700;text-align:center;margin:12px 0 0;">Please toggle on at least one design type.</p>
               </div>
               <div class="form-group">
                 <label for="prColors">Brand Colours (if any)</label>
                 <input type="text" id="prColors" placeholder="e.g. Black, Gold, White">
               </div>
               <div class="form-group">
-                <label for="prDetails">Design Details &amp; Description</label>
-                <textarea id="prDetails" rows="5" required placeholder="Describe what you need — include any text, images, style preferences, event details, etc."></textarea>
+                <label for="prDetails">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                <textarea id="prDetails" rows="4" placeholder="Any general notes that apply across all your designs..."></textarea>
               </div>
               <button type="submit" class="submit-button">Submit Request</button>
               <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);">← Back</button>
