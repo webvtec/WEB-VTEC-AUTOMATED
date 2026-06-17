@@ -484,7 +484,7 @@ button{box-shadow:none}
   background:rgba(255,255,255,.025);
   border:1px solid rgba(212,160,23,.16);
   border-radius:10px;
-  padding:14px 16px;
+  padding:0 16px;
   transition:border-color .2s,background .2s,box-shadow .2s;
 }
 .promo-type-item:has(.prTypeToggle:checked){
@@ -492,10 +492,33 @@ button{box-shadow:none}
   background:rgba(212,160,23,.08);
   box-shadow:0 0 0 1px rgba(212,160,23,.12),0 4px 14px rgba(212,160,23,.1);
 }
-.promo-type-row{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.promo-type-row{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:15px 0;cursor:pointer;user-select:none;margin:0;
+}
+.promo-type-row input[type="checkbox"]{display:none;}
 .promo-type-name{font-size:13.5px;color:var(--tx2);font-weight:500;}
 .promo-type-item:has(.prTypeToggle:checked) .promo-type-name{color:var(--tx1);}
-.promo-type-extra{margin-top:13px;display:flex;flex-direction:column;gap:10px;}
+.promo-type-switch{
+  position:relative;width:46px;height:26px;border-radius:14px;flex-shrink:0;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  transition:background .22s,border-color .22s;
+}
+.promo-type-switch-knob{
+  position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(160deg,#fdfdfd,#cfcfd8);
+  box-shadow:0 1px 3px rgba(0,0,0,.45);
+  transition:transform .22s,background .22s;
+}
+.promo-type-item:has(.prTypeToggle:checked) .promo-type-switch{
+  background:rgba(52,211,153,.25);border-color:rgba(52,211,153,.6);
+}
+.promo-type-item:has(.prTypeToggle:checked) .promo-type-switch-knob{
+  transform:translateX(20px);
+  background:linear-gradient(160deg,#6ff0d2,#10b981);
+  box-shadow:0 1px 4px rgba(16,185,129,.6);
+}
+.promo-type-extra{margin:0 0 16px;padding-top:2px;display:flex;flex-direction:column;gap:10px;}
 .promo-type-extra textarea{resize:vertical;min-height:64px;font-size:13.5px;padding:11px 13px;}
 .promo-type-extra input{font-size:13.5px;padding:11px 13px;}
 .promo-type-extra-hint{font-size:11px;color:var(--tx3);margin:-2px 0 0;}
@@ -1426,6 +1449,7 @@ Some of his main goals are to help more businesses get online and build a strong
               Get Started
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
+          </div>
 
           <!-- ── CHOOSE YOUR PATH ── -->
           <div style="width:100%;margin-top:56px;max-width:860px;margin-left:auto;margin-right:auto;">
@@ -1474,8 +1498,6 @@ Some of his main goals are to help more businesses get online and build a strong
               </div>
 
             </div>
-          </div>
-
           </div>
 
           <!-- Pillar cards: what we offer -->
@@ -1633,6 +1655,42 @@ Some of his main goals are to help more businesses get online and build a strong
               </div>
             </div>
 
+            <!-- MAKEUP ARTIST PACKAGE -->
+            <div class="scard">
+              <div class="scard-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1522335789203-aabd1fc54bc9.avif?alt=media&token=39c5cbd2-8197-4889-8499-84a53a250b9f')"></div>
+              <div class="scard-body">
+                <h3 class="scard-title">Makeup Artist Package</h3>
+                <ul class="scard-list">
+                  <li>Custom makeup artist website with portfolio gallery</li>
+                  <li>Online booking form</li>
+                  <li>AI receptionist answers every call 24/7</li>
+                  <li>AI takes bookings, cancellations &amp; reschedules</li>
+                  <li>AI answers general client questions</li>
+                  <li>Mobile &amp; desktop responsive design</li>
+                  <li>Admin photo management</li>
+                </ul>
+                <button class="scard-btn" onclick="requestPackage('makeup')">Request This Package</button>
+              </div>
+            </div>
+
+            <!-- PARTY RENTAL PACKAGE -->
+            <div class="scard">
+              <div class="scard-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1530103862676-de8c9debad1d.avif?alt=media&token=e4dbcc89-2346-4e74-b972-8e165cfcd3f3')"></div>
+              <div class="scard-body">
+                <h3 class="scard-title">Party Rental Package</h3>
+                <ul class="scard-list">
+                  <li>Custom party rental website with equipment catalogue</li>
+                  <li>Online quote &amp; booking requests</li>
+                  <li>AI receptionist answers every call 24/7</li>
+                  <li>AI takes bookings, cancellations &amp; reschedules</li>
+                  <li>AI answers general questions on availability &amp; pricing</li>
+                  <li>Mobile &amp; desktop responsive design</li>
+                  <li>Admin content management</li>
+                </ul>
+                <button class="scard-btn" onclick="requestPackage('party-rental')">Request This Package</button>
+              </div>
+            </div>
+
             <!-- OTHER / CTA CARD -->
             <div class="scard scard-cta">
               <div class="scard-cta-inner">
@@ -1698,6 +1756,288 @@ Some of his main goals are to help more businesses get online and build a strong
               </div>
               <div class="ai-card-footer">
                 <button class="pillar-btn" onclick="requestAiSystem('dental')">
+                  Request This System
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Barbering — AI Receptionist -->
+            <div class="ai-card">
+              <div class="ai-card-header">
+                <div class="ai-avatar ai-avatar-photo" style="border-color:rgba(212,160,23,.5);background:#0f0b1a;">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1621605815971-fbc98d665033.avif?alt=media&token=d4c928dd-f06a-4a64-91de-a474e929138b" alt="Barbershop">
+                </div>
+                <div class="ai-agent-info">
+                  <span class="ai-agent-name">Barbering</span>
+                  <span class="ai-agent-role">AI Receptionist</span>
+                </div>
+              </div>
+              <div class="ai-card-body">
+                <div style="display:flex;justify-content:center;">
+                  <span class="mandatory-badge">Included In Every Package</span>
+                </div>
+                <div class="included-section">
+                  <div class="included-header">
+                    <span class="included-badge">✓ Included</span>
+                    <span class="included-title">Standard With Every AI Receptionist</span>
+                  </div>
+                  <div class="included-grid">
+                    <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
+                    <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
+                    <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
+                    <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
+                  </div>
+                </div>
+                <p style="color:var(--tx3);font-size:11.5px;text-align:center;line-height:1.5;">$200 one-time setup, then $150/mo continuation — plus a usage fee that varies based on call volume.</p>
+                <div>
+                  <p style="color:var(--g2);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:11px;">Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);letter-spacing:0;">(optional)</span></p>
+                  <div class="ai-capabilities">
+                    <span class="ai-cap-tag">+ Sends Reminder Emails</span>
+                    <span class="ai-cap-tag">+ Automated Email Confirmations</span>
+                    <span class="ai-cap-tag">+ Revive – Dead Lead Follow-Up</span>
+                    <span class="ai-cap-tag">+ Broadcast – SMS &amp; Email Campaigns</span>
+                    <span class="ai-cap-tag">+ Clockwork – Email Reviews Requester</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ai-card-footer">
+                <button class="pillar-btn" onclick="requestAiSystem('barbering')">
+                  Request This System
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Nail Tech — AI Receptionist -->
+            <div class="ai-card">
+              <div class="ai-card-header">
+                <div class="ai-avatar ai-avatar-photo" style="border-color:rgba(212,160,23,.5);background:#0f0b1a;">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1604654894610-df63bc536371.avif?alt=media&token=275e9fff-997a-4984-8318-bff212639bf9" alt="Nail studio">
+                </div>
+                <div class="ai-agent-info">
+                  <span class="ai-agent-name">Nail Tech</span>
+                  <span class="ai-agent-role">AI Receptionist</span>
+                </div>
+              </div>
+              <div class="ai-card-body">
+                <div style="display:flex;justify-content:center;">
+                  <span class="mandatory-badge">Included In Every Package</span>
+                </div>
+                <div class="included-section">
+                  <div class="included-header">
+                    <span class="included-badge">✓ Included</span>
+                    <span class="included-title">Standard With Every AI Receptionist</span>
+                  </div>
+                  <div class="included-grid">
+                    <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
+                    <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
+                    <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
+                    <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
+                  </div>
+                </div>
+                <p style="color:var(--tx3);font-size:11.5px;text-align:center;line-height:1.5;">$200 one-time setup, then $150/mo continuation — plus a usage fee that varies based on call volume.</p>
+                <div>
+                  <p style="color:var(--g2);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:11px;">Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);letter-spacing:0;">(optional)</span></p>
+                  <div class="ai-capabilities">
+                    <span class="ai-cap-tag">+ Sends Reminder Emails</span>
+                    <span class="ai-cap-tag">+ Automated Email Confirmations</span>
+                    <span class="ai-cap-tag">+ Revive – Dead Lead Follow-Up</span>
+                    <span class="ai-cap-tag">+ Broadcast – SMS &amp; Email Campaigns</span>
+                    <span class="ai-cap-tag">+ Clockwork – Email Reviews Requester</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ai-card-footer">
+                <button class="pillar-btn" onclick="requestAiSystem('nail-tech')">
+                  Request This System
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Restaurant — AI Receptionist -->
+            <div class="ai-card">
+              <div class="ai-card-header">
+                <div class="ai-avatar ai-avatar-photo" style="border-color:rgba(212,160,23,.5);background:#0f0b1a;">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1517248135467-4c7edcad34c4.avif?alt=media&token=262cbdfd-bd51-4696-8e89-061a9722f1c2" alt="Restaurant">
+                </div>
+                <div class="ai-agent-info">
+                  <span class="ai-agent-name">Restaurant</span>
+                  <span class="ai-agent-role">AI Receptionist</span>
+                </div>
+              </div>
+              <div class="ai-card-body">
+                <div style="display:flex;justify-content:center;">
+                  <span class="mandatory-badge">Included In Every Package</span>
+                </div>
+                <div class="included-section">
+                  <div class="included-header">
+                    <span class="included-badge">✓ Included</span>
+                    <span class="included-title">Standard With Every AI Receptionist</span>
+                  </div>
+                  <div class="included-grid">
+                    <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
+                    <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
+                    <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
+                    <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
+                  </div>
+                </div>
+                <p style="color:var(--tx3);font-size:11.5px;text-align:center;line-height:1.5;">$200 one-time setup, then $150/mo continuation — plus a usage fee that varies based on call volume.</p>
+                <div>
+                  <p style="color:var(--g2);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:11px;">Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);letter-spacing:0;">(optional)</span></p>
+                  <div class="ai-capabilities">
+                    <span class="ai-cap-tag">+ Sends Reminder Emails</span>
+                    <span class="ai-cap-tag">+ Automated Email Confirmations</span>
+                    <span class="ai-cap-tag">+ Revive – Dead Lead Follow-Up</span>
+                    <span class="ai-cap-tag">+ Broadcast – SMS &amp; Email Campaigns</span>
+                    <span class="ai-cap-tag">+ Clockwork – Email Reviews Requester</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ai-card-footer">
+                <button class="pillar-btn" onclick="requestAiSystem('restaurant')">
+                  Request This System
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Spa — AI Receptionist -->
+            <div class="ai-card">
+              <div class="ai-card-header">
+                <div class="ai-avatar ai-avatar-photo" style="border-color:rgba(212,160,23,.5);background:#0f0b1a;">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1540555700478-4be289fbecef.avif?alt=media&token=b8fe18bf-7ffa-4c3e-abf6-8d21eadc74e4" alt="Spa">
+                </div>
+                <div class="ai-agent-info">
+                  <span class="ai-agent-name">Spa</span>
+                  <span class="ai-agent-role">AI Receptionist</span>
+                </div>
+              </div>
+              <div class="ai-card-body">
+                <div style="display:flex;justify-content:center;">
+                  <span class="mandatory-badge">Included In Every Package</span>
+                </div>
+                <div class="included-section">
+                  <div class="included-header">
+                    <span class="included-badge">✓ Included</span>
+                    <span class="included-title">Standard With Every AI Receptionist</span>
+                  </div>
+                  <div class="included-grid">
+                    <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
+                    <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
+                    <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
+                    <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
+                  </div>
+                </div>
+                <p style="color:var(--tx3);font-size:11.5px;text-align:center;line-height:1.5;">$200 one-time setup, then $150/mo continuation — plus a usage fee that varies based on call volume.</p>
+                <div>
+                  <p style="color:var(--g2);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:11px;">Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);letter-spacing:0;">(optional)</span></p>
+                  <div class="ai-capabilities">
+                    <span class="ai-cap-tag">+ Sends Reminder Emails</span>
+                    <span class="ai-cap-tag">+ Automated Email Confirmations</span>
+                    <span class="ai-cap-tag">+ Revive – Dead Lead Follow-Up</span>
+                    <span class="ai-cap-tag">+ Broadcast – SMS &amp; Email Campaigns</span>
+                    <span class="ai-cap-tag">+ Clockwork – Email Reviews Requester</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ai-card-footer">
+                <button class="pillar-btn" onclick="requestAiSystem('spa')">
+                  Request This System
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Makeup Artist — AI Receptionist -->
+            <div class="ai-card">
+              <div class="ai-card-header">
+                <div class="ai-avatar ai-avatar-photo" style="border-color:rgba(212,160,23,.5);background:#0f0b1a;">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1522335789203-aabd1fc54bc9.avif?alt=media&token=39c5cbd2-8197-4889-8499-84a53a250b9f" alt="Makeup studio">
+                </div>
+                <div class="ai-agent-info">
+                  <span class="ai-agent-name">Makeup Artist</span>
+                  <span class="ai-agent-role">AI Receptionist</span>
+                </div>
+              </div>
+              <div class="ai-card-body">
+                <div style="display:flex;justify-content:center;">
+                  <span class="mandatory-badge">Included In Every Package</span>
+                </div>
+                <div class="included-section">
+                  <div class="included-header">
+                    <span class="included-badge">✓ Included</span>
+                    <span class="included-title">Standard With Every AI Receptionist</span>
+                  </div>
+                  <div class="included-grid">
+                    <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
+                    <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
+                    <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
+                    <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
+                  </div>
+                </div>
+                <p style="color:var(--tx3);font-size:11.5px;text-align:center;line-height:1.5;">$200 one-time setup, then $150/mo continuation — plus a usage fee that varies based on call volume.</p>
+                <div>
+                  <p style="color:var(--g2);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:11px;">Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);letter-spacing:0;">(optional)</span></p>
+                  <div class="ai-capabilities">
+                    <span class="ai-cap-tag">+ Sends Reminder Emails</span>
+                    <span class="ai-cap-tag">+ Automated Email Confirmations</span>
+                    <span class="ai-cap-tag">+ Revive – Dead Lead Follow-Up</span>
+                    <span class="ai-cap-tag">+ Broadcast – SMS &amp; Email Campaigns</span>
+                    <span class="ai-cap-tag">+ Clockwork – Email Reviews Requester</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ai-card-footer">
+                <button class="pillar-btn" onclick="requestAiSystem('makeup')">
+                  Request This System
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Party Rental — AI Receptionist -->
+            <div class="ai-card">
+              <div class="ai-card-header">
+                <div class="ai-avatar ai-avatar-photo" style="border-color:rgba(212,160,23,.5);background:#0f0b1a;">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1530103862676-de8c9debad1d.avif?alt=media&token=e4dbcc89-2346-4e74-b972-8e165cfcd3f3" alt="Party rentals">
+                </div>
+                <div class="ai-agent-info">
+                  <span class="ai-agent-name">Party Rental</span>
+                  <span class="ai-agent-role">AI Receptionist</span>
+                </div>
+              </div>
+              <div class="ai-card-body">
+                <div style="display:flex;justify-content:center;">
+                  <span class="mandatory-badge">Included In Every Package</span>
+                </div>
+                <div class="included-section">
+                  <div class="included-header">
+                    <span class="included-badge">✓ Included</span>
+                    <span class="included-title">Standard With Every AI Receptionist</span>
+                  </div>
+                  <div class="included-grid">
+                    <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
+                    <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
+                    <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
+                    <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
+                  </div>
+                </div>
+                <p style="color:var(--tx3);font-size:11.5px;text-align:center;line-height:1.5;">$200 one-time setup, then $150/mo continuation — plus a usage fee that varies based on call volume.</p>
+                <div>
+                  <p style="color:var(--g2);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:11px;">Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);letter-spacing:0;">(optional)</span></p>
+                  <div class="ai-capabilities">
+                    <span class="ai-cap-tag">+ Sends Reminder Emails</span>
+                    <span class="ai-cap-tag">+ Automated Email Confirmations</span>
+                    <span class="ai-cap-tag">+ Revive – Dead Lead Follow-Up</span>
+                    <span class="ai-cap-tag">+ Broadcast – SMS &amp; Email Campaigns</span>
+                    <span class="ai-cap-tag">+ Clockwork – Email Reviews Requester</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ai-card-footer">
+                <button class="pillar-btn" onclick="requestAiSystem('party-rental')">
                   Request This System
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
@@ -3167,7 +3507,13 @@ function requestWebsiteType(key) {
 // "Request This System" on an industry AI card (e.g. Dental) should land on
 // a page that says so, instead of a generic, unbranded form.
 const AI_PRESETS = {
-  dental: { type: 'dental', title: 'Dental AI Receptionist' }
+  dental:         { type: 'dental',       title: 'Dental AI Receptionist' },
+  barbering:      { type: 'barbershop',   title: 'Barbering AI Receptionist' },
+  'nail-tech':    { type: 'beauty-salon', title: 'Nail Tech AI Receptionist' },
+  restaurant:     { type: 'restaurant',   title: 'Restaurant AI Receptionist' },
+  spa:            { type: 'spa',          title: 'Spa AI Receptionist' },
+  makeup:         { type: 'makeup',       title: 'Makeup Artist AI Receptionist' },
+  'party-rental': { type: 'party-rental', title: 'Party Rental AI Receptionist' }
 };
 const DEFAULT_AI_TITLE = 'Request AI Receptionist';
 
@@ -3241,6 +3587,22 @@ const PACKAGE_PRESETS = {
     promo: false,
     title: 'Spa Package',
     subtitle: 'Your spa gets a custom website with a treatment menu and online booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general client questions.'
+  },
+  makeup: {
+    businessType: 'makeup',
+    website: true,
+    ai: true,
+    promo: false,
+    title: 'Makeup Artist Package',
+    subtitle: 'Your makeup artistry business gets a custom website with a portfolio gallery and online booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general client questions.'
+  },
+  'party-rental': {
+    businessType: 'party-rental',
+    website: true,
+    ai: true,
+    promo: false,
+    title: 'Party Rental Package',
+    subtitle: 'Your party rental business gets a custom website with an equipment catalogue and online quote requests, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general questions.'
   }
 };
 
@@ -4150,6 +4512,8 @@ async function handleCustomPackageRequest(e) {
                                 <option value="retail">Retail Store</option>
                                 <option value="medical">Medical / Healthcare</option>
                                 <option value="real-estate">Real Estate</option>
+                                <option value="makeup">Makeup Artist</option>
+                                <option value="party-rental">Party Rental</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
@@ -4231,13 +4595,11 @@ async function handleCustomPackageRequest(e) {
                 <div class="promo-type-list" id="prDesignTypesGroup">
 
                   <div class="promo-type-item">
-                    <div class="promo-type-row">
+                    <label class="promo-type-row">
                       <span class="promo-type-name">Poster</span>
-                      <label class="pkg-toggle">
-                        <input type="checkbox" class="prTypeToggle" data-type="poster" data-label="Poster" onchange="handlePromoTypeToggle(this)">
-                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
-                      </label>
-                    </div>
+                      <input type="checkbox" class="prTypeToggle" data-type="poster" data-label="Poster" onchange="handlePromoTypeToggle(this)">
+                      <span class="promo-type-switch"><span class="promo-type-switch-knob"></span></span>
+                    </label>
                     <div class="promo-type-extra" style="display:none;">
                       <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                       <textarea class="prTypeExtra" data-type="poster" rows="2" placeholder="Event/promo details, size, key text to include..."></textarea>
@@ -4245,13 +4607,11 @@ async function handleCustomPackageRequest(e) {
                   </div>
 
                   <div class="promo-type-item">
-                    <div class="promo-type-row">
+                    <label class="promo-type-row">
                       <span class="promo-type-name">Event Ticket</span>
-                      <label class="pkg-toggle">
-                        <input type="checkbox" class="prTypeToggle" data-type="ticket" data-label="Event Ticket" onchange="handlePromoTypeToggle(this)">
-                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
-                      </label>
-                    </div>
+                      <input type="checkbox" class="prTypeToggle" data-type="ticket" data-label="Event Ticket" onchange="handlePromoTypeToggle(this)">
+                      <span class="promo-type-switch"><span class="promo-type-switch-knob"></span></span>
+                    </label>
                     <div class="promo-type-extra" style="display:none;">
                       <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                       <textarea class="prTypeExtra" data-type="ticket" rows="2" placeholder="Event name, date, venue, ticket tiers..."></textarea>
@@ -4259,13 +4619,11 @@ async function handleCustomPackageRequest(e) {
                   </div>
 
                   <div class="promo-type-item">
-                    <div class="promo-type-row">
+                    <label class="promo-type-row">
                       <span class="promo-type-name">Business Card</span>
-                      <label class="pkg-toggle">
-                        <input type="checkbox" class="prTypeToggle" data-type="business-card" data-label="Business Card" onchange="handlePromoTypeToggle(this)">
-                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
-                      </label>
-                    </div>
+                      <input type="checkbox" class="prTypeToggle" data-type="business-card" data-label="Business Card" onchange="handlePromoTypeToggle(this)">
+                      <span class="promo-type-switch"><span class="promo-type-switch-knob"></span></span>
+                    </label>
                     <div class="promo-type-extra" style="display:none;">
                       <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                       <textarea class="prTypeExtra" data-type="business-card" rows="2" placeholder="Job title, contact info, layout style..."></textarea>
@@ -4273,13 +4631,11 @@ async function handleCustomPackageRequest(e) {
                   </div>
 
                   <div class="promo-type-item">
-                    <div class="promo-type-row">
+                    <label class="promo-type-row">
                       <span class="promo-type-name">Social Media Banner</span>
-                      <label class="pkg-toggle">
-                        <input type="checkbox" class="prTypeToggle" data-type="social-banner" data-label="Social Media Banner" onchange="handlePromoTypeToggle(this)">
-                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
-                      </label>
-                    </div>
+                      <input type="checkbox" class="prTypeToggle" data-type="social-banner" data-label="Social Media Banner" onchange="handlePromoTypeToggle(this)">
+                      <span class="promo-type-switch"><span class="promo-type-switch-knob"></span></span>
+                    </label>
                     <div class="promo-type-extra" style="display:none;">
                       <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                       <textarea class="prTypeExtra" data-type="social-banner" rows="2" placeholder="Platform (Instagram, Facebook, etc), dimensions, campaign message..."></textarea>
@@ -4287,13 +4643,11 @@ async function handleCustomPackageRequest(e) {
                   </div>
 
                   <div class="promo-type-item">
-                    <div class="promo-type-row">
+                    <label class="promo-type-row">
                       <span class="promo-type-name">Logo Design</span>
-                      <label class="pkg-toggle">
-                        <input type="checkbox" class="prTypeToggle" data-type="logo" data-label="Logo Design" onchange="handlePromoTypeToggle(this)">
-                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
-                      </label>
-                    </div>
+                      <input type="checkbox" class="prTypeToggle" data-type="logo" data-label="Logo Design" onchange="handlePromoTypeToggle(this)">
+                      <span class="promo-type-switch"><span class="promo-type-switch-knob"></span></span>
+                    </label>
                     <div class="promo-type-extra" style="display:none;">
                       <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                       <textarea class="prTypeExtra" data-type="logo" rows="2" placeholder="Style preferences, symbols/icons, fonts you like..."></textarea>
@@ -4301,13 +4655,11 @@ async function handleCustomPackageRequest(e) {
                   </div>
 
                   <div class="promo-type-item">
-                    <div class="promo-type-row">
+                    <label class="promo-type-row">
                       <span class="promo-type-name">Flyer</span>
-                      <label class="pkg-toggle">
-                        <input type="checkbox" class="prTypeToggle" data-type="flyer" data-label="Flyer" onchange="handlePromoTypeToggle(this)">
-                        <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
-                      </label>
-                    </div>
+                      <input type="checkbox" class="prTypeToggle" data-type="flyer" data-label="Flyer" onchange="handlePromoTypeToggle(this)">
+                      <span class="promo-type-switch"><span class="promo-type-switch-knob"></span></span>
+                    </label>
                     <div class="promo-type-extra" style="display:none;">
                       <label class="promo-type-extra-label">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                       <textarea class="prTypeExtra" data-type="flyer" rows="2" placeholder="Event/offer details, distribution size, key info to include..."></textarea>
