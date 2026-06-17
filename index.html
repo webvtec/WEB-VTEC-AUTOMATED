@@ -1114,24 +1114,24 @@ button{box-shadow:none}
         <h2 class="modal-title">GET STARTED</h2>
         <p style="color:rgba(255,255,255,.5);font-size:13px;margin-bottom:28px;margin-top:-16px;">What would you like to request?</p>
 
-        <button class="login-button" onclick="closeGetStartedModal(); showPage('custom-package');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+        <button class="login-button" onclick="closeGetStartedModal(); resetCustomPackageHeader(); showPage('custom-package');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            Custom Package (Website + AI)
+            (Website + AI Receptionist)
         </button>
 
         <button class="login-button" onclick="closeGetStartedModal(); showPage('ai-receptionist');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><line x1="19" y1="14" x2="22" y2="14"/><line x1="2" y1="14" x2="5" y2="14"/></svg>
-            AI Call Receptionist
+            AI Receptionist
         </button>
 
         <button class="login-button" onclick="closeGetStartedModal(); showPage('request');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            Request Website
+            Website
         </button>
 
         <button class="login-button" onclick="closeGetStartedModal(); showPage('promo-request');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            Request Promotional Image
+            Promotional Image
         </button>
     </div>
 </div>
@@ -1364,7 +1364,7 @@ Some of his main goals are to help more businesses get online and build a strong
             </div>
 
             <div class="hero-left-ctas">
-              <button class="btn-primary" onclick="showPage('custom-package')">
+              <button class="btn-primary" onclick="resetCustomPackageHeader(); showPage('custom-package')">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                 Request A Custom Package
               </button>
@@ -1544,7 +1544,7 @@ Some of his main goals are to help more businesses get online and build a strong
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(212,160,23,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
                 <h3>Your Industry</h3>
                 <p>Don't see your niche? We build custom website + AI packages for <em>any</em> business. Tell us what you need.</p>
-                <button class="btn-primary" onclick="showPage('custom-package')" style="margin-top:24px;">Request a Custom Package</button>
+                <button class="btn-primary" onclick="resetCustomPackageHeader(); showPage('custom-package')" style="margin-top:24px;">Request a Custom Package</button>
               </div>
             </div>
 
@@ -1880,8 +1880,8 @@ Some of his main goals are to help more businesses get online and build a strong
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
-                    <h2 class="form-page-title">Request A Custom Package</h2>
-                    <p class="form-page-subtitle">Mix and match any 2 or more of our services — Website, AI Receptionist, and Promotional Images — bundled together as one package.</p>
+                    <h2 class="form-page-title" id="customPackageTitle">Request A Custom Package</h2>
+                    <p class="form-page-subtitle" id="customPackageSubtitle">Mix and match any 2 or more of our services — Website, AI Receptionist, and Promotional Images — bundled together as one package.</p>
 
                     <form id="customPackageForm" onsubmit="handleCustomPackageRequest(event)">
                         <div class="form-group">
@@ -3061,8 +3061,29 @@ function handlePkgTypeChange(e) {
 // have to answer those questions themselves on the Custom Package form —
 // it arrives pre-filled and ready to submit.
 const PACKAGE_PRESETS = {
-  dental: { businessType: 'dental', website: true, ai: true, promo: false }
+  dental: {
+    businessType: 'dental',
+    website: true,
+    ai: true,
+    promo: false,
+    title: 'Dental Package',
+    subtitle: 'Your dental practice gets a custom website with online appointment booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general patient questions.'
+  }
 };
+
+const DEFAULT_PKG_TITLE = 'Request A Custom Package';
+const DEFAULT_PKG_SUBTITLE = 'Mix and match any 2 or more of our services — Website, AI Receptionist, and Promotional Images — bundled together as one package.';
+
+function setCustomPackageHeader(title, subtitle) {
+  const titleEl = document.getElementById('customPackageTitle');
+  const subtitleEl = document.getElementById('customPackageSubtitle');
+  if (titleEl) titleEl.textContent = title || DEFAULT_PKG_TITLE;
+  if (subtitleEl) subtitleEl.textContent = subtitle || DEFAULT_PKG_SUBTITLE;
+}
+
+function resetCustomPackageHeader() {
+  setCustomPackageHeader(DEFAULT_PKG_TITLE, DEFAULT_PKG_SUBTITLE);
+}
 
 function requestPackage(key) {
   const preset = PACKAGE_PRESETS[key];
@@ -3080,6 +3101,10 @@ function requestPackage(key) {
     if (aiToggle)    aiToggle.checked    = !!preset.ai;
     if (promoToggle) promoToggle.checked = !!preset.promo;
     if (typeof handlePkgServiceToggle === 'function') handlePkgServiceToggle();
+
+    setCustomPackageHeader(preset.title, preset.subtitle);
+  } else {
+    resetCustomPackageHeader();
   }
   showPage('custom-package');
 }
