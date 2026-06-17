@@ -2706,20 +2706,6 @@ Some of his main goals are to help more businesses get online and build a strong
     </div>
 
 
-<!-- Admin Password Modal -->
-<div id="adminPasswordModal" class="modal">
-    <div class="modal-content">
-        <button class="close-modal" onclick="closeAdminPasswordModal()">&times;</button>
-        <h2 class="modal-title">Admin Access Required</h2>
-        <p style="color:rgba(255,255,255,.42);margin-bottom:24px;font-size:14px;line-height:1.5;">Enter admin password to continue</p>
-        
-        <input type="password" id="adminPassword" class="login-input" placeholder="Admin Password" required>
-        
-        <button class="login-button" onclick="verifyAdminPassword()">ENTER</button>
-    </div>
-</div>
-
-
 
 
 <script>
@@ -2778,7 +2764,10 @@ function initializeApp() {
 
 
     const ADMIN_EMAILS = ["carlanviroberts@gmail.com"]; // add more if needed
-    const ADMIN_PASSWORD = "@lanman"; // Change this to your desired password
+    const ADMIN_UID = "JDVESXWZx3Y05nXJBSLpPyz2wHq2"; // admin's Firebase Auth UID
+    function isAdminUser(user) {
+        return !!user && (ADMIN_EMAILS.includes(user.email) || user.uid === ADMIN_UID);
+    }
 
 
 // Setup all event listeners
@@ -2816,7 +2805,6 @@ function setupEventListeners() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('close-modal')) {
             closeLoginModal();
-            closeAdminPasswordModal(); // Add this line
         }
     });
     
@@ -2825,15 +2813,6 @@ function setupEventListeners() {
         if (e.key === 'Escape') {
             closeLoginModal();
             closeWelcomeModal();
-            closeAdminPasswordModal(); // Add this line
-        }
-        
-        // Handle Enter key for admin password
-        if (e.key === 'Enter') {
-            const adminPasswordModal = document.getElementById('adminPasswordModal');
-            if (adminPasswordModal && adminPasswordModal.classList.contains('active')) {
-                verifyAdminPassword();
-            }
         }
     });
 }
@@ -2871,12 +2850,6 @@ window.addEventListener('load', () => {
 async function handleWebsiteRequest(e) {
     e.preventDefault();
     
-    // Check if user is logged in
-    if (!currentUser) {
-        showLoginModal();
-        return;
-    }
-    
     
     // Rest of your existing code remains the same...
     const formData = new FormData(e.target);
@@ -2897,7 +2870,7 @@ async function handleWebsiteRequest(e) {
         lastName: formData.get('lastName'),
         phone: formData.get('phone'),
         email: formData.get('email'),
-        userId: currentUser.uid,
+        userId: currentUser?.uid || null,
         websiteType: websiteType,
         addons: formData.getAll('addons'),
         oneTimeTotal: '$160',
@@ -2940,7 +2913,7 @@ async function handleWebsiteRequest(e) {
 👤 Name: ${requestData.firstName} ${requestData.lastName}
 📞 Phone: ${requestData.phone}
 📨 Contact Email: ${requestData.email}
-✉️ Verified Email: ${currentUser.email}
+✉️ Verified Email: ${currentUser?.email || 'Not signed in'}
 
   REQUEST DETAILS:
 🌐 Website Type: ${requestData.websiteType}
@@ -3107,7 +3080,7 @@ function createReviewElement(review, docId) {
                 <div style="color: #9CA3AF; font-size: 12px;">${timeAgo}</div>
             </div>
             ${
-                currentUser && (currentUser.uid === review.userId || ADMIN_EMAILS.includes(currentUser.email))
+                currentUser && (currentUser.uid === review.userId || isAdminUser(currentUser))
                     ? `<button class="delete-review-btn" data-id="${docId}">🗑️</button>`
                     : ''
             }
@@ -3320,7 +3293,7 @@ function updateUserStatus() {
         // Hide verification button completely
         if (resendButton) resendButton.style.display = 'none';
 
-        if (ADMIN_EMAILS.includes(currentUser.email)) {
+        if (isAdminUser(currentUser)) {
             adminButton.style.display = 'inline-block';
         } else {
             adminButton.style.display = 'none';
@@ -3442,9 +3415,9 @@ window.addEventListener('offline', function() {
 function adminLogin() {
     console.log('Admin login clicked. Current user:', currentUser ? currentUser.email : 'null');
     
-    if (currentUser && ADMIN_EMAILS.includes(currentUser.email)) {
-        console.log('Admin user detected, requesting password');
-        showAdminPasswordModal();
+    if (isAdminUser(currentUser)) {
+        console.log('Admin verified, redirecting to dashboard');
+        window.location.href = 'admindashboard.html';
     } else if (currentUser) {
         console.log('Non-admin user attempted access:', currentUser.email);
         alert('Access denied. Admin privileges required.');
@@ -3728,34 +3701,7 @@ function requestPackage(key) {
 }
 
 
-function showAdminPasswordModal() {
-    document.getElementById('adminPasswordModal').classList.add('active');
-    document.getElementById('adminPassword').focus();
-}
 
-function closeAdminPasswordModal() {
-    document.getElementById('adminPasswordModal').classList.remove('active');
-    document.getElementById('adminPassword').value = '';
-}
-
-function verifyAdminPassword() {
-    const enteredPassword = document.getElementById('adminPassword').value;
-    
-    if (!enteredPassword) {
-        alert('Please enter the admin password.');
-        return;
-    }
-    
-    if (enteredPassword === ADMIN_PASSWORD) {
-        console.log('Admin password verified, redirecting to dashboard');
-        closeAdminPasswordModal();
-        window.location.href = 'admindashboard.html';
-    } else {
-        alert('Incorrect admin password. Access denied.');
-        document.getElementById('adminPassword').value = '';
-        document.getElementById('adminPassword').focus();
-    }
-}
 
 
 // Simple visitor tracking - sends message when site loads
@@ -4257,7 +4203,6 @@ function handlePromoTypeToggle(el) {
 
 async function handlePromoImageRequest(e) {
   e.preventDefault();
-  if (!currentUser) { showLoginModal(); return; }
 
   const checkedToggles = Array.from(document.querySelectorAll('#prDesignTypesGroup .prTypeToggle:checked'));
   const warning = document.getElementById('prDesignTypeWarning');
@@ -4285,8 +4230,8 @@ async function handlePromoImageRequest(e) {
     designType:   designTypes.map(d => d.label).join(', '),
     colors:       document.getElementById('prColors').value.trim(),
     details:      document.getElementById('prDetails').value.trim(),
-    userId:       currentUser.uid,
-    userEmail:    currentUser.email,
+    userId:       currentUser?.uid || null,
+    userEmail:    currentUser?.email || document.getElementById('prEmail').value.trim(),
     timestamp:    firebase.firestore.FieldValue.serverTimestamp(),
     status:       'pending'
   };
@@ -4316,7 +4261,6 @@ async function handlePromoImageRequest(e) {
 // AI Receptionist Request Form Handler
 async function handleAIReceptionistRequest(e) {
   e.preventDefault();
-  if (!currentUser) { showLoginModal(); return; }
 
   const AI_INCLUDED_FEATURES = [
     'Answers Every Call 24/7',
@@ -4342,8 +4286,8 @@ async function handleAIReceptionistRequest(e) {
     addons:       checkedAddons,
     setupFee:        '$200',
     monthlyEstimate: document.getElementById('aiTotalEstimate')?.textContent || '$150/mo',
-    userId:       currentUser.uid,
-    userEmail:    currentUser.email,
+    userId:       currentUser?.uid || null,
+    userEmail:    currentUser?.email || document.getElementById('aiEmail').value.trim(),
     timestamp:    firebase.firestore.FieldValue.serverTimestamp(),
     status:       'pending'
   };
@@ -4399,7 +4343,6 @@ function resetPackageDisplays() {
 
 async function handleCustomPackageRequest(e) {
   e.preventDefault();
-  if (!currentUser) { showLoginModal(); return; }
 
   const state = getPkgToggleState();
   const activeCount = Object.values(state).filter(Boolean).length;
@@ -4476,8 +4419,8 @@ async function handleCustomPackageRequest(e) {
     promoTotal:   document.getElementById('pkgPromoTotal')?.textContent || '$0',
     oneTimeSetupTotal:   document.getElementById('pkgGrandOneTime')?.textContent || '$0',
     monthlySubscription: document.getElementById('pkgGrandMonthly')?.textContent || '$0/mo',
-    userId:    currentUser.uid,
-    userEmail: currentUser.email,
+    userId:    currentUser?.uid || null,
+    userEmail: currentUser?.email || document.getElementById('pkgEmail').value.trim(),
     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     status:    'pending'
   };
