@@ -249,6 +249,14 @@ body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--t
 }
 .scard-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(212,160,23,.5)}
 
+/* Icon-style card header for bundled Packages (no external photo needed) */
+.scard-img-icon{
+  height:200px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(212,160,23,.2) 0%,rgba(15,11,26,.96) 100%);
+  border-bottom:1px solid rgba(212,160,23,.16);
+}
+.scard-img-icon span{font-size:58px;line-height:1;filter:drop-shadow(0 6px 16px rgba(212,160,23,.28));}
+
 /* CTA card */
 .scard-cta{background:rgba(212,160,23,.04);border-style:dashed;border-color:rgba(212,160,23,.28);align-items:center;justify-content:center}
 .scard-cta-inner{text-align:center;padding:40px 30px;display:flex;flex-direction:column;align-items:center;gap:12px}
@@ -411,6 +419,10 @@ button{box-shadow:none}
   display:flex;align-items:center;justify-content:center;
   font-size:11px;font-weight:900;line-height:1;
 }
+/* Bonus items added dynamically when a shared add-on is selected on the
+   other side of the Custom Package form (gold = "added", green = "standard") */
+.included-item.pkg-bonus-item{border-color:rgba(212,160,23,.35);background:rgba(212,160,23,.05);}
+.included-item.pkg-bonus-item .included-check{background:rgba(212,160,23,.18);color:var(--g1);}
 
 .form-page-title{font-family:"Playfair Display",serif;font-size:clamp(20px,4vw,32px);font-weight:700;letter-spacing:.5px;text-align:center;margin-bottom:32px;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
 .form-page-subtitle{font-size:13.5px;line-height:1.65;color:var(--tx3);text-align:center;margin-bottom:32px;margin-top:-20px}
@@ -1645,6 +1657,53 @@ Some of his main goals are to help more businesses get online and build a strong
         </div>
       </section>
 
+      <!-- ══════════════════ PACKAGES (Website + AI bundles) ══════════════════ -->
+      <section class="services-section">
+        <div class="services-header">
+          <span class="section-eyebrow section-eyebrow-lg">Packages</span>
+          <h2 class="services-headline">Bundled By Industry</h2>
+        </div>
+        <div class="hscroll-wrap">
+          <div class="hscroll-track" id="packagesTrack">
+
+            <!-- DENTAL PACKAGE -->
+            <div class="scard">
+              <div class="scard-img-icon"><span>🦷</span></div>
+              <div class="scard-body">
+                <h3 class="scard-title">Dental Package</h3>
+                <ul class="scard-list">
+                  <li>Custom dental practice website</li>
+                  <li>Online appointment booking system</li>
+                  <li>AI receptionist answers every call 24/7</li>
+                  <li>AI takes bookings, cancellations &amp; reschedules</li>
+                  <li>AI answers general patient questions</li>
+                  <li>Mobile &amp; desktop responsive design</li>
+                  <li>Admin content management</li>
+                </ul>
+                <button class="scard-btn" onclick="showPage('custom-package')">Request This Package</button>
+              </div>
+            </div>
+
+            <!-- OTHER / CTA CARD -->
+            <div class="scard scard-cta">
+              <div class="scard-cta-inner">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(212,160,23,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                <h3>Your Industry</h3>
+                <p>Don't see your niche? We build custom website + AI packages for <em>any</em> business. Tell us what you need.</p>
+                <button class="btn-primary" onclick="showPage('custom-package')" style="margin-top:24px;">Request a Custom Package</button>
+              </div>
+            </div>
+
+          </div>
+          <button class="hscroll-arrow hscroll-prev" onclick="scrollPackagesTrack(-1)" aria-label="Previous">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="hscroll-arrow hscroll-next" onclick="scrollPackagesTrack(1)" aria-label="Next">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </section>
+
       <!-- ══════════════════ SERVICE CARDS (horizontal scroll) ══════════════════ -->
       <section class="services-section">
         <div class="services-header">
@@ -2031,7 +2090,7 @@ Some of his main goals are to help more businesses get online and build a strong
                                     <span class="included-badge">✓ Included</span>
                                     <span class="included-title">Standard With Every AI Receptionist</span>
                                 </div>
-                                <div class="included-grid">
+                                <div class="included-grid" id="pkgAiIncludedGrid">
                                     <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
                                     <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
                                     <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
@@ -3119,6 +3178,12 @@ function scrollAITrack(dir) {
   if (t) t.scrollBy({ left: dir * 380, behavior: 'smooth' });
 }
 
+// ── Packages scroll helper ───────────────────────────────
+function scrollPackagesTrack(dir) {
+  const t = document.getElementById('packagesTrack');
+  if (t) t.scrollBy({ left: dir * 380, behavior: 'smooth' });
+}
+
 // ── Text-to-speech AI demo ────────────────────────────────
 let currentUtterance = null;
 let currentPlayBtn   = null;
@@ -3318,6 +3383,39 @@ const PKG_SHARED_ADDON_VALUES = [
   'clockwork-auto-reviews'
 ];
 
+// Display labels for every optional Custom Package add-on, used by
+// syncPkgBonusIncluded() below.
+const PKG_ADDON_LABELS = {
+  'ai-chatbot':             'AI Chatbot (text-based)',
+  'reminder-emails':        'Sends Reminder Emails',
+  'email-confirmations':    'Automated Email Confirmations',
+  'revive-dead-leads':      'Revive – Dead Lead Follow-Up',
+  'broadcast-campaigns':    'Broadcast – SMS & Email Campaigns',
+  'clockwork-auto-reviews': 'Clockwork – Email Reviews Requester'
+};
+
+// Whatever add-ons get checked under the Website's "Add Extra Capabilities"
+// get checkmark items appended to the AI Receptionist's "Included" list
+// below, since selecting them applies to the AI Receptionist too at no
+// extra cost — not just a note of text, but the Included list itself.
+function syncPkgBonusIncluded() {
+  const webGroup       = document.getElementById('pkgWebsiteAddonsGroup');
+  const aiIncludedGrid = document.getElementById('pkgAiIncludedGrid');
+  if (!webGroup || !aiIncludedGrid) return;
+
+  aiIncludedGrid.querySelectorAll('.pkg-bonus-item').forEach(el => el.remove());
+
+  Array.from(webGroup.querySelectorAll('input[type="checkbox"]:checked'))
+    .forEach(cb => {
+      const label = PKG_ADDON_LABELS[cb.value];
+      if (!label) return;
+      const item = document.createElement('div');
+      item.className = 'included-item pkg-bonus-item';
+      item.innerHTML = '<span class="included-check">✓</span>' + label;
+      aiIncludedGrid.appendChild(item);
+    });
+}
+
 function setupPackagePageCalculator() {
   const webGroup = document.getElementById('pkgWebsiteAddonsGroup');
   const aiGroup  = document.getElementById('pkgAiAddonsGroup');
@@ -3353,6 +3451,8 @@ function setupPackagePageCalculator() {
 
     if (webMonthlyEl)   webMonthlyEl.textContent   = '$' + total.toLocaleString() + '/mo';
     if (grandMonthlyEl) grandMonthlyEl.textContent  = '$' + combinedMonthly.toLocaleString() + '/mo';
+
+    syncPkgBonusIncluded();
   }
 
   function handleSharedChange(value, isChecked) {
