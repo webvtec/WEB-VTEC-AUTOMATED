@@ -1981,7 +1981,11 @@ Some of his main goals are to help more businesses get online and build a strong
                                 <div class="checkbox-group" id="pkgWebsiteAddonsGroup">
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="pkgWebsiteAddons" value="ai-chatbot" data-price="40">
-                                        <span class="checkbox-text">AI Chatbot (text-based) on my website</span>
+                                        <span class="checkbox-text">AI Chatbot (text-based)</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgWebsiteAddons" value="reminder-emails" data-price="40">
+                                        <span class="checkbox-text">Sends Reminder Emails</span>
                                     </label>
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="pkgWebsiteAddons" value="email-confirmations" data-price="40">
@@ -1997,9 +2001,10 @@ Some of his main goals are to help more businesses get online and build a strong
                                     </label>
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="pkgWebsiteAddons" value="clockwork-auto-reviews" data-price="40">
-                                        <span class="checkbox-text">Clockwork – Auto Reviews</span>
+                                        <span class="checkbox-text">Clockwork – Email Reviews Requester</span>
                                     </label>
                                 </div>
+                                <p style="color:var(--tx3);font-size:10.5px;text-align:center;margin:10px 0 0;">Selecting any of these also applies them to your AI Receptionist below, at no extra cost.</p>
                                 <div class="package-grand-total">
                                     <div class="package-grand-total-row">
                                         <span class="package-grand-total-label">One-Time Setup</span>
@@ -2031,11 +2036,35 @@ Some of his main goals are to help more businesses get online and build a strong
                                     <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
                                     <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
                                     <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
-                                    <div class="included-item"><span class="included-check">✓</span>Sends Reminder Emails</div>
-                                    <div class="included-item"><span class="included-check">✓</span>Instant Email Confirmations</div>
                                 </div>
                             </div>
                             <p style="color:var(--tx3);font-size:11.5px;text-align:center;margin-top:14px;">$200 one-time setup, then $150/mo continuation — plus a usage fee that varies based on call volume.</p>
+                            <div class="form-group" style="margin-top:18px;margin-bottom:0;">
+                                <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                                <div class="checkbox-group" id="pkgAiAddonsGroup">
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgAiAddons" value="reminder-emails" data-price="40">
+                                        <span class="checkbox-text">Sends Reminder Emails</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgAiAddons" value="email-confirmations" data-price="40">
+                                        <span class="checkbox-text">Automated Email Confirmations</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgAiAddons" value="revive-dead-leads" data-price="40">
+                                        <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgAiAddons" value="broadcast-campaigns" data-price="40">
+                                        <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
+                                    </label>
+                                    <label class="checkbox-option">
+                                        <input type="checkbox" name="pkgAiAddons" value="clockwork-auto-reviews" data-price="40">
+                                        <span class="checkbox-text">Clockwork – Email Reviews Requester</span>
+                                    </label>
+                                </div>
+                                <p style="color:var(--tx3);font-size:10.5px;text-align:center;margin:10px 0 0;">Selecting any of these also applies them to your Website above, at no extra cost.</p>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -3276,25 +3305,82 @@ function setupWebsiteCalculator() {
   recalc();
 }
 
-// Custom Package page: website's one-time fee never changes ($160 fixed).
-// Website add-ons + AI base combine into one monthly subscription figure.
+// Custom Package page: website's one-time fee never changes ($160 fixed),
+// and the AI Receptionist's own setup/monthly never changes ($200/$150).
+// Every add-on except the AI Chatbot is shared between the Website section
+// and the AI Receptionist section — checking it in either spot checks it
+// in both, and it's only ever counted once toward the total.
+const PKG_SHARED_ADDON_VALUES = [
+  'reminder-emails',
+  'email-confirmations',
+  'revive-dead-leads',
+  'broadcast-campaigns',
+  'clockwork-auto-reviews'
+];
+
 function setupPackagePageCalculator() {
   const webGroup = document.getElementById('pkgWebsiteAddonsGroup');
+  const aiGroup  = document.getElementById('pkgAiAddonsGroup');
   if (!webGroup) return;
 
   const webMonthlyEl   = document.getElementById('pkgWebsiteMonthly');
   const grandMonthlyEl = document.getElementById('pkgGrandAi');
 
-  function recalc() {
-    const webMonthly      = calcTieredAddonsTotal(webGroup);
-    const combinedMonthly = webMonthly + 150; // AI continuation fee (no AI add-ons in the package)
+  let sharedOrder = []; // order in which shared add-ons were first selected, across both sections
 
-    if (webMonthlyEl)   webMonthlyEl.textContent   = '$' + webMonthly.toLocaleString() + '/mo';
+  function checkboxesForValue(value) {
+    const selector = 'input[value="' + value + '"]';
+    const boxes = [];
+    const webCb = webGroup.querySelector(selector);
+    if (webCb) boxes.push(webCb);
+    if (aiGroup) {
+      const aiCb = aiGroup.querySelector(selector);
+      if (aiCb) boxes.push(aiCb);
+    }
+    return boxes;
+  }
+
+  function recalc() {
+    const chatbotCb = webGroup.querySelector('input[value="' + CHATBOT_ADDON_VALUE + '"]');
+    let total = (chatbotCb && chatbotCb.checked) ? CHATBOT_ADDON_PRICE : 0;
+
+    const stillSelected = sharedOrder.filter(value => checkboxesForValue(value).some(cb => cb.checked));
+    stillSelected.forEach((value, i) => {
+      total += (i === 0) ? FIRST_ADDON_PRICE : ADDITIONAL_ADDON_PRICE;
+    });
+
+    const combinedMonthly = total + 150; // AI continuation fee
+
+    if (webMonthlyEl)   webMonthlyEl.textContent   = '$' + total.toLocaleString() + '/mo';
     if (grandMonthlyEl) grandMonthlyEl.textContent  = '$' + combinedMonthly.toLocaleString() + '/mo';
   }
 
-  webGroup.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-    cb.addEventListener('change', () => { trackAddonSelectionOrder(webGroup, cb); recalc(); });
+  function handleSharedChange(value, isChecked) {
+    checkboxesForValue(value).forEach(cb => { cb.checked = isChecked; });
+    if (isChecked) {
+      if (!sharedOrder.includes(value)) sharedOrder.push(value);
+    } else {
+      sharedOrder = sharedOrder.filter(v => v !== value);
+    }
+    recalc();
+  }
+
+  // Native form.reset() doesn't fire change events, so expose a hook to clear
+  // our tracked selection order whenever the package form gets reset.
+  window.__pkgAddonsReset = function() {
+    sharedOrder = [];
+    recalc();
+  };
+
+  const chatbotCb = webGroup.querySelector('input[value="' + CHATBOT_ADDON_VALUE + '"]');
+  if (chatbotCb) chatbotCb.addEventListener('change', recalc);
+
+  [webGroup, aiGroup].forEach(group => {
+    if (!group) return;
+    PKG_SHARED_ADDON_VALUES.forEach(value => {
+      const cb = group.querySelector('input[value="' + value + '"]');
+      if (cb) cb.addEventListener('change', () => handleSharedChange(value, cb.checked));
+    });
   });
 
   recalc();
@@ -3414,6 +3500,7 @@ function resetPackageDisplays() {
     const el = document.getElementById(id);
     if (el) el.textContent = val;
   });
+  if (window.__pkgAddonsReset) window.__pkgAddonsReset();
 }
 
 async function handleCustomPackageRequest(e) {
@@ -3432,9 +3519,7 @@ async function handleCustomPackageRequest(e) {
     'Answers Every Call 24/7',
     'Takes Bookings',
     'Cancels & Reschedules',
-    'Answers General Questions',
-    'Sends Reminder Emails',
-    'Instant Email Confirmations'
+    'Answers General Questions'
   ];
 
   let businessType = document.getElementById('pkgBusinessType').value;
