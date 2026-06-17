@@ -1484,7 +1484,7 @@ Some of his main goals are to help more businesses get online and build a strong
                   <li>Mobile &amp; desktop responsive design</li>
                   <li>Admin content management</li>
                 </ul>
-                <button class="scard-btn" onclick="showPage('custom-package')">Request This Package</button>
+                <button class="scard-btn" onclick="requestPackage('dental')">Request This Package</button>
               </div>
             </div>
 
@@ -1858,6 +1858,7 @@ Some of his main goals are to help more businesses get online and build a strong
                             <label for="pkgBusinessType">Business / Website Type</label>
                             <select id="pkgBusinessType" required onchange="handlePkgTypeChange(event)">
                                 <option value="">Select your business type</option>
+                                <option value="dental">Dental Practice</option>
                                 <option value="nail-tech">Nail Tech</option>
                                 <option value="hair-barbershop">Hair Tech / Barbershop</option>
                                 <option value="makeup">Makeup Artist</option>
@@ -3002,6 +3003,35 @@ function handlePkgTypeChange(e) {
         customInput.required = false;
         customInput.value = '';
     }
+}
+
+// Pre-built industry packages (e.g. the "Dental Package" card on the
+// homepage). Clicking "Request This Package" already tells us the business
+// type and which services belong in the bundle, so the visitor shouldn't
+// have to answer those questions themselves on the Custom Package form —
+// it arrives pre-filled and ready to submit.
+const PACKAGE_PRESETS = {
+  dental: { businessType: 'dental', website: true, ai: true, promo: false }
+};
+
+function requestPackage(key) {
+  const preset = PACKAGE_PRESETS[key];
+  if (preset) {
+    const typeSelect = document.getElementById('pkgBusinessType');
+    if (typeSelect && preset.businessType) {
+      typeSelect.value = preset.businessType;
+      typeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    const webToggle    = document.getElementById('pkgToggleWebsite');
+    const aiToggle      = document.getElementById('pkgToggleAi');
+    const promoToggle   = document.getElementById('pkgTogglePromo');
+    if (webToggle)   webToggle.checked   = !!preset.website;
+    if (aiToggle)    aiToggle.checked    = !!preset.ai;
+    if (promoToggle) promoToggle.checked = !!preset.promo;
+    if (typeof handlePkgServiceToggle === 'function') handlePkgServiceToggle();
+  }
+  showPage('custom-package');
 }
 
 
