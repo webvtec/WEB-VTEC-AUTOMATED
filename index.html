@@ -165,7 +165,7 @@ body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--t
   background:transparent;border:none;border-radius:0;gap:0;
 }
 .nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
-.nav-logo-img{width:74px;height:74px;border-radius:50%;border:2px solid rgba(212,160,23,.45);box-shadow:0 0 20px rgba(212,160,23,.3);object-fit:cover}
+.nav-logo-img{width:74px;height:74px;border-radius:0;border:none;box-shadow:none;object-fit:contain;background:transparent}
 .nav-logo-text{display:flex;flex-direction:column;line-height:1}
 .nav-logo-name{font-size:20px;font-weight:900;letter-spacing:2.5px;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-logo-tagline{font-size:9.5px;font-weight:600;letter-spacing:2px;color:rgba(212,160,23,.45);text-transform:uppercase;margin-top:4px}
@@ -2271,63 +2271,6 @@ Some of his main goals are to help more businesses get online and build a strong
                 <button class="scard-btn" onclick="requestWebsiteType('restaurant')">Request This Website</button>
               </div>
             </div>
-            <!-- SPA -->
-            <div class="scard">
-              <div class="scard-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1540555700478-4be289fbecef.avif?alt=media&token=b8fe18bf-7ffa-4c3e-abf6-8d21eadc74e4')"></div>
-              <div class="scard-body">
-                <h3 class="scard-title">Spa / Wellness Website</h3>
-                <ul class="scard-list">
-                  <li>Elegant service &amp; treatment menu</li>
-                  <li>Online booking with confirmations</li>
-                  <li>Gift voucher request form</li>
-                  <li>Before &amp; after photo gallery</li>
-                  <li>Therapist profiles</li>
-                  <li>Client testimonials section</li>
-                  <li>Instagram &amp; TikTok embed</li>
-                  <li>Mobile &amp; desktop responsive</li>
-                  <li>Luxury custom design</li>
-                </ul>
-                <button class="scard-btn" onclick="requestWebsiteType('spa')">Request This Website</button>
-              </div>
-            </div>
-            <!-- MAKEUP -->
-            <div class="scard">
-              <div class="scard-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1522335789203-aabd1fc54bc9.avif?alt=media&token=39c5cbd2-8197-4889-8499-84a53a250b9f')"></div>
-              <div class="scard-body">
-                <h3 class="scard-title">Makeup Artist Website</h3>
-                <ul class="scard-list">
-                  <li>Portfolio gallery with lookbook style</li>
-                  <li>Service packages &amp; pricing list</li>
-                  <li>Online booking form</li>
-                  <li>Bridal &amp; events enquiry section</li>
-                  <li>Client reviews &amp; ratings</li>
-                  <li>Social media &amp; video integration</li>
-                  <li>Admin photo management</li>
-                  <li>Mobile &amp; desktop responsive</li>
-                  <li>Elegant custom brand design</li>
-                </ul>
-                <button class="scard-btn" onclick="requestWebsiteType('makeup')">Request This Website</button>
-              </div>
-            </div>
-            <!-- PARTY RENTAL -->
-            <div class="scard">
-              <div class="scard-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1530103862676-de8c9debad1d.avif?alt=media&token=e4dbcc89-2346-4e74-b972-8e165cfcd3f3')"></div>
-              <div class="scard-body">
-                <h3 class="scard-title">Party Rental Website</h3>
-                <ul class="scard-list">
-                  <li>Equipment catalogue with photos</li>
-                  <li>Online quote &amp; booking request</li>
-                  <li>Availability calendar</li>
-                  <li>Instant booking notifications</li>
-                  <li>Client gallery &amp; event photos</li>
-                  <li>Package pricing display</li>
-                  <li>Social media integration</li>
-                  <li>Mobile &amp; desktop responsive</li>
-                  <li>Custom brand colours</li>
-                </ul>
-                <button class="scard-btn" onclick="requestWebsiteType('party-rental')">Request This Website</button>
-              </div>
-            </div>
             <!-- OTHER / CTA CARD -->
             <div class="scard scard-cta">
               <div class="scard-cta-inner">
@@ -2398,9 +2341,9 @@ Some of his main goals are to help more businesses get online and build a strong
     <label for="websiteType">Website Type</label>
     <select id="websiteType" name="websiteType" required>
         <option value="">Select Website Type</option>
+        <option value="hair-tech">HAIR TECH / BARBERING WEBSITE</option>
         <option value="nail-tech">NAIL TECH WEBSITE</option>
-        <option value="hair-tech">HAIR TECH WEBSITE</option>
-        <option value="makeup">MAKEUP WEBSITE</option>
+        <option value="restaurant-delivery">RESTAURANT WEBSITE</option>
         <option value="other">OTHER</option>
     </select>
 </div>
@@ -3603,10 +3546,7 @@ function handleWebsiteTypeChange(e) {
 const WEBSITE_PRESETS = {
   barbering:      { type: 'hair-tech',           title: 'Barbering Website' },
   'nail-tech':    { type: 'nail-tech',           title: 'Nail Tech Website' },
-  restaurant:     { type: 'restaurant-delivery', title: 'Restaurant Website' },
-  spa:            { type: 'spa',                 title: 'Spa / Wellness Website' },
-  makeup:         { type: 'makeup',              title: 'Makeup Artist Website' },
-  'party-rental': { type: 'party-rental',        title: 'Party Rental Website' }
+  restaurant:     { type: 'restaurant-delivery', title: 'Restaurant Website' }
 };
 const DEFAULT_REQUEST_TITLE = 'Request Your Website';
 
