@@ -241,64 +241,8 @@ body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--t
 .why-body{font-size:clamp(14px,1.6vw,17px);line-height:1.88;color:var(--tx2)}
 
 /* ── SECTION HEADERS ─────────────────────────────────────── */
-.services-section{padding:90px 0 0;background:var(--bg)}
-.services-header{text-align:center;padding:0 24px 48px}
 .services-headline{font-family:"Playfair Display",serif;font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.12;letter-spacing:-.5px;color:var(--tx1);margin-bottom:0}
 .section-eyebrow-lg{font-size:clamp(18px,2.4vw,28px);font-weight:800;letter-spacing:1.5px;margin-bottom:10px;color:var(--g1);}
-
-/* ── HORIZONTAL SCROLL TRACK ─────────────────────────────── */
-.hscroll-wrap{position:relative;padding:0 0 48px}
-.hscroll-track{
-  display:flex;gap:24px;
-  overflow-x:auto;scroll-snap-type:x mandatory;
-  padding:12px 48px 24px;
-  scrollbar-width:none;-ms-overflow-style:none;
-  scroll-behavior:smooth;
-}
-.hscroll-track::-webkit-scrollbar{display:none}
-
-/* ── SERVICE CARD ────────────────────────────────────────── */
-.scard{
-  flex:0 0 360px;scroll-snap-align:start;
-  background:var(--card);border:1px solid rgba(212,160,23,.18);border-radius:var(--rl);
-  overflow:hidden;display:flex;flex-direction:column;
-  transition:border-color .28s,box-shadow .28s,transform .28s;
-}
-.scard:hover{border-color:rgba(212,160,23,.6);box-shadow:0 0 32px rgba(212,160,23,.14),0 16px 44px rgba(0,0,0,.55);transform:translateY(-4px)}
-.scard-img{height:200px;background-size:cover;background-position:center;position:relative}
-.scard-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,7,13,0) 40%,rgba(8,7,13,.85) 100%)}
-/* scard-img is a div, so we need relative position on parent */
-.scard-img{position:relative}
-.scard-body{padding:24px 24px 28px;flex:1;display:flex;flex-direction:column}
-.scard-title{font-family:"Playfair Display",serif;font-size:22px;font-weight:700;color:var(--tx1);margin-bottom:18px;letter-spacing:-.3px}
-.scard-list{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1}
-.scard-list li{font-size:13px;color:var(--tx2);line-height:1.5;padding-left:18px;position:relative}
-.scard-list li::before{content:"▸";position:absolute;left:0;color:var(--g2);font-size:11px;top:1px}
-.scard-btn{
-  margin-top:24px;width:100%;
-  padding:13px;background:var(--gold);color:#08070d;
-  font-family:"Inter",sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-  border:none;border-radius:var(--r);cursor:pointer;box-shadow:0 4px 18px rgba(212,160,23,.3);transition:all .22s;
-}
-.scard-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(212,160,23,.5)}
-
-/* CTA card */
-.scard-cta{background:rgba(212,160,23,.04);border-style:dashed;border-color:rgba(212,160,23,.28);align-items:center;justify-content:center}
-.scard-cta-inner{text-align:center;padding:40px 30px;display:flex;flex-direction:column;align-items:center;gap:12px}
-.scard-cta-inner h3{font-family:"Playfair Display",serif;font-size:24px;font-weight:700;color:var(--tx1)}
-.scard-cta-inner p{font-size:14px;line-height:1.7;color:var(--tx3);max-width:240px}
-
-/* scroll arrows */
-.hscroll-arrow{
-  position:absolute;top:50%;transform:translateY(-calc(50% + 24px));
-  width:44px;height:44px;border-radius:50%;
-  background:rgba(15,11,26,.92);border:1px solid rgba(212,160,23,.3);
-  color:var(--g1);display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .2s;z-index:10;
-}
-.hscroll-arrow:hover{background:rgba(212,160,23,.15);border-color:var(--g1);box-shadow:var(--glow)}
-.hscroll-prev{left:8px}
-.hscroll-next{right:8px}
 
 /* ── PROMO HOME SECTION ──────────────────────────────────── */
 
@@ -476,12 +420,6 @@ button{box-shadow:none}
 .package-section-title{
   font-family:"Playfair Display",serif;font-size:18px;font-weight:700;color:var(--tx1);
   display:flex;align-items:center;gap:8px;margin:0;
-}
-.mandatory-badge{
-  font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
-  color:var(--g1);background:rgba(212,160,23,.12);
-  border:1px solid rgba(212,160,23,.4);
-  padding:4px 11px;border-radius:20px;white-space:nowrap;
 }
 /* Service include/exclude toggle switch (Custom Package form) */
 .pkg-toggle{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;white-space:nowrap;flex-shrink:0;}
@@ -758,11 +696,6 @@ button{box-shadow:none}
   .google-signin-button .gsi-short{display:inline}
   .hero{min-height:auto;padding:68px 20px 90px}
   .why-section{padding:64px 24px}
-    .services-section{padding:60px 0 0}
-  .services-header{padding:0 20px 36px}
-  .hscroll-track{padding:8px 20px 16px}
-  .scard{flex:0 0 300px}
-  
     #containerSection{padding:0 12px 40px}
   .container-content{padding:24px 18px 16px}
   .content-area{padding:28px 18px 64px}
@@ -775,7 +708,6 @@ button{box-shadow:none}
   .nav-item{font-size:9.5px;padding:7px 9px}
   .google-signin-button{padding:8px 9px;gap:0}
   .google-signin-button .gsi-short{display:none}
-  .scard{flex:0 0 280px}
   .hero-headline{letter-spacing:-.5px}
   }
 @media(max-width:359px){
@@ -910,9 +842,6 @@ button{box-shadow:none}
 /* ── RIGHT: Frosted glass card ── */
 
 /* Subtle gold shimmer top edge */
-
-
-
 
 
 /* Scroll cue */
@@ -1077,156 +1006,6 @@ button{box-shadow:none}
 
 /* ── Scroll-driven promo labels ─────────────────────────── */
 
-
-/* ── AI CALLING SECTION ──────────────────────────────────── */
-.ai-section{padding:90px 0 0;background:var(--bg);}
-
-.ai-track{align-items:stretch;}
-
-.ai-card{
-  flex:0 0 360px;scroll-snap-align:start;
-  background:var(--card);
-  border:1px solid rgba(212,160,23,.18);
-  border-radius:var(--rl);
-  overflow:hidden;
-  display:flex;flex-direction:column;
-  transition:border-color .28s,box-shadow .28s,transform .28s;
-}
-.ai-card:hover{
-  border-color:rgba(212,160,23,.55);
-  box-shadow:0 0 30px rgba(212,160,23,.12),0 16px 44px rgba(0,0,0,.55);
-  transform:translateY(-4px);
-}
-
-/* Card header */
-.ai-card-header{
-  display:flex;align-items:center;gap:14px;
-  padding:22px 24px 18px;
-  border-bottom:1px solid rgba(255,255,255,.05);
-}
-.ai-avatar{
-  width:52px;height:52px;flex-shrink:0;
-  background:rgba(212,160,23,.1);
-  border:1px solid rgba(212,160,23,.35);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--g1);
-}
-.ai-agent-info{display:flex;flex-direction:column;gap:3px;flex:1;}
-.ai-agent-name{font-size:16px;font-weight:800;color:var(--tx1);letter-spacing:.3px;}
-.ai-agent-role{font-size:11px;font-weight:600;color:var(--tx3);letter-spacing:1px;text-transform:uppercase;}
-.ai-live-badge{
-  display:flex;align-items:center;gap:6px;
-  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--g1);
-  border:1px solid rgba(212,160,23,.35);
-  border-radius:20px;padding:5px 12px;
-  white-space:nowrap;
-}
-.ai-live-dot{
-  width:7px;height:7px;border-radius:50%;
-  background:var(--g1);
-  box-shadow:0 0 7px rgba(212,160,23,.8);
-  animation:livePulse 1.8s ease-in-out infinite;
-  flex-shrink:0;
-}
-@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.4}}
-
-/* Card body */
-.ai-card-body{padding:20px 24px;flex:1;display:flex;flex-direction:column;gap:16px;}
-.ai-card-desc{font-size:13.5px;line-height:1.72;color:var(--tx2);}
-
-/* Capability tags shown under each agent's description */
-.ai-capabilities{
-  display:flex;flex-wrap:wrap;gap:6px;
-}
-.ai-cap-tag{
-  font-size:10.5px;font-weight:600;letter-spacing:.3px;
-  color:var(--g1);
-  border:1px solid rgba(212,160,23,.3);
-  border-radius:20px;
-  padding:5px 11px;
-  white-space:nowrap;
-  background:rgba(212,160,23,.05);
-}
-
-
-
-/* Play button */
-.ai-play-btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:11px 18px;
-  background:transparent;
-  border:1px solid rgba(212,160,23,.3);
-  border-radius:var(--r);
-  color:var(--g1);
-  font-family:"Inter",sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;
-  cursor:pointer;transition:all .22s;
-  width:fit-content;
-}
-.ai-play-btn:hover{background:rgba(212,160,23,.08);border-color:var(--g1);}
-.ai-play-btn.playing{border-color:var(--g1);background:rgba(212,160,23,.1);}
-.ai-play-icon{
-  width:30px;height:30px;flex-shrink:0;
-  background:rgba(212,160,23,.12);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--g1);
-  transition:background .22s;
-}
-.ai-play-btn.playing .ai-play-icon{background:rgba(212,160,23,.25);}
-
-/* Sound wave animation when playing */
-.ai-wave{
-  display:inline-flex;align-items:center;gap:2px;height:16px;
-}
-.ai-wave span{
-  display:block;width:3px;background:currentColor;border-radius:2px;
-  animation:wave 0.9s ease-in-out infinite;
-}
-.ai-wave span:nth-child(2){animation-delay:.15s;}
-.ai-wave span:nth-child(3){animation-delay:.3s;}
-.ai-wave span:nth-child(4){animation-delay:.15s;}
-@keyframes wave{0%,100%{height:4px}50%{height:14px}}
-
-/* Card footer */
-.ai-card-footer{
-  padding:16px 24px 22px;
-  border-top:1px solid rgba(255,255,255,.05);
-}
-
-@media(max-width:768px){
-  .ai-card{flex:0 0 300px;}
-  .ai-section{padding:60px 0 0;}
-}
-@media(max-width:480px){
-  .ai-card{flex:0 0 280px;}
-}
-
-
-/* AI section CTA card */
-.ai-card-cta{background:rgba(212,160,23,.04);border-style:dashed;border-color:rgba(212,160,23,.28);align-items:center;justify-content:center}
-.ai-card-cta-inner{text-align:center;padding:40px 30px;display:flex;flex-direction:column;align-items:center;gap:12px}
-.ai-card-cta-inner h3{font-family:"Playfair Display",serif;font-size:24px;font-weight:700;color:var(--tx1)}
-.ai-card-cta-inner p{font-size:14px;line-height:1.7;color:var(--tx3);max-width:240px}
-
-.ai-avatar-photo{
-  width:52px;height:52px;flex-shrink:0;
-  border-radius:50%;
-  border:2px solid rgba(212,160,23,.45);
-  overflow:hidden;
-  box-shadow:0 0 12px rgba(212,160,23,.2);
-  display:flex;align-items:center;justify-content:center;
-}
-.ai-avatar-photo img{
-  width:100%;height:100%;
-  object-fit:cover;object-position:center top;
-  display:block;
-}
-.ai-avatar-photo svg{
-  width:100%;height:100%;
-  display:block;
-}
 
 </style>
 <!-- Replace the existing Firebase CDN links with these updated ones -->
@@ -1551,7 +1330,6 @@ Some of his main goals are to help more businesses get online and build a strong
           </div>
 
 
-
         </div>
 
         <div class="hero-scroll">
@@ -1707,16 +1485,10 @@ Some of his main goals are to help more businesses get online and build a strong
         </div>
       </section>
 
-      <!-- Hidden placeholders so JS scroll helpers don't error -->
-      <div id="packagesTrack" style="display:none"></div>
-      <div id="aiTrack" style="display:none"></div>
-      <div id="servicesTrack" style="display:none"></div>
-
       <!-- Keep hidden containerSection for Firebase dynamic cards -->
       <section id="containerSection" style="display:none"></section>
 
     </div>
-
 
 
     <!-- REQUEST WEBSITE PAGE (hidden, accessed from home) -->
@@ -2142,8 +1914,6 @@ Some of his main goals are to help more businesses get online and build a strong
     </div>
 
 
-
-
 <script>
 // Firebase Configuration
 const firebaseConfig = {
@@ -2378,8 +2148,7 @@ CONTACT THE CUSTOMER!
         submitBtn.disabled = false;
     }
 }
-        
-        
+
 
 // Review Submission Handler
 async function handleReviewSubmission(e) {
@@ -2865,7 +2634,6 @@ function adminLogin() {
 }
 
 
-
 function normalizeUrl(raw) {
     if (!raw) return '#';
     raw = raw.trim();
@@ -2971,48 +2739,29 @@ function handleWebsiteTypeChange(e) {
 // (e.g. clicking "Request This Website" on the Restaurant Website card).
 // Tells the visitor this is specifically a Restaurant Website request
 // instead of a blank generic form, and pre-selects the website type for them.
-const WEBSITE_PRESETS = {
-  barbering:      { type: 'hair-tech',           title: 'Barbering Website' },
-  'nail-tech':    { type: 'nail-tech',           title: 'Nail Tech Website' },
-  restaurant:     { type: 'restaurant-delivery', title: 'Restaurant Website' }
-};
 const DEFAULT_REQUEST_TITLE = 'Request Your Website';
 
 function requestWebsiteType(key) {
-  const preset = WEBSITE_PRESETS[key];
   const titleEl = document.getElementById('requestPageTitle');
   const typeSelect = document.getElementById('websiteType');
 
-  selectedService = preset ? key : null;
-  if (titleEl) titleEl.textContent = preset ? preset.title : DEFAULT_REQUEST_TITLE;
+  selectedService = null;
+  if (titleEl) titleEl.textContent = DEFAULT_REQUEST_TITLE;
   if (typeSelect) {
-    typeSelect.value = preset ? preset.type : '';
+    typeSelect.value = '';
     typeSelect.dispatchEvent(new Event('change', { bubbles: true }));
   }
   showPage('request');
 }
 
-// Same idea for the standalone "Request AI Receptionist" page — clicking
-// "Request This System" on an industry AI card (e.g. Dental) should land on
-// a page that says so, instead of a generic, unbranded form.
-const AI_PRESETS = {
-  dental:         { type: 'dental',       title: 'Dental AI Receptionist' },
-  barbering:      { type: 'barbershop',   title: 'Barbering AI Receptionist' },
-  'nail-tech':    { type: 'beauty-salon', title: 'Nail Tech AI Receptionist' },
-  restaurant:     { type: 'restaurant',   title: 'Restaurant AI Receptionist' },
-  spa:            { type: 'spa',          title: 'Spa AI Receptionist' },
-  makeup:         { type: 'makeup',       title: 'Makeup Artist AI Receptionist' },
-  'party-rental': { type: 'party-rental', title: 'Party Rental AI Receptionist' }
-};
 const DEFAULT_AI_TITLE = 'Request AI Receptionist';
 
 function requestAiSystem(key) {
-  const preset = AI_PRESETS[key];
   const titleEl = document.getElementById('aiPageTitle');
   const typeSelect = document.getElementById('aiBusinessType');
 
-  if (titleEl) titleEl.textContent = preset ? preset.title : DEFAULT_AI_TITLE;
-  if (typeSelect) typeSelect.value = preset ? preset.type : '';
+  if (titleEl) titleEl.textContent = DEFAULT_AI_TITLE;
+  if (typeSelect) typeSelect.value = '';
   showPage('ai-receptionist');
 }
 
@@ -3031,70 +2780,6 @@ function handlePkgTypeChange(e) {
     }
 }
 
-// Pre-built industry packages (e.g. the "Dental Package" card on the
-// homepage). Clicking "Request This Package" already tells us the business
-// type and which services belong in the bundle, so the visitor shouldn't
-// have to answer those questions themselves on the Custom Package form —
-// it arrives pre-filled and ready to submit.
-const PACKAGE_PRESETS = {
-  dental: {
-    businessType: 'dental',
-    website: true,
-    ai: true,
-    promo: false,
-    title: 'Dental Package',
-    subtitle: 'Your dental practice gets a custom website with online appointment booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general patient questions.'
-  },
-  barbering: {
-    businessType: 'hair-barbershop',
-    website: true,
-    ai: true,
-    promo: false,
-    title: 'Barbering Package',
-    subtitle: 'Your barbershop gets a custom website with a photo gallery and real-time booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general client questions.'
-  },
-  'nail-tech': {
-    businessType: 'nail-tech',
-    website: true,
-    ai: true,
-    promo: false,
-    title: 'Nail Tech Package',
-    subtitle: 'Your nail studio gets a custom website with a portfolio gallery and online booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general client questions.'
-  },
-  restaurant: {
-    businessType: 'restaurant',
-    website: true,
-    ai: true,
-    promo: false,
-    title: 'Restaurant Package',
-    subtitle: 'Your restaurant gets a custom website with a digital menu and online ordering, plus an AI receptionist that answers every call 24/7, takes reservations, handles cancellations & reschedules, and answers general questions.'
-  },
-  spa: {
-    businessType: 'spa',
-    website: true,
-    ai: true,
-    promo: false,
-    title: 'Spa Package',
-    subtitle: 'Your spa gets a custom website with a treatment menu and online booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general client questions.'
-  },
-  makeup: {
-    businessType: 'makeup',
-    website: true,
-    ai: true,
-    promo: false,
-    title: 'Makeup Artist Package',
-    subtitle: 'Your makeup artistry business gets a custom website with a portfolio gallery and online booking, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general client questions.'
-  },
-  'party-rental': {
-    businessType: 'party-rental',
-    website: true,
-    ai: true,
-    promo: false,
-    title: 'Party Rental Package',
-    subtitle: 'Your party rental business gets a custom website with an equipment catalogue and online quote requests, plus an AI receptionist that answers every call 24/7, takes bookings, handles cancellations & reschedules, and answers general questions.'
-  }
-};
-
 const DEFAULT_PKG_TITLE = 'Request A Custom Package';
 const DEFAULT_PKG_SUBTITLE = 'Mix and match any 2 or more of our services (Website, AI Receptionist, and Promotional Images) bundled together as one package.';
 
@@ -3108,33 +2793,6 @@ function setCustomPackageHeader(title, subtitle) {
 function resetCustomPackageHeader() {
   setCustomPackageHeader(DEFAULT_PKG_TITLE, DEFAULT_PKG_SUBTITLE);
 }
-
-function requestPackage(key) {
-  const preset = PACKAGE_PRESETS[key];
-  if (preset) {
-    const typeSelect = document.getElementById('pkgBusinessType');
-    if (typeSelect && preset.businessType) {
-      typeSelect.value = preset.businessType;
-      typeSelect.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-
-    const webToggle    = document.getElementById('pkgToggleWebsite');
-    const aiToggle      = document.getElementById('pkgToggleAi');
-    const promoToggle   = document.getElementById('pkgTogglePromo');
-    if (webToggle)   webToggle.checked   = !!preset.website;
-    if (aiToggle)    aiToggle.checked    = !!preset.ai;
-    if (promoToggle) promoToggle.checked = !!preset.promo;
-    if (typeof handlePkgServiceToggle === 'function') handlePkgServiceToggle();
-
-    setCustomPackageHeader(preset.title, preset.subtitle);
-  } else {
-    resetCustomPackageHeader();
-  }
-  showPage('custom-package');
-}
-
-
-
 
 
 // Simple visitor tracking - sends message when site loads
@@ -3199,129 +2857,6 @@ User Agent: ${visitInfo.userAgent}`;
     }
 }
     
-// ── Horizontal scroll helpers ────────────────────────────
-function scrollTrack(dir) {
-  const t = document.getElementById('servicesTrack');
-  if (t) t.scrollBy({ left: dir * 380, behavior: 'smooth' });
-}
-
-
-
-// ── AI scroll helper ─────────────────────────────────────
-function scrollAITrack(dir) {
-  const t = document.getElementById('aiTrack');
-  if (t) t.scrollBy({ left: dir * 380, behavior: 'smooth' });
-}
-
-// ── Packages scroll helper ───────────────────────────────
-function scrollPackagesTrack(dir) {
-  const t = document.getElementById('packagesTrack');
-  if (t) t.scrollBy({ left: dir * 380, behavior: 'smooth' });
-}
-
-// ── Text-to-speech AI demo ────────────────────────────────
-let currentUtterance = null;
-let currentPlayBtn   = null;
-let voicesReady      = false;
-let voicesList       = [];
-
-function loadVoices() {
-  voicesList = window.speechSynthesis.getVoices();
-  if (voicesList.length) voicesReady = true;
-}
-window.speechSynthesis.onvoiceschanged = loadVoices;
-loadVoices();
-
-/*  Voice profiles — ordered priority lists so we fall through
-    to whatever the browser actually has available.
-    Maya  = warm bilingual female (Samantha / Google US Eng female feel)
-    Sage  = calm, professional male (Daniel / Google UK Male)
-*/
-const AI_VOICE_PROFILES = {
-  Maya: {
-    gender: 'female',
-    pitch: 1.08, rate: 0.92,
-    names: ['Samantha','Google US English','Joanna','Victoria','Siri Female','Ava','Susan','en-US-Standard-C','en-US-Wavenet-C']
-  },
-  Sage: {
-    gender: 'male',
-    pitch: 0.85, rate: 0.88,
-    names: ['Daniel','Google UK English Male','en-GB-Standard-B','Rishi','Oliver','Gordon','Fred','Alex','Thomas']
-  }
-};
-
-function pickVoice(agentName) {
-  const voices = window.speechSynthesis.getVoices();
-  const profile = AI_VOICE_PROFILES[agentName];
-  if (!profile) return voices.find(v => v.lang.startsWith('en')) || voices[0];
-
-  // 1. Try exact name matches
-  for (const name of profile.names) {
-    const match = voices.find(v => v.name.toLowerCase().includes(name.toLowerCase()) && v.lang.startsWith('en'));
-    if (match) return match;
-  }
-
-  // 2. Fall back to gender heuristic
-  const genderHint = profile.gender === 'male'
-    ? voices.filter(v => v.lang.startsWith('en') && /male|david|daniel|fred|alex|oliver|rishi|gordon|thomas/i.test(v.name))
-    : voices.filter(v => v.lang.startsWith('en') && !/male|david|fred|gordon|thomas/i.test(v.name) && /female|samantha|karen|victoria|zira|aria|ava|susan|fiona|moira|tessa|alice|kathy|nicky|monica/i.test(v.name));
-
-  if (genderHint.length) return genderHint[0];
-
-  // 3. Just return any English voice
-  return voices.find(v => v.lang.startsWith('en')) || voices[0];
-}
-
-function speakAI(btn, text) {
-  // Ensure voices are loaded (Chrome lazy-loads them)
-  if (!voicesList.length) voicesList = window.speechSynthesis.getVoices();
-
-  // Stop current if playing
-  if (currentUtterance) {
-    window.speechSynthesis.cancel();
-    if (currentPlayBtn) resetPlayBtn(currentPlayBtn);
-    if (currentPlayBtn === btn) { currentPlayBtn = null; currentUtterance = null; return; }
-  }
-
-  const agentName = btn.closest('.ai-card')?.querySelector('.ai-agent-name')?.textContent?.trim() || '';
-  const profile   = AI_VOICE_PROFILES[agentName] || { pitch: 1, rate: 0.92 };
-  const voice     = pickVoice(agentName);
-
-  const utter = new SpeechSynthesisUtterance(text);
-  if (voice)      utter.voice  = voice;
-  utter.pitch   = profile.pitch;
-  utter.rate    = profile.rate;
-  utter.volume  = 1;
-  utter.lang    = voice?.lang || 'en-US';
-
-  // Set playing UI
-  currentPlayBtn   = btn;
-  currentUtterance = utter;
-  btn.classList.add('playing');
-  const label = btn.querySelector('.ai-play-label');
-  const icon  = btn.querySelector('.ai-play-icon');
-  if (label) label.innerHTML = '<span class="ai-wave"><span></span><span></span><span></span><span></span></span>';
-  if (icon)  icon.innerHTML  = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-
-  utter.onend   = () => resetPlayBtn(btn);
-  utter.onerror = (e) => { console.warn('TTS error', e); resetPlayBtn(btn); };
-
-  // Small delay fixes Chrome voice not applying bug
-  setTimeout(() => window.speechSynthesis.speak(utter), 80);
-}
-
-function resetPlayBtn(btn) {
-  if (!btn) return;
-  btn.classList.remove('playing');
-  const agentName = btn.closest('.ai-card')?.querySelector('.ai-agent-name')?.textContent?.trim() || 'Agent';
-  const label = btn.querySelector('.ai-play-label');
-  const icon  = btn.querySelector('.ai-play-icon');
-  if (label) label.textContent = 'Hear ' + agentName + ' Speak';
-  if (icon)  icon.innerHTML    = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-  currentUtterance = null;
-  currentPlayBtn   = null;
-}
-
 // ── Live add-on price calculators ─────────────────────────
 // Sums a base price + any checked add-on prices (read from each
 // checkbox's data-price attribute) and writes the result into the
@@ -3899,8 +3434,6 @@ async function handleCustomPackageRequest(e) {
 
 
 </script>
-
-
 
 
     <!-- AI RECEPTIONIST PAGE -->
