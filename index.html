@@ -1464,6 +1464,22 @@ His main goal is to help more businesses get online, automate their operations, 
               </div>
             </div>
 
+            <!-- AI Hiring Screener -->
+            <div class="pillar-card">
+              <div class="pillar-img" style="background-image:url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80');background-size:cover;background-position:center;">
+                <div class="pillar-img-overlay"></div>
+                <div class="pillar-tag">AI</div>
+              </div>
+              <div class="pillar-body">
+                <h3 class="pillar-title">AI Hiring Screener</h3>
+                <p class="pillar-desc">An AI that calls your applicants, asks your custom questions, scores their answers, and delivers a ranked summary so you only speak to the best candidates.</p>
+                <button class="pillar-btn" onclick="showPage('screener-request')">
+                  Request AI Screener
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
             <!-- Custom Websites -->
             <div class="pillar-card">
               <div class="pillar-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1467232004584-a241de8bcf5d.avif?alt=media&token=6c0147b9-0c17-4dfc-a157-8cd0fb721dd3')">
@@ -3299,6 +3315,59 @@ async function handleAIReceptionistRequest(e) {
   }
 }
 
+async function handleScreenerRequest(e) {
+  e.preventDefault();
+
+  const SCREENER_INCLUDED = [
+    'Calls Applicants 24/7',
+    'Custom Screening Questions',
+    'Candidate Scoring & Ranking',
+    'Full Call Transcripts',
+    'Summary Report Per Candidate',
+    'Instant Email Delivery'
+  ];
+
+  const data = {
+    firstName:    document.getElementById('scFirstName').value.trim(),
+    lastName:     document.getElementById('scLastName').value.trim(),
+    phone:        document.getElementById('scPhone').value.trim(),
+    email:        document.getElementById('scEmail').value.trim(),
+    businessName: document.getElementById('scBusinessName').value.trim(),
+    industry:     document.getElementById('scIndustry').value,
+    role:         document.getElementById('scRole').value.trim(),
+    volume:       document.getElementById('scVolume').value,
+    questions:    document.getElementById('scQuestions').value.trim(),
+    notes:        document.getElementById('scNotes').value.trim(),
+    includedFeatures: SCREENER_INCLUDED,
+    setupFee:     '$399',
+    monthly:      '$250/mo',
+    userId:       currentUser?.uid || null,
+    userEmail:    currentUser?.email || document.getElementById('scEmail').value.trim(),
+    timestamp:    firebase.firestore.FieldValue.serverTimestamp(),
+    status:       'pending'
+  };
+
+  const btn = e.target.querySelector('button[type="submit"]');
+  const orig = btn.textContent;
+  try {
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+    await db.collection('ai-screener-requests').add(data);
+
+    const msg = `\n📋 NEW AI HIRING SCREENER REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Industry: ${data.industry}\n💼 Role: ${data.role}\n📊 Volume: ${data.volume} applicants/mo\n✅ Included: ${SCREENER_INCLUDED.join(', ')}\n💰 Setup Fee: ${data.setupFee}\n💰 Monthly: ${data.monthly}\n💡 Plus usage fee by call volume\n❓ Questions: ${data.questions || 'Not provided'}\n📝 Notes: ${data.notes || 'None'}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
+    await sendTelegramMessage(msg);
+    alert('🎉 Request submitted! We will be in touch soon.');
+    e.target.reset();
+    showPage('home');
+  } catch(err) {
+    console.error(err);
+    alert('❌ Error submitting. Please try again.');
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+}
+
 function resetPackageDisplays() {
   const defaults = {
     pkgWebsiteOneTime: '$190',
@@ -3560,6 +3629,119 @@ async function handleCustomPackageRequest(e) {
                             <label for="aiDescription">What should your AI receptionist handle?</label>
                             <textarea id="aiDescription" rows="4" required placeholder="e.g. Answer calls, book appointments, answer FAQs about services and pricing, take messages..."></textarea>
                         </div>
+                        <button type="submit" class="submit-button">SUBMIT REQUEST</button>
+                        <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- AI HIRING SCREENER REQUEST PAGE -->
+    <div id="screener-request" class="page">
+        <div class="navy-gradient-container">
+            <div class="content-area">
+                <div class="form-container">
+                    <h2 class="form-page-title">Request AI Hiring Screener</h2>
+                    <div class="price-badge-row">
+                        <div class="price-badge-chip">
+                            <span class="price-badge-chip-label">Setup Fee</span>
+                            <span class="price-badge-chip-amount">$399</span>
+                            <span class="price-badge-chip-period">one-time</span>
+                        </div>
+                        <div class="price-badge-chip">
+                            <span class="price-badge-chip-label">Continuation</span>
+                            <span class="price-badge-chip-amount">$250</span>
+                            <span class="price-badge-chip-period">/mo</span>
+                        </div>
+                    </div>
+                    <p style="color:var(--tx3);font-size:11.5px;text-align:center;margin:-18px auto 26px;">Plus a usage fee that varies based on call volume.</p>
+                    <div class="included-section" style="margin-bottom:28px;">
+                        <div class="included-header">
+                            <span class="included-badge">✓ Included</span>
+                            <span class="included-title">Standard With Every AI Screener</span>
+                        </div>
+                        <div class="included-grid">
+                            <div class="included-item"><span class="included-check">✓</span>Calls Applicants 24/7</div>
+                            <div class="included-item"><span class="included-check">✓</span>Custom Screening Questions</div>
+                            <div class="included-item"><span class="included-check">✓</span>Candidate Scoring &amp; Ranking</div>
+                            <div class="included-item"><span class="included-check">✓</span>Full Call Transcripts</div>
+                            <div class="included-item"><span class="included-check">✓</span>Summary Report Per Candidate</div>
+                            <div class="included-item"><span class="included-check">✓</span>Instant Email Delivery</div>
+                        </div>
+                    </div>
+                    <p style="color:rgba(255,255,255,.45);font-size:13px;text-align:center;margin-bottom:32px;line-height:1.6;">Let an AI interview every applicant and hand you a shortlist of your best candidates, fully automated.</p>
+                    <form id="screenerRequestForm" onsubmit="handleScreenerRequest(event)">
+                        <div class="form-group">
+                            <label for="scFirstName">First Name</label>
+                            <input type="text" id="scFirstName" required placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <label for="scLastName">Last Name</label>
+                            <input type="text" id="scLastName" required placeholder="Last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="scPhone">Phone Number</label>
+                            <input type="tel" id="scPhone" required placeholder="Your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="scEmail">Email Address</label>
+                            <input type="email" id="scEmail" required placeholder="Your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="scBusinessName">Business Name</label>
+                            <input type="text" id="scBusinessName" required placeholder="Your business name">
+                        </div>
+                        <div class="form-group">
+                            <label for="scIndustry">Industry / Business Type</label>
+                            <select id="scIndustry" required>
+                                <option value="">Select your industry</option>
+                                <option value="retail">Retail</option>
+                                <option value="restaurant">Restaurant / Food Service</option>
+                                <option value="beauty-salon">Beauty Salon / Barbershop</option>
+                                <option value="healthcare">Healthcare / Medical</option>
+                                <option value="construction">Construction / Trades</option>
+                                <option value="logistics">Logistics / Delivery</option>
+                                <option value="hospitality">Hotel / Hospitality</option>
+                                <option value="real-estate">Real Estate</option>
+                                <option value="tech">Tech / Startup</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="scRole">Role You Are Hiring For</label>
+                            <input type="text" id="scRole" required placeholder="e.g. Customer Service Rep, Sales Associate...">
+                        </div>
+                        <div class="form-group">
+                            <label for="scVolume">Expected Applicants Per Month</label>
+                            <select id="scVolume" required>
+                                <option value="">Select volume</option>
+                                <option value="1-10">1 – 10</option>
+                                <option value="11-30">11 – 30</option>
+                                <option value="31-60">31 – 60</option>
+                                <option value="60+">60+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="scQuestions">Key Screening Questions <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional — we can help craft these)</span></label>
+                            <textarea id="scQuestions" rows="4" placeholder="e.g. Do you have experience in customer service? Are you available weekends? What salary range are you looking for?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="scNotes">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                            <textarea id="scNotes" rows="3" placeholder="e.g. We need someone bilingual, must own a car, night shifts only..."></textarea>
+                        </div>
+                        <div class="package-grand-total">
+                            <div class="package-grand-total-row">
+                                <span class="package-grand-total-label">Setup Fee</span>
+                                <span class="package-grand-total-amount">$399</span>
+                            </div>
+                            <div class="package-grand-total-row">
+                                <span class="package-grand-total-label">Monthly Continuation</span>
+                                <span class="package-grand-total-amount">$250/mo</span>
+                            </div>
+                        </div>
+                        <p style="color:var(--tx3);font-size:11px;text-align:center;margin-bottom:24px;">Plus a usage fee that varies based on call volume, billed separately.</p>
                         <button type="submit" class="submit-button">SUBMIT REQUEST</button>
                         <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
                     </form>
