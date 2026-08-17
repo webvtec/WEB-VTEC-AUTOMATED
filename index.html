@@ -654,6 +654,30 @@ button{box-shadow:none}
 .plan-price{font-family:"Playfair Display",serif;font-size:19px;font-weight:800;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .plan-setup-note{color:var(--tx3);font-size:11.5px;text-align:center;margin:12px 0 0;}
 @media(max-width:480px){.plan-grid{grid-template-columns:1fr 1fr;}}
+
+.minutes-slider-wrap{
+  background:rgba(255,255,255,.025);border:1px solid rgba(212,160,23,.2);
+  border-radius:10px;padding:20px 16px 16px;
+}
+.minutes-slider-readout{
+  text-align:center;margin-bottom:14px;
+}
+.minutes-slider-mins{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--tx2);text-transform:uppercase;display:block;margin-bottom:4px;}
+.minutes-slider-price{font-family:"Playfair Display",serif;font-size:24px;font-weight:800;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.minutes-slider-input{
+  -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:4px;
+  background:rgba(212,160,23,.18);outline:none;cursor:pointer;margin:6px 0;
+}
+.minutes-slider-input::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;
+  background:var(--gold);border:3px solid #0d1420;cursor:pointer;
+  box-shadow:0 2px 8px rgba(212,160,23,.4);
+}
+.minutes-slider-input::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;background:var(--gold);
+  border:3px solid #0d1420;cursor:pointer;box-shadow:0 2px 8px rgba(212,160,23,.4);
+}
+.minutes-slider-scale{display:flex;justify-content:space-between;font-size:10px;color:var(--tx3);margin-top:6px;}
 .package-divider{
   height:1px;background:rgba(212,160,23,.16);
   margin:32px 0 28px;
@@ -1181,7 +1205,7 @@ button{box-shadow:none}
 
         <button class="login-button" onclick="closeGetStartedModal(); requestPhotoVisit();" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            Property Photo Visit
+            Property Photo Shoot
         </button>
 
         <button class="login-button" onclick="closeGetStartedModal(); requestWebsiteType(null);" style="display:flex;align-items:center;justify-content:center;gap:10px;">
@@ -1430,42 +1454,6 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
               </button>
             </div>
 
-            <div class="hero-social-row">
-              <a href="https://www.instagram.com/carlanviroberts4?igsh=MXBobTd0M2ozNWljNQ==" target="_blank" rel="noopener" class="social-icon-btn" aria-label="Instagram">
-                <svg width="40" height="40" viewBox="0 0 48 48">
-                  <defs>
-                    <radialGradient id="igGrad" cx="30%" cy="107%" r="150%">
-                      <stop offset="0%" stop-color="#fdf497"/>
-                      <stop offset="5%" stop-color="#fdf497"/>
-                      <stop offset="45%" stop-color="#fd5949"/>
-                      <stop offset="60%" stop-color="#d6249f"/>
-                      <stop offset="90%" stop-color="#285AEB"/>
-                    </radialGradient>
-                  </defs>
-                  <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#igGrad)"/>
-                  <rect x="13" y="13" width="22" height="22" rx="7" fill="none" stroke="#fff" stroke-width="2.4"/>
-                  <circle cx="24" cy="24" r="6.2" fill="none" stroke="#fff" stroke-width="2.4"/>
-                  <circle cx="32.8" cy="15.2" r="1.7" fill="#fff"/>
-                </svg>
-              </a>
-
-              <a href="https://whatsapp.com/channel/0029Vb7tQ3tEVccTSyrNHY2L" target="_blank" rel="noopener" class="whatsapp-channel-btn">
-                <svg width="20" height="20" viewBox="0 0 48 48">
-                  <rect x="2" y="2" width="44" height="44" rx="12" fill="#25D366"/>
-                  <path fill="#fff" d="M24 10c-7.7 0-14 6.3-14 14 0 2.7.8 5.3 2.2 7.5L11 38l6.7-2.1c2.1 1.2 4.6 1.9 7.1 1.9h.1c7.7 0 14-6.3 14-14S31.7 10 24 10zm8.2 20c-.4 1-2 1.9-2.8 2-.7.1-1.6.2-2.6-.2-.6-.2-1.4-.4-2.4-.9-4.1-1.8-6.8-5.9-7-6.2-.2-.3-1.7-2.2-1.7-4.3s1.1-3.1 1.4-3.5c.4-.4.8-.5 1.1-.5h.8c.3 0 .6 0 .9.7.3.8 1.2 2.9 1.3 3.1.1.2.2.5 0 .7-.1.3-.2.4-.4.7-.2.2-.4.5-.6.7-.2.2-.4.4-.2.8.2.4 1 1.6 2.2 2.6 1.5 1.3 2.7 1.7 3.1 1.9.4.2.6.2.8-.1.2-.2 1-1.1 1.2-1.5.3-.4.5-.3.8-.2.3.1 2.1 1 2.5 1.2.4.2.6.3.7.4.1.2.1.8-.2 1.6z"/>
-                </svg>
-                Join Our Channel
-              </a>
-
-              <a href="#" onclick="return false;" class="social-icon-btn" aria-label="TikTok">
-                <svg width="40" height="40" viewBox="0 0 48 48">
-                  <rect x="2" y="2" width="44" height="44" rx="12" fill="#010101"/>
-                  <path transform="translate(-1.1,0)" fill="#25F4EE" d="M31.5 13.5c1 2.2 3 3.9 5.4 4.4v4.7c-1.9 0-3.7-.6-5.4-1.6v9.6c0 4.9-4 8.9-8.9 8.9s-8.9-4-8.9-8.9 4-8.9 8.9-8.9c.5 0 .9 0 1.4.1v4.8c-.4-.1-.9-.2-1.4-.2-2.3 0-4.2 1.9-4.2 4.2s1.9 4.2 4.2 4.2 4.2-1.9 4.2-4.2V9.8h4.7c0 1.3.3 2.6.9 3.7z"/>
-                  <path transform="translate(1.1,0)" fill="#FE2C55" d="M31.5 13.5c1 2.2 3 3.9 5.4 4.4v4.7c-1.9 0-3.7-.6-5.4-1.6v9.6c0 4.9-4 8.9-8.9 8.9s-8.9-4-8.9-8.9 4-8.9 8.9-8.9c.5 0 .9 0 1.4.1v4.8c-.4-.1-.9-.2-1.4-.2-2.3 0-4.2 1.9-4.2 4.2s1.9 4.2 4.2 4.2 4.2-1.9 4.2-4.2V9.8h4.7c0 1.3.3 2.6.9 3.7z"/>
-                  <path fill="#fff" d="M31.5 13.5c1 2.2 3 3.9 5.4 4.4v4.7c-1.9 0-3.7-.6-5.4-1.6v9.6c0 4.9-4 8.9-8.9 8.9s-8.9-4-8.9-8.9 4-8.9 8.9-8.9c.5 0 .9 0 1.4.1v4.8c-.4-.1-.9-.2-1.4-.2-2.3 0-4.2 1.9-4.2 4.2s1.9 4.2 4.2 4.2 4.2-1.9 4.2-4.2V9.8h4.7c0 1.3.3 2.6.9 3.7z"/>
-                </svg>
-              </a>
-            </div>
           </div>
 
 
@@ -1619,17 +1607,17 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
               </div>
             </div>
 
-            <!-- Property Photo Visit -->
+            <!-- Property Photo Shoot -->
             <div class="pillar-card">
               <div class="pillar-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1467232004584-a241de8bcf5d.avif?alt=media&token=6c0147b9-0c17-4dfc-a157-8cd0fb721dd3')">
                 <div class="pillar-img-overlay"></div>
                 <div class="pillar-tag">On-Site</div>
               </div>
               <div class="pillar-body">
-                <h3 class="pillar-title">Property Photo Visit</h3>
+                <h3 class="pillar-title">Property Photo Shoot</h3>
                 <p class="pillar-desc">Request Carlanvi to come out to your property in person and take photos for your business, hotels, rentals, restaurants, and more. Tell us your business type and we'll quote you directly.</p>
                 <button class="pillar-btn" onclick="requestPhotoVisit()">
-                  Request A Photo Visit
+                  Request A Photo Shoot
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
               </div>
@@ -1702,20 +1690,6 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                         <span class="price-badge-amount">$190+</span>
                         <span class="price-badge-period">one-time</span>
                     </div>
-                    <div class="included-section" style="margin-bottom:28px;">
-                        <div class="included-header">
-                            <span class="included-badge">✓ Included</span>
-                            <span class="included-title">Standard With Every Website</span>
-                        </div>
-                        <div class="included-grid">
-                            <div class="included-item"><span class="included-check">✓</span>Custom Responsive Design</div>
-                            <div class="included-item"><span class="included-check">✓</span>Mobile &amp; Desktop Friendly</div>
-                            <div class="included-item"><span class="included-check">✓</span>Social Media Integration</div>
-                            <div class="included-item"><span class="included-check">✓</span>Contact / Inquiry Form</div>
-                            <div class="included-item"><span class="included-check">✓</span>SEO-Friendly Setup</div>
-                            <div class="included-item"><span class="included-check">✓</span>Admin Content Management</div>
-                        </div>
-                    </div>
                     <form id="websiteRequestForm">
                         <div class="form-group">
                             <label for="firstName">First Name</label>
@@ -1753,6 +1727,21 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
     <input type="text" id="customWebsiteType" name="customWebsiteType" placeholder="Enter your website type...">
 </div>
 
+                        <div class="included-section" style="margin-bottom:28px;">
+                            <div class="included-header">
+                                <span class="included-badge">✓ Included</span>
+                                <span class="included-title">Standard With Every Website</span>
+                            </div>
+                            <div class="included-grid">
+                                <div class="included-item"><span class="included-check">✓</span>Custom Responsive Design</div>
+                                <div class="included-item"><span class="included-check">✓</span>Mobile &amp; Desktop Friendly</div>
+                                <div class="included-item"><span class="included-check">✓</span>Social Media Integration</div>
+                                <div class="included-item"><span class="included-check">✓</span>Contact / Inquiry Form</div>
+                                <div class="included-item"><span class="included-check">✓</span>SEO-Friendly Setup</div>
+                                <div class="included-item"><span class="included-check">✓</span>Admin Content Management</div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label>Would you like any of these built into your site? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                             <div class="checkbox-group" id="websiteAddonsGroup">
@@ -1763,18 +1752,6 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                                 <label class="checkbox-option">
                                     <input type="checkbox" name="addons" value="email-confirmations" data-price="50">
                                     <span class="checkbox-text">Automated Email Confirmations</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="addons" value="revive-dead-leads" data-price="50">
-                                    <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="addons" value="broadcast-campaigns" data-price="50">
-                                    <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="addons" value="clockwork-auto-reviews" data-price="50">
-                                    <span class="checkbox-text">Clockwork – Auto Reviews</span>
                                 </label>
                             </div>
                             <div class="package-grand-total">
@@ -3250,36 +3227,44 @@ function setupPackagePageCalculator() {
   recalc();
 }
 
-// Minute-based plan calculator: base price comes from the selected radio
-// plan (250/500/750/1000 min), plus any checked add-ons ($/mo each).
-function setupAIPlanCalculator(planGroupId, addonsGroupId, totalElId) {
-  const planGroup = document.getElementById(planGroupId);
-  const addonsGroup = document.getElementById(addonsGroupId);
+// Minute-based plan calculator: a slider from 250–10,000 min/mo, stepping
+// 250 min at a time. Base rate is $295 for the first 250 min, +$50 for
+// every additional 250 min block (matches the original 250/500/750/1000
+// pricing of $295/$345/$395/$445, extrapolated out to 10,000 min).
+const MINUTES_BASE = 250;
+const MINUTES_BASE_PRICE = 295;
+const MINUTES_STEP = 250;
+const MINUTES_STEP_PRICE = 50;
+
+function calcMinutesPrice(minutes) {
+  const blocks = (minutes - MINUTES_BASE) / MINUTES_STEP;
+  return MINUTES_BASE_PRICE + (blocks * MINUTES_STEP_PRICE);
+}
+
+function setupAIPlanCalculator(sliderId, minsLabelId, priceLabelId, totalElId) {
+  const slider = document.getElementById(sliderId);
+  const minsLabel = document.getElementById(minsLabelId);
+  const priceLabel = document.getElementById(priceLabelId);
   const totalEl = document.getElementById(totalElId);
-  if (!planGroup || !totalEl) return;
+  if (!slider || !totalEl) return;
 
   function recalc() {
-    const selected = planGroup.querySelector('input[type="radio"]:checked');
-    let total = selected ? parseFloat(selected.dataset.price || '0') : 0;
-    if (addonsGroup) {
-      addonsGroup.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
-        total += parseFloat(cb.dataset.price || '0');
-      });
-    }
-    totalEl.textContent = '$' + total.toLocaleString() + '/mo';
+    const minutes = parseInt(slider.value, 10);
+    const price = calcMinutesPrice(minutes);
+    const priceText = '$' + price.toLocaleString() + '/mo';
+    if (minsLabel) minsLabel.textContent = minutes.toLocaleString();
+    if (priceLabel) priceLabel.textContent = priceText;
+    totalEl.textContent = priceText;
   }
 
-  planGroup.querySelectorAll('input[type="radio"]').forEach(r => r.addEventListener('change', recalc));
-  if (addonsGroup) {
-    addonsGroup.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', recalc));
-  }
+  slider.addEventListener('input', recalc);
   recalc();
 }
 
 function setupPriceCalculators() {
   setupWebsiteCalculator();
-  setupAIPlanCalculator('aiPlanGroup', 'aiAddonsGroup', 'aiTotalEstimate');
-  setupAIPlanCalculator('outPlanGroup', 'outAddonsGroup', 'outTotalEstimate');
+  setupAIPlanCalculator('aiPlanGroup', 'aiPlanMinsLabel', 'aiPlanPriceLabel', 'aiTotalEstimate');
+  setupAIPlanCalculator('outPlanGroup', 'outPlanMinsLabel', 'outPlanPriceLabel', 'outTotalEstimate');
   setupPackagePageCalculator();
 }
 
@@ -3379,7 +3364,7 @@ async function handleAIReceptionistRequest(e) {
 
   const checkedAddons = Array.from(document.querySelectorAll('input[name="aiAddons"]:checked'))
     .map(cb => cb.value);
-  const selectedPlan = document.querySelector('input[name="aiPlan"]:checked');
+  const aiPlanSlider = document.getElementById('aiPlanGroup');
 
   const data = {
     firstName:    document.getElementById('aiFirstName').value.trim(),
@@ -3391,7 +3376,7 @@ async function handleAIReceptionistRequest(e) {
     description:  document.getElementById('aiDescription').value.trim(),
     includedFeatures: AI_INCLUDED_FEATURES,
     addons:       checkedAddons,
-    minutesPlan:     selectedPlan ? (selectedPlan.value + ' min/mo') : 'Not selected',
+    minutesPlan:     aiPlanSlider ? (aiPlanSlider.value + ' min/mo') : 'Not selected',
     setupFee:        '$200',
     monthlyEstimate: document.getElementById('aiTotalEstimate')?.textContent || '$295/mo',
     userId:       currentUser?.uid || null,
@@ -3438,7 +3423,7 @@ async function handleOutboundCallerRequest(e) {
 
   const checkedAddons = Array.from(document.querySelectorAll('input[name="outAddons"]:checked'))
     .map(cb => cb.value);
-  const selectedPlan = document.querySelector('input[name="outPlan"]:checked');
+  const outPlanSlider = document.getElementById('outPlanGroup');
 
   const data = {
     firstName:    document.getElementById('outFirstName').value.trim(),
@@ -3450,7 +3435,7 @@ async function handleOutboundCallerRequest(e) {
     callGoal:     document.getElementById('outCallGoal').value.trim(),
     includedFeatures: OUT_INCLUDED_FEATURES,
     addons:       checkedAddons,
-    minutesPlan:     selectedPlan ? (selectedPlan.value + ' min/mo') : 'Not selected',
+    minutesPlan:     outPlanSlider ? (outPlanSlider.value + ' min/mo') : 'Not selected',
     setupFee:        '$200',
     monthlyEstimate: document.getElementById('outTotalEstimate')?.textContent || '$295/mo',
     userId:       currentUser?.uid || null,
@@ -3790,28 +3775,6 @@ async function handleCustomPackageRequest(e) {
             <div class="content-area">
                 <div class="form-container">
                     <h2 class="form-page-title" id="aiPageTitle">Request AI Inbound Caller</h2>
-                    <div class="form-group">
-                        <label>Choose Your Minutes Plan</label>
-                        <div class="plan-grid" id="aiPlanGroup">
-                            <label class="plan-option">
-                                <input type="radio" name="aiPlan" value="250" data-price="295" checked>
-                                <span class="plan-mins">250 min/mo</span>
-                            </label>
-                            <label class="plan-option">
-                                <input type="radio" name="aiPlan" value="500" data-price="345">
-                                <span class="plan-mins">500 min/mo</span>
-                            </label>
-                            <label class="plan-option">
-                                <input type="radio" name="aiPlan" value="750" data-price="395">
-                                <span class="plan-mins">750 min/mo</span>
-                            </label>
-                            <label class="plan-option">
-                                <input type="radio" name="aiPlan" value="1000" data-price="445">
-                                <span class="plan-mins">1,000 min/mo</span>
-                            </label>
-                        </div>
-                        <p class="plan-setup-note">Plus a one-time $200 setup fee. Estimated rates — final pricing confirmed after we learn more about your call volume.</p>
-                    </div>
                     <form id="aiReceptionistForm" onsubmit="handleAIReceptionistRequest(event)">
                         <div class="form-group">
                             <label for="aiFirstName">First Name</label>
@@ -3852,6 +3815,16 @@ async function handleCustomPackageRequest(e) {
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Choose Your Minutes Plan</label>
+                            <div class="minutes-slider-wrap">
+                                <div class="minutes-slider-readout">
+                                    <span class="minutes-slider-mins"><span id="aiPlanMinsLabel">250</span> min/mo</span>
+                                    <span class="minutes-slider-price" id="aiPlanPriceLabel">$295/mo</span>
+                                </div>
+                                <input type="range" class="minutes-slider-input" id="aiPlanGroup" min="250" max="10000" step="250" value="250">
+                                <div class="minutes-slider-scale"><span>250</span><span>10,000</span></div>
+                            </div>
+                            <p class="plan-setup-note">Plus a one-time $200 setup fee. Estimated rates — final pricing confirmed after we learn more about your call volume.</p>
                             <div class="package-grand-total">
                                 <div class="package-grand-total-row">
                                     <span class="package-grand-total-label">Setup Fee</span>
@@ -3883,28 +3856,6 @@ async function handleCustomPackageRequest(e) {
             <div class="content-area">
                 <div class="form-container">
                     <h2 class="form-page-title">Request AI Outbound Caller</h2>
-                    <div class="form-group">
-                        <label>Choose Your Minutes Plan</label>
-                        <div class="plan-grid" id="outPlanGroup">
-                            <label class="plan-option">
-                                <input type="radio" name="outPlan" value="250" data-price="295" checked>
-                                <span class="plan-mins">250 min/mo</span>
-                            </label>
-                            <label class="plan-option">
-                                <input type="radio" name="outPlan" value="500" data-price="345">
-                                <span class="plan-mins">500 min/mo</span>
-                            </label>
-                            <label class="plan-option">
-                                <input type="radio" name="outPlan" value="750" data-price="395">
-                                <span class="plan-mins">750 min/mo</span>
-                            </label>
-                            <label class="plan-option">
-                                <input type="radio" name="outPlan" value="1000" data-price="445">
-                                <span class="plan-mins">1,000 min/mo</span>
-                            </label>
-                        </div>
-                        <p class="plan-setup-note">Plus a one-time $200 setup fee. Estimated rates — final pricing confirmed after we learn more about your call volume &amp; goals.</p>
-                    </div>
                     <form id="outboundCallerForm" onsubmit="handleOutboundCallerRequest(event)">
                         <div class="form-group">
                             <label for="outFirstName">First Name</label>
@@ -3945,6 +3896,16 @@ async function handleCustomPackageRequest(e) {
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Choose Your Minutes Plan</label>
+                            <div class="minutes-slider-wrap">
+                                <div class="minutes-slider-readout">
+                                    <span class="minutes-slider-mins"><span id="outPlanMinsLabel">250</span> min/mo</span>
+                                    <span class="minutes-slider-price" id="outPlanPriceLabel">$295/mo</span>
+                                </div>
+                                <input type="range" class="minutes-slider-input" id="outPlanGroup" min="250" max="10000" step="250" value="250">
+                                <div class="minutes-slider-scale"><span>250</span><span>10,000</span></div>
+                            </div>
+                            <p class="plan-setup-note">Plus a one-time $200 setup fee. Estimated rates — final pricing confirmed after we learn more about your call volume &amp; goals.</p>
                             <div class="package-grand-total">
                                 <div class="package-grand-total-row">
                                     <span class="package-grand-total-label">Setup Fee</span>
@@ -3975,7 +3936,7 @@ async function handleCustomPackageRequest(e) {
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
-                    <h2 class="form-page-title">Request A Property Photo Visit</h2>
+                    <h2 class="form-page-title">Request A Property Photo Shoot</h2>
                     <p class="form-page-subtitle">Carlanvi will come to your property in person and take photos for your business. Tell us about your business and we'll follow up with a direct quote — no fixed pricing on this service.</p>
                     <form id="photoVisitForm" onsubmit="handlePhotoVisitRequest(event)">
                         <div class="form-group">
