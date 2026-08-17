@@ -634,6 +634,26 @@ button{box-shadow:none}
 .brand-color-group{display:flex;align-items:center;gap:14px;flex-wrap:nowrap;}
 .brand-color-group label{margin-bottom:0;flex-shrink:0;white-space:nowrap;}
 .brand-color-group input{flex:1;min-width:0;}
+
+/* Minute-based pricing plan selector (AI Inbound / Outbound Caller) */
+.plan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.plan-option{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:16px 10px;text-align:center;cursor:pointer;
+  background:rgba(255,255,255,.025);border:1px solid rgba(212,160,23,.2);
+  border-radius:10px;transition:all .2s;
+}
+.plan-option input{display:none;}
+.plan-option:hover{border-color:rgba(212,160,23,.45);background:rgba(212,160,23,.05);}
+.plan-option:has(input:checked){
+  border-color:rgba(212,160,23,.6);background:rgba(212,160,23,.1);
+  box-shadow:0 0 0 1px rgba(212,160,23,.15),0 4px 14px rgba(212,160,23,.12);
+}
+.plan-mins{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--tx2);text-transform:uppercase;}
+.plan-option:has(input:checked) .plan-mins{color:var(--tx1);}
+.plan-price{font-family:"Playfair Display",serif;font-size:19px;font-weight:800;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.plan-setup-note{color:var(--tx3);font-size:11.5px;text-align:center;margin:12px 0 0;}
+@media(max-width:480px){.plan-grid{grid-template-columns:1fr 1fr;}}
 .package-divider{
   height:1px;background:rgba(212,160,23,.16);
   margin:32px 0 28px;
@@ -1151,7 +1171,17 @@ button{box-shadow:none}
 
         <button class="login-button" onclick="closeGetStartedModal(); requestAiSystem(null);" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><line x1="19" y1="14" x2="22" y2="14"/><line x1="2" y1="14" x2="5" y2="14"/></svg>
-            AI Receptionist
+            AI Inbound Caller
+        </button>
+
+        <button class="login-button" onclick="closeGetStartedModal(); requestOutboundCaller();" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><line x1="16" y1="2" x2="22" y2="8"/><line x1="22" y1="2" x2="16" y2="8"/></svg>
+            AI Outbound Caller
+        </button>
+
+        <button class="login-button" onclick="closeGetStartedModal(); requestPhotoVisit();" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            Property Photo Visit
         </button>
 
         <button class="login-button" onclick="closeGetStartedModal(); requestWebsiteType(null);" style="display:flex;align-items:center;justify-content:center;gap:10px;">
@@ -1548,10 +1578,26 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                 <div class="pillar-tag">AI</div>
               </div>
               <div class="pillar-body">
-                <h3 class="pillar-title">AI Calling System</h3>
-                <p class="pillar-desc">An intelligent AI receptionist that answers your calls, handles bookings, responds to FAQs, and follows up with clients, 24 hours a day, 7 days a week.</p>
+                <h3 class="pillar-title">AI Inbound Caller</h3>
+                <p class="pillar-desc">Answer calls, handle inquiries, book appointments &amp; follow up 24/7. An intelligent AI receptionist that answers your calls, handles bookings, responds to FAQs, and follows up with clients around the clock.</p>
                 <button class="pillar-btn" onclick="requestAiSystem(null)">
-                  Request AI Receptionist
+                  Request AI Inbound Caller
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- AI Outbound Caller -->
+            <div class="pillar-card">
+              <div class="pillar-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/ChatGPT%20Image%20Jun%2017%2C%202026%2C%2001_59_34%20PM.png?alt=media&token=4056df5d-3e4d-4e2f-9e34-664b552f25a2')">
+                <div class="pillar-img-overlay"></div>
+                <div class="pillar-tag">AI</div>
+              </div>
+              <div class="pillar-body">
+                <h3 class="pillar-title">AI Outbound Caller</h3>
+                <p class="pillar-desc">An AI agent that calls your lead lists to boost sales, calls customers to leave reminders, follow up, chase payment reminders and more, all without you lifting a phone.</p>
+                <button class="pillar-btn" onclick="requestOutboundCaller()">
+                  Request AI Outbound Caller
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
               </div>
@@ -1568,6 +1614,22 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                 <p class="pillar-desc">An AI that answers every applicant call, asks your custom screening questions, scores their responses, and delivers a ranked summary so you only speak to the best candidates.</p>
                 <button class="pillar-btn" onclick="showPage('screener-request')">
                   Request AI Screener
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Property Photo Visit -->
+            <div class="pillar-card">
+              <div class="pillar-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1467232004584-a241de8bcf5d.avif?alt=media&token=6c0147b9-0c17-4dfc-a157-8cd0fb721dd3')">
+                <div class="pillar-img-overlay"></div>
+                <div class="pillar-tag">On-Site</div>
+              </div>
+              <div class="pillar-body">
+                <h3 class="pillar-title">Property Photo Visit</h3>
+                <p class="pillar-desc">Request Carlanvi to come out to your property in person and take photos for your business, hotels, rentals, restaurants, and more. Tell us your business type and we'll quote you directly.</p>
+                <button class="pillar-btn" onclick="requestPhotoVisit()">
+                  Request A Photo Visit
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
               </div>
@@ -1884,7 +1946,32 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                                         <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
                                     </div>
                                 </div>
-                                <p style="color:var(--tx3);font-size:11.5px;text-align:center;margin-top:14px;">$399 one-time setup, then $250+/mo continuation, plus a usage fee that varies based on call volume.</p>
+                                <div class="form-group" style="margin-top:14px;margin-bottom:0;">
+                                    <label>Choose Your Minutes Plan</label>
+                                    <div class="plan-grid" id="pkgAiPlanGroup">
+                                        <label class="plan-option">
+                                            <input type="radio" name="pkgAiPlan" value="250" data-price="295" checked>
+                                            <span class="plan-mins">250 min/mo</span>
+                                            <span class="plan-price">$295/mo</span>
+                                        </label>
+                                        <label class="plan-option">
+                                            <input type="radio" name="pkgAiPlan" value="500" data-price="345">
+                                            <span class="plan-mins">500 min/mo</span>
+                                            <span class="plan-price">$345/mo</span>
+                                        </label>
+                                        <label class="plan-option">
+                                            <input type="radio" name="pkgAiPlan" value="750" data-price="395">
+                                            <span class="plan-mins">750 min/mo</span>
+                                            <span class="plan-price">$395/mo</span>
+                                        </label>
+                                        <label class="plan-option">
+                                            <input type="radio" name="pkgAiPlan" value="1000" data-price="445">
+                                            <span class="plan-mins">1,000 min/mo</span>
+                                            <span class="plan-price">$445/mo</span>
+                                        </label>
+                                    </div>
+                                    <p class="plan-setup-note">$200 one-time setup fee. Estimated rates based on the minutes plan you choose.</p>
+                                </div>
                                 <div class="form-group" style="margin-top:18px;margin-bottom:0;">
                                     <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
                                     <div class="checkbox-group" id="pkgAiAddonsGroup">
@@ -1914,11 +2001,11 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                                 <div class="package-grand-total" style="margin-top:18px;">
                                     <div class="package-grand-total-row">
                                         <span class="package-grand-total-label">AI Receptionist: One-Time Setup</span>
-                                        <span class="package-grand-total-amount">$399</span>
+                                        <span class="package-grand-total-amount">$200</span>
                                     </div>
                                     <div class="package-grand-total-row">
-                                        <span class="package-grand-total-label">AI Receptionist: Monthly</span>
-                                        <span class="package-grand-total-amount">$250/mo</span>
+                                        <span class="package-grand-total-label">AI Receptionist: Monthly Plan</span>
+                                        <span class="package-grand-total-amount" id="pkgAiPlanMonthly">$295/mo</span>
                                     </div>
                                 </div>
                             </div>
@@ -1993,11 +2080,11 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                             </div>
                             <div class="package-grand-total-row">
                                 <span class="package-grand-total-label">One-Time Setup</span>
-                                <span class="package-grand-total-amount" id="pkgGrandOneTime">$589</span>
+                                <span class="package-grand-total-amount" id="pkgGrandOneTime">$390</span>
                             </div>
                             <div class="package-grand-total-row">
                                 <span class="package-grand-total-label">Monthly Subscription</span>
-                                <span class="package-grand-total-amount" id="pkgGrandMonthly">$250/mo</span>
+                                <span class="package-grand-total-amount" id="pkgGrandMonthly">$295/mo</span>
                             </div>
                         </div>
                         <p style="color:var(--tx3);font-size:11px;text-align:center;margin-top:-12px;margin-bottom:24px;">Totals update automatically based on the services you select above. AI usage fee varies and is billed separately.</p>
@@ -2808,7 +2895,7 @@ function requestWebsiteType(key) {
   showPage('request');
 }
 
-const DEFAULT_AI_TITLE = 'Request AI Receptionist';
+const DEFAULT_AI_TITLE = 'Request AI Inbound Caller';
 
 function requestAiSystem(key) {
   const titleEl = document.getElementById('aiPageTitle');
@@ -2817,6 +2904,14 @@ function requestAiSystem(key) {
   if (titleEl) titleEl.textContent = DEFAULT_AI_TITLE;
   if (typeSelect) typeSelect.value = '';
   showPage('ai-receptionist');
+}
+
+function requestOutboundCaller() {
+  showPage('outbound-caller-request');
+}
+
+function requestPhotoVisit() {
+  showPage('photo-visit-request');
 }
 
 function handlePkgTypeChange(e) {
@@ -3093,9 +3188,15 @@ function setupPackagePageCalculator() {
       addonMonthly += (i === 0) ? FIRST_ADDON_PRICE : ADDITIONAL_ADDON_PRICE;
     });
 
+    const aiPlanGroup = document.getElementById('pkgAiPlanGroup');
+    const selectedAiPlan = aiPlanGroup ? aiPlanGroup.querySelector('input[type="radio"]:checked') : null;
+    const aiPlanPrice = selectedAiPlan ? parseFloat(selectedAiPlan.dataset.price || '0') : 295;
+    const pkgAiPlanMonthlyEl = document.getElementById('pkgAiPlanMonthly');
+    if (pkgAiPlanMonthlyEl) pkgAiPlanMonthlyEl.textContent = '$' + aiPlanPrice.toLocaleString() + '/mo';
+
     const promoTotal = calcPromoTotal();
-    const oneTime = (state.website ? 190 : 0) + (state.ai ? 399 : 0) + (state.promo ? promoTotal : 0);
-    const monthly = addonMonthly + (state.ai ? 250 : 0);
+    const oneTime = (state.website ? 190 : 0) + (state.ai ? 200 : 0) + (state.promo ? promoTotal : 0);
+    const monthly = addonMonthly + (state.ai ? aiPlanPrice : 0);
 
     if (webOneTimeEl)   webOneTimeEl.textContent   = '$' + (state.website ? 190 : 0).toLocaleString();
     if (webMonthlyEl)   webMonthlyEl.textContent   = '$' + addonMonthly.toLocaleString() + '/mo';
@@ -3127,6 +3228,11 @@ function setupPackagePageCalculator() {
   const chatbotCb = webGroup.querySelector('input[value="' + CHATBOT_ADDON_VALUE + '"]');
   if (chatbotCb) chatbotCb.addEventListener('change', recalc);
 
+  const pkgAiPlanGroupEl = document.getElementById('pkgAiPlanGroup');
+  if (pkgAiPlanGroupEl) {
+    pkgAiPlanGroupEl.querySelectorAll('input[type="radio"]').forEach(r => r.addEventListener('change', recalc));
+  }
+
   [webGroup, aiGroup].forEach(group => {
     if (!group) return;
     PKG_SHARED_ADDON_VALUES.forEach(value => {
@@ -3144,9 +3250,36 @@ function setupPackagePageCalculator() {
   recalc();
 }
 
+// Minute-based plan calculator: base price comes from the selected radio
+// plan (250/500/750/1000 min), plus any checked add-ons ($/mo each).
+function setupAIPlanCalculator(planGroupId, addonsGroupId, totalElId) {
+  const planGroup = document.getElementById(planGroupId);
+  const addonsGroup = document.getElementById(addonsGroupId);
+  const totalEl = document.getElementById(totalElId);
+  if (!planGroup || !totalEl) return;
+
+  function recalc() {
+    const selected = planGroup.querySelector('input[type="radio"]:checked');
+    let total = selected ? parseFloat(selected.dataset.price || '0') : 0;
+    if (addonsGroup) {
+      addonsGroup.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+        total += parseFloat(cb.dataset.price || '0');
+      });
+    }
+    totalEl.textContent = '$' + total.toLocaleString() + '/mo';
+  }
+
+  planGroup.querySelectorAll('input[type="radio"]').forEach(r => r.addEventListener('change', recalc));
+  if (addonsGroup) {
+    addonsGroup.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', recalc));
+  }
+  recalc();
+}
+
 function setupPriceCalculators() {
   setupWebsiteCalculator();
-  initPriceCalculator('aiAddonsGroup', 'aiTotalEstimate', 250, '/mo');
+  setupAIPlanCalculator('aiPlanGroup', 'aiAddonsGroup', 'aiTotalEstimate');
+  setupAIPlanCalculator('outPlanGroup', 'outAddonsGroup', 'outTotalEstimate');
   setupPackagePageCalculator();
 }
 
@@ -3246,6 +3379,7 @@ async function handleAIReceptionistRequest(e) {
 
   const checkedAddons = Array.from(document.querySelectorAll('input[name="aiAddons"]:checked'))
     .map(cb => cb.value);
+  const selectedPlan = document.querySelector('input[name="aiPlan"]:checked');
 
   const data = {
     firstName:    document.getElementById('aiFirstName').value.trim(),
@@ -3257,8 +3391,9 @@ async function handleAIReceptionistRequest(e) {
     description:  document.getElementById('aiDescription').value.trim(),
     includedFeatures: AI_INCLUDED_FEATURES,
     addons:       checkedAddons,
-    setupFee:        '$399',
-    monthlyEstimate: document.getElementById('aiTotalEstimate')?.textContent || '$250/mo',
+    minutesPlan:     selectedPlan ? (selectedPlan.value + ' min/mo') : 'Not selected',
+    setupFee:        '$200',
+    monthlyEstimate: document.getElementById('aiTotalEstimate')?.textContent || '$295/mo',
     userId:       currentUser?.uid || null,
     userEmail:    currentUser?.email || document.getElementById('aiEmail').value.trim(),
     timestamp:    firebase.firestore.FieldValue.serverTimestamp(),
@@ -3274,9 +3409,118 @@ async function handleAIReceptionistRequest(e) {
 
     const addonsText = checkedAddons.length ? checkedAddons.join(', ') : 'None selected';
 
-    const msg = `\n🤖 NEW AI RECEPTIONIST REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n✅ Included: ${AI_INCLUDED_FEATURES.join(', ')}\n➕ Extra Add-Ons: ${addonsText}\n💰 Setup Fee: ${data.setupFee}\n💰 Monthly (Continuation + Add-Ons): ${data.monthlyEstimate}\n💡 Plus a usage fee that varies by call volume\n📝 Details: ${data.description}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
+    const msg = `\n🤖 NEW AI INBOUND CALLER REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n✅ Included: ${AI_INCLUDED_FEATURES.join(', ')}\n➕ Extra Add-Ons: ${addonsText}\n⏱️ Minutes Plan: ${data.minutesPlan}\n💰 Setup Fee: ${data.setupFee}\n💰 Monthly (Plan + Add-Ons): ${data.monthlyEstimate}\n📝 Details: ${data.description}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
     await sendTelegramMessage(msg);
     alert('🎉 Request submitted! We will be in touch soon.');
+    e.target.reset();
+    showPage('home');
+  } catch(err) {
+    console.error(err);
+    alert('❌ Error submitting. Please try again.');
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+}
+
+// AI Outbound Caller Request Form Handler
+async function handleOutboundCallerRequest(e) {
+  e.preventDefault();
+
+  const OUT_INCLUDED_FEATURES = [
+    'Calls Your Lead Lists',
+    'Sales & Follow-Up Calls',
+    'Appointment & Payment Reminders',
+    'Dead Lead Revive Calls',
+    'Call Recordings & Summaries',
+    'Custom Call Script'
+  ];
+
+  const checkedAddons = Array.from(document.querySelectorAll('input[name="outAddons"]:checked'))
+    .map(cb => cb.value);
+  const selectedPlan = document.querySelector('input[name="outPlan"]:checked');
+
+  const data = {
+    firstName:    document.getElementById('outFirstName').value.trim(),
+    lastName:     document.getElementById('outLastName').value.trim(),
+    phone:        document.getElementById('outPhone').value.trim(),
+    email:        document.getElementById('outEmail').value.trim(),
+    businessName: document.getElementById('outBusinessName').value.trim(),
+    businessType: document.getElementById('outBusinessType').value,
+    callGoal:     document.getElementById('outCallGoal').value.trim(),
+    includedFeatures: OUT_INCLUDED_FEATURES,
+    addons:       checkedAddons,
+    minutesPlan:     selectedPlan ? (selectedPlan.value + ' min/mo') : 'Not selected',
+    setupFee:        '$200',
+    monthlyEstimate: document.getElementById('outTotalEstimate')?.textContent || '$295/mo',
+    userId:       currentUser?.uid || null,
+    userEmail:    currentUser?.email || document.getElementById('outEmail').value.trim(),
+    timestamp:    firebase.firestore.FieldValue.serverTimestamp(),
+    status:       'pending'
+  };
+
+  const btn = e.target.querySelector('button[type="submit"]');
+  const orig = btn.textContent;
+  try {
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+    await db.collection('ai-outbound-requests').add(data);
+
+    const addonsText = checkedAddons.length ? checkedAddons.join(', ') : 'None selected';
+
+    const msg = `\n📤 NEW AI OUTBOUND CALLER REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n✅ Included: ${OUT_INCLUDED_FEATURES.join(', ')}\n➕ Extra Add-Ons: ${addonsText}\n⏱️ Minutes Plan: ${data.minutesPlan}\n💰 Setup Fee: ${data.setupFee}\n💰 Monthly (Plan + Add-Ons): ${data.monthlyEstimate}\n📝 What The Calls Should Achieve: ${data.callGoal}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
+    await sendTelegramMessage(msg);
+    alert('🎉 Request submitted! We will be in touch soon.');
+    e.target.reset();
+    showPage('home');
+  } catch(err) {
+    console.error(err);
+    alert('❌ Error submitting. Please try again.');
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+}
+
+// Property Photo Visit Request Form Handler (no fixed pricing — quoted per request)
+async function handlePhotoVisitRequest(e) {
+  e.preventDefault();
+
+  let businessType = document.getElementById('pvBusinessType').value;
+  if (businessType === 'other') {
+    const customType = document.getElementById('pvCustomBusinessType').value.trim();
+    if (!customType) {
+      alert('Please specify your business type.');
+      return;
+    }
+    businessType = customType;
+  }
+
+  const data = {
+    firstName:        document.getElementById('pvFirstName').value.trim(),
+    lastName:         document.getElementById('pvLastName').value.trim(),
+    phone:            document.getElementById('pvPhone').value.trim(),
+    email:            document.getElementById('pvEmail').value.trim(),
+    businessName:     document.getElementById('pvBusinessName').value.trim(),
+    businessType:     businessType,
+    propertyAddress:  document.getElementById('pvAddress').value.trim(),
+    details:          document.getElementById('pvDetails').value.trim(),
+    userId:           currentUser?.uid || null,
+    userEmail:        currentUser?.email || document.getElementById('pvEmail').value.trim(),
+    timestamp:        firebase.firestore.FieldValue.serverTimestamp(),
+    status:           'pending'
+  };
+
+  const btn = e.target.querySelector('button[type="submit"]');
+  const orig = btn.textContent;
+  try {
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+    await db.collection('photo-visit-requests').add(data);
+
+    const msg = `\n📸 NEW PROPERTY PHOTO VISIT REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n📍 Property Address: ${data.propertyAddress}\n📝 Details: ${data.details || 'None provided'}\n💰 Pricing: To be quoted directly\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
+    await sendTelegramMessage(msg);
+    alert('🎉 Request submitted! We will reach out to schedule a visit and confirm pricing.');
     e.target.reset();
     showPage('home');
   } catch(err) {
@@ -3386,8 +3630,9 @@ function resetPackageDisplays() {
     pkgWebsiteOneTime: '$190',
     pkgWebsiteMonthly: '$0/mo',
     pkgPromoTotal:     '$0',
-    pkgGrandOneTime:   '$589',
-    pkgGrandMonthly:   '$250/mo'
+    pkgAiPlanMonthly:  '$295/mo',
+    pkgGrandOneTime:   '$390',
+    pkgGrandMonthly:   '$295/mo'
   };
   Object.entries(defaults).forEach(([id, val]) => {
     const el = document.getElementById(id);
@@ -3402,6 +3647,10 @@ function resetPackageDisplays() {
   if (webToggle)   webToggle.checked = true;
   if (aiToggle)    aiToggle.checked = true;
   if (promoToggle) promoToggle.checked = false;
+
+  const pkgAiPlanDefault = document.querySelector('#pkgAiPlanGroup input[value="250"]');
+  if (pkgAiPlanDefault) pkgAiPlanDefault.checked = true;
+
   if (typeof handlePkgServiceToggle === 'function') handlePkgServiceToggle();
 
   if (window.__pkgAddonsReset) window.__pkgAddonsReset();
@@ -3478,8 +3727,9 @@ async function handleCustomPackageRequest(e) {
     websiteAddons: websiteAddons,
     websiteOneTime:      document.getElementById('pkgWebsiteOneTime')?.textContent || '$0',
     websiteMonthly:      document.getElementById('pkgWebsiteMonthly')?.textContent || '$0/mo',
-    aiSetupFee:          state.ai ? '$399' : '$0',
-    aiContinuationFee:   state.ai ? '$250/mo' : '$0/mo',
+    aiSetupFee:          state.ai ? '$200' : '$0',
+    aiMinutesPlan:       state.ai ? (document.querySelector('#pkgAiPlanGroup input[type="radio"]:checked')?.value + ' min/mo') : 'N/A',
+    aiContinuationFee:   state.ai ? (document.getElementById('pkgAiPlanMonthly')?.textContent || '$295/mo') : '$0/mo',
     promoTypes:   promoTypes,
     promoDetails: document.getElementById('pkgPromoDetails')?.value.trim() || '',
     promoTotal:   document.getElementById('pkgPromoTotal')?.textContent || '$0',
@@ -3505,7 +3755,7 @@ async function handleCustomPackageRequest(e) {
       msg += `\n🌐 WEBSITE (included)\n✅ Standard: ${PKG_INCLUDED_WEBSITE.join(', ')}\n➕ Extra Add-Ons: ${websiteAddonsText}\n💰 One-Time Setup: ${data.websiteOneTime}\n💰 Website Monthly Add-Ons: ${data.websiteMonthly}\n`;
     }
     if (state.ai) {
-      msg += `\n🤖 AI RECEPTIONIST (included)\n✅ Standard: ${PKG_INCLUDED_AI.join(', ')}\n💰 Setup Fee: ${data.aiSetupFee}\n💰 Continuation: ${data.aiContinuationFee}\n💡 Plus a usage fee that varies by call volume\n`;
+      msg += `\n🤖 AI RECEPTIONIST (included)\n✅ Standard: ${PKG_INCLUDED_AI.join(', ')}\n⏱️ Minutes Plan: ${data.aiMinutesPlan}\n💰 Setup Fee: ${data.aiSetupFee}\n💰 Monthly: ${data.aiContinuationFee}\n`;
     }
     if (state.promo) {
       const promoTypesText = promoTypes.length ? promoTypes.join(', ') : 'None selected';
@@ -3539,24 +3789,37 @@ async function handleCustomPackageRequest(e) {
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
-                    <h2 class="form-page-title" id="aiPageTitle">Request AI Receptionist</h2>
-                    <div class="price-badge-row">
-                        <div class="price-badge-chip">
-                            <span class="price-badge-chip-label">Setup Fee</span>
-                            <span class="price-badge-chip-amount">$399</span>
-                            <span class="price-badge-chip-period">one-time</span>
+                    <h2 class="form-page-title" id="aiPageTitle">Request AI Inbound Caller</h2>
+                    <div class="form-group">
+                        <label>Choose Your Minutes Plan</label>
+                        <div class="plan-grid" id="aiPlanGroup">
+                            <label class="plan-option">
+                                <input type="radio" name="aiPlan" value="250" data-price="295" checked>
+                                <span class="plan-mins">250 min/mo</span>
+                                <span class="plan-price">$295/mo</span>
+                            </label>
+                            <label class="plan-option">
+                                <input type="radio" name="aiPlan" value="500" data-price="345">
+                                <span class="plan-mins">500 min/mo</span>
+                                <span class="plan-price">$345/mo</span>
+                            </label>
+                            <label class="plan-option">
+                                <input type="radio" name="aiPlan" value="750" data-price="395">
+                                <span class="plan-mins">750 min/mo</span>
+                                <span class="plan-price">$395/mo</span>
+                            </label>
+                            <label class="plan-option">
+                                <input type="radio" name="aiPlan" value="1000" data-price="445">
+                                <span class="plan-mins">1,000 min/mo</span>
+                                <span class="plan-price">$445/mo</span>
+                            </label>
                         </div>
-                        <div class="price-badge-chip">
-                            <span class="price-badge-chip-label">Continuation</span>
-                            <span class="price-badge-chip-amount">$250</span>
-                            <span class="price-badge-chip-period">/mo</span>
-                        </div>
+                        <p class="plan-setup-note">Plus a one-time $200 setup fee. Estimated rates — final pricing confirmed after we learn more about your call volume.</p>
                     </div>
-                    <p style="color:var(--tx3);font-size:11.5px;text-align:center;margin:-18px auto 26px;">Plus a usage fee that varies based on call volume.</p>
                     <div class="included-section" style="margin-bottom:28px;">
                         <div class="included-header">
                             <span class="included-badge">✓ Included</span>
-                            <span class="included-title">Standard With Every AI Receptionist</span>
+                            <span class="included-title">Standard With Every AI Inbound Caller</span>
                         </div>
                         <div class="included-grid">
                             <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
@@ -3629,19 +3892,213 @@ async function handleCustomPackageRequest(e) {
                             <div class="package-grand-total">
                                 <div class="package-grand-total-row">
                                     <span class="package-grand-total-label">Setup Fee</span>
-                                    <span class="package-grand-total-amount">$399</span>
+                                    <span class="package-grand-total-amount">$200</span>
                                 </div>
                                 <div class="package-grand-total-row">
-                                    <span class="package-grand-total-label">Monthly (Continuation + Add-Ons)</span>
-                                    <span class="package-grand-total-amount" id="aiTotalEstimate">$250/mo</span>
+                                    <span class="package-grand-total-label">Monthly (Plan + Add-Ons)</span>
+                                    <span class="package-grand-total-amount" id="aiTotalEstimate">$295/mo</span>
                                 </div>
                             </div>
-                            <p style="color:var(--tx3);font-size:11px;text-align:center;margin-top:10px;">Plus a usage fee that varies based on call volume, billed separately.</p>
+                            <p style="color:var(--tx3);font-size:11px;text-align:center;margin-top:10px;">Estimated rates based on the minutes plan you choose above.</p>
                         </div>
                         <div class="form-group">
                             <label for="aiDescription">What should your AI receptionist handle?</label>
                             <textarea id="aiDescription" rows="4" required placeholder="e.g. Answer calls, book appointments, answer FAQs about services and pricing, take messages..."></textarea>
                         </div>
+                        <button type="submit" class="submit-button">SUBMIT REQUEST</button>
+                        <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- AI OUTBOUND CALLER REQUEST PAGE -->
+    <div id="outbound-caller-request" class="page">
+        <div class="navy-gradient-container">
+            <div class="content-area">
+                <div class="form-container">
+                    <h2 class="form-page-title">Request AI Outbound Caller</h2>
+                    <div class="form-group">
+                        <label>Choose Your Minutes Plan</label>
+                        <div class="plan-grid" id="outPlanGroup">
+                            <label class="plan-option">
+                                <input type="radio" name="outPlan" value="250" data-price="295" checked>
+                                <span class="plan-mins">250 min/mo</span>
+                                <span class="plan-price">$295/mo</span>
+                            </label>
+                            <label class="plan-option">
+                                <input type="radio" name="outPlan" value="500" data-price="345">
+                                <span class="plan-mins">500 min/mo</span>
+                                <span class="plan-price">$345/mo</span>
+                            </label>
+                            <label class="plan-option">
+                                <input type="radio" name="outPlan" value="750" data-price="395">
+                                <span class="plan-mins">750 min/mo</span>
+                                <span class="plan-price">$395/mo</span>
+                            </label>
+                            <label class="plan-option">
+                                <input type="radio" name="outPlan" value="1000" data-price="445">
+                                <span class="plan-mins">1,000 min/mo</span>
+                                <span class="plan-price">$445/mo</span>
+                            </label>
+                        </div>
+                        <p class="plan-setup-note">Plus a one-time $200 setup fee. Estimated rates — final pricing confirmed after we learn more about your call volume &amp; goals.</p>
+                    </div>
+                    <div class="included-section" style="margin-bottom:28px;">
+                        <div class="included-header">
+                            <span class="included-badge">✓ Included</span>
+                            <span class="included-title">Standard With Every AI Outbound Caller</span>
+                        </div>
+                        <div class="included-grid">
+                            <div class="included-item"><span class="included-check">✓</span>Calls Your Lead Lists</div>
+                            <div class="included-item"><span class="included-check">✓</span>Sales &amp; Follow-Up Calls</div>
+                            <div class="included-item"><span class="included-check">✓</span>Appointment &amp; Payment Reminders</div>
+                            <div class="included-item"><span class="included-check">✓</span>Dead Lead Revive Calls</div>
+                            <div class="included-item"><span class="included-check">✓</span>Call Recordings &amp; Summaries</div>
+                            <div class="included-item"><span class="included-check">✓</span>Custom Call Script</div>
+                        </div>
+                    </div>
+                    <p style="color:rgba(255,255,255,.45);font-size:13px;text-align:center;margin-bottom:32px;line-height:1.6;">An AI agent that calls your lead lists to boost sales, calls customers to leave reminders, follow up, and chase payment reminders — fully automated.</p>
+                    <form id="outboundCallerForm" onsubmit="handleOutboundCallerRequest(event)">
+                        <div class="form-group">
+                            <label for="outFirstName">First Name</label>
+                            <input type="text" id="outFirstName" required placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <label for="outLastName">Last Name</label>
+                            <input type="text" id="outLastName" required placeholder="Last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="outPhone">Phone Number</label>
+                            <input type="tel" id="outPhone" required placeholder="Your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="outEmail">Email Address</label>
+                            <input type="email" id="outEmail" required placeholder="Your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="outBusinessName">Business Name</label>
+                            <input type="text" id="outBusinessName" required placeholder="Your business name">
+                        </div>
+                        <div class="form-group">
+                            <label for="outBusinessType">Business Type</label>
+                            <select id="outBusinessType" required>
+                                <option value="">Select your business type</option>
+                                <option value="dental">Dental Practice</option>
+                                <option value="beauty-salon">Beauty Salon / Nail Tech</option>
+                                <option value="barbershop">Barbershop</option>
+                                <option value="restaurant">Restaurant / Food Delivery</option>
+                                <option value="spa">Spa / Wellness</option>
+                                <option value="home-services">Home Services</option>
+                                <option value="retail">Retail Store</option>
+                                <option value="medical">Medical / Healthcare</option>
+                                <option value="real-estate">Real Estate</option>
+                                <option value="hotel">Hotel / Hospitality</option>
+                                <option value="finance">Finance / Collections</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                            <div class="checkbox-group" id="outAddonsGroup">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="outAddons" value="revive-dead-leads" data-price="50">
+                                    <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
+                                    <span class="addon-price">+$50/mo</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="outAddons" value="broadcast-campaigns" data-price="50">
+                                    <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
+                                    <span class="addon-price">+$50/mo</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="outAddons" value="clockwork-auto-reviews" data-price="50">
+                                    <span class="checkbox-text">Clockwork – Auto Reviews</span>
+                                    <span class="addon-price">+$50/mo</span>
+                                </label>
+                            </div>
+                            <div class="package-grand-total">
+                                <div class="package-grand-total-row">
+                                    <span class="package-grand-total-label">Setup Fee</span>
+                                    <span class="package-grand-total-amount">$200</span>
+                                </div>
+                                <div class="package-grand-total-row">
+                                    <span class="package-grand-total-label">Monthly (Plan + Add-Ons)</span>
+                                    <span class="package-grand-total-amount" id="outTotalEstimate">$295/mo</span>
+                                </div>
+                            </div>
+                            <p style="color:var(--tx3);font-size:11px;text-align:center;margin-top:10px;">Estimated rates based on the minutes plan you choose above.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="outCallGoal">What should these outbound calls achieve?</label>
+                            <textarea id="outCallGoal" rows="4" required placeholder="e.g. Call our lead list to book consultations, remind customers of upcoming appointments, follow up on unpaid invoices..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">SUBMIT REQUEST</button>
+                        <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- PROPERTY PHOTO VISIT REQUEST PAGE (no fixed pricing — quoted per request) -->
+    <div id="photo-visit-request" class="page">
+        <div class="navy-gradient-container">
+            <div class="content-area">
+                <div class="form-container">
+                    <h2 class="form-page-title">Request A Property Photo Visit</h2>
+                    <p class="form-page-subtitle">Carlanvi will come to your property in person and take photos for your business. Tell us about your business and we'll follow up with a direct quote — no fixed pricing on this service.</p>
+                    <form id="photoVisitForm" onsubmit="handlePhotoVisitRequest(event)">
+                        <div class="form-group">
+                            <label for="pvFirstName">First Name</label>
+                            <input type="text" id="pvFirstName" required placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <label for="pvLastName">Last Name</label>
+                            <input type="text" id="pvLastName" required placeholder="Last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="pvPhone">Phone Number</label>
+                            <input type="tel" id="pvPhone" required placeholder="Your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="pvEmail">Email Address</label>
+                            <input type="email" id="pvEmail" required placeholder="Your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="pvBusinessName">Business Name</label>
+                            <input type="text" id="pvBusinessName" required placeholder="Your business name">
+                        </div>
+                        <div class="form-group">
+                            <label for="pvBusinessType">Type Of Business</label>
+                            <select id="pvBusinessType" required onchange="document.getElementById('pvCustomBusinessTypeGroup').style.display = this.value === 'other' ? 'block' : 'none';">
+                                <option value="">Select your business type</option>
+                                <option value="hotel">Hotel</option>
+                                <option value="villa-rental">Villa / Vacation Rental</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="real-estate">Real Estate</option>
+                                <option value="retail">Retail Store</option>
+                                <option value="spa">Spa / Wellness</option>
+                                <option value="event-venue">Event Venue</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="pvCustomBusinessTypeGroup" style="display:none;">
+                            <label for="pvCustomBusinessType">Please specify your business type:</label>
+                            <input type="text" id="pvCustomBusinessType" placeholder="Enter your business type...">
+                        </div>
+                        <div class="form-group">
+                            <label for="pvAddress">Property Address</label>
+                            <input type="text" id="pvAddress" required placeholder="Where should we come take photos?">
+                        </div>
+                        <div class="form-group">
+                            <label for="pvDetails">Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
+                            <textarea id="pvDetails" rows="4" placeholder="e.g. Number of rooms/areas to photograph, preferred date/time, what you'll use the photos for..."></textarea>
+                        </div>
+                        <p style="color:var(--tx3);font-size:11.5px;text-align:center;margin-bottom:24px;">No fixed pricing for this service — we'll follow up with a direct quote based on your property and needs.</p>
                         <button type="submit" class="submit-button">SUBMIT REQUEST</button>
                         <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
                     </form>
