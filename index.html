@@ -3796,41 +3796,22 @@ async function handleCustomPackageRequest(e) {
                             <label class="plan-option">
                                 <input type="radio" name="aiPlan" value="250" data-price="295" checked>
                                 <span class="plan-mins">250 min/mo</span>
-                                <span class="plan-price">$295/mo</span>
                             </label>
                             <label class="plan-option">
                                 <input type="radio" name="aiPlan" value="500" data-price="345">
                                 <span class="plan-mins">500 min/mo</span>
-                                <span class="plan-price">$345/mo</span>
                             </label>
                             <label class="plan-option">
                                 <input type="radio" name="aiPlan" value="750" data-price="395">
                                 <span class="plan-mins">750 min/mo</span>
-                                <span class="plan-price">$395/mo</span>
                             </label>
                             <label class="plan-option">
                                 <input type="radio" name="aiPlan" value="1000" data-price="445">
                                 <span class="plan-mins">1,000 min/mo</span>
-                                <span class="plan-price">$445/mo</span>
                             </label>
                         </div>
                         <p class="plan-setup-note">Plus a one-time $200 setup fee. Estimated rates — final pricing confirmed after we learn more about your call volume.</p>
                     </div>
-                    <div class="included-section" style="margin-bottom:28px;">
-                        <div class="included-header">
-                            <span class="included-badge">✓ Included</span>
-                            <span class="included-title">Standard With Every AI Inbound Caller</span>
-                        </div>
-                        <div class="included-grid">
-                            <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
-                            <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
-                            <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
-                            <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
-                            <div class="included-item"><span class="included-check">✓</span>Sends Reminder Emails</div>
-                            <div class="included-item"><span class="included-check">✓</span>Instant Email Confirmations</div>
-                        </div>
-                    </div>
-                    <p style="color:rgba(255,255,255,.45);font-size:13px;text-align:center;margin-bottom:32px;line-height:1.6;">Let an AI handle your calls, bookings, and customer inquiries 24/7, fully branded to your business.</p>
                     <form id="aiReceptionistForm" onsubmit="handleAIReceptionistRequest(event)">
                         <div class="form-group">
                             <label for="aiFirstName">First Name</label>
@@ -3871,31 +3852,13 @@ async function handleCustomPackageRequest(e) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
-                            <div class="checkbox-group" id="aiAddonsGroup">
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="aiAddons" value="revive-dead-leads" data-price="50">
-                                    <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
-                                    <span class="addon-price">+$50/mo</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="aiAddons" value="broadcast-campaigns" data-price="50">
-                                    <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
-                                    <span class="addon-price">+$50/mo</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="aiAddons" value="clockwork-auto-reviews" data-price="50">
-                                    <span class="checkbox-text">Clockwork – Auto Reviews</span>
-                                    <span class="addon-price">+$50/mo</span>
-                                </label>
-                            </div>
                             <div class="package-grand-total">
                                 <div class="package-grand-total-row">
                                     <span class="package-grand-total-label">Setup Fee</span>
                                     <span class="package-grand-total-amount">$200</span>
                                 </div>
                                 <div class="package-grand-total-row">
-                                    <span class="package-grand-total-label">Monthly (Plan + Add-Ons)</span>
+                                    <span class="package-grand-total-label">Monthly Plan</span>
                                     <span class="package-grand-total-amount" id="aiTotalEstimate">$295/mo</span>
                                 </div>
                             </div>
@@ -3926,41 +3889,22 @@ async function handleCustomPackageRequest(e) {
                             <label class="plan-option">
                                 <input type="radio" name="outPlan" value="250" data-price="295" checked>
                                 <span class="plan-mins">250 min/mo</span>
-                                <span class="plan-price">$295/mo</span>
                             </label>
                             <label class="plan-option">
                                 <input type="radio" name="outPlan" value="500" data-price="345">
                                 <span class="plan-mins">500 min/mo</span>
-                                <span class="plan-price">$345/mo</span>
                             </label>
                             <label class="plan-option">
                                 <input type="radio" name="outPlan" value="750" data-price="395">
                                 <span class="plan-mins">750 min/mo</span>
-                                <span class="plan-price">$395/mo</span>
                             </label>
                             <label class="plan-option">
                                 <input type="radio" name="outPlan" value="1000" data-price="445">
                                 <span class="plan-mins">1,000 min/mo</span>
-                                <span class="plan-price">$445/mo</span>
                             </label>
                         </div>
                         <p class="plan-setup-note">Plus a one-time $200 setup fee. Estimated rates — final pricing confirmed after we learn more about your call volume &amp; goals.</p>
                     </div>
-                    <div class="included-section" style="margin-bottom:28px;">
-                        <div class="included-header">
-                            <span class="included-badge">✓ Included</span>
-                            <span class="included-title">Standard With Every AI Outbound Caller</span>
-                        </div>
-                        <div class="included-grid">
-                            <div class="included-item"><span class="included-check">✓</span>Calls Your Lead Lists</div>
-                            <div class="included-item"><span class="included-check">✓</span>Sales &amp; Follow-Up Calls</div>
-                            <div class="included-item"><span class="included-check">✓</span>Appointment &amp; Payment Reminders</div>
-                            <div class="included-item"><span class="included-check">✓</span>Dead Lead Revive Calls</div>
-                            <div class="included-item"><span class="included-check">✓</span>Call Recordings &amp; Summaries</div>
-                            <div class="included-item"><span class="included-check">✓</span>Custom Call Script</div>
-                        </div>
-                    </div>
-                    <p style="color:rgba(255,255,255,.45);font-size:13px;text-align:center;margin-bottom:32px;line-height:1.6;">An AI agent that calls your lead lists to boost sales, calls customers to leave reminders, follow up, and chase payment reminders — fully automated.</p>
                     <form id="outboundCallerForm" onsubmit="handleOutboundCallerRequest(event)">
                         <div class="form-group">
                             <label for="outFirstName">First Name</label>
@@ -4001,31 +3945,13 @@ async function handleCustomPackageRequest(e) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
-                            <div class="checkbox-group" id="outAddonsGroup">
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="outAddons" value="revive-dead-leads" data-price="50">
-                                    <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
-                                    <span class="addon-price">+$50/mo</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="outAddons" value="broadcast-campaigns" data-price="50">
-                                    <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
-                                    <span class="addon-price">+$50/mo</span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="outAddons" value="clockwork-auto-reviews" data-price="50">
-                                    <span class="checkbox-text">Clockwork – Auto Reviews</span>
-                                    <span class="addon-price">+$50/mo</span>
-                                </label>
-                            </div>
                             <div class="package-grand-total">
                                 <div class="package-grand-total-row">
                                     <span class="package-grand-total-label">Setup Fee</span>
                                     <span class="package-grand-total-amount">$200</span>
                                 </div>
                                 <div class="package-grand-total-row">
-                                    <span class="package-grand-total-label">Monthly (Plan + Add-Ons)</span>
+                                    <span class="package-grand-total-label">Monthly Plan</span>
                                     <span class="package-grand-total-amount" id="outTotalEstimate">$295/mo</span>
                                 </div>
                             </div>
@@ -4114,34 +4040,6 @@ async function handleCustomPackageRequest(e) {
             <div class="content-area">
                 <div class="form-container">
                     <h2 class="form-page-title">Request AI Hiring Screener</h2>
-                    <div class="price-badge-row">
-                        <div class="price-badge-chip">
-                            <span class="price-badge-chip-label">Setup Fee</span>
-                            <span class="price-badge-chip-amount">$399</span>
-                            <span class="price-badge-chip-period">one-time</span>
-                        </div>
-                        <div class="price-badge-chip">
-                            <span class="price-badge-chip-label">Continuation</span>
-                            <span class="price-badge-chip-amount">$250</span>
-                            <span class="price-badge-chip-period">/mo</span>
-                        </div>
-                    </div>
-                    <p style="color:var(--tx3);font-size:11.5px;text-align:center;margin:-18px auto 26px;">Plus a usage fee that varies based on call volume.</p>
-                    <div class="included-section" style="margin-bottom:28px;">
-                        <div class="included-header">
-                            <span class="included-badge">✓ Included</span>
-                            <span class="included-title">Standard With Every AI Screener</span>
-                        </div>
-                        <div class="included-grid">
-                            <div class="included-item"><span class="included-check">✓</span>Calls Applicants 24/7</div>
-                            <div class="included-item"><span class="included-check">✓</span>Custom Screening Questions</div>
-                            <div class="included-item"><span class="included-check">✓</span>Candidate Scoring &amp; Ranking</div>
-                            <div class="included-item"><span class="included-check">✓</span>Full Call Transcripts</div>
-                            <div class="included-item"><span class="included-check">✓</span>Summary Report Per Candidate</div>
-                            <div class="included-item"><span class="included-check">✓</span>Instant Email Delivery</div>
-                        </div>
-                    </div>
-                    <p style="color:rgba(255,255,255,.45);font-size:13px;text-align:center;margin-bottom:32px;line-height:1.6;">Let an AI interview every applicant and hand you a shortlist of your best candidates, fully automated.</p>
                     <form id="screenerRequestForm" onsubmit="handleScreenerRequest(event)">
                         <div class="form-group">
                             <label for="scFirstName">First Name</label>
