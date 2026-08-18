@@ -362,6 +362,7 @@ body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--t
 }
 .hl-gold{background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
 .hero-sub{font-family:"Playfair Display",serif;font-size:clamp(18px,3vw,30px);font-weight:600;font-style:italic;color:var(--tx2);margin-bottom:20px;letter-spacing:.3px}
+.hero-tagline-small{font-family:"Inter",sans-serif;font-size:clamp(13px,1.6vw,16px);font-weight:500;color:var(--tx2);letter-spacing:.3px;margin:0 0 30px;}
 .stat{display:flex;flex-direction:column;align-items:center;gap:5px}
 .stat-number{font-family:"Playfair Display",serif;font-size:clamp(30px,4vw,46px);font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
 .stat-label{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--tx3);text-transform:uppercase}
@@ -1188,11 +1189,6 @@ button{box-shadow:none}
         <h2 class="modal-title">GET STARTED</h2>
         <p style="color:rgba(255,255,255,.5);font-size:13px;margin-bottom:28px;margin-top:-16px;">What would you like to request?</p>
 
-        <button class="login-button" onclick="closeGetStartedModal(); resetCustomPackageHeader(); showPage('custom-package');" style="display:flex;align-items:center;justify-content:center;gap:10px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            (Website + AI Receptionist)
-        </button>
-
         <button class="login-button" onclick="closeGetStartedModal(); requestAiSystem(null);" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><line x1="19" y1="14" x2="22" y2="14"/><line x1="2" y1="14" x2="5" y2="14"/></svg>
             AI Inbound Caller
@@ -1205,7 +1201,7 @@ button{box-shadow:none}
 
         <button class="login-button" onclick="closeGetStartedModal(); requestPhotoVisit();" style="display:flex;align-items:center;justify-content:center;gap:10px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            Property Photo Shoot
+            Photo Shoot
         </button>
 
         <button class="login-button" onclick="closeGetStartedModal(); requestWebsiteType(null);" style="display:flex;align-items:center;justify-content:center;gap:10px;">
@@ -1413,10 +1409,10 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
               International Web &amp; AI Agency
             </div>
             <h1 class="hero-headline">
-              Your Business,
-              <span class="hl-gold">Built to<br>Dominate.</span>
+              AUTOMATE. ELEVATE
+              <span class="hl-gold">DOMINATE.</span>
             </h1>
-
+            <p class="hero-tagline-small">Everything Your business needs to grow.</p>
 
             <div class="hero-left-stats">
               <div class="stat">
@@ -1444,9 +1440,9 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
             </div>
 
             <div class="hero-left-ctas">
-              <button class="btn-primary" onclick="resetCustomPackageHeader(); showPage('custom-package')">
+              <button class="btn-primary" onclick="showGetStartedModal()">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                Request A Custom Package
+                Get Started
               </button>
               <button class="about-btn" onclick="openFounderSection()">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
@@ -1607,22 +1603,6 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
               </div>
             </div>
 
-            <!-- Property Photo Shoot -->
-            <div class="pillar-card">
-              <div class="pillar-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1467232004584-a241de8bcf5d.avif?alt=media&token=6c0147b9-0c17-4dfc-a157-8cd0fb721dd3')">
-                <div class="pillar-img-overlay"></div>
-                <div class="pillar-tag">On-Site</div>
-              </div>
-              <div class="pillar-body">
-                <h3 class="pillar-title">Property Photo Shoot</h3>
-                <p class="pillar-desc">Request Carlanvi to come out to your property in person and take photos for your business, hotels, rentals, restaurants, and more. Tell us your business type and we'll quote you directly.</p>
-                <button class="pillar-btn" onclick="requestPhotoVisit()">
-                  Request A Photo Shoot
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </button>
-              </div>
-            </div>
-
             <!-- Custom Websites -->
             <div class="pillar-card">
               <div class="pillar-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1467232004584-a241de8bcf5d.avif?alt=media&token=6c0147b9-0c17-4dfc-a157-8cd0fb721dd3')">
@@ -1634,6 +1614,22 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                 <p class="pillar-desc">High performance, mobile & desktop responsive websites built specifically for your business, with galleries, admin dashboards, social integrations baked in and all supporting pages.</p>
                 <button class="pillar-btn" onclick="requestWebsiteType(null)">
                   Request a Website
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Photo Shoot -->
+            <div class="pillar-card">
+              <div class="pillar-img" style="background-image:url('https://firebasestorage.googleapis.com/v0/b/web--vtec.firebasestorage.app/o/photo-1467232004584-a241de8bcf5d.avif?alt=media&token=6c0147b9-0c17-4dfc-a157-8cd0fb721dd3')">
+                <div class="pillar-img-overlay"></div>
+                <div class="pillar-tag">On-Site</div>
+              </div>
+              <div class="pillar-body">
+                <h3 class="pillar-title">Photo Shoot</h3>
+                <p class="pillar-desc">Request our team to come out to your property in person and take photos for your business, hotels, rentals, restaurants, and more. Tell us your business type and we'll quote you directly.</p>
+                <button class="pillar-btn" onclick="requestPhotoVisit()">
+                  Request A Photo Shoot
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </button>
               </div>
@@ -1767,306 +1763,6 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                         </div>
 
                         <button type="submit" class="submit-button">SUBMIT REQUEST</button>
-                        <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- CUSTOM PACKAGE REQUEST PAGE -->
-    <div id="custom-package" class="page">
-        <div class="navy-gradient-container">
-            <div class="content-area">
-                <div class="form-container">
-                    <h2 class="form-page-title" id="customPackageTitle">Request A Custom Package</h2>
-                    <p class="form-page-subtitle" id="customPackageSubtitle">Mix and match any 2 or more of our services (Website, AI Receptionist, and Promotional Images) bundled together as one package.</p>
-
-                    <form id="customPackageForm" onsubmit="handleCustomPackageRequest(event)">
-                        <div class="form-group">
-                            <label for="pkgFirstName">First Name</label>
-                            <input type="text" id="pkgFirstName" required placeholder="First name">
-                        </div>
-                        <div class="form-group">
-                            <label for="pkgLastName">Last Name</label>
-                            <input type="text" id="pkgLastName" required placeholder="Last name">
-                        </div>
-                        <div class="form-group">
-                            <label for="pkgPhone">Phone Number</label>
-                            <input type="tel" id="pkgPhone" required placeholder="Your phone number">
-                        </div>
-                        <div class="form-group">
-                            <label for="pkgEmail">Email Address</label>
-                            <input type="email" id="pkgEmail" required placeholder="Your email">
-                        </div>
-                        <div class="form-group">
-                            <label for="pkgBusinessName">Business Name</label>
-                            <input type="text" id="pkgBusinessName" required placeholder="Your business name">
-                        </div>
-                        <div class="form-group">
-                            <label for="pkgBusinessType">Business / Website Type</label>
-                            <select id="pkgBusinessType" required onchange="handlePkgTypeChange(event)">
-                                <option value="">Select your business type</option>
-                                <option value="dental">Dental Practice</option>
-                                <option value="nail-tech">Nail Tech</option>
-                                <option value="hair-barbershop">Hair Tech / Barbershop</option>
-                                <option value="makeup">Makeup Artist</option>
-                                <option value="spa">Spa / Wellness</option>
-                                <option value="painting">Painting</option>
-                                <option value="restaurant">Restaurant / Food Delivery</option>
-                                <option value="party-rental">Party Rental</option>
-                                <option value="home-services">Home Services</option>
-                                <option value="retail">Retail Store</option>
-                                <option value="medical">Medical / Healthcare</option>
-                                <option value="real-estate">Real Estate</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="pkgCustomTypeGroup" style="display:none;">
-                            <label for="pkgCustomType">Please specify your business type:</label>
-                            <input type="text" id="pkgCustomType" placeholder="Enter your business type...">
-                        </div>
-
-                        <p class="pkg-toggle-instructions">Toggle the services you want below. Pick at least 2 to build your package.</p>
-
-                        <!-- WEBSITE SECTION -->
-                        <div class="package-section" id="pkgWebsiteSection">
-                            <div class="package-section-header">
-                                <h3 class="package-section-title">🌐 Your Website</h3>
-                                <label class="pkg-toggle">
-                                    <input type="checkbox" id="pkgToggleWebsite" checked onchange="handlePkgServiceToggle()">
-                                    <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
-                                    <span class="pkg-toggle-label">In Package</span>
-                                </label>
-                            </div>
-                            <div class="pkg-section-body" id="pkgWebsiteBody">
-                                <div class="included-section">
-                                    <div class="included-header">
-                                        <span class="included-badge">✓ Included</span>
-                                        <span class="included-title">Standard With Every Website</span>
-                                    </div>
-                                    <div class="included-grid">
-                                        <div class="included-item"><span class="included-check">✓</span>Custom Responsive Design</div>
-                                        <div class="included-item"><span class="included-check">✓</span>Mobile &amp; Desktop Friendly</div>
-                                        <div class="included-item"><span class="included-check">✓</span>Social Media Integration</div>
-                                        <div class="included-item"><span class="included-check">✓</span>Contact / Inquiry Form</div>
-                                        <div class="included-item"><span class="included-check">✓</span>SEO-Friendly Setup</div>
-                                        <div class="included-item"><span class="included-check">✓</span>Admin Content Management</div>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin-top:18px;margin-bottom:0;">
-                                    <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
-                                    <div class="checkbox-group" id="pkgWebsiteAddonsGroup">
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgWebsiteAddons" value="ai-chatbot" data-price="50">
-                                            <span class="checkbox-text">AI Chatbot (text-based)</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgWebsiteAddons" value="reminder-emails" data-price="50">
-                                            <span class="checkbox-text">Sends Reminder Emails</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgWebsiteAddons" value="email-confirmations" data-price="50">
-                                            <span class="checkbox-text">Automated Email Confirmations</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgWebsiteAddons" value="revive-dead-leads" data-price="50">
-                                            <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgWebsiteAddons" value="broadcast-campaigns" data-price="50">
-                                            <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgWebsiteAddons" value="clockwork-auto-reviews" data-price="50">
-                                            <span class="checkbox-text">Clockwork – Email Reviews Requester</span>
-                                        </label>
-                                    </div>
-                                    <p id="pkgWebsiteCrossNote" style="color:var(--tx3);font-size:10.5px;text-align:center;margin:10px 0 0;">Selecting any of these also applies them to your AI Receptionist below, at no extra cost.</p>
-                                    <div class="package-grand-total">
-                                        <div class="package-grand-total-row">
-                                            <span class="package-grand-total-label">One-Time Setup</span>
-                                            <span class="package-grand-total-amount" id="pkgWebsiteOneTime">$190</span>
-                                        </div>
-                                        <div class="package-grand-total-row">
-                                            <span class="package-grand-total-label">Monthly Subscription</span>
-                                            <span class="package-grand-total-amount" id="pkgWebsiteMonthly">$0/mo</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="package-divider"></div>
-
-                        <!-- AI RECEPTIONIST SECTION -->
-                        <div class="package-section" id="pkgAiSection">
-                            <div class="package-section-header">
-                                <h3 class="package-section-title">🤖 Your AI Receptionist</h3>
-                                <label class="pkg-toggle">
-                                    <input type="checkbox" id="pkgToggleAi" checked onchange="handlePkgServiceToggle()">
-                                    <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
-                                    <span class="pkg-toggle-label">In Package</span>
-                                </label>
-                            </div>
-                            <div class="pkg-section-body" id="pkgAiBody">
-                                <div class="included-section">
-                                    <div class="included-header">
-                                        <span class="included-badge">✓ Included</span>
-                                        <span class="included-title">Standard With Every AI Receptionist</span>
-                                    </div>
-                                    <div class="included-grid" id="pkgAiIncludedGrid">
-                                        <div class="included-item"><span class="included-check">✓</span>Answers Every Call 24/7</div>
-                                        <div class="included-item"><span class="included-check">✓</span>Takes Bookings</div>
-                                        <div class="included-item"><span class="included-check">✓</span>Cancels &amp; Reschedules</div>
-                                        <div class="included-item"><span class="included-check">✓</span>Answers General Questions</div>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin-top:14px;margin-bottom:0;">
-                                    <label>Choose Your Minutes Plan</label>
-                                    <div class="plan-grid" id="pkgAiPlanGroup">
-                                        <label class="plan-option">
-                                            <input type="radio" name="pkgAiPlan" value="250" data-price="295" checked>
-                                            <span class="plan-mins">250 min/mo</span>
-                                            <span class="plan-price">$295/mo</span>
-                                        </label>
-                                        <label class="plan-option">
-                                            <input type="radio" name="pkgAiPlan" value="500" data-price="345">
-                                            <span class="plan-mins">500 min/mo</span>
-                                            <span class="plan-price">$345/mo</span>
-                                        </label>
-                                        <label class="plan-option">
-                                            <input type="radio" name="pkgAiPlan" value="750" data-price="395">
-                                            <span class="plan-mins">750 min/mo</span>
-                                            <span class="plan-price">$395/mo</span>
-                                        </label>
-                                        <label class="plan-option">
-                                            <input type="radio" name="pkgAiPlan" value="1000" data-price="445">
-                                            <span class="plan-mins">1,000 min/mo</span>
-                                            <span class="plan-price">$445/mo</span>
-                                        </label>
-                                    </div>
-                                    <p class="plan-setup-note">$200 one-time setup fee. Estimated rates based on the minutes plan you choose.</p>
-                                </div>
-                                <div class="form-group" style="margin-top:18px;margin-bottom:0;">
-                                    <label>Add Extra Capabilities <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
-                                    <div class="checkbox-group" id="pkgAiAddonsGroup">
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgAiAddons" value="reminder-emails" data-price="50">
-                                            <span class="checkbox-text">Sends Reminder Emails</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgAiAddons" value="email-confirmations" data-price="50">
-                                            <span class="checkbox-text">Automated Email Confirmations</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgAiAddons" value="revive-dead-leads" data-price="50">
-                                            <span class="checkbox-text">Revive – Dead Lead Follow-Up</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgAiAddons" value="broadcast-campaigns" data-price="50">
-                                            <span class="checkbox-text">Broadcast – SMS &amp; Email Campaigns</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgAiAddons" value="clockwork-auto-reviews" data-price="50">
-                                            <span class="checkbox-text">Clockwork – Email Reviews Requester</span>
-                                        </label>
-                                    </div>
-                                    <p id="pkgAiCrossNote" style="color:var(--tx3);font-size:10.5px;text-align:center;margin:10px 0 0;">Selecting any of these also applies them to your Website above, at no extra cost.</p>
-                                </div>
-                                <div class="package-grand-total" style="margin-top:18px;">
-                                    <div class="package-grand-total-row">
-                                        <span class="package-grand-total-label">AI Receptionist: One-Time Setup</span>
-                                        <span class="package-grand-total-amount">$200</span>
-                                    </div>
-                                    <div class="package-grand-total-row">
-                                        <span class="package-grand-total-label">AI Receptionist: Monthly Plan</span>
-                                        <span class="package-grand-total-amount" id="pkgAiPlanMonthly">$295/mo</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="package-divider"></div>
-
-                        <!-- PROMOTIONAL IMAGES SECTION -->
-                        <div class="package-section" id="pkgPromoSection">
-                            <div class="package-section-header">
-                                <h3 class="package-section-title">🖼️ Promotional Images</h3>
-                                <label class="pkg-toggle">
-                                    <input type="checkbox" id="pkgTogglePromo" onchange="handlePkgServiceToggle()">
-                                    <span class="pkg-toggle-track"><span class="pkg-toggle-knob"></span></span>
-                                    <span class="pkg-toggle-label">In Package</span>
-                                </label>
-                            </div>
-                            <div class="pkg-section-body" id="pkgPromoBody" style="display:none;">
-                                <p style="color:var(--tx3);font-size:11.5px;text-align:center;">Posters, business cards, flyers, banners &amp; more: $20 per design.</p>
-                                <div class="form-group" style="margin-top:18px;margin-bottom:0;">
-                                    <label>Choose Your Designs</label>
-                                    <div class="checkbox-group" id="pkgPromoTypesGroup">
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgPromoTypes" value="poster">
-                                            <span class="checkbox-text">Poster</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgPromoTypes" value="ticket">
-                                            <span class="checkbox-text">Event Ticket</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgPromoTypes" value="business-card">
-                                            <span class="checkbox-text">Business Card</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgPromoTypes" value="social-banner">
-                                            <span class="checkbox-text">Social Media Banner</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgPromoTypes" value="logo">
-                                            <span class="checkbox-text">Logo Design</span>
-                                        </label>
-                                        <label class="checkbox-option">
-                                            <input type="checkbox" name="pkgPromoTypes" value="flyer">
-                                            <span class="checkbox-text">Flyer</span>
-                                        </label>
-                                    </div>
-                                    <div class="package-grand-total">
-                                        <div class="package-grand-total-row">
-                                            <span class="package-grand-total-label">Promotional Images Total</span>
-                                            <span class="package-grand-total-amount" id="pkgPromoTotal">$0</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pkgPromoDetails">Design Details &amp; Description <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
-                                    <textarea id="pkgPromoDetails" rows="3" placeholder="Tell us about colors, branding, event details, or anything else for your designs..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Anything Else We Should Know? <span style="text-transform:none;font-weight:400;color:var(--tx3);">(optional)</span></label>
-                            <textarea id="pkgDetails" rows="4" placeholder="Tell us anything specific you need for your services..."></textarea>
-                        </div>
-
-                        <p id="pkgServiceWarning" style="display:none;color:#f87171;font-size:12px;font-weight:700;text-align:center;margin:-8px 0 22px;">Select at least 2 services above to build a package.</p>
-
-                        <div class="package-grand-total package-grand-total-highlight">
-                            <div class="package-grand-total-tag">
-                                <span class="included-badge" style="color:#34d399;background:rgba(52,211,153,.16);border-color:rgba(52,211,153,.5);">Package Total</span>
-                            </div>
-                            <div class="package-grand-total-row">
-                                <span class="package-grand-total-label">One-Time Setup</span>
-                                <span class="package-grand-total-amount" id="pkgGrandOneTime">$390</span>
-                            </div>
-                            <div class="package-grand-total-row">
-                                <span class="package-grand-total-label">Monthly Subscription</span>
-                                <span class="package-grand-total-amount" id="pkgGrandMonthly">$295/mo</span>
-                            </div>
-                        </div>
-                        <p style="color:var(--tx3);font-size:11px;text-align:center;margin-top:-12px;margin-bottom:24px;">Totals update automatically based on the services you select above. AI usage fee varies and is billed separately.</p>
-
-                        <button type="submit" class="submit-button" id="pkgSubmitBtn">SUBMIT PACKAGE REQUEST</button>
                         <button type="button" class="submit-button" onclick="showPage('home')" style="margin-top:12px; background:rgba(255,255,255,.06); color:rgba(255,255,255,.7);">← BACK</button>
                     </form>
                 </div>
@@ -2218,7 +1914,8 @@ function setupEventListeners() {
     });
 }
 
-function showPage(pageId) {
+function showPage(pageId, options) {
+    options = options || {};
     document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
     const targetPage = document.getElementById(pageId);
     if (targetPage) targetPage.classList.add('active');
@@ -2228,18 +1925,22 @@ function showPage(pageId) {
         if (item.getAttribute('data-page') === pageId) item.classList.add('active');
     });
 
-    // Use replaceState instead of pushState to avoid creating new URLs Google crawls
-    history.replaceState({ page: pageId }, '', window.location.pathname);
+    window.scrollTo(0, 0);
+
+    // Push a new history entry for every normal navigation (keeps the URL
+    // clean, no hash) so the device back button steps back through the
+    // site's own pages one at a time instead of immediately leaving the
+    // site. Navigation triggered BY the back/forward button itself
+    // (fromPopstate) must not push another entry.
+    if (!options.fromPopstate) {
+        history.pushState({ page: pageId }, '', window.location.pathname);
+    }
 }
 
-// Handle back button
+// Handle back / forward button — step through in-app pages in order
 window.addEventListener('popstate', function(event) {
     const page = event.state?.page;
-    if (page && page !== 'welcome') {
-        showPage(page);
-    } else {
-        showPage('home');
-    }
+    showPage(page && page !== 'welcome' ? page : 'home', { fromPopstate: true });
 });
 
 // Initialize first state - keep URL clean, no hash
@@ -2891,35 +2592,6 @@ function requestPhotoVisit() {
   showPage('photo-visit-request');
 }
 
-function handlePkgTypeChange(e) {
-    const customGroup = document.getElementById('pkgCustomTypeGroup');
-    const customInput = document.getElementById('pkgCustomType');
-    if (!customGroup || !customInput) return;
-
-    if (e.target.value === 'other') {
-        customGroup.style.display = 'block';
-        customInput.required = true;
-    } else {
-        customGroup.style.display = 'none';
-        customInput.required = false;
-        customInput.value = '';
-    }
-}
-
-const DEFAULT_PKG_TITLE = 'Request A Custom Package';
-const DEFAULT_PKG_SUBTITLE = 'Mix and match any 2 or more of our services (Website, AI Receptionist, and Promotional Images) bundled together as one package.';
-
-function setCustomPackageHeader(title, subtitle) {
-  const titleEl = document.getElementById('customPackageTitle');
-  const subtitleEl = document.getElementById('customPackageSubtitle');
-  if (titleEl) titleEl.textContent = title || DEFAULT_PKG_TITLE;
-  if (subtitleEl) subtitleEl.textContent = subtitle || DEFAULT_PKG_SUBTITLE;
-}
-
-function resetCustomPackageHeader() {
-  setCustomPackageHeader(DEFAULT_PKG_TITLE, DEFAULT_PKG_SUBTITLE);
-}
-
 
 // ── Live add-on price calculators ─────────────────────────
 // Sums a base price + any checked add-on prices (read from each
@@ -3004,228 +2676,6 @@ function setupWebsiteCalculator() {
   recalc();
 }
 
-// Custom Package page: website's one-time fee never changes ($190 fixed),
-// and the AI Receptionist's own setup/monthly never changes ($399/$250).
-// Every add-on except the AI Chatbot is shared between the Website section
-// and the AI Receptionist section — checking it in either spot checks it
-// in both, and it's only ever counted once toward the total.
-const PKG_SHARED_ADDON_VALUES = [
-  'reminder-emails',
-  'email-confirmations',
-  'revive-dead-leads',
-  'broadcast-campaigns',
-  'clockwork-auto-reviews'
-];
-
-// Display labels for every optional Custom Package add-on, used by
-// syncPkgBonusIncluded() below.
-const PKG_ADDON_LABELS = {
-  'ai-chatbot':             'AI Chatbot (text-based)',
-  'reminder-emails':        'Sends Reminder Emails',
-  'email-confirmations':    'Automated Email Confirmations',
-  'revive-dead-leads':      'Revive – Dead Lead Follow-Up',
-  'broadcast-campaigns':    'Broadcast – SMS & Email Campaigns',
-  'clockwork-auto-reviews': 'Clockwork – Email Reviews Requester'
-};
-
-// Whatever add-ons get checked under the Website's "Add Extra Capabilities"
-// get checkmark items appended to the AI Receptionist's "Included" list
-// below, since selecting them applies to the AI Receptionist too at no
-// extra cost — not just a note of text, but the Included list itself.
-function syncPkgBonusIncluded() {
-  const webGroup       = document.getElementById('pkgWebsiteAddonsGroup');
-  const aiIncludedGrid = document.getElementById('pkgAiIncludedGrid');
-  if (!webGroup || !aiIncludedGrid) return;
-
-  aiIncludedGrid.querySelectorAll('.pkg-bonus-item').forEach(el => el.remove());
-
-  Array.from(webGroup.querySelectorAll('input[type="checkbox"]:checked'))
-    .forEach(cb => {
-      const label = PKG_ADDON_LABELS[cb.value];
-      if (!label) return;
-      const item = document.createElement('div');
-      item.className = 'included-item pkg-bonus-item';
-      item.innerHTML = '<span class="included-check">✓</span>' + label;
-      aiIncludedGrid.appendChild(item);
-    });
-}
-
-// ── Custom Package: toggleable services (Website / AI Receptionist /
-// Promotional Images) ─────────────────────────────────────────────
-// A package requires at least 2 of the 3 services to be switched on.
-// Promotional Images are priced per design: $20 for the first design
-// selected, $15 for every additional design — order doesn't matter since
-// the total only depends on how many designs are checked.
-const PKG_PROMO_LABELS = {
-  'poster':        'Poster',
-  'ticket':        'Event Ticket',
-  'business-card': 'Business Card',
-  'social-banner': 'Social Media Banner',
-  'logo':          'Logo Design',
-  'flyer':         'Flyer'
-};
-const PROMO_FIRST_PRICE = 20;
-const PROMO_ADDITIONAL_PRICE = 20;
-
-function getPkgToggleState() {
-  return {
-    website: !!document.getElementById('pkgToggleWebsite')?.checked,
-    ai:      !!document.getElementById('pkgToggleAi')?.checked,
-    promo:   !!document.getElementById('pkgTogglePromo')?.checked
-  };
-}
-
-function calcPromoTotal() {
-  const group = document.getElementById('pkgPromoTypesGroup');
-  if (!group) return 0;
-  const count = group.querySelectorAll('input[type="checkbox"]:checked').length;
-  if (count === 0) return 0;
-  return PROMO_FIRST_PRICE + (count - 1) * PROMO_ADDITIONAL_PRICE;
-}
-
-function clearPkgCheckboxGroup(groupId) {
-  const group = document.getElementById(groupId);
-  if (!group) return;
-  group.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
-    cb.checked = false;
-    cb.dispatchEvent(new Event('change', { bubbles: true }));
-  });
-}
-
-// Switching a service on/off shows or hides its body, clears out any
-// selections left behind in a service that just got switched off, hides
-// the "applies to the other side too" notes when they no longer apply,
-// and enforces the 2-service minimum on the submit button.
-function handlePkgServiceToggle() {
-  const state = getPkgToggleState();
-
-  const webBody   = document.getElementById('pkgWebsiteBody');
-  const aiBody    = document.getElementById('pkgAiBody');
-  const promoBody = document.getElementById('pkgPromoBody');
-  if (webBody)   webBody.style.display   = state.website ? '' : 'none';
-  if (aiBody)    aiBody.style.display    = state.ai      ? '' : 'none';
-  if (promoBody) promoBody.style.display = state.promo   ? '' : 'none';
-
-  if (!state.website) clearPkgCheckboxGroup('pkgWebsiteAddonsGroup');
-  if (!state.ai)       clearPkgCheckboxGroup('pkgAiAddonsGroup');
-  if (!state.promo)    clearPkgCheckboxGroup('pkgPromoTypesGroup');
-
-  const webNote = document.getElementById('pkgWebsiteCrossNote');
-  const aiNote  = document.getElementById('pkgAiCrossNote');
-  if (webNote) webNote.style.display = state.ai      ? '' : 'none';
-  if (aiNote)  aiNote.style.display  = state.website ? '' : 'none';
-
-  const activeCount = Object.values(state).filter(Boolean).length;
-  const warning   = document.getElementById('pkgServiceWarning');
-  const submitBtn = document.getElementById('pkgSubmitBtn');
-  if (warning) warning.style.display = activeCount < 2 ? 'block' : 'none';
-  if (submitBtn) {
-    submitBtn.disabled      = activeCount < 2;
-    submitBtn.style.opacity = activeCount < 2 ? '.45' : '';
-    submitBtn.style.cursor  = activeCount < 2 ? 'not-allowed' : '';
-  }
-
-  if (window.__pkgRecalc) window.__pkgRecalc();
-}
-
-function setupPackagePageCalculator() {
-  const webGroup   = document.getElementById('pkgWebsiteAddonsGroup');
-  const aiGroup    = document.getElementById('pkgAiAddonsGroup');
-  const promoGroup = document.getElementById('pkgPromoTypesGroup');
-  if (!webGroup) return;
-
-  const webOneTimeEl   = document.getElementById('pkgWebsiteOneTime');
-  const webMonthlyEl   = document.getElementById('pkgWebsiteMonthly');
-  const promoTotalEl   = document.getElementById('pkgPromoTotal');
-  const grandOneTimeEl = document.getElementById('pkgGrandOneTime');
-  const grandMonthlyEl = document.getElementById('pkgGrandMonthly');
-
-  let sharedOrder = []; // order in which shared add-ons were first selected, across both sections
-
-  function checkboxesForValue(value) {
-    const selector = 'input[value="' + value + '"]';
-    const boxes = [];
-    const webCb = webGroup.querySelector(selector);
-    if (webCb) boxes.push(webCb);
-    if (aiGroup) {
-      const aiCb = aiGroup.querySelector(selector);
-      if (aiCb) boxes.push(aiCb);
-    }
-    return boxes;
-  }
-
-  function recalc() {
-    const state = getPkgToggleState();
-
-    const chatbotCb = webGroup.querySelector('input[value="' + CHATBOT_ADDON_VALUE + '"]');
-    let addonMonthly = (chatbotCb && chatbotCb.checked) ? CHATBOT_ADDON_PRICE : 0;
-
-    const stillSelected = sharedOrder.filter(value => checkboxesForValue(value).some(cb => cb.checked));
-    stillSelected.forEach((value, i) => {
-      addonMonthly += (i === 0) ? FIRST_ADDON_PRICE : ADDITIONAL_ADDON_PRICE;
-    });
-
-    const aiPlanGroup = document.getElementById('pkgAiPlanGroup');
-    const selectedAiPlan = aiPlanGroup ? aiPlanGroup.querySelector('input[type="radio"]:checked') : null;
-    const aiPlanPrice = selectedAiPlan ? parseFloat(selectedAiPlan.dataset.price || '0') : 295;
-    const pkgAiPlanMonthlyEl = document.getElementById('pkgAiPlanMonthly');
-    if (pkgAiPlanMonthlyEl) pkgAiPlanMonthlyEl.textContent = '$' + aiPlanPrice.toLocaleString() + '/mo';
-
-    const promoTotal = calcPromoTotal();
-    const oneTime = (state.website ? 190 : 0) + (state.ai ? 200 : 0) + (state.promo ? promoTotal : 0);
-    const monthly = addonMonthly + (state.ai ? aiPlanPrice : 0);
-
-    if (webOneTimeEl)   webOneTimeEl.textContent   = '$' + (state.website ? 190 : 0).toLocaleString();
-    if (webMonthlyEl)   webMonthlyEl.textContent   = '$' + addonMonthly.toLocaleString() + '/mo';
-    if (promoTotalEl)   promoTotalEl.textContent   = '$' + promoTotal.toLocaleString();
-    if (grandOneTimeEl) grandOneTimeEl.textContent = '$' + oneTime.toLocaleString();
-    if (grandMonthlyEl) grandMonthlyEl.textContent = '$' + monthly.toLocaleString() + '/mo';
-
-    syncPkgBonusIncluded();
-  }
-
-  function handleSharedChange(value, isChecked) {
-    checkboxesForValue(value).forEach(cb => { cb.checked = isChecked; });
-    if (isChecked) {
-      if (!sharedOrder.includes(value)) sharedOrder.push(value);
-    } else {
-      sharedOrder = sharedOrder.filter(v => v !== value);
-    }
-    recalc();
-  }
-
-  // Native form.reset() doesn't fire change events, so expose a hook to clear
-  // our tracked selection order whenever the package form gets reset.
-  window.__pkgAddonsReset = function() {
-    sharedOrder = [];
-    recalc();
-  };
-  window.__pkgRecalc = recalc;
-
-  const chatbotCb = webGroup.querySelector('input[value="' + CHATBOT_ADDON_VALUE + '"]');
-  if (chatbotCb) chatbotCb.addEventListener('change', recalc);
-
-  const pkgAiPlanGroupEl = document.getElementById('pkgAiPlanGroup');
-  if (pkgAiPlanGroupEl) {
-    pkgAiPlanGroupEl.querySelectorAll('input[type="radio"]').forEach(r => r.addEventListener('change', recalc));
-  }
-
-  [webGroup, aiGroup].forEach(group => {
-    if (!group) return;
-    PKG_SHARED_ADDON_VALUES.forEach(value => {
-      const cb = group.querySelector('input[value="' + value + '"]');
-      if (cb) cb.addEventListener('change', () => handleSharedChange(value, cb.checked));
-    });
-  });
-
-  if (promoGroup) {
-    promoGroup.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      cb.addEventListener('change', recalc);
-    });
-  }
-
-  recalc();
-}
 
 // Minute-based plan calculator: a slider from 250–10,000 min/mo, stepping
 // 250 min at a time. Base rate is $295 for the first 250 min, +$50 for
@@ -3265,7 +2715,6 @@ function setupPriceCalculators() {
   setupWebsiteCalculator();
   setupAIPlanCalculator('aiPlanGroup', 'aiPlanMinsLabel', 'aiPlanPriceLabel', 'aiTotalEstimate');
   setupAIPlanCalculator('outPlanGroup', 'outPlanMinsLabel', 'outPlanPriceLabel', 'outTotalEstimate');
-  setupPackagePageCalculator();
 }
 
 
@@ -3610,162 +3059,6 @@ async function handleChatbotRequest(e) {
   }
 }
 
-function resetPackageDisplays() {
-  const defaults = {
-    pkgWebsiteOneTime: '$190',
-    pkgWebsiteMonthly: '$0/mo',
-    pkgPromoTotal:     '$0',
-    pkgAiPlanMonthly:  '$295/mo',
-    pkgGrandOneTime:   '$390',
-    pkgGrandMonthly:   '$295/mo'
-  };
-  Object.entries(defaults).forEach(([id, val]) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = val;
-  });
-
-  // Back to the default toggle state (Website + AI on, Promo off) and
-  // resync visibility/warning/submit-button state to match.
-  const webToggle   = document.getElementById('pkgToggleWebsite');
-  const aiToggle     = document.getElementById('pkgToggleAi');
-  const promoToggle  = document.getElementById('pkgTogglePromo');
-  if (webToggle)   webToggle.checked = true;
-  if (aiToggle)    aiToggle.checked = true;
-  if (promoToggle) promoToggle.checked = false;
-
-  const pkgAiPlanDefault = document.querySelector('#pkgAiPlanGroup input[value="250"]');
-  if (pkgAiPlanDefault) pkgAiPlanDefault.checked = true;
-
-  if (typeof handlePkgServiceToggle === 'function') handlePkgServiceToggle();
-
-  if (window.__pkgAddonsReset) window.__pkgAddonsReset();
-}
-
-async function handleCustomPackageRequest(e) {
-  e.preventDefault();
-
-  const state = getPkgToggleState();
-  const activeCount = Object.values(state).filter(Boolean).length;
-  if (activeCount < 2) {
-    alert('Please select at least 2 services (Website, AI Receptionist, or Promotional Images) to build a package.');
-    return;
-  }
-  if (state.promo) {
-    const promoCount = document.querySelectorAll('input[name="pkgPromoTypes"]:checked').length;
-    if (promoCount === 0) {
-      alert('Please select at least one design type for Promotional Images, or switch that service off.');
-      return;
-    }
-  }
-
-  const PKG_INCLUDED_WEBSITE = [
-    'Custom Responsive Design',
-    'Mobile & Desktop Friendly',
-    'Social Media Integration',
-    'Contact / Inquiry Form',
-    'SEO-Friendly Setup',
-    'Admin Content Management'
-  ];
-  const PKG_INCLUDED_AI = [
-    'Answers Every Call 24/7',
-    'Takes Bookings',
-    'Cancels & Reschedules',
-    'Answers General Questions'
-  ];
-
-  let businessType = document.getElementById('pkgBusinessType').value;
-  if (businessType === 'other') {
-    const customType = document.getElementById('pkgCustomType').value.trim();
-    if (!customType) {
-      alert('Please specify your business type.');
-      return;
-    }
-    businessType = customType;
-  }
-
-  const websiteAddons = state.website
-    ? Array.from(document.querySelectorAll('input[name="pkgWebsiteAddons"]:checked')).map(cb => cb.value)
-    : [];
-  const promoTypes = state.promo
-    ? Array.from(document.querySelectorAll('input[name="pkgPromoTypes"]:checked')).map(cb => PKG_PROMO_LABELS[cb.value] || cb.value)
-    : [];
-
-  const servicesSelected = [];
-  if (state.website) servicesSelected.push('Website');
-  if (state.ai)       servicesSelected.push('AI Receptionist');
-  if (state.promo)    servicesSelected.push('Promotional Images');
-
-  const data = {
-    firstName:    document.getElementById('pkgFirstName').value.trim(),
-    lastName:     document.getElementById('pkgLastName').value.trim(),
-    phone:        document.getElementById('pkgPhone').value.trim(),
-    email:        document.getElementById('pkgEmail').value.trim(),
-    businessName: document.getElementById('pkgBusinessName').value.trim(),
-    businessType: businessType,
-    details:      document.getElementById('pkgDetails').value.trim(),
-    servicesSelected: servicesSelected,
-    websiteIncluded: state.website,
-    aiIncluded:      state.ai,
-    promoIncluded:   state.promo,
-    includedWebsiteFeatures: state.website ? PKG_INCLUDED_WEBSITE : [],
-    includedAiFeatures:      state.ai      ? PKG_INCLUDED_AI      : [],
-    websiteAddons: websiteAddons,
-    websiteOneTime:      document.getElementById('pkgWebsiteOneTime')?.textContent || '$0',
-    websiteMonthly:      document.getElementById('pkgWebsiteMonthly')?.textContent || '$0/mo',
-    aiSetupFee:          state.ai ? '$200' : '$0',
-    aiMinutesPlan:       state.ai ? (document.querySelector('#pkgAiPlanGroup input[type="radio"]:checked')?.value + ' min/mo') : 'N/A',
-    aiContinuationFee:   state.ai ? (document.getElementById('pkgAiPlanMonthly')?.textContent || '$295/mo') : '$0/mo',
-    promoTypes:   promoTypes,
-    promoDetails: document.getElementById('pkgPromoDetails')?.value.trim() || '',
-    promoTotal:   document.getElementById('pkgPromoTotal')?.textContent || '$0',
-    oneTimeSetupTotal:   document.getElementById('pkgGrandOneTime')?.textContent || '$0',
-    monthlySubscription: document.getElementById('pkgGrandMonthly')?.textContent || '$0/mo',
-    userId:    currentUser?.uid || null,
-    userEmail: currentUser?.email || document.getElementById('pkgEmail').value.trim(),
-    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    status:    'pending'
-  };
-
-  const btn = e.target.querySelector('button[type="submit"]');
-  const orig = btn.textContent;
-  try {
-    btn.textContent = 'SUBMITTING...';
-    btn.disabled = true;
-    await db.collection('custom-package-requests').add(data);
-
-    let msg = `\n📦 NEW CUSTOM PACKAGE REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n\n🧩 Services Selected: ${servicesSelected.join(', ')}\n`;
-
-    if (state.website) {
-      const websiteAddonsText = websiteAddons.length ? websiteAddons.join(', ') : 'None selected';
-      msg += `\n🌐 WEBSITE (included)\n✅ Standard: ${PKG_INCLUDED_WEBSITE.join(', ')}\n➕ Extra Add-Ons: ${websiteAddonsText}\n💰 One-Time Setup: ${data.websiteOneTime}\n💰 Website Monthly Add-Ons: ${data.websiteMonthly}\n`;
-    }
-    if (state.ai) {
-      msg += `\n🤖 AI RECEPTIONIST (included)\n✅ Standard: ${PKG_INCLUDED_AI.join(', ')}\n⏱️ Minutes Plan: ${data.aiMinutesPlan}\n💰 Setup Fee: ${data.aiSetupFee}\n💰 Monthly: ${data.aiContinuationFee}\n`;
-    }
-    if (state.promo) {
-      const promoTypesText = promoTypes.length ? promoTypes.join(', ') : 'None selected';
-      msg += `\n🖼️ PROMOTIONAL IMAGES (included)\n✅ Designs: ${promoTypesText}\n💰 Total: ${data.promoTotal}\n📝 Design Notes: ${data.promoDetails || 'None provided'}\n`;
-    }
-
-    msg += `\n💵 TOTAL ONE-TIME SETUP: ${data.oneTimeSetupTotal}\n💵 TOTAL MONTHLY SUBSCRIPTION: ${data.monthlySubscription}\n📝 Details: ${data.details || 'None provided'}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
-
-    await sendTelegramMessage(msg);
-    alert('🎉 Package request submitted! We will be in touch soon.');
-    e.target.reset();
-    const pkgCustomGroup = document.getElementById('pkgCustomTypeGroup');
-    if (pkgCustomGroup) pkgCustomGroup.style.display = 'none';
-    resetPackageDisplays();
-    showPage('home');
-  } catch(err) {
-    console.error(err);
-    alert('❌ Error submitting. Please try again.');
-  } finally {
-    btn.textContent = orig;
-    btn.disabled = false;
-  }
-}
-
-
 </script>
 
 
@@ -3936,7 +3229,7 @@ async function handleCustomPackageRequest(e) {
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
-                    <h2 class="form-page-title">Request A Property Photo Shoot</h2>
+                    <h2 class="form-page-title">Request A Photo Shoot</h2>
                     <p class="form-page-subtitle">Carlanvi will come to your property in person and take photos for your business. Tell us about your business and we'll follow up with a direct quote — no fixed pricing on this service.</p>
                     <form id="photoVisitForm" onsubmit="handlePhotoVisitRequest(event)">
                         <div class="form-group">
