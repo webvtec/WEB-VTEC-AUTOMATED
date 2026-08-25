@@ -736,6 +736,46 @@ button{box-shadow:none}
 .close-modal{position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;color:var(--tx3);cursor:pointer;transition:color .2s;line-height:1}
 .close-modal:hover{color:var(--g1)}
 
+/* ── APP MODAL (replaces native alert/confirm popups) ───────── */
+.app-modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,3,8,.82);z-index:3000;backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px}
+.app-modal-overlay.active{display:flex}
+.app-modal-box{background:var(--card);border:1px solid rgba(212,160,23,.3);border-radius:var(--rl);max-width:400px;width:100%;padding:38px 32px 30px;text-align:center;position:relative;box-shadow:0 0 70px rgba(212,160,23,.12),0 24px 60px rgba(0,0,0,.8);transform:translateY(14px) scale(.97);opacity:0;transition:transform .28s cubic-bezier(.2,.9,.3,1.2),opacity .22s ease}
+.app-modal-overlay.active .app-modal-box{transform:translateY(0) scale(1);opacity:1}
+.app-modal-icon{width:56px;height:56px;margin:0 auto 18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px}
+.app-modal-icon.is-success{background:rgba(46,204,113,.12);color:#4ade80;box-shadow:0 0 0 1px rgba(74,222,128,.25)}
+.app-modal-icon.is-error{background:rgba(255,92,92,.12);color:#ff6b6b;box-shadow:0 0 0 1px rgba(255,107,107,.25)}
+.app-modal-icon.is-info{background:rgba(212,160,23,.12);color:var(--g1);box-shadow:0 0 0 1px rgba(212,160,23,.3)}
+.app-modal-icon.is-confirm{background:rgba(212,160,23,.12);color:var(--g1);box-shadow:0 0 0 1px rgba(212,160,23,.3)}
+.app-modal-title{font-family:"Playfair Display",serif;font-size:19px;font-weight:700;letter-spacing:.3px;color:var(--tx1);margin-bottom:10px;line-height:1.3}
+.app-modal-message{font-size:14px;line-height:1.65;color:var(--tx2);margin-bottom:26px;white-space:pre-line}
+.app-modal-actions{display:flex;gap:10px}
+.app-modal-btn{flex:1;padding:13px 18px;border-radius:var(--r);font-family:"Inter",sans-serif;font-size:12.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;transition:all .2s}
+.app-modal-btn.is-primary{background:var(--gold);color:#08070d;box-shadow:0 4px 18px rgba(212,160,23,.3)}
+.app-modal-btn.is-primary:hover{filter:brightness(1.08)}
+.app-modal-btn.is-secondary{background:rgba(255,255,255,.06);color:var(--tx1);border:1px solid rgba(255,255,255,.12)}
+.app-modal-btn.is-secondary:hover{background:rgba(255,255,255,.1)}
+
+/* ── FIELD VALIDATION (replaces native browser validation bubbles) ── */
+.form-group.field-invalid input,
+.form-group.field-invalid select,
+.form-group.field-invalid textarea{
+  border-color:#ff6b6b!important;
+  background:rgba(255,92,92,.05)!important;
+  box-shadow:0 0 0 3px rgba(255,92,92,.14)!important;
+  animation:fieldShake .32s ease;
+}
+.form-group.field-invalid label{color:#ff8a8a}
+.field-error-msg{display:flex;align-items:center;gap:6px;color:#ff8a8a;font-size:12px;font-weight:600;margin-top:7px;letter-spacing:.2px}
+.field-error-msg::before{content:"⚠";font-size:12px;line-height:1}
+@keyframes fieldShake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-5px)}
+  40%{transform:translateX(4px)}
+  60%{transform:translateX(-3px)}
+  80%{transform:translateX(2px)}
+}
+
+
 /* ── FOUNDER ─────────────────────────────────────────────── */
 #founder-overlay{position:fixed;inset:0;background:var(--bg);display:none;overflow-y:auto;z-index:9999}
 .founder-content{max-width:680px;margin:0 auto;background:var(--bg);min-height:100vh}
@@ -1257,6 +1297,19 @@ button{box-shadow:none}
         <div id="loginError" style="color: #DC2626; margin-top: 15px; font-size: 14px; display: none;"></div>
     </div>
 </div>
+
+<!-- APP MODAL — replaces native alert()/confirm() popups site-wide -->
+<div id="appModalOverlay" class="app-modal-overlay">
+    <div class="app-modal-box">
+        <div class="app-modal-icon" id="appModalIcon">!</div>
+        <h3 class="app-modal-title" id="appModalTitle">Notice</h3>
+        <p class="app-modal-message" id="appModalMessage"></p>
+        <div class="app-modal-actions">
+            <button type="button" class="app-modal-btn is-secondary" id="appModalCancelBtn" style="display:none;">Cancel</button>
+            <button type="button" class="app-modal-btn is-primary" id="appModalOkBtn">OK</button>
+        </div>
+    </div>
+</div>
     
     <!-- FOUNDER OVERLAY -->
 <section id="founder-overlay">
@@ -1686,7 +1739,7 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                         <span class="price-badge-amount">$190+</span>
                         <span class="price-badge-period">one-time</span>
                     </div>
-                    <form id="websiteRequestForm">
+                    <form id="websiteRequestForm" novalidate>
                         <div class="form-group">
                             <label for="firstName">First Name</label>
                             <input type="text" id="firstName" name="firstName" required>
@@ -1778,7 +1831,7 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
                 <!-- Review Form -->
                 <div class="review-form-container">
                     <h2 class="review-form-title">SHARE YOUR EXPERIENCE</h2>
-                    <form id="reviewForm">
+                    <form id="reviewForm" novalidate>
                         <div class="form-group">
                             <input type="text" id="reviewerName" name="reviewerName" placeholder="Your Name" required>
                         </div>
@@ -1813,6 +1866,210 @@ WEB VTEC is a digital agency built to help businesses of every kind — from nic
 
 
 <script>
+/* ============================================================
+   APP MODAL SYSTEM
+   Replaces native browser alert()/confirm() popups with a
+   themed in-page modal. Use:
+     showAlertModal('message', { title, type })   -> fire & forget
+     showConfirmModal('message', { title })       -> returns Promise<boolean>
+   ============================================================ */
+const AppModal = (function () {
+  const overlay   = document.getElementById('appModalOverlay');
+  const iconEl    = document.getElementById('appModalIcon');
+  const titleEl   = document.getElementById('appModalTitle');
+  const messageEl = document.getElementById('appModalMessage');
+  const okBtn     = document.getElementById('appModalOkBtn');
+  const cancelBtn = document.getElementById('appModalCancelBtn');
+
+  const ICONS = { success: '✓', error: '✕', info: 'i', confirm: '?' };
+  let activeResolve = null;
+
+  function close(result) {
+    overlay.classList.remove('active');
+    document.removeEventListener('keydown', onKeydown);
+    if (activeResolve) {
+      const resolve = activeResolve;
+      activeResolve = null;
+      resolve(result);
+    }
+  }
+
+  function onKeydown(e) {
+    if (e.key === 'Escape') close(false);
+    if (e.key === 'Enter') close(true);
+  }
+
+  function open({ title, message, type = 'info', okText = 'OK', cancelText = null }) {
+    return new Promise((resolve) => {
+      activeResolve = resolve;
+      iconEl.className = 'app-modal-icon is-' + type;
+      iconEl.textContent = ICONS[type] || ICONS.info;
+      titleEl.textContent = title || '';
+      titleEl.style.display = title ? 'block' : 'none';
+      messageEl.textContent = message || '';
+      okBtn.textContent = okText;
+
+      if (cancelText) {
+        cancelBtn.style.display = 'inline-flex';
+        cancelBtn.textContent = cancelText;
+      } else {
+        cancelBtn.style.display = 'none';
+      }
+
+      overlay.classList.add('active');
+      document.addEventListener('keydown', onKeydown);
+      setTimeout(() => okBtn.focus(), 30);
+    });
+  }
+
+  okBtn.addEventListener('click', () => close(true));
+  cancelBtn.addEventListener('click', () => close(false));
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close(false);
+  });
+
+  return { open };
+})();
+
+// Picks a sensible title + icon type from the emoji/text an alert() used to carry.
+function inferAlertMeta(message) {
+  const m = String(message || '');
+  if (/^(✅|🎉|📧|👋)/.test(m) || /success|logged in|sent|deleted|reset email/i.test(m)) {
+    return { title: 'Success', type: 'success' };
+  }
+  if (/^(❌)/.test(m) || /error|denied|could not|please (login|enter|specify|select|toggle)/i.test(m)) {
+    return { title: /please/i.test(m) ? 'Missing Information' : 'Something Went Wrong', type: /please/i.test(m) ? 'info' : 'error' };
+  }
+  return { title: 'Notice', type: 'info' };
+}
+
+// Strips leading emoji so it doesn't duplicate the icon already shown in the modal.
+function cleanAlertMessage(message) {
+  return String(message || '').replace(/^\s*[\p{Emoji_Presentation}\u2600-\u27BF]+\s*/u, '').trim();
+}
+
+function showAlertModal(message, opts) {
+  const meta = inferAlertMeta(message);
+  return AppModal.open({
+    title: (opts && opts.title) || meta.title,
+    message: cleanAlertMessage(message),
+    type: (opts && opts.type) || meta.type,
+    okText: 'OK'
+  });
+}
+
+function showConfirmModal(message, opts) {
+  return AppModal.open({
+    title: (opts && opts.title) || 'Please Confirm',
+    message: message,
+    type: 'confirm',
+    okText: (opts && opts.okText) || 'Yes, Continue',
+    cancelText: (opts && opts.cancelText) || 'Cancel'
+  });
+}
+
+/* ============================================================
+   FORM VALIDATION ENGINE
+   Replaces native browser "please fill this field" bubbles with
+   inline, on-brand error states under each field, and stops
+   submission of any form containing empty/invalid required
+   fields, focusing the first one that needs attention.
+   ============================================================ */
+function isFieldVisible(field) {
+  // Skip fields hidden inside a collapsed group (display:none ancestor)
+  return !!(field.offsetWidth || field.offsetHeight || field.getClientRects().length);
+}
+
+function clearFieldError(field) {
+  const group = field.closest('.form-group') || field.parentElement;
+  if (!group) return;
+  group.classList.remove('field-invalid');
+  const msg = group.querySelector('.field-error-msg');
+  if (msg) msg.remove();
+}
+
+function markFieldError(field, message) {
+  const group = field.closest('.form-group') || field.parentElement;
+  if (!group) return;
+  group.classList.add('field-invalid');
+  let msg = group.querySelector('.field-error-msg');
+  if (!msg) {
+    msg = document.createElement('div');
+    msg.className = 'field-error-msg';
+    group.appendChild(msg);
+  }
+  msg.textContent = message;
+}
+
+function validateFormFields(form) {
+  let firstInvalid = null;
+  let invalidCount = 0;
+
+  const fields = form.querySelectorAll('input[required], select[required], textarea[required]');
+  fields.forEach((field) => {
+    if (field.type === 'hidden') return;
+    if (!isFieldVisible(field)) { clearFieldError(field); return; }
+
+    clearFieldError(field);
+    let valid = true;
+    let message = 'This field is required.';
+
+    if (field.type === 'checkbox' || field.type === 'radio') {
+      const name = field.name;
+      const group = name ? form.querySelectorAll(`input[name="${name}"]`) : [field];
+      valid = Array.from(group).some(f => f.checked);
+    } else if (!field.value || !field.value.trim()) {
+      valid = false;
+    } else if (typeof field.checkValidity === 'function' && !field.checkValidity()) {
+      valid = false;
+      if (field.type === 'email') message = 'Please enter a valid email address.';
+      else if (field.type === 'tel') message = 'Please enter a valid phone number.';
+      else message = field.validationMessage || message;
+    }
+
+    if (!valid) {
+      invalidCount++;
+      markFieldError(field, message);
+      if (!firstInvalid) firstInvalid = field;
+    }
+  });
+
+  return { valid: invalidCount === 0, firstInvalid, invalidCount };
+}
+
+// Live-clear a field's error state as soon as the user starts fixing it.
+document.addEventListener('input', function (e) {
+  const field = e.target;
+  if (field.matches && field.matches('input[required], select[required], textarea[required]')) {
+    if (field.value && field.value.trim()) clearFieldError(field);
+  }
+}, true);
+document.addEventListener('change', function (e) {
+  const field = e.target;
+  if (field.matches && field.matches('input[required], select[required], textarea[required]')) {
+    if (field.type === 'checkbox' || field.type === 'radio' || field.value) clearFieldError(field);
+  }
+}, true);
+
+// Runs in the CAPTURE phase, ahead of every form's own submit handler
+// (inline onsubmit="" attributes and addEventListener-registered ones
+// alike), so invalid forms never reach their submit logic at all.
+document.addEventListener('submit', function (e) {
+  const form = e.target;
+  if (!(form instanceof HTMLFormElement)) return;
+  if (form.hasAttribute('novalidate') !== true) return; // only forms we've opted into custom validation
+
+  const result = validateFormFields(form);
+  if (!result.valid) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if (result.firstInvalid) {
+      result.firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => result.firstInvalid.focus({ preventScroll: true }), 250);
+    }
+  }
+}, true);
+
 // Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAnegeJ8pcMGVIcjdIQ82t1LyBSzq5wX2A",
@@ -1961,7 +2218,7 @@ async function handleWebsiteRequest(e) {
     if (websiteType === 'other') {
         const customType = formData.get('customWebsiteType');
         if (!customType || customType.trim() === '') {
-            alert('Please specify your website type.');
+            await showAlertModal('Please specify your website type.');
             return;
         }
         websiteType = customType.trim();
@@ -2030,13 +2287,13 @@ CONTACT THE CUSTOMER!
         await sendTelegramMessage(telegramMessage);
         
         // Success feedback
-        alert('🎉 Request submitted successfully! We will contact you soon.');
+        await showAlertModal('🎉 Request submitted successfully! We will contact you soon.');
         e.target.reset();
         showPage('home');
         
     } catch (error) {
         console.error('Error submitting request:', error);
-        alert('❌ Error submitting request. Please try again.');
+        await showAlertModal('❌ Error submitting request. Please try again.');
     } finally {
         // Reset button
         const submitBtn = e.target.querySelector('.submit-button');
@@ -2059,7 +2316,7 @@ async function handleReviewSubmission(e) {
     const rating = document.getElementById('starRating').value;
 
     if (!rating) {
-        alert('Please select a star rating!');
+        await showAlertModal('Please select a star rating!');
         return;
     }
 
@@ -2083,13 +2340,13 @@ async function handleReviewSubmission(e) {
         await db.collection('reviews').add(reviewData);
 
         // ✅ Success feedback
-        alert('✅ Review submitted successfully!');
+        await showAlertModal('✅ Review submitted successfully!');
         e.target.reset();
         resetStarRating();
 
     } catch (error) {
         console.error('Error submitting review:', error);
-        alert('❌ Error submitting review. Please try again.');
+        await showAlertModal('❌ Error submitting review. Please try again.');
     } finally {
         const submitBtn = e.target.querySelector('.submit-button');
         submitBtn.textContent = 'SUBMIT REVIEW';
@@ -2193,13 +2450,13 @@ function createReviewElement(review, docId) {
     const deleteBtn = reviewDiv.querySelector('.delete-review-btn');
     if (deleteBtn) {
         deleteBtn.addEventListener('click', async () => {
-            if (confirm('Are you sure you want to delete this review?')) {
+            if (await showConfirmModal('Are you sure you want to delete this review? This cannot be undone.', { title: 'Delete Review', okText: 'Delete', cancelText: 'Keep It' })) {
                 try {
                     await db.collection('reviews').doc(docId).delete();
-                    alert('🗑️ Review deleted');
+                    await showAlertModal('🗑️ Review deleted');
                 } catch (error) {
                     console.error('Error deleting review:', error);
-                    alert('❌ Could not delete review.');
+                    await showAlertModal('❌ Could not delete review.');
                 }
             }
         });
@@ -2287,7 +2544,7 @@ async function loginWithEmail() {
     try {
         await auth.signInWithEmailAndPassword(email, password);
         closeLoginModal();
-        alert('✅ Logged in successfully!');
+        await showAlertModal('✅ Logged in successfully!');
     } catch (error) {
         showLoginError(formatFirebaseError(error));
     }
@@ -2313,7 +2570,7 @@ async function signupWithEmail() {
     try {
         await auth.createUserWithEmailAndPassword(email, password);
         closeLoginModal();
-        alert('Account created and logged in successfully!');
+        await showAlertModal('Account created and logged in successfully!');
         
     } catch (error) {
         showLoginError(formatFirebaseError(error));
@@ -2333,7 +2590,7 @@ async function loginWithApple() {
     try {
         const result = await auth.signInWithPopup(provider);
         closeLoginModal();
-        alert('✅ Logged in with Apple successfully!');
+        await showAlertModal('✅ Logged in with Apple successfully!');
     } catch (error) {
         console.error('Apple login error:', error);
         showLoginError('Apple login failed. Please try again.');
@@ -2353,7 +2610,7 @@ async function resetPassword() {
     
     try {
         await auth.sendPasswordResetEmail(email);
-        alert('📧 Password reset email sent! Check your inbox and follow the instructions.');
+        await showAlertModal('📧 Password reset email sent! Check your inbox and follow the instructions.');
     } catch (error) {
         showLoginError(formatFirebaseError(error));
     }
@@ -2367,15 +2624,15 @@ async function loginWithGoogle() {
     try {
         await auth.signInWithPopup(provider);
         closeLoginModal();
-        alert('✅ Logged in with Google successfully!');
+        await showAlertModal('✅ Logged in with Google successfully!');
     } catch (error) {
         showLoginError('Google login failed. Please try again.');
     }
 }
 
 function logout() {
-    auth.signOut().then(() => {
-        alert('👋 Logged out successfully!');
+    auth.signOut().then(async () => {
+        await showAlertModal('👋 Logged out successfully!');
     });
 }
     
@@ -2521,10 +2778,10 @@ function adminLogin() {
         window.location.href = 'admindashboard.html';
     } else if (currentUser) {
         console.log('Non-admin user attempted access:', currentUser.email);
-        alert('Access denied. Admin privileges required.');
+        showAlertModal('Access denied. Admin privileges required.');
     } else {
         console.log('No user logged in for admin access');
-        alert('Please login first to access admin panel.');
+        showAlertModal('Please login first to access admin panel.');
         showLoginModal();
     }
 }
@@ -2784,14 +3041,14 @@ async function handlePromoImageRequest(e) {
     const typesSummary = designTypes.map(d => d.extra ? `${d.label} ($${d.price}) (${d.extra})` : `${d.label} ($${d.price})`).join('; ');
     const msg = `\n🎨 NEW PROMOTIONAL IMAGE REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n🖼️ Design Types: ${typesSummary}\n💰 Total: ${data.totalPrice}\n🎨 Colours: ${data.colors || 'Not specified'}\n📝 General Notes: ${data.details || 'None'}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
     await sendTelegramMessage(msg);
-    alert('🎉 Request submitted! We will be in touch soon.');
+    await showAlertModal('🎉 Request submitted! We will be in touch soon.');
     e.target.reset();
     document.querySelectorAll('#prDesignTypesGroup .promo-type-extra').forEach(el => el.style.display = 'none');
     updatePromoTotal();
     showPage('home');
   } catch(err) {
     console.error(err);
-    alert('❌ Error submitting. Please try again.');
+    await showAlertModal('❌ Error submitting. Please try again.');
   } finally {
     btn.textContent = orig;
     btn.disabled = false;
@@ -2845,12 +3102,12 @@ async function handleAIReceptionistRequest(e) {
 
     const msg = `\n🤖 NEW AI INBOUND CALLER REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n✅ Included: ${AI_INCLUDED_FEATURES.join(', ')}\n➕ Extra Add-Ons: ${addonsText}\n⏱️ Minutes Plan: ${data.minutesPlan}\n💰 Setup Fee: ${data.setupFee}\n💰 Monthly (Plan + Add-Ons): ${data.monthlyEstimate}\n📝 Details: ${data.description}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
     await sendTelegramMessage(msg);
-    alert('🎉 Request submitted! We will be in touch soon.');
+    await showAlertModal('🎉 Request submitted! We will be in touch soon.');
     e.target.reset();
     showPage('home');
   } catch(err) {
     console.error(err);
-    alert('❌ Error submitting. Please try again.');
+    await showAlertModal('❌ Error submitting. Please try again.');
   } finally {
     btn.textContent = orig;
     btn.disabled = false;
@@ -2904,12 +3161,12 @@ async function handleOutboundCallerRequest(e) {
 
     const msg = `\n📤 NEW AI OUTBOUND CALLER REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n✅ Included: ${OUT_INCLUDED_FEATURES.join(', ')}\n➕ Extra Add-Ons: ${addonsText}\n⏱️ Minutes Plan: ${data.minutesPlan}\n💰 Setup Fee: ${data.setupFee}\n💰 Monthly (Plan + Add-Ons): ${data.monthlyEstimate}\n📝 What The Calls Should Achieve: ${data.callGoal}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
     await sendTelegramMessage(msg);
-    alert('🎉 Request submitted! We will be in touch soon.');
+    await showAlertModal('🎉 Request submitted! We will be in touch soon.');
     e.target.reset();
     showPage('home');
   } catch(err) {
     console.error(err);
-    alert('❌ Error submitting. Please try again.');
+    await showAlertModal('❌ Error submitting. Please try again.');
   } finally {
     btn.textContent = orig;
     btn.disabled = false;
@@ -2924,7 +3181,7 @@ async function handlePhotoVisitRequest(e) {
   if (businessType === 'other') {
     const customType = document.getElementById('pvCustomBusinessType').value.trim();
     if (!customType) {
-      alert('Please specify your business type.');
+      await showAlertModal('Please specify your business type.');
       return;
     }
     businessType = customType;
@@ -2954,12 +3211,12 @@ async function handlePhotoVisitRequest(e) {
 
     const msg = `\n📸 NEW PROPERTY PHOTO VISIT REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Type: ${data.businessType}\n📍 Property Address: ${data.propertyAddress}\n📝 Details: ${data.details || 'None provided'}\n💰 Pricing: To be quoted directly\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
     await sendTelegramMessage(msg);
-    alert('🎉 Request submitted! We will reach out to schedule a visit and confirm pricing.');
+    await showAlertModal('🎉 Request submitted! We will reach out to schedule a visit and confirm pricing.');
     e.target.reset();
     showPage('home');
   } catch(err) {
     console.error(err);
-    alert('❌ Error submitting. Please try again.');
+    await showAlertModal('❌ Error submitting. Please try again.');
   } finally {
     btn.textContent = orig;
     btn.disabled = false;
@@ -3007,12 +3264,12 @@ async function handleScreenerRequest(e) {
 
     const msg = `\n📋 NEW AI HIRING SCREENER REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🏢 Business: ${data.businessName}\n📂 Industry: ${data.industry}\n💼 Role: ${data.role}\n📊 Volume: ${data.volume} applicants/mo\n✅ Included: ${SCREENER_INCLUDED.join(', ')}\n💰 Setup Fee: ${data.setupFee}\n💰 Monthly: ${data.monthly}\n💡 Plus usage fee by call volume\n❓ Questions: ${data.questions || 'Not provided'}\n📝 Notes: ${data.notes || 'None'}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
     await sendTelegramMessage(msg);
-    alert('🎉 Request submitted! We will be in touch soon.');
+    await showAlertModal('🎉 Request submitted! We will be in touch soon.');
     e.target.reset();
     showPage('home');
   } catch(err) {
     console.error(err);
-    alert('❌ Error submitting. Please try again.');
+    await showAlertModal('❌ Error submitting. Please try again.');
   } finally {
     btn.textContent = orig;
     btn.disabled = false;
@@ -3047,12 +3304,12 @@ async function handleChatbotRequest(e) {
 
     const msg = `\n💬 NEW AI CHATBOT REQUEST!\n\n👤 ${data.firstName} ${data.lastName}\n📞 ${data.phone}\n📨 ${data.email}\n\n🌐 Website: ${data.websiteUrl}\n💰 Setup Fee: ${data.setupFee}\n💰 Monthly: ${data.monthly}\n📝 Notes: ${data.notes || 'None'}\n\n📅 ${new Date().toLocaleString()}\n\nCONTACT THE CUSTOMER!`;
     await sendTelegramMessage(msg);
-    alert('🎉 Request submitted! We will be in touch soon.');
+    await showAlertModal('🎉 Request submitted! We will be in touch soon.');
     e.target.reset();
     showPage('home');
   } catch(err) {
     console.error(err);
-    alert('❌ Error submitting. Please try again.');
+    await showAlertModal('❌ Error submitting. Please try again.');
   } finally {
     btn.textContent = orig;
     btn.disabled = false;
@@ -3068,7 +3325,7 @@ async function handleChatbotRequest(e) {
             <div class="content-area">
                 <div class="form-container">
                     <h2 class="form-page-title" id="aiPageTitle">Request AI Inbound Caller</h2>
-                    <form id="aiReceptionistForm" onsubmit="handleAIReceptionistRequest(event)">
+                    <form id="aiReceptionistForm" novalidate onsubmit="handleAIReceptionistRequest(event)">
                         <div class="form-group">
                             <label for="aiFirstName">First Name</label>
                             <input type="text" id="aiFirstName" required placeholder="First name">
@@ -3149,7 +3406,7 @@ async function handleChatbotRequest(e) {
             <div class="content-area">
                 <div class="form-container">
                     <h2 class="form-page-title">Request AI Outbound Caller</h2>
-                    <form id="outboundCallerForm" onsubmit="handleOutboundCallerRequest(event)">
+                    <form id="outboundCallerForm" novalidate onsubmit="handleOutboundCallerRequest(event)">
                         <div class="form-group">
                             <label for="outFirstName">First Name</label>
                             <input type="text" id="outFirstName" required placeholder="First name">
@@ -3231,7 +3488,7 @@ async function handleChatbotRequest(e) {
                 <div class="form-container">
                     <h2 class="form-page-title">Request A Photo Shoot</h2>
                     <p class="form-page-subtitle">Our team will come to your property in person and take photos for your business. Tell us about your business and we'll follow up with a direct quote — no fixed pricing on this service.</p>
-                    <form id="photoVisitForm" onsubmit="handlePhotoVisitRequest(event)">
+                    <form id="photoVisitForm" novalidate onsubmit="handlePhotoVisitRequest(event)">
                         <div class="form-group">
                             <label for="pvFirstName">First Name</label>
                             <input type="text" id="pvFirstName" required placeholder="First name">
@@ -3294,7 +3551,7 @@ async function handleChatbotRequest(e) {
             <div class="content-area">
                 <div class="form-container">
                     <h2 class="form-page-title">Request AI Hiring Screener</h2>
-                    <form id="screenerRequestForm" onsubmit="handleScreenerRequest(event)">
+                    <form id="screenerRequestForm" novalidate onsubmit="handleScreenerRequest(event)">
                         <div class="form-group">
                             <label for="scFirstName">First Name</label>
                             <input type="text" id="scFirstName" required placeholder="First name">
@@ -3392,7 +3649,7 @@ async function handleChatbotRequest(e) {
                         </div>
                     </div>
                     <p style="color:rgba(255,255,255,.45);font-size:13px;text-align:center;margin:-18px auto 32px;line-height:1.6;">A simple drop-in AI chatbot widget for your existing website, no rebuild required. Engages visitors, answers questions, and captures leads 24/7.</p>
-                    <form id="chatbotRequestForm" onsubmit="handleChatbotRequest(event)">
+                    <form id="chatbotRequestForm" novalidate onsubmit="handleChatbotRequest(event)">
                         <div class="form-group">
                             <label for="cbFirstName">First Name</label>
                             <input type="text" id="cbFirstName" required placeholder="First name">
@@ -3444,7 +3701,7 @@ async function handleChatbotRequest(e) {
             <h2 class="form-page-title">Request a Promotional Image</h2>
             <p class="form-page-subtitle">Fill out the form below and we will create a custom design tailored to your brand.</p>
 
-            <form id="promoRequestForm" onsubmit="handlePromoImageRequest(event)">
+            <form id="promoRequestForm" novalidate onsubmit="handlePromoImageRequest(event)">
               <div class="form-group">
                 <label for="prFirstName">First Name</label>
                 <input type="text" id="prFirstName" required placeholder="Your first name">
