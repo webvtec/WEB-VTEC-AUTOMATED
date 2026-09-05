@@ -404,6 +404,19 @@ body{font-family:"Inter",system-ui,sans-serif;background:var(--bg);color:var(--t
 }
 .btn-secondary:hover{background:rgba(212,160,23,.1);border-color:var(--g1);box-shadow:var(--glow);color:#fff}
 .about-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 30px;background:rgba(15,11,26,.9);color:var(--g1);font-family:"Inter",sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(212,160,23,.48);border-radius:var(--r);cursor:pointer;box-shadow:0 0 16px rgba(212,160,23,.08);transition:all .22s;backdrop-filter:blur(8px);text-decoration:none;flex-shrink:0}
+
+/* Pay Setup Fee button (Square checkout) — shown at the top of AI service request pages */
+.pay-setup-fee-wrap{display:flex;justify-content:center;margin:0 0 26px;}
+.pay-setup-fee-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 30px;background:var(--gold);color:#08070d;
+  font-family:"Inter",sans-serif;font-size:12.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  border:none;border-radius:var(--r);cursor:pointer;
+  box-shadow:0 4px 22px rgba(212,160,23,.38),inset 0 1px 0 rgba(255,255,255,.16);
+  transition:all .22s;
+}
+.pay-setup-fee-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(212,160,23,.58),inset 0 1px 0 rgba(255,255,255,.16)}
+.pay-setup-fee-btn svg{flex-shrink:0}
 .about-btn:hover{background:rgba(212,160,23,.1);border-color:var(--g1);box-shadow:var(--glow);color:#fff}
 .admin-button{display:inline-flex;align-items:center;justify-content:center;padding:10px 22px;background:rgba(255,255,255,.02);color:var(--tx2);font-family:"Inter",sans-serif;font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,.1);border-radius:var(--r);cursor:pointer;transition:all .22s ease}
 .admin-button{display:none}.admin-button:hover{border-color:rgba(212,160,23,.4);color:var(--g1);background:rgba(212,160,23,.07);transform:translateY(-1px);box-shadow:0 4px 14px rgba(212,160,23,.16)}
@@ -2532,6 +2545,26 @@ function closeLoginModal() {
     document.getElementById('loginModal').classList.remove('active');
 }
 
+// Opens a Square Payment Link in a centered popup window, matching Square's
+// own embedded-checkout behavior. Used by the "Pay Setup Fee" buttons on the
+// AI Inbound Caller, AI Outbound Caller, and AI Hiring Screener request pages.
+function openSquareCheckout(url) {
+    const title = 'Square Payment Links';
+    // Some platforms embed in an iframe, so we want the top window to calculate sizes correctly
+    const topWindow = window.top ? window.top : window;
+    const dualScreenLeft = topWindow.screenLeft !== undefined ? topWindow.screenLeft : topWindow.screenX;
+    const dualScreenTop = topWindow.screenTop !== undefined ? topWindow.screenTop : topWindow.screenY;
+    const width = topWindow.innerWidth ? topWindow.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    const height = topWindow.innerHeight ? topWindow.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+    const h = height * .75;
+    const w = 500;
+    const systemZoom = width / topWindow.screen.availWidth;
+    const left = (width - w) / 2 / systemZoom + dualScreenLeft;
+    const top = (height - h) / 2 / systemZoom + dualScreenTop;
+    const newWindow = window.open(url, title, `scrollbars=yes, width=${w / systemZoom}, height=${h / systemZoom}, top=${top}, left=${left}`);
+    if (newWindow && newWindow.focus) newWindow.focus();
+}
+
 function showGetStartedModal() {
     document.getElementById('getStartedModal').classList.add('active');
 }
@@ -3334,6 +3367,12 @@ async function handleChatbotRequest(e) {
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
+                    <div class="pay-setup-fee-wrap">
+                        <button type="button" class="pay-setup-fee-btn" onclick="openSquareCheckout('https://square.link/u/ckdIFn2L?src=embed')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                            Pay Setup Fee — $200
+                        </button>
+                    </div>
                     <h2 class="form-page-title" id="aiPageTitle">Request AI Inbound Caller</h2>
                     <form id="aiReceptionistForm" novalidate onsubmit="handleAIReceptionistRequest(event)">
                         <div class="form-group">
@@ -3415,6 +3454,12 @@ async function handleChatbotRequest(e) {
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
+                    <div class="pay-setup-fee-wrap">
+                        <button type="button" class="pay-setup-fee-btn" onclick="openSquareCheckout('https://square.link/u/ckdIFn2L?src=embed')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                            Pay Setup Fee — $200
+                        </button>
+                    </div>
                     <h2 class="form-page-title">Request AI Outbound Caller</h2>
                     <form id="outboundCallerForm" novalidate onsubmit="handleOutboundCallerRequest(event)">
                         <div class="form-group">
@@ -3560,6 +3605,12 @@ async function handleChatbotRequest(e) {
         <div class="navy-gradient-container">
             <div class="content-area">
                 <div class="form-container">
+                    <div class="pay-setup-fee-wrap">
+                        <button type="button" class="pay-setup-fee-btn" onclick="openSquareCheckout('https://square.link/u/eQq14Wvt?src=embed')">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                            Pay Setup Fee — $399
+                        </button>
+                    </div>
                     <h2 class="form-page-title">Request AI Hiring Screener</h2>
                     <form id="screenerRequestForm" novalidate onsubmit="handleScreenerRequest(event)">
                         <div class="form-group">
